@@ -1,9 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
@@ -57,6 +62,47 @@ public class Room extends DomainEntity {
 
 	public void setInRepair(final boolean inRepair) {
 		this.inRepair = inRepair;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Museum					museum;
+	private Collection<Exhibition>	exhibitions;
+	private Collection<Incident>	incidents;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Museum getMuseum() {
+		return this.museum;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "room")
+	public Collection<Exhibition> getExhibitions() {
+		return this.exhibitions;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "room")
+	public Collection<Incident> getIncidents() {
+		return this.incidents;
+	}
+
+	public void setMuseum(final Museum museum) {
+		this.museum = museum;
+	}
+
+	public void setExhibitions(final Collection<Exhibition> exhibitions) {
+		this.exhibitions = exhibitions;
+	}
+
+	public void setIncidents(final Collection<Incident> incidents) {
+		this.incidents = incidents;
 	}
 
 }

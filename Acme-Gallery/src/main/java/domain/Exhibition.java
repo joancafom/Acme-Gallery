@@ -6,11 +6,16 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -122,6 +127,95 @@ public class Exhibition extends DomainEntity {
 
 	public void setPrice(final Double price) {
 		this.price = price;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Collection<DayPass>		dayPasses;
+	private Collection<Sponsorship>	sponsorships;
+	private Collection<Critique>	critiques;
+	private Category				category;
+	private Collection<Highlight>	highlights;
+	private Collection<Guide>		guides;
+	private Room					room;
+
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "exhibition")
+	public Collection<DayPass> getDayPasses() {
+		return this.dayPasses;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "exhibition")
+	public Collection<Sponsorship> getSponsorships() {
+		return this.sponsorships;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "exhibition")
+	public Collection<Critique> getCritiques() {
+		return this.critiques;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Category getCategory() {
+		return this.category;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "exhibition")
+	public Collection<Highlight> getHighlights() {
+		return this.highlights;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToMany(mappedBy = "exhibitions")
+	public Collection<Guide> getGuides() {
+		return this.guides;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Room getRoom() {
+		return this.room;
+	}
+
+	public void setDayPasses(final Collection<DayPass> dayPasses) {
+		this.dayPasses = dayPasses;
+	}
+
+	public void setSponsorships(final Collection<Sponsorship> sponsorships) {
+		this.sponsorships = sponsorships;
+	}
+
+	public void setCritiques(final Collection<Critique> critiques) {
+		this.critiques = critiques;
+	}
+
+	public void setCategory(final Category category) {
+		this.category = category;
+	}
+
+	public void setHighlights(final Collection<Highlight> highlights) {
+		this.highlights = highlights;
+	}
+
+	public void setGuides(final Collection<Guide> guides) {
+		this.guides = guides;
+	}
+
+	public void setRoom(final Room room) {
+		this.room = room;
 	}
 
 }

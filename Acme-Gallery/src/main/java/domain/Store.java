@@ -1,9 +1,16 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
@@ -60,6 +67,35 @@ public class Store extends DomainEntity {
 
 	public void setEmail(final String email) {
 		this.email = email;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Museum				museum;
+	private Collection<Product>	products;
+
+
+	@NotNull
+	@Valid
+	@OneToOne(optional = false, mappedBy = "store")
+	public Museum getMuseum() {
+		return this.museum;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "store")
+	public Collection<Product> getProducts() {
+		return this.products;
+	}
+
+	public void setMuseum(final Museum museum) {
+		this.museum = museum;
+	}
+
+	public void setProducts(final Collection<Product> products) {
+		this.products = products;
 	}
 
 }

@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -47,6 +49,34 @@ public class Incident extends DomainEntity {
 
 	public void setChecked(final boolean isChecked) {
 		this.isChecked = isChecked;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Guide	guide;
+	private Room	room;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Guide getGuide() {
+		return this.guide;
+	}
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Room getRoom() {
+		return this.room;
+	}
+
+	public void setGuide(final Guide guide) {
+		this.guide = guide;
+	}
+
+	public void setRoom(final Room room) {
+		this.room = room;
 	}
 
 }

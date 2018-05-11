@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -77,6 +79,23 @@ public class Highlight extends DomainEntity {
 
 	public void setFinal(final boolean isFinal) {
 		this.isFinal = isFinal;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Exhibition	exhibition;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Exhibition getExhibition() {
+		return this.exhibition;
+	}
+
+	public void setExhibition(final Exhibition exhibition) {
+		this.exhibition = exhibition;
 	}
 
 }

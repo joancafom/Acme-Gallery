@@ -6,8 +6,10 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -69,6 +71,35 @@ public class Critique extends DomainEntity {
 
 	public void setCreationDate(final Date creationDate) {
 		this.creationDate = creationDate;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Reviewer	reviewer;
+	private Exhibition	exhibition;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Reviewer getReviewer() {
+		return this.reviewer;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Exhibition getExhibition() {
+		return this.exhibition;
+	}
+
+	public void setReviewer(final Reviewer reviewer) {
+		this.reviewer = reviewer;
+	}
+
+	public void setExhibition(final Exhibition exhibition) {
+		this.exhibition = exhibition;
 	}
 
 }

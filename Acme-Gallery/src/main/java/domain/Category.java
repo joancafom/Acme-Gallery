@@ -1,9 +1,15 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -24,6 +30,46 @@ public class Category extends DomainEntity {
 
 	public void setName(final String name) {
 		this.name = name;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Collection<Category>	childrenCategory;
+	private Category				parentCategory;
+	private Collection<Exhibition>	exhibitions;
+
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "parentCategory")
+	public Collection<Category> getChildrenCategory() {
+		return this.childrenCategory;
+	}
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Category getParentCategory() {
+		return this.parentCategory;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "category")
+	public Collection<Exhibition> getExhibitions() {
+		return this.exhibitions;
+	}
+
+	public void setChildrenCategory(final Collection<Category> childrenCategory) {
+		this.childrenCategory = childrenCategory;
+	}
+
+	public void setParentCategory(final Category parentCategory) {
+		this.parentCategory = parentCategory;
+	}
+
+	public void setExhibitions(final Collection<Exhibition> exhibitions) {
+		this.exhibitions = exhibitions;
 	}
 
 }

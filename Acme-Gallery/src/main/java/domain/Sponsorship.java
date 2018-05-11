@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -83,6 +84,35 @@ public class Sponsorship extends DomainEntity {
 
 	public void setEndingDate(final String endingDate) {
 		this.endingDate = endingDate;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Sponsor		sponsor;
+	private Exhibition	exhibition;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Sponsor getSponsor() {
+		return this.sponsor;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Exhibition getExhibition() {
+		return this.exhibition;
+	}
+
+	public void setSponsor(final Sponsor sponsor) {
+		this.sponsor = sponsor;
+	}
+
+	public void setExhibition(final Exhibition exhibition) {
+		this.exhibition = exhibition;
 	}
 
 }

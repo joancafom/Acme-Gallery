@@ -7,6 +7,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -82,6 +84,23 @@ public class Product extends DomainEntity {
 
 	public void setBarcode(final String barcode) {
 		this.barcode = barcode;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Store	store;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Store getStore() {
+		return this.store;
+	}
+
+	public void setStore(final Store store) {
+		this.store = store;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -80,6 +81,46 @@ public class DayPass extends DomainEntity {
 
 	public void setPrice(final Double price) {
 		this.price = price;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Visitor		visitor;
+	private Exhibition	exhibition;
+	private Museum		museum;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Visitor getVisitor() {
+		return this.visitor;
+	}
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Exhibition getExhibition() {
+		return this.exhibition;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Museum getMuseum() {
+		return this.museum;
+	}
+
+	public void setVisitor(final Visitor visitor) {
+		this.visitor = visitor;
+	}
+
+	public void setExhibition(final Exhibition exhibition) {
+		this.exhibition = exhibition;
+	}
+
+	public void setMuseum(final Museum museum) {
+		this.museum = museum;
 	}
 
 }

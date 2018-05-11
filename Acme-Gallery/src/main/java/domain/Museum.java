@@ -1,10 +1,17 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
@@ -120,6 +127,94 @@ public class Museum extends DomainEntity {
 
 	public void setPrice(final Double price) {
 		this.price = price;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Director			director;
+	private Collection<Group>	groups;
+	private Collection<Review>	reviews;
+	private Collection<DayPass>	dayPasses;
+	private Collection<Room>	rooms;
+	private Store				store;
+	private Collection<Guide>	guides;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Director getDirector() {
+		return this.director;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "museum")
+	public Collection<Group> getGroups() {
+		return this.groups;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "museum")
+	public Collection<Review> getReviews() {
+		return this.reviews;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "museum")
+	public Collection<DayPass> getDayPasses() {
+		return this.dayPasses;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "museum")
+	public Collection<Room> getRooms() {
+		return this.rooms;
+	}
+
+	@Valid
+	@OneToOne(optional = true)
+	public Store getStore() {
+		return this.store;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToMany
+	public Collection<Guide> getGuides() {
+		return this.guides;
+	}
+
+	public void setDirector(final Director director) {
+		this.director = director;
+	}
+
+	public void setGroups(final Collection<Group> groups) {
+		this.groups = groups;
+	}
+
+	public void setReviews(final Collection<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public void setDayPasses(final Collection<DayPass> dayPasses) {
+		this.dayPasses = dayPasses;
+	}
+
+	public void setRooms(final Collection<Room> rooms) {
+		this.rooms = rooms;
+	}
+
+	public void setStore(final Store store) {
+		this.store = store;
+	}
+
+	public void setGuides(final Collection<Guide> guides) {
+		this.guides = guides;
 	}
 
 }

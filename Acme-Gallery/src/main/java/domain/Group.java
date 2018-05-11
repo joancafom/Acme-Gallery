@@ -1,13 +1,18 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -100,6 +105,83 @@ public class Group extends DomainEntity {
 
 	public void setContainsTaboo(final boolean containsTaboo) {
 		this.containsTaboo = containsTaboo;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Collection<Announcement>	announcements;
+	private Collection<Comment>			comments;
+	private Visitor						creator;
+	private Collection<Visitor>			participants;
+	private Collection<Invitation>		invitations;
+	private Museum						museum;
+
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "group")
+	public Collection<Announcement> getAnnouncements() {
+		return this.announcements;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "group")
+	public Collection<Comment> getComments() {
+		return this.comments;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Visitor getCreator() {
+		return this.creator;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToMany(mappedBy = "joinedGroups")
+	public Collection<Visitor> getParticipants() {
+		return this.participants;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "group")
+	public Collection<Invitation> getInvitations() {
+		return this.invitations;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Museum getMuseum() {
+		return this.museum;
+	}
+
+	public void setAnnouncements(final Collection<Announcement> announcements) {
+		this.announcements = announcements;
+	}
+
+	public void setComments(final Collection<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public void setCreator(final Visitor creator) {
+		this.creator = creator;
+	}
+
+	public void setParticipants(final Collection<Visitor> participants) {
+		this.participants = participants;
+	}
+
+	public void setInvitations(final Collection<Invitation> invitations) {
+		this.invitations = invitations;
+	}
+
+	public void setMuseum(final Museum museum) {
+		this.museum = museum;
 	}
 
 }

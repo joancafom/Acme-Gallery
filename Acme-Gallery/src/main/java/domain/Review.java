@@ -6,8 +6,10 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -68,6 +70,35 @@ public class Review extends DomainEntity {
 
 	public void setCreationDate(final Date creationDate) {
 		this.creationDate = creationDate;
+	}
+
+
+	// Relationships ----------------------------------------------------------------------------------
+
+	private Visitor	visitor;
+	private Museum	museum;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Visitor getVisitor() {
+		return this.visitor;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Museum getMuseum() {
+		return this.museum;
+	}
+
+	public void setVisitor(final Visitor visitor) {
+		this.visitor = visitor;
+	}
+
+	public void setMuseum(final Museum museum) {
+		this.museum = museum;
 	}
 
 }

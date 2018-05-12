@@ -28,6 +28,5 @@
 
 <%-- Definition --%>
 
-	<spring:message code="${code}" var="acmeDateFormat"></spring:message>
-	<fmt:formatDate value="${value}" pattern="${acmeDateFormat}" type="${type}"/>
-
+<spring:message code="${code}" var="acmeDateFormat"></spring:message>
+<fmt:formatDate value="${value}" pattern="${acmeDateFormat}" type="${type}"/>

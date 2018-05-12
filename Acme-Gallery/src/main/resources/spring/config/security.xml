@@ -44,13 +44,14 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 
+		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+		
 		<!-- Acme-Gallery Directives go under here -->
 		
+		<security:intercept-url pattern="/exhibition/listResults.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/exhibition/search.do" access="isAnonymous()" /> 
 
 		<security:intercept-url pattern="/visitor/register.do" access="isAnonymous()" />
-
-		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 
 			login-page="/security/login.do"

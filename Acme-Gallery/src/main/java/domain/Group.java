@@ -72,7 +72,7 @@ public class Group extends DomainEntity {
 	}
 
 	@NotNull
-	public boolean isClosed() {
+	public boolean getIsClosed() {
 		return this.isClosed;
 	}
 
@@ -101,7 +101,7 @@ public class Group extends DomainEntity {
 		this.meetingDate = meetingDate;
 	}
 
-	public void setClosed(final boolean isClosed) {
+	public void setIsClosed(final boolean isClosed) {
 		this.isClosed = isClosed;
 	}
 

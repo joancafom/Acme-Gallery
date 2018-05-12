@@ -436,7 +436,63 @@
 		<property name="gender" value="MALE"/>
 		<property name="userAccount" ref="userAccountAdmin"/>
 	</bean>
-
+	
+	<!-- Coordinates -->
+	
+	<bean id="coordinates1" class="domain.GPSCoordinates">
+		<property name="latitude" value="56.4882" />
+		<property name="longitude" value="47.2939"/>
+	</bean>
+	
+	<bean id="coordinates2" class="domain.GPSCoordinates">
+		<property name="latitude" value="1.29393" />
+		<property name="longitude" value="3.54899"/>
+	</bean>
+	
+	<bean id="coordinates3" class="domain.GPSCoordinates">
+		<property name="latitude" value="0.0344" />
+		<property name="longitude" value="37.34838"/>
+	</bean>
+	
+	<bean id="coordinates4" class="domain.GPSCoordinates">
+		<property name="latitude" value="-4.5882" />
+		<property name="longitude" value="43.539"/>
+	</bean>
+	
+	<bean id="coordinates5" class="domain.GPSCoordinates">
+		<property name="latitude" value="8.34232" />
+		<property name="longitude" value="9.453857"/>
+	</bean>
+	
+	<bean id="coordinates6" class="domain.GPSCoordinates">
+		<property name="latitude" value="82.4747" />
+		<property name="longitude" value="39.34834"/>
+	</bean>
+	
+	<bean id="coordinates7" class="domain.GPSCoordinates">
+		<property name="latitude" value="564.3882" />
+		<property name="longitude" value="7.2569"/>
+	</bean>
+	
+	<bean id="coordinates8" class="domain.GPSCoordinates">
+		<property name="latitude" value="84.3232" />
+		<property name="longitude" value="4343.9"/>
+	</bean>
+	
+	<bean id="coordinates9" class="domain.GPSCoordinates">
+		<property name="latitude" value="-45.882" />
+		<property name="longitude" value="-45.2939"/>
+	</bean>
+	
+	<bean id="coordinates10" class="domain.GPSCoordinates">
+		<property name="latitude" value="4334.882" />
+		<property name="longitude" value="94.54435"/>
+	</bean>
+	
+	<bean id="coordinates11" class="domain.GPSCoordinates">
+		<property name="latitude" value="45.45482" />
+		<property name="longitude" value="411.939"/>
+	</bean>
 
 	<!-- Directors -->
 
@@ -451,6 +507,12 @@
 
 		<property name="museums">
 			<list>
+				<ref bean="museum1"/>
+				<ref bean="museum2"/>
+				<ref bean="museum3"/>
+				<ref bean="museum4"/>
+				<ref bean="museum5"/>
+				<ref bean="museum6"/>
 			</list>
 		</property>
 	</bean>
@@ -466,6 +528,7 @@
 
 		<property name="museums">
 			<list>
+				<ref bean="museum7"/>
 			</list>
 		</property>
 	</bean>
@@ -496,6 +559,7 @@
 
 		<property name="museums">
 			<list>
+				<ref bean="museum8"/>
 			</list>
 		</property>
 	</bean>
@@ -510,6 +574,8 @@
 
 		<property name="museums">
 			<list>
+				<ref bean="museum9"/>
+				<ref bean="museum10"/>
 			</list>
 		</property>
 	</bean>
@@ -524,6 +590,7 @@
 
 		<property name="museums">
 			<list>
+				<ref bean="museum11"/>
 			</list>
 		</property>
 	</bean>
@@ -717,7 +784,893 @@
 			</list>
 		</property>
 	</bean>
-
+	
+	<!-- Groups -->
+	
+	<bean id="group1" class="domain.Group">
+		<property name="name" value="Vist to El Prado" />
+		<property name="description" value="Let's have a good time"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="19/04/2018 17:32" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="30"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="18/09/2018 10:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="false"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="creator" ref="visitor1"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor1"/>
+				<ref bean="visitor2"/>
+				<ref bean="visitor3"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group2" class="domain.Group">
+		<property name="name" value="British Museum Meeting" />
+		<property name="description" value="Let's go!!"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/05/2018 12:58" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="10"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/06/2018 12:30" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="true"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum2"/>
+		<property name="creator" ref="visitor2"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor2"/>
+				<ref bean="visitor4"/>
+				<ref bean="visitor5"/>
+				<ref bean="visitor6"/>
+				<ref bean="visitor1"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group3" class="domain.Group">
+		<property name="name" value="Date in El Prado" />
+		<property name="description" value="It's gonna be so romantic!"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="12/02/2018 13:02" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="2"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/02/2018 20:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="true"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="creator" ref="visitor1"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor1"/>
+				<ref bean="visitor2"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group4" class="domain.Group">
+		<property name="name" value="The Squad in El Prado!" />
+		<property name="description" value="We're gonna have so much fun together!!"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/04/2018 19:43" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="10"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="03/05/2018 16:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="true"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="creator" ref="visitor1"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor1"/>
+				<ref bean="visitor4"/>
+				<ref bean="visitor5"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group5" class="domain.Group">
+		<property name="name" value="Open Meeting to El Prado" />
+		<property name="description" value="Anyone who's interested in going can join us :)"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/04/2018 20:22" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="100"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/05/2018 10:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="true"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="creator" ref="visitor1"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor1"/>
+				<ref bean="visitor6"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group6" class="domain.Group">
+		<property name="name" value="Visit to the British Museum" />
+		<property name="description" value="I'll show you what real art is"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="17/12/2017 23:01" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="5"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/02/2018 20:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="true"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum2"/>
+		<property name="creator" ref="visitor1"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor1"/>
+				<ref bean="visitor3"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group7" class="domain.Group">
+		<property name="name" value="Visit to el Prado without Tricia" />
+		<property name="description" value="Let's have fun together"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="03/03/2018 20:31" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="10"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="28/03/2018 16:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="true"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="creator" ref="visitor2"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor2"/>
+				<ref bean="visitor4"/>
+				<ref bean="visitor6"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group8" class="domain.Group">
+		<property name="name" value="Madame Tussauds Meeting" />
+		<property name="description" value="Does someone wanna come with me?"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/02/2018 15:21" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="10"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/02/2018 12:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="false"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum8"/>
+		<property name="creator" ref="visitor4"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor4"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group9" class="domain.Group">
+		<property name="name" value="Romantic Date to the National Gallery!!" />
+		<property name="description" value="Surprise! Are you excited?"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 21:05" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="2"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/02/2018 10:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="true"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum9"/>
+		<property name="creator" ref="visitor5"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor5"/>
+				<ref bean="visitor6"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group10" class="domain.Group">
+		<property name="name" value="Visiting the National Gallery Tomorrow" />
+		<property name="description" value="Anyone can come with me"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="18/02/2018 13:11" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="100"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="19/02/2018 17:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="false"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum9"/>
+		<property name="creator" ref="visitor4"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor4"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group11" class="domain.Group">
+		<property name="name" value="Visiting the Vaticano" />
+		<property name="description" value="Any christian who wants to join me?"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="25/12/2017 19:43" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="100"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="06/01/2018 19:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="false"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum4"/>
+		<property name="creator" ref="visitor1"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor1"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group12" class="domain.Group">
+		<property name="name" value="Visiting El Prado Alone" />
+		<property name="description" value="Finally!"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="08/05/2018 11:04" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="2"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="19/06/2018 20:30" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="true"/>
+		<property name="containsTaboo" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="creator" ref="visitor4"/>
+		
+		<property name="participants">
+			<list>
+				<ref bean="visitor4"/>
+				<ref bean="visitor5"/>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+	<!-- Museums -->
+	
+	<bean id="museum1" class="domain.Museum">
+		<property name="name" value="The Prado"/>
+		<property name="address" value="28014 Paseo del Prado"/>
+		<property name="coordinates" ref="coordinates1"/>
+		<property name="email" value="padromuseo@gmail.com"/>
+		<property name="phoneNumber" value="+34688912668"/>
+		<property name="title" value="200 Years sharing art with you"/>
+		<property name="identifier" value="MDP"/>
+		<property name="banner" value="https://upload.wikimedia.org/wikipedia/commons/9/94/Logo_del_Museo_Nacional_del_Prado.png"/>
+		<property name="price" value="58.99"/>
+		
+		<property name="director" ref="director1"/>
+		<property name="groups">
+			<list>
+				<ref bean="group1"/>
+				<ref bean="group3"/>
+				<ref bean="group4"/>
+				<ref bean="group5"/>
+				<ref bean="group7"/>
+				<ref bean="group12"/>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="store" ref="store1"/>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum2" class="domain.Museum">
+		<property name="name" value="The British Museum"/>
+		<property name="address" value="Great Russell St, Bloomsbury"/>
+		<property name="coordinates" ref="coordinates2"/>
+		<property name="email" value="britishmuseum@gmail.com"/>
+		<property name="phoneNumber" value="+34654112980"/>
+		<property name="title" value="© 2017 Trustees of the British Museum"/>
+		<property name="identifier" value="TBM"/>
+		<property name="banner" value="http://files.websitebuilder.prositehosting.co.uk/fasthosts23063/image/britishmuseumlogo_6515.jpg"/>
+		<property name="price" value="80.00"/>
+		
+		<property name="director" ref="director1"/>
+		<property name="groups">
+			<list>
+				<ref bean="group2"/>
+				<ref bean="group6"/>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="store" ref="store2"/>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum3" class="domain.Museum">
+		<property name="name" value="The Metropolitan Museum of Art"/>
+		<property name="address" value="1000 5th Ave"/>
+		<property name="coordinates" ref="coordinates3"/>
+		<property name="email" value="newyorkart@gmail.com"/>
+		<property name="phoneNumber" value="+34667120556"/>
+		<property name="title" value="Founded in 1870"/>
+		<property name="identifier" value="TMMA"/>
+		<property name="banner" value="https://static.dezeen.com/uploads/2016/02/new-metropolitan-art-museum-logo-wolff-olins_dezeen_1568_0.jpg"/>
+		<property name="price" value="49.99"/>
+		
+		<property name="director" ref="director1"/>
+		<property name="groups">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="store" ref="store3"/>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum4" class="domain.Museum">
+		<property name="name" value="The Vatican Museums"/>
+		<property name="address" value="Viale Vaticano, 00165"/>
+		<property name="coordinates" ref="coordinates4"/>
+		<property name="email" value="vaticanmuseums@gmail.com"/>
+		<property name="phoneNumber" value="+34655900879"/>
+		<property name="title" value="Art, aside from being a credible witness to the beauty of creation, is also a tool of evangelisation"/>
+		<property name="identifier" value="TVM"/>
+		<property name="banner" value="http://www.museivaticani.va/etc/designs/museivaticani/release/library/main/images/favicon-social-1500.png"/>
+		<property name="price" value="60.50"/>
+		
+		<property name="director" ref="director1"/>
+		<property name="groups">
+			<list>
+				<ref bean="group11"/>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum5" class="domain.Museum">
+		<property name="name" value="The Louvre"/>
+		<property name="address" value="Rue de Rivoli, 75001"/>
+		<property name="coordinates" ref="coordinates5"/>
+		<property name="email" value="thelouvre@gmail.com"/>
+		<property name="phoneNumber" value="+34691122467"/>
+		<property name="title" value="Préparer sa visite, connaître l'actualité du musée, participer aux activités, découvrir les œuvres."/>
+		<property name="identifier" value="TL"/>
+		<property name="banner" value="https://d302e0npexowb4.cloudfront.net/wp-content/uploads/2016/11/Louvre-Logo.jpg"/>
+		<property name="price" value="67.90"/>
+		
+		<property name="director" ref="director1"/>
+		<property name="groups">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="store" ref="store5"/>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum6" class="domain.Museum">
+		<property name="name" value="State Hermitage"/>
+		<property name="address" value="Palace Square, 2, Sankt-Peterburg"/>
+		<property name="coordinates" ref="coordinates6"/>
+		<property name="email" value="statehermitage@gmail.com"/>
+		<property name="phoneNumber" value="+34667129433"/>
+		<property name="title" value="Not Everyone will be Taken into the Future"/>
+		<property name="identifier" value="SH"/>
+		<property name="banner" value="https://s-media-cache-ak0.pinimg.com/originals/3c/18/50/3c1850453a810e9edc8f5b68d560578b.png"/>
+		<property name="price" value="18.99"/>
+		
+		<property name="director" ref="director1"/>
+		<property name="groups">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum7" class="domain.Museum">
+		<property name="name" value="Guggenheim"/>
+		<property name="address" value="Avenida Abandoibarra, 2 48009"/>
+		<property name="coordinates" ref="coordinates7"/>
+		<property name="email" value="guggenheim@gmail.com"/>
+		<property name="phoneNumber" value="+34655980600"/>
+		<property name="title" value="© FMGB Guggenheim Bilbao Museoa, 2018"/>
+		<property name="identifier" value="GM"/>
+		<property name="banner" value="https://d302e0npexowb4.cloudfront.net/wp-content/uploads/2016/11/guggenheim-logo.png"/>
+		<property name="price" value="49.99"/>
+		
+		<property name="director" ref="director2"/>
+		<property name="groups">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="store" ref="store7"/>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum8" class="domain.Museum">
+		<property name="name" value="Madame Tussauds"/>
+		<property name="address" value="Marylebone Rd, Marylebone"/>
+		<property name="coordinates" ref="coordinates8"/>
+		<property name="email" value="tussauds@gmail.com"/>
+		<property name="phoneNumber" value="+34899123666"/>
+		<property name="title" value="Get closer to the stars in London"/>
+		<property name="identifier" value="MT"/>
+		<property name="banner" value="http://www.qverlondres.com/wp-content/uploads/2016/10/mdame-tussauds-museo-de-cera-londres.jpg"/>
+		<property name="price" value="60.00"/>
+		
+		<property name="director" ref="director4"/>
+		<property name="groups">
+			<list>
+				<ref bean="group8"/>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="store" ref="store8"/>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum9" class="domain.Museum">
+		<property name="name" value="The National Gallery"/>
+		<property name="address" value="Trafalgar Square, London"/>
+		<property name="coordinates" ref="coordinates9"/>
+		<property name="email" value="nationalgallery@gmail.com"/>
+		<property name="phoneNumber" value="+34998234776"/>
+		<property name="title" value="The story of European art, masterpiece by masterpiece."/>
+		<property name="identifier" value="TNG"/>
+		<property name="banner" value="http://3.bp.blogspot.com/-vpxgw6XtyDM/TVuxpAMFgnI/AAAAAAAABho/03rIOoY6tsY/s1600/NG_Logo_White.png"/>
+		<property name="price" value="1.0"/>
+		
+		<property name="director" ref="director5"/>
+		<property name="groups">
+			<list>
+				<ref bean="group9"/>
+				<ref bean="group10"/>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum10" class="domain.Museum">
+		<property name="name" value="Museo Thyssen-Bornemisza"/>
+		<property name="address" value="Paseo del Prado, 8"/>
+		<property name="coordinates" ref="coordinates10"/>
+		<property name="email" value="thyssen@gmail.com"/>
+		<property name="phoneNumber" value="+34665900800"/>
+		<property name="title" value="Un paseo por la historia del arte. Visita obligada en Madrid."/>
+		<property name="identifier" value="MTB"/>
+		<property name="banner" value="https://www.vectorlogo.es/wp-content/uploads/2016/01/logo-vector-museo-thyssen-bornemisza.jpg"/>
+		<property name="price" value="35.55"/>
+		
+		<property name="director" ref="director5"/>
+		<property name="groups">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="museum11" class="domain.Museum">
+		<property name="name" value="Egyptian Museum"/>
+		<property name="address" value="15 Meret Basha, Ismailia"/>
+		<property name="coordinates" ref="coordinates11"/>
+		<property name="email" value="elcairomuseum@gmail.com"/>
+		<property name="phoneNumber" value="+34677122980"/>
+		<property name="title" value="Home to an extensive collection of ancient Egyptian antiquities"/>
+		<property name="identifier" value="EGEC"/>
+		<property name="banner" value="https://i.pinimg.com/originals/dc/cc/de/dcccde3f0d9d0794318412768bddf5f2.png"/>
+		<property name="price" value="29.99"/>
+		
+		<property name="director" ref="director6"/>
+		<property name="groups">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="rooms">
+			<list>
+			</list>
+		</property>
+		<property name="store" ref="store11"/>
+		<property name="guides">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
 
 	<!-- Visitors -->
 
@@ -732,10 +1685,23 @@
 
 		<property name="createdGroups">
 			<list>
+				<ref bean="group1"/>
+				<ref bean="group3"/>
+				<ref bean="group4"/>
+				<ref bean="group5"/>
+				<ref bean="group6"/>
+				<ref bean="group11"/>
 			</list>
 		</property>
 		<property name="joinedGroups">
 			<list>
+				<ref bean="group1"/>
+				<ref bean="group3"/>
+				<ref bean="group4"/>
+				<ref bean="group5"/>
+				<ref bean="group6"/>
+				<ref bean="group11"/>
+				<ref bean="group2"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -771,10 +1737,16 @@
 
 		<property name="createdGroups">
 			<list>
+				<ref bean="group2"/>
+				<ref bean="group7"/>
 			</list>
 		</property>
 		<property name="joinedGroups">
 			<list>
+				<ref bean="group2"/>
+				<ref bean="group7"/>
+				<ref bean="group3"/>
+				<ref bean="group6"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -849,10 +1821,20 @@
 
 		<property name="createdGroups">
 			<list>
+				<ref bean="group8"/>
+				<ref bean="group10"/>
+				<ref bean="group12"/>
 			</list>
 		</property>
 		<property name="joinedGroups">
 			<list>
+				<ref bean="group8"/>
+				<ref bean="group10"/>
+				<ref bean="group2"/>
+				<ref bean="group4"/>
+				<ref bean="group6"/>
+				<ref bean="group7"/>
+				<ref bean="group12"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -887,10 +1869,15 @@
 
 		<property name="createdGroups">
 			<list>
+				<ref bean="group5"/>
 			</list>
 		</property>
 		<property name="joinedGroups">
 			<list>
+				<ref bean="group5"/>
+				<ref bean="group2"/>
+				<ref bean="group4"/>
+				<ref bean="group12"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -929,6 +1916,10 @@
 		</property>
 		<property name="joinedGroups">
 			<list>
+				<ref bean="group2"/>
+				<ref bean="group5"/>
+				<ref bean="group7"/>
+				<ref bean="group9"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -1074,5 +2065,99 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Store -->
+	
+	<bean id="store1" class="domain.Store">
+		<property name="name" value="Tienda Prado" />
+		<property name="logo" value="http://www.tiendaprado.com/themes/UniqueShop/imgmuseo/logo_tiendaprado_pq.png"/>
+		<property name="phoneNumber" value="+34657112980"/>
+		<property name="email" value="tiendaprado@gmail.com"/>
+
+		<property name="museum" ref="museum1"/>
+		<property name="products">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="store2" class="domain.Store">
+		<property name="name" value="The Britsh Museum Shop" />
+		<property name="logo" value="https://www.britishmuseumshoponline.org/media/logo/stores/1/logo.png"/>
+		<property name="phoneNumber" value="+34776199100"/>
+		<property name="email" value="britishshop@gmail.com"/>
+
+		<property name="museum" ref="museum2"/>
+		<property name="products">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="store3" class="domain.Store">
+		<property name="name" value="The MET Shop" />
+		<property name="logo" value="https://store.metmuseum.org/static/version1526014148/frontend/Corra/metmuseum/en_US/images/logo.svg"/>
+		<property name="phoneNumber" value="+346651119000"/>
+		<property name="email" value="metshop@gmail.com"/>
+
+		<property name="museum" ref="museum3"/>
+		<property name="products">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="store5" class="domain.Store">
+		<property name="name" value="The Louvre's Shop" />
+		<property name="logo" value="https://mir-s3-cdn-cf.behance.net/project_modules/disp/b928d144690415.5607819169ff8.png"/>
+		<property name="phoneNumber" value="+34699887445"/>
+		<property name="email" value="louvreshop@gmail.com"/>
+
+		<property name="museum" ref="museum5"/>
+		<property name="products">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="store7" class="domain.Store">
+		<property name="name" value="Guggenheim Shop" />
+		<property name="logo" value="http://payload274.cargocollective.com/1/14/454254/7788719/logo_guggen_900.png"/>
+		<property name="phoneNumber" value="+34998100456"/>
+		<property name="email" value="guggenheimshop@gmail.com"/>
+
+		<property name="museum" ref="museum7"/>
+		<property name="products">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="store8" class="domain.Store">
+		<property name="name" value="Madame Tussauds' Shop" />
+		<property name="logo" value="http://www.logo-designer.co/wp-content/uploads/2017/05/2017-someone-logo-design-madame-tussauds.png"/>
+		<property name="phoneNumber" value="+34887911900"/>
+		<property name="email" value="tussaudsshop@gmail.com"/>
+
+		<property name="museum" ref="museum8"/>
+		<property name="products">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="store11" class="domain.Store">
+		<property name="name" value="The Egyptian Shop" />
+		<property name="logo" value="http://uploads.webflow.com/5733a2bde86245b622d7e13f/5745129e9e3261e515a7ec01_Identities-TEMGIP.jpg"/>
+		<property name="phoneNumber" value="+34667989200"/>
+		<property name="email" value="egyptianshop@gmail.com"/>
+
+		<property name="museum" ref="museum11"/>
+		<property name="products">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	
 </beans>

@@ -18,11 +18,14 @@
 	">
 
 	<util:list id="messages">
-		<value>/views/exhibition/messages</value>
 		<value>/views/master-page/messages</value>
 		<value>/views/misc/messages</value>
 		<value>/views/security/messages</value>		
 		<value>/views/welcome/messages</value>
+		
+		<!-- Acme-Gallery Messages go under here -->
+		<value>/views/actor/messages</value>
+		<value>/views/exhibition/messages</value>
 	</util:list>
 
 </beans>

@@ -33,8 +33,8 @@ window.onload = function(){
     <div class="navbar-header">
     
       <!-- TODO: Place here the name and logo of the company -->
-      <img src="images/logo.png" alt="Sample Co., Inc." style="max-height: 50px;"/>
-      <a class="navbar-brand" href="#">Sample Co.</a>
+      <img src="images/logo.png" alt="Acme, Inc." style="max-height: 50px;"/>
+      <a class="navbar-brand" href="#">Acme</a>
     </div>
     
     <!-- TODO: Place here the role of the Actor -->
@@ -52,7 +52,7 @@ window.onload = function(){
     	<ul class="nav navbar-nav">
     	
 			<!-- TODO: Place here the entities, actions and messageCodes -->
-			<li ><a href="entityX/actionX.do"><spring:message code="master.page.sample"/></a></li>
+			<li ><a href="exhibition/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			
 		</ul>
 		<ul class="nav navbar-nav navbar-right">

@@ -1,6 +1,8 @@
 
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -23,8 +25,8 @@ public class Sponsorship extends DomainEntity {
 	private CreditCard	creditCard;
 	private String		banner;
 	private String		link;
-	private String		startingDate;
-	private String		endingDate;
+	private Date		startingDate;
+	private Date		endingDate;
 
 
 	@NotNull
@@ -52,13 +54,13 @@ public class Sponsorship extends DomainEntity {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public String getStartingDate() {
+	public Date getStartingDate() {
 		return this.startingDate;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public String getEndingDate() {
+	public Date getEndingDate() {
 		return this.endingDate;
 	}
 
@@ -78,11 +80,11 @@ public class Sponsorship extends DomainEntity {
 		this.link = link;
 	}
 
-	public void setStartingDate(final String startingDate) {
+	public void setStartingDate(final Date startingDate) {
 		this.startingDate = startingDate;
 	}
 
-	public void setEndingDate(final String endingDate) {
+	public void setEndingDate(final Date endingDate) {
 		this.endingDate = endingDate;
 	}
 

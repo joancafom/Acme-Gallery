@@ -22,9 +22,10 @@
 	
 	<!-- User accounts -->
 
-	<bean id="userAccount1" class="security.UserAccount">
+	<bean id="userAccountAdmin" class="security.UserAccount">
 		<property name="username" value="admin" />
 		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="isLocked" value="false"/>
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -34,6 +35,1044 @@
 		</property>
 	</bean>
 
-	<!-- Other domain beans come here -->	
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="visitor1" />
+		<property name="password" value="6b6bd8b6963e4a254bf6d4760390fddc" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="visitor2" />
+		<property name="password" value="dc0aae5ad49b535328e8ff6586ce4cb9" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="visitor3" />
+		<property name="password" value="3c7e8d3dc82fb340495186f57b6f251f" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="visitor4" />
+		<property name="password" value="ecad069456249536c8fb9d96855d59c6" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="visitor5" />
+		<property name="password" value="5157dcb4702627348c8c0539b69a80cf" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="visitor6" />
+		<property name="password" value="56c136b80b32c6bba419115415094b26" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="reviewer1" />
+		<property name="password" value="6ce19528a40dde9521d97cf7ba264eca" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="reviewer2" />
+		<property name="password" value="2693b57f0f59df94caacefb811e99851" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="reviewer3" />
+		<property name="password" value="315d31e7c8f3a136610aafa220d689be" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="reviewer4" />
+		<property name="password" value="5293e8663cbb7c157ff83eeae25177d3" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="sponsor1" />
+		<property name="password" value="42c63ad66d4dc07ed17753772bef96d6" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount12" class="security.UserAccount">
+		<property name="username" value="sponsor2" />
+		<property name="password" value="3dc67f80a03324e01b1640f45d107485" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount13" class="security.UserAccount">
+		<property name="username" value="sponsor3" />
+		<property name="password" value="857a54956061fdc1b88d7722cafe6519" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount14" class="security.UserAccount">
+		<property name="username" value="sponsor4" />
+		<property name="password" value="a8be034fe44a453e912feadc414dc803" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount15" class="security.UserAccount">
+		<property name="username" value="director1" />
+		<property name="password" value="21a70a20a394dc2a038843a51a64322b" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="DIRECTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount16" class="security.UserAccount">
+		<property name="username" value="director2" />
+		<property name="password" value="c9c25d0280cad37aa512f2394f5baa34" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="DIRECTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount17" class="security.UserAccount">
+		<property name="username" value="director3" />
+		<property name="password" value="e3b2adc6c01ef0cdc3520d2b3716dfa3" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="DIRECTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount18" class="security.UserAccount">
+		<property name="username" value="director4" />
+		<property name="password" value="193b0e473341160fead2c20f4120de9a" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="DIRECTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount19" class="security.UserAccount">
+		<property name="username" value="director5" />
+		<property name="password" value="7d2fd72afbe450563de3aed8f7a16c4c" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="DIRECTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount20" class="security.UserAccount">
+		<property name="username" value="director6" />
+		<property name="password" value="287d2662f214126093fdbea4b327825d" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="DIRECTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount21" class="security.UserAccount">
+		<property name="username" value="guide1" />
+		<property name="password" value="f510e23d073d307697b845e84f4398f1" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount22" class="security.UserAccount">
+		<property name="username" value="guide2" />
+		<property name="password" value="f6ea0da319e7c2192998a8b48edc5024" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount23" class="security.UserAccount">
+		<property name="username" value="guide3" />
+		<property name="password" value="1b60cec032194468b46bd87bfe1af456" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount24" class="security.UserAccount">
+		<property name="username" value="guide4" />
+		<property name="password" value="50af8909a65fbf6790845e275adecb46" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount25" class="security.UserAccount">
+		<property name="username" value="guide5" />
+		<property name="password" value="936ccfabcfe7c0c0aa3b2ad77210febd" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount26" class="security.UserAccount">
+		<property name="username" value="guide6" />
+		<property name="password" value="5ca67f92df774624bdaefc52568b7aa2" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount27" class="security.UserAccount">
+		<property name="username" value="guide7" />
+		<property name="password" value="792483d3ebafe0965438e3227b93de55" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount28" class="security.UserAccount">
+		<property name="username" value="guide8" />
+		<property name="password" value="b1df69b415394916d416ffb29d051b52" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount29" class="security.UserAccount">
+		<property name="username" value="guide9" />
+		<property name="password" value="846827b6b969105dd154b2bbbe4e66ab" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount30" class="security.UserAccount">
+		<property name="username" value="guide10" />
+		<property name="password" value="944c1a270edbef10d9da4f8aac8221e6" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GUIDE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Administrator -->
+
+	<bean id="admin" class="domain.Administrator">
+		<property name="name" value="Fran" />
+		<property name="surnames" value="Vail"/>
+		<property name="email" value="fran@gmail.com"/>
+		<property name="phoneNumber" value="+34512565480"/>
+		<property name="address" value="824 Ashton Lane"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccountAdmin"/>
+	</bean>
+
+
+	<!-- Directors -->
+
+	<bean id="director1" class="domain.Director">
+		<property name="name" value="Pili" />
+		<property name="surnames" value="Beaton"/>
+		<property name="email" value="pili@gmail.com"/>
+		<property name="phoneNumber" value="+34907200114"/>
+		<property name="address" value="3062 Tully Street"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount15"/>
+
+		<property name="museums">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="director2" class="domain.Director">
+		<property name="name" value="Estela" />
+		<property name="surnames" value="Sharma"/>
+		<property name="email" value="estela@gmail.com"/>
+		<property name="phoneNumber" value="+34443226248"/>
+		<property name="address" value="2052 Lyon Avenue"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount16"/>
+
+		<property name="museums">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="director3" class="domain.Director">
+		<property name="name" value="Tota KK" />
+		<property name="surnames" value="Richardson"/>
+		<property name="email" value="totakk@gmail.com"/>
+		<property name="phoneNumber" value="+34615710397"/>
+		<property name="address" value="109 Marshville Road"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount17"/>
+
+		<property name="museums">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="director4" class="domain.Director">
+		<property name="name" value="Elio" />
+		<property name="surnames" value="Petit"/>
+		<property name="email" value="elio@gmail.com"/>
+		<property name="phoneNumber" value="+34484368739"/>
+		<property name="address" value="3436 Goff Avenue"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount18"/>
+
+		<property name="museums">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="director5" class="domain.Director">
+		<property name="name" value="Tom" />
+		<property name="surnames" value="Nook"/>
+		<property name="email" value="tomNook@gmail.com"/>
+		<property name="phoneNumber" value="+34907200114"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount19"/>
+
+		<property name="museums">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="director6" class="domain.Director">
+		<property name="name" value="Sócrates" />
+		<property name="surnames" value="Alvarado"/>
+		<property name="email" value="socrates@gmail.com"/>
+		<property name="phoneNumber" value="+348032351835"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount20"/>
+
+		<property name="museums">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Guide -->
+
+	<bean id="guide1" class="domain.Guide">
+		<property name="name" value="Pascual" />
+		<property name="surnames" value="Pruitt"/>
+		<property name="email" value="pascual@gmail.com"/>
+		<property name="phoneNumber" value="+34928462331"/>
+		<property name="address" value="2649 Skips Lane"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount21"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide2" class="domain.Guide">
+		<property name="name" value="Ketchup" />
+		<property name="surnames" value="Nations"/>
+		<property name="email" value="ketchup@gmail.com"/>
+		<property name="phoneNumber" value="+34337201478"/>
+		<property name="gender" value="OTHER"/>
+		<property name="userAccount" ref="userAccount22"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide3" class="domain.Guide">
+		<property name="name" value="Miki" />
+		<property name="surnames" value="Rankin"/>
+		<property name="email" value="miki@gmail.com"/>
+		<property name="phoneNumber" value="+34601953203"/>
+		<property name="address" value="2543 Oxford Court"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount23"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide4" class="domain.Guide">
+		<property name="name" value="Marina" />
+		<property name="surnames" value="J King"/>
+		<property name="email" value="marina@gmail.com"/>
+		<property name="phoneNumber" value="+34978778261"/>
+		<property name="address" value="4503 Christine Way"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount24"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide5" class="domain.Guide">
+		<property name="name" value="Jeremías" />
+		<property name="surnames" value="Abbott"/>
+		<property name="email" value="jeremias@gmail.com"/>
+		<property name="phoneNumber" value="+34412280844"/>
+		<property name="address" value="4205 Spruce Divine"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount25"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide6" class="domain.Guide">
+		<property name="name" value="Natura" />
+		<property name="surnames" value="Shrader"/>
+		<property name="email" value="natura@gmail.com"/>
+		<property name="phoneNumber" value="+346066260439"/>
+		<property name="address" value="3408 May Street"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount26"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide7" class="domain.Guide">
+		<property name="name" value="Camember" />
+		<property name="surnames" value="Hogan"/>
+		<property name="email" value="camember@gmail.com"/>
+		<property name="phoneNumber" value="+34915541233"/>
+		<property name="address" value="3908 Birch Street"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount27"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide8" class="domain.Guide">
+		<property name="name" value="Vacarena" />
+		<property name="surnames" value="Corby"/>
+		<property name="email" value="vacarena@gmail.com"/>
+		<property name="phoneNumber" value="+34561633002"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount28"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide9" class="domain.Guide">
+		<property name="name" value="Nenufar" />
+		<property name="surnames" value="Hutchinson"/>
+		<property name="email" value="nenufar@gmail.com"/>
+		<property name="phoneNumber" value="+34770894273"/>
+		<property name="address" value="3657 Smith Road"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount29"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="guide10" class="domain.Guide">
+		<property name="name" value="Luisa" />
+		<property name="surnames" value="Mathias"/>
+		<property name="email" value="luisa@gmail.com"/>
+		<property name="phoneNumber" value="+34310699097"/>
+		<property name="address" value="2649 Skips Lane"/>
+		<property name="gender" value="OTHER"/>
+		<property name="userAccount" ref="userAccount30"/>
+
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- Visitors -->
+
+	<bean id="visitor1" class="domain.Visitor">
+		<property name="name" value="Tricia" />
+		<property name="surnames" value="Sundberg"/>
+		<property name="email" value="tricia@gmail.com"/>
+		<property name="phoneNumber" value="+34633017787"/>
+		<property name="address" value="1590 Black Stallion Road"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount1"/>
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="visitor2" class="domain.Visitor">
+		<property name="name" value="Surfín" />
+		<property name="surnames" value="Brown"/>
+		<property name="email" value="surfin@gmail.com"/>
+		<property name="phoneNumber" value="+34651980500"/>
+		<property name="address" value="4841 Bagwell Avenue"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount2"/>
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="visitor3" class="domain.Visitor">
+		<property name="name" value="Azabache" />
+		<property name="surnames" value="Ford"/>
+		<property name="email" value="azabache@gmail.com"/>
+		<property name="phoneNumber" value="+34677145098"/>
+		<property name="address" value="3826 Leroy Lane"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount3"/>
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="visitor4" class="domain.Visitor">
+		<property name="name" value="Martita" />
+		<property name="surnames" value="C Lee"/>
+		<property name="email" value="martita@gmail.com"/>
+		<property name="phoneNumber" value="+34667208805"/>
+		<property name="address" value="1211 Blue Spruce Lane"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount4"/>
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="visitor5" class="domain.Visitor">
+		<property name="name" value="Arandano" />
+		<property name="surnames" value="Posey"/>
+		<property name="email" value="arandano@gmail.com"/>
+		<property name="phoneNumber" value="+34641841970"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount5"/>
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="visitor6" class="domain.Visitor">
+		<property name="name" value="Bruno" />
+		<property name="surnames" value="Harding"/>
+		<property name="email" value="bruno@gmail.com"/>
+		<property name="phoneNumber" value="+34998841948"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount6"/>
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Reviewers -->
+
+	<bean id="reviewer1" class="domain.Reviewer">
+		<property name="name" value="Rubí" />
+		<property name="surnames" value="Koon"/>
+		<property name="email" value="rubi@gmail.com"/>
+		<property name="phoneNumber" value="+34606383526"/>
+		<property name="address" value="4315 Honeysuckle Lane"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount7"/>
+
+		<property name="critiques">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="reviewer2" class="domain.Reviewer">
+		<property name="name" value="Quique" />
+		<property name="surnames" value="Perkins"/>
+		<property name="email" value="quique@gmail.com"/>
+		<property name="phoneNumber" value="+34348337243"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount8"/>
+
+		<property name="critiques">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="reviewer3" class="domain.Reviewer">
+		<property name="name" value="Norberto" />
+		<property name="surnames" value="Sanchez"/>
+		<property name="email" value="norberto@gmail.com"/>
+		<property name="phoneNumber" value="+34818218338"/>
+		<property name="address" value="2097 Aviation Way"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount9"/>
+
+		<property name="critiques">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="reviewer4" class="domain.Reviewer">
+		<property name="name" value="Minina" />
+		<property name="surnames" value="Juarez"/>
+		<property name="email" value="minina@gmail.com"/>
+		<property name="phoneNumber" value="+34347988810"/>
+		<property name="address" value="1466 Anmoore Road"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount10"/>
+
+		<property name="critiques">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Sponsors -->
+
+	<bean id="sponsor1" class="domain.Sponsor">
+		<property name="name" value="Bombo" />
+		<property name="surnames" value="Lucas"/>
+		<property name="email" value="bombo@gmail.com"/>
+		<property name="phoneNumber" value="+34314202953"/>
+		<property name="address" value="2275 Robinson Lane"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount11"/>
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sponsor2" class="domain.Sponsor">
+		<property name="name" value="Lupe" />
+		<property name="surnames" value="Derr"/>
+		<property name="email" value="lupe@gmail.com"/>
+		<property name="phoneNumber" value="+34216355401"/>
+		<property name="address" value="2937 Horseshoe Lane"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount12"/>
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sponsor3" class="domain.Sponsor">
+		<property name="name" value="Parches" />
+		<property name="surnames" value="Cohen"/>
+		<property name="email" value="parches@gmail.com"/>
+		<property name="phoneNumber" value="+34832382160"/>
+		<property name="address" value="1718 Mill Street"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount13"/>
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sponsor4" class="domain.Sponsor">
+		<property name="name" value="Orestes" />
+		<property name="surnames" value="Ross"/>
+		<property name="email" value="orestes@gmail.com"/>
+		<property name="phoneNumber" value="+34314202953"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount14"/>
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
 	
 </beans>

@@ -1,5 +1,5 @@
 <%--
- * textarea.tag
+ * textbox.tag
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -21,9 +21,10 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <%-- Attributes --%> 
-
+ 
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
+
 <%@ attribute name="readonly" required="false" %>
 
 <jstl:if test="${readonly == null}">
@@ -32,10 +33,10 @@
 
 <%-- Definition --%>
 
-<div class="form-group">
+<div>
 	<form:label path="${path}">
-		<strong><spring:message code="${code}" />:</strong>
+		<strong><spring:message code="${code}"/>:</strong>
 	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" />
-	<form:errors path="${path}" cssClass="error" />
-</div>
+	<form:input path="${path}" placeholder="dd/MM/yyyy HH:mm"/>
+	<form:errors cssClass="error" path="${path}"/><br><br>
+</div>	

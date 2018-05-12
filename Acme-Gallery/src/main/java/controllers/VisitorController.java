@@ -49,9 +49,9 @@ public class VisitorController extends AbstractController {
 		else
 			try {
 
-				this.visitorService.save(visitorToRegister);
+				this.visitorService.register(visitorToRegister);
 
-				res = new ModelAndView("redirect:welcome/index");
+				res = new ModelAndView("welcome/index");
 
 			} catch (final DataIntegrityViolationException oops) {
 				res = this.createEditModelAndView(actorRegistrationForm, "actor.userAccount.username.duplicated");

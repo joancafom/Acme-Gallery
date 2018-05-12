@@ -1,11 +1,6 @@
 <%--
- * textarea.tag
+ * dateFormat.tag
  *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
  --%>
 
 <%@ tag language="java" body-content="empty" %>
@@ -21,21 +16,18 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <%-- Attributes --%> 
-
-<%@ attribute name="path" required="true" %>
+ 
 <%@ attribute name="code" required="true" %>
-<%@ attribute name="readonly" required="false" %>
+<%@ attribute name="value" required="true" type="java.util.Date"%>
 
-<jstl:if test="${readonly == null}">
-	<jstl:set var="readonly" value="false" />
+<%@ attribute name="type" required="false" %>
+
+<jstl:if test="${type == null}">
+	<jstl:set var="type" value="date" />
 </jstl:if>
 
 <%-- Definition --%>
 
-<div class="form-group">
-	<form:label path="${path}">
-		<strong><spring:message code="${code}" />:</strong>
-	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" />
-	<form:errors path="${path}" cssClass="error" />
-</div>
+	<spring:message code="${code}" var="acmeDateFormat"></spring:message>
+	<fmt:formatDate value="${value}" pattern="${acmeDateFormat}" type="${type}"/>
+

@@ -55,27 +55,27 @@ public class ActorService {
 
 		switch (clase.getName().toUpperCase()) {
 
-		case "ADMINISTRATOR":
+		case "DOMAIN.ADMINISTRATOR":
 			userAuthority.setAuthority(Authority.ADMINISTRATOR);
 			break;
 
-		case "GUIDE":
+		case "DOMAIN.GUIDE":
 			userAuthority.setAuthority(Authority.GUIDE);
 			break;
 
-		case "DIRECTOR":
+		case "DOMAIN.DIRECTOR":
 			userAuthority.setAuthority(Authority.DIRECTOR);
 			break;
 
-		case "VISITOR":
+		case "DOMAIN.VISITOR":
 			userAuthority.setAuthority(Authority.VISITOR);
 			break;
 
-		case "SPONSOR":
+		case "DOMAIN.SPONSOR":
 			userAuthority.setAuthority(Authority.SPONSOR);
 			break;
 
-		case "REVIEWER":
+		case "DOMAIN.REVIEWER":
 			userAuthority.setAuthority(Authority.REVIEWER);
 			break;
 
@@ -108,8 +108,16 @@ public class ActorService {
 		actorToReconstruct.setSurnames(actorRegistrationForm.getSurnames());
 		actorToReconstruct.setEmail(actorRegistrationForm.getEmail());
 		actorToReconstruct.setPhoneNumber(actorRegistrationForm.getPhoneNumber());
-		actorToReconstruct.setAddress(actorRegistrationForm.getAddress());
-		actorToReconstruct.setGender(actorRegistrationForm.getGender());
+
+		if (actorRegistrationForm.getAddress() == null || actorRegistrationForm.getAddress().equals(""))
+			actorToReconstruct.setAddress(null);
+		else
+			actorToReconstruct.setAddress(actorRegistrationForm.getAddress());
+
+		if (actorRegistrationForm.getGender() == null || actorRegistrationForm.getGender().equals(""))
+			actorToReconstruct.setGender(null);
+		else
+			actorToReconstruct.setGender(actorRegistrationForm.getGender());
 
 		this.validator.validate(actorToReconstruct, binding);
 

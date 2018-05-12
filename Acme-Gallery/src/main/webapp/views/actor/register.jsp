@@ -20,12 +20,14 @@
 <spring:message code="actor.userAccount.passwordMatchMessage" var="passwordMatchError"></spring:message>
 
 <jstl:if test="${actor == 'visitor'}">
-	<spring:message code="actorTitle" var="visitorTitle"></spring:message>
+	<spring:message code="visitorTitle" var="actorTitle"></spring:message>
 </jstl:if>
 
 <script type="text/javascript">
 
-	document.title = ${actorTitle};
+	$(document).ready(function(){
+		document.title = '${actorTitle}';
+	});
 
 	function checkData(){
 		
@@ -90,13 +92,13 @@
 		<spring:message code="actor.gender" />
 	</form:label>	
 	<form:select path="gender">
-		<form:option value="0" label="----" />
+		<form:option value="" label="----" />
 		<form:option value="MALE" label="${genderMale}" />
 		<form:option value="FEMALE" label="${genderFemale}" />
 		<form:option value="OTHER" label="${genderOther}" />
 	</form:select>
 	<form:errors path="gender" cssClass="error" />
-	
+	<br><br>
 	<form:checkbox path="acceptedTerms" onchange="checkData()" id="checkbox" name="checkbox" /><spring:message code="actor.accept"/> <a href="misc/termsAndConditions.do" target="_blank"><spring:message code="actor.termsAndConditions"/></a>
 	<br><br>
 	

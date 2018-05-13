@@ -36,17 +36,74 @@ window.onload = function(){
       <img src="images/logo.png" alt="Acme, Inc." style="max-height: 50px;"/>
       <a class="navbar-brand" href="#">Acme</a>
     </div>
-    
-    <!-- TODO: Place here the role of the Actor -->
-    <security:authorize access="hasRole('roleX')">
+  
+  	<!--------------------------- ADMINISTRATOR --------------------------->  
+  
+    <security:authorize access="hasRole('ADMINISTRATOR')">
     	<ul class="nav navbar-nav">
     		
-    		<!-- TODO: Place here the roles, actions and messageCodes -->
-			<li ><a href="roleX/actionX.do"><spring:message code="master.page.sample"/></a></li>
+			<li ><a href="exhibition/administrator/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
 	</security:authorize>
+	
+	<!------------------------------ DIRECTOR ----------------------------->
+	
+	<security:authorize access="hasRole('DIRECTOR')">
+    	<ul class="nav navbar-nav">
+    		
+			<li ><a href="exhibition/director/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			
+			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
+		</ul>
+	</security:authorize>
+	
+	<!------------------------------- GUIDE ------------------------------->
+	
+	<security:authorize access="hasRole('GUIDE')">
+    	<ul class="nav navbar-nav">
+    		
+			<li ><a href="exhibition/guide/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			
+			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
+		</ul>
+	</security:authorize>
+	
+	<!------------------------------ REVIEWER ----------------------------->
+	
+	<security:authorize access="hasRole('REVIEWER')">
+    	<ul class="nav navbar-nav">
+    		
+			<li ><a href="exhibition/reviewer/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			
+			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
+		</ul>
+	</security:authorize>
+	
+	<!------------------------------ SPONSOR ------------------------------>
+	
+	<security:authorize access="hasRole('SPONSOR')">
+    	<ul class="nav navbar-nav">
+    		
+			<li ><a href="exhibition/sponsor/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			
+			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
+		</ul>
+	</security:authorize>
+	
+	<!------------------------------ VISITOR ------------------------------>
+	
+	<security:authorize access="hasRole('VISITOR')">
+    	<ul class="nav navbar-nav">
+    		
+			<li ><a href="exhibition/visitor/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			
+			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
+		</ul>
+	</security:authorize>
+	
+	<!-------------------------- UNAUTHENTICATED -------------------------->
 	
     <security:authorize access="isAnonymous()">
     	<ul class="nav navbar-nav">

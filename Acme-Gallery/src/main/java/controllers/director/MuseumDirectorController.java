@@ -21,10 +21,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import services.DirectorService;
 import services.ExhibitionService;
 import services.MuseumService;
 import services.ReviewService;
 import controllers.AbstractController;
+import domain.Director;
 import domain.Exhibition;
 import domain.Museum;
 import domain.Review;
@@ -46,12 +49,15 @@ public class MuseumDirectorController extends AbstractController {
 	@Autowired
 	private ExhibitionService	exhibitionService;
 
+	@Autowired
+	private DirectorService		directorService;
+
 
 	// Methods ----------------------------------------------------------------------------------------
 
 	//v1.0 - Implemented by JA
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int museumId, @RequestParam(value = "d-1332308-p", defaultValue = "1") final Integer pageR, @RequestParam(value = "d-1332309-p", defaultValue = "1") final Integer pageE) {
+	public ModelAndView display(@RequestParam final int museumId, @RequestParam(value = "d-1332308-p", defaultValue = "1") final Integer pageR, @RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer pageE) {
 
 		final ModelAndView res;
 
@@ -68,12 +74,16 @@ public class MuseumDirectorController extends AbstractController {
 		final Collection<Exhibition> exhibitions = pageResultE.getContent();
 		final Integer resultSizeE = new Long(pageResultE.getTotalElements()).intValue();
 
+		final Director currentDirector = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentDirector);
+
 		res = new ModelAndView("museum/display");
 		res.addObject("museum", museum);
 		res.addObject("reviews", reviews);
 		res.addObject("resultSizeR", resultSizeR);
 		res.addObject("exhibitions", exhibitions);
 		res.addObject("resultSizeE", resultSizeE);
+		res.addObject("own", museum.getDirector().equals(currentDirector));
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

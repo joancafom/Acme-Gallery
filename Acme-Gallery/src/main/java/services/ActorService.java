@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import repositories.ActorRepository;
 import security.Authority;
 import security.UserAccount;
 import security.UserAccountService;
@@ -21,12 +22,14 @@ import forms.ActorRegistrationForm;
 @Transactional
 public class ActorService {
 
+	//Managed Repository
+	@Autowired
+	private ActorRepository		actorRepository;
+
 	//Other supporting services
 
 	@Autowired
 	private UserAccountService	userAccountService;
-
-	//Other supporting services
 
 	@Autowired
 	private Validator			validator;
@@ -35,7 +38,7 @@ public class ActorService {
 	//CRUD Methods
 
 	//v1.0 - Implemented by JA
-	public <T extends Actor> T create(final Class<T> clase) {
+	protected <T extends Actor> T create(final Class<T> clase) {
 
 		// Create the Actor
 
@@ -91,6 +94,22 @@ public class ActorService {
 	}
 
 	//Other Business Methods
+
+	//v1.0 - Implemented by JA
+	protected <T extends Actor> T findByUserAccount(final UserAccount userAccount, final Class<T> clase) {
+
+		Assert.notNull(userAccount);
+
+		final Actor res = this.actorRepository.findByUserAccountId(userAccount.getId());
+		Assert.notNull(res);
+
+		if (res == null)
+			return null;
+		else {
+			Assert.isTrue(clase.isInstance(res));
+			return clase.cast(res);
+		}
+	}
 
 	//v1.0 - Implemented by JA
 	protected <T extends Actor> T reconstructRegisterForm(final T actorToReconstruct, final ActorRegistrationForm actorRegistrationForm, final BindingResult binding) {

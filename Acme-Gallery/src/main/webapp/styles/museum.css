@@ -24,3 +24,19 @@
 .info{
 	padding: 70px;
 }
+
+th {
+	text-align: center;
+}
+
+td{
+	text-align: center;
+}
+
+.moreInfo{
+	text-align: justify;
+}
+
+.messageOk{
+	color: #1ebf59;
+}

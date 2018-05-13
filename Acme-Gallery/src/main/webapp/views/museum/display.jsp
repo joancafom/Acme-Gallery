@@ -25,6 +25,11 @@
 		<img src="${museum.banner}" alt="${museum.name}"/>
 	</jstl:if>
 	<h2><jstl:out value="${museum.name}" /></h2>
+	<security:authorize access="hasRole('DIRECTOR')">
+		<jstl:if test="${own}">
+			<h3 class="messageOk"><spring:message code="museum.yours"/></h3>
+		</jstl:if>
+	</security:authorize>
 	<jstl:if test="${museum.title ne null}">
 		<p><jstl:out value="${museum.title}" /></p>
 	</jstl:if>
@@ -41,9 +46,9 @@
 	
 	<spring:message code="price.format" var="priceFormat"></spring:message>
 	<display:table name="exhibitions" id="exhibition" requestURI="museum/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeE}">
-		<display:column titleKey="exhibition.title" property="name" style="width:20%" />
-		<display:column titleKey="exhibition.description" property="description" style="width:60%" />
-		<display:column titleKey="exhibition.price" style="width:20%">
+		<display:column titleKey="exhibition.title" property="title"/>
+		<display:column titleKey="exhibition.description" property="description" style="width:60%" class="moreInfo"/>
+		<display:column titleKey="exhibition.price" style="width:5%;">
 			<fmt:formatNumber type="currency" currencySymbol="&#8364;" pattern="${priceFormat}" value="${exhibition.price}" />
 		</display:column>
 		<display:column titleKey="exhibition.dates" style="width:20%">

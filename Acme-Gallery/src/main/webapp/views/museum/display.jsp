@@ -11,6 +11,7 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
@@ -29,10 +30,32 @@
 	</jstl:if>
 </div>
 
+<div id="mExhibitions" class="info">
+
+	<security:authorize access="hasAnyRole('VISITOR','SPONSOR', 'REVIEWER') or isAnonymous()">
+		<h4><spring:message code="museum.exhibitions.currentAndFuture"/></h4>
+	</security:authorize>
+	<security:authorize access="hasAnyRole('ADMINISTRATOR','DIRECTOR', 'GUIDE')">
+		<h4><spring:message code="museum.exhibitions"/></h4>
+	</security:authorize>
+	
+	<spring:message code="price.format" var="priceFormat"></spring:message>
+	<display:table name="exhibitions" id="exhibition" requestURI="museum/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeE}">
+		<display:column titleKey="exhibition.title" property="name" style="width:20%" />
+		<display:column titleKey="exhibition.description" property="description" style="width:60%" />
+		<display:column titleKey="exhibition.price" style="width:20%">
+			<fmt:formatNumber type="currency" currencySymbol="&#8364;" pattern="${priceFormat}" value="${exhibition.price}" />
+		</display:column>
+		<display:column titleKey="exhibition.dates" style="width:20%">
+			<spring:message code="exhibition.from"/> <acme:dateFormat code="date.format" value="${exhibition.startingDate}"/> <spring:message code="exhibition.to"/> <acme:dateFormat code="date.format" value="${exhibition.endingDate}"/> 
+		</display:column>
+	</display:table>
+</div>
+
 <div id="mReviews" class="info">
 	<h4><spring:message code="museum.reviews"/></h4>
 	
-	<display:table name="reviews" id="review" requestURI="museum/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
+	<display:table name="reviews" id="review" requestURI="museum/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeR}">
 		<display:column titleKey="review.visitor.name" property="${review.visitor.name}" style="width:20%" />
 		<display:column titleKey="review.body" property="body" style="width:60%" />
 		<display:column titleKey="review.score" style="width:20%">

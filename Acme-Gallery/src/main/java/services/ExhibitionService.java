@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.ExhibitionRepository;
 import domain.Category;
 import domain.Exhibition;
+import domain.Museum;
 
 @Service
 @Transactional
@@ -68,6 +69,46 @@ public class ExhibitionService {
 		Assert.notNull(category);
 
 		final Page<Exhibition> res = this.exhibitionRepository.findByCategoryId(category.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	public Collection<Exhibition> getCurrentAndFutureByMuseum(final Museum museum) {
+		Assert.notNull(museum);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.getCurrentAndFutureByMuseumId(museum.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	public Page<Exhibition> getCurrentAndFutureByMuseum(final Museum museum, final int page, final int size) {
+		Assert.notNull(museum);
+
+		final Page<Exhibition> res = this.exhibitionRepository.getCurrentAndFutureByMuseumId(museum.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	public Collection<Exhibition> getAllByMuseum(final Museum museum) {
+		Assert.notNull(museum);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.getAllByMuseumId(museum.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	public Page<Exhibition> getAllByMuseum(final Museum museum, final int page, final int size) {
+		Assert.notNull(museum);
+
+		final Page<Exhibition> res = this.exhibitionRepository.getAllByMuseumId(museum.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
 		return res;

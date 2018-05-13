@@ -440,7 +440,7 @@
 	<!-- Categories -->
 	<bean id="category1" class="domain.Category">
 		<property name="name" value="CATEGORY"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 				<ref bean="category2"/>
 				<ref bean="category3"/>
@@ -456,7 +456,7 @@
 	<bean id="category2" class="domain.Category">
 		<property name="name" value="Paintings"/>
 		<property name="parentCategory" ref="category1"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 				<ref bean="category5"/>
 				<ref bean="category6"/>
@@ -474,7 +474,7 @@
 	<bean id="category3" class="domain.Category">
 		<property name="name" value="Sculptures"/>
 		<property name="parentCategory" ref="category1"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 				<ref bean="category10"/>
 				<ref bean="category11"/>
@@ -491,7 +491,7 @@
 	<bean id="category4" class="domain.Category">
 		<property name="name" value="Other Arts"/>
 		<property name="parentCategory" ref="category1"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 				<ref bean="category14"/>
 			</list>
@@ -505,7 +505,7 @@
 	<bean id="category5" class="domain.Category">
 		<property name="name" value="Contemporaine"/>
 		<property name="parentCategory" ref="category2"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -519,7 +519,7 @@
 	<bean id="category6" class="domain.Category">
 		<property name="name" value="Byzantine Painting"/>
 		<property name="parentCategory" ref="category2"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -532,7 +532,7 @@
 	<bean id="category7" class="domain.Category">
 		<property name="name" value="Renaissance"/>
 		<property name="parentCategory" ref="category2"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -545,7 +545,7 @@
 	<bean id="category8" class="domain.Category">
 		<property name="name" value="Baroque"/>
 		<property name="parentCategory" ref="category2"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -564,7 +564,7 @@
 	<bean id="category9" class="domain.Category">
 		<property name="name" value="Rococos"/>
 		<property name="parentCategory" ref="category2"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -577,7 +577,7 @@
 	<bean id="category10" class="domain.Category">
 		<property name="name" value="Mesopotamia"/>
 		<property name="parentCategory" ref="category3"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -590,7 +590,7 @@
 	<bean id="category11" class="domain.Category">
 		<property name="name" value="Egypt"/>
 		<property name="parentCategory" ref="category3"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -604,7 +604,7 @@
 	<bean id="category12" class="domain.Category">
 		<property name="name" value="Ancient Greece"/>
 		<property name="parentCategory" ref="category3"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -618,7 +618,7 @@
 	<bean id="category13" class="domain.Category">
 		<property name="name" value="Gothic"/>
 		<property name="parentCategory" ref="category3"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -631,7 +631,7 @@
 	<bean id="category14" class="domain.Category">
 		<property name="name" value="Modern Arts"/>
 		<property name="parentCategory" ref="category4"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 				<ref bean="category15"/>
 				<ref bean="category16"/>
@@ -649,7 +649,7 @@
 	<bean id="category15" class="domain.Category">
 		<property name="name" value="Pop History"/>
 		<property name="parentCategory" ref="category14"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -663,7 +663,7 @@
 	<bean id="category16" class="domain.Category">
 		<property name="name" value="Abstract Art"/>
 		<property name="parentCategory" ref="category14"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -677,7 +677,7 @@
 	<bean id="category17" class="domain.Category">
 		<property name="name" value="Modern Style"/>
 		<property name="parentCategory" ref="category14"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -690,7 +690,7 @@
 	<bean id="category18" class="domain.Category">
 		<property name="name" value="Postmodern Era"/>
 		<property name="parentCategory" ref="category14"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -704,7 +704,7 @@
 	<bean id="category19" class="domain.Category">
 		<property name="name" value="Avant-Grade"/>
 		<property name="parentCategory" ref="category14"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -717,7 +717,7 @@
 	<bean id="category20" class="domain.Category">
 		<property name="name" value="Postimpressionisme"/>
 		<property name="parentCategory" ref="category2"/>
-		<property name="childrenCategory">
+		<property name="childrenCategories">
 			<list>
 			</list>
 		</property>
@@ -732,58 +732,58 @@
 	<!-- Coordinates -->
 	
 	<bean id="coordinates1" class="domain.GPSCoordinates">
-		<property name="latitude" value="56.4882" />
-		<property name="longitude" value="47.2939"/>
+		<property name="latitude" value="40.413889" />
+		<property name="longitude" value="-3.6925"/>
 	</bean>
 	
 	<bean id="coordinates2" class="domain.GPSCoordinates">
-		<property name="latitude" value="1.29393" />
-		<property name="longitude" value="3.54899"/>
+		<property name="latitude" value="51.5183162601 " />
+		<property name="longitude" value="-0.12291117502"/>
 	</bean>
 	
 	<bean id="coordinates3" class="domain.GPSCoordinates">
-		<property name="latitude" value="0.0344" />
-		<property name="longitude" value="37.34838"/>
+		<property name="latitude" value="40.7794162" />
+		<property name="longitude" value="-73.9633727"/>
 	</bean>
 	
 	<bean id="coordinates4" class="domain.GPSCoordinates">
-		<property name="latitude" value="-4.5882" />
-		<property name="longitude" value="43.539"/>
+		<property name="latitude" value="41.903829718" />
+		<property name="longitude" value="12.452664856"/>
 	</bean>
 	
 	<bean id="coordinates5" class="domain.GPSCoordinates">
-		<property name="latitude" value="8.34232" />
-		<property name="longitude" value="9.453857"/>
+		<property name="latitude" value="48.86072" />
+		<property name="longitude" value="2.34096"/>
 	</bean>
 	
 	<bean id="coordinates6" class="domain.GPSCoordinates">
-		<property name="latitude" value="82.4747" />
-		<property name="longitude" value="39.34834"/>
+		<property name="latitude" value="59.941065" />
+		<property name="longitude" value="30.317846"/>
 	</bean>
 	
 	<bean id="coordinates7" class="domain.GPSCoordinates">
-		<property name="latitude" value="564.3882" />
-		<property name="longitude" value="7.2569"/>
+		<property name="latitude" value="43.268606" />
+		<property name="longitude" value="-2.934286"/>
 	</bean>
 	
 	<bean id="coordinates8" class="domain.GPSCoordinates">
-		<property name="latitude" value="84.3232" />
-		<property name="longitude" value="4343.9"/>
+		<property name="latitude" value="51.5228" />
+		<property name="longitude" value="-0.155278"/>
 	</bean>
 	
 	<bean id="coordinates9" class="domain.GPSCoordinates">
-		<property name="latitude" value="-45.882" />
-		<property name="longitude" value="-45.2939"/>
+		<property name="latitude" value="51.508704" />
+		<property name="longitude" value="-0.128435"/>
 	</bean>
 	
 	<bean id="coordinates10" class="domain.GPSCoordinates">
-		<property name="latitude" value="4334.882" />
-		<property name="longitude" value="94.54435"/>
+		<property name="latitude" value="40.416111" />
+		<property name="longitude" value="-3.695"/>
 	</bean>
 	
 	<bean id="coordinates11" class="domain.GPSCoordinates">
-		<property name="latitude" value="45.45482" />
-		<property name="longitude" value="411.939"/>
+		<property name="latitude" value="30.047778" />
+		<property name="longitude" value="31.233333"/>
 	</bean>
 	
 	<!-- Exhibitions -->

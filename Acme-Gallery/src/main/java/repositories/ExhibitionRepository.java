@@ -30,4 +30,20 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
 	@Query("select e from Exhibition e where e.category.id = ?1")
 	Page<Exhibition> findByCategoryId(int categoryId, Pageable pageable);
 
+	// v1.0 - JA
+	@Query("select e from Exhibition e, Room r where r.museum.id = ?1 and e member of r.exhibitions and e.endingDate >= CURRENT_TIMESTAMP")
+	Collection<Exhibition> getCurrentAndFutureByMuseumId(int museumId);
+
+	// v1.0 - JA
+	@Query("select e from Exhibition e, Room r where r.museum.id = ?1 and e member of r.exhibitions and e.endingDate >= CURRENT_TIMESTAMP")
+	Page<Exhibition> getCurrentAndFutureByMuseumId(int museumId, Pageable pageable);
+
+	// v1.0 - JA
+	@Query("select r.exhibitions from Room r where r.museum.id = ?1")
+	Collection<Exhibition> getAllByMuseumId(int museumId);
+
+	// v1.0 - JA
+	@Query("select e from Exhibition e, Room r where r.museum.id = ?1 and e member of r.exhibitions")
+	Page<Exhibition> getAllByMuseumId(int museumId, Pageable pageable);
+
 }

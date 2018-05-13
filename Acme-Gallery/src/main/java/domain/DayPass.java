@@ -30,7 +30,7 @@ public class DayPass extends DomainEntity {
 
 
 	@NotNull
-	@Pattern(regexp = "^([A-Za-z]{1,4}-[A-Za-z]{5,}-[0-9]{4})$")
+	@Pattern(regexp = "^([A-Za-z]{1,4}-[A-Za-z0-9]{5,}-[0-9]{4})$")
 	public String getIdentifier() {
 		return this.identifier;
 	}

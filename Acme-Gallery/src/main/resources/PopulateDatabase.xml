@@ -786,6 +786,418 @@
 		<property name="longitude" value="31.233333"/>
 	</bean>
 	
+	<!-- CreditCard -->
+	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Tricia"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4635876275165858"/>
+		<property name="CVV" value="576"/>
+		<property name="month" value="10"/>
+		<property name="year" value="2020"/>
+	</bean>
+	
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Surfín"/>
+		<property name="brandName" value="Master Card"/>
+		<property name="number" value="4874723107648372"/>
+		<property name="CVV" value="879"/>
+		<property name="month" value="12"/>
+		<property name="year" value="2022"/>
+	</bean>
+	
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holderName" value="Azabache"/>
+		<property name="brandName" value="BBVA"/>
+		<property name="number" value="4688375856141236"/>
+		<property name="CVV" value="423"/>
+		<property name="month" value="1"/>
+		<property name="year" value="2021"/>
+	</bean>
+	
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holderName" value="Martita"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="5138023518721010"/>
+		<property name="CVV" value="462"/>
+		<property name="month" value="4"/>
+		<property name="year" value="2020"/>
+	</bean>
+	
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="Arándano"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="5102532708147812"/>
+		<property name="CVV" value="483"/>
+		<property name="month" value="11"/>
+		<property name="year" value="2025"/>
+	</bean>
+	
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="Bruno"/>
+		<property name="brandName" value="Master Card"/>
+		<property name="number" value="5408480764266038"/>
+		<property name="CVV" value="110"/>
+		<property name="month" value="3"/>
+		<property name="year" value="2019"/>
+	</bean>
+	
+	<!-- DayPasses -->
+	
+	<bean id="dayPass1" class="domain.DayPass">
+		<property name="identifier" value="MDP-visitor1-0001"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/05/2018 23:51" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 17:30" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard1"/>
+ 		<property name="price" value="68.99"/>
+ 		
+ 		<property name="visitor" ref="visitor1"/>
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="dayPass2" class="domain.DayPass">
+		<property name="identifier" value="MDP-visitor1-0002"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="08/02/2018 16:45" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/02/2018 12:15" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard1"/>
+ 		<property name="price" value="85.99"/>
+ 		
+ 		<property name="visitor" ref="visitor1"/>
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="exhibition" ref="exhibition3"/>
+	</bean>
+	
+	<bean id="dayPass3" class="domain.DayPass">
+		<property name="identifier" value="TBM-visitor1-0003"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="28/01/2018 13:55" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 10:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard1"/>
+ 		<property name="price" value="80.00"/>
+ 		
+ 		<property name="visitor" ref="visitor1"/>
+ 		<property name="museum" ref="museum2"/>
+	</bean>
+	
+	<bean id="dayPass4" class="domain.DayPass">
+		<property name="identifier" value="TVM-visitor1-0003"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="24/12/2017 21:23" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/01/2018 16:30" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard1"/>
+ 		<property name="price" value="88.59"/>
+ 		
+ 		<property name="visitor" ref="visitor1"/>
+ 		<property name="museum" ref="museum4"/>
+ 		<property name="exhibition" ref="exhibition8"/>
+	</bean>
+	
+	<bean id="dayPass5" class="domain.DayPass">
+		<property name="identifier" value="EGEC-visitor1-0004"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 21:29" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="25/03/2018 16:30" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard1"/>
+ 		<property name="price" value="35.55"/>
+ 		
+ 		<property name="visitor" ref="visitor1"/>
+ 		<property name="museum" ref="museum11"/>
+ 		<property name="exhibition" ref="exhibition14"/>
+	</bean>
+	
+	<bean id="dayPass6" class="domain.DayPass">
+		<property name="identifier" value="MDP-visitor2-0001"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="09/02/2018 08:21" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 18:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard2"/>
+ 		<property name="price" value="68.99"/>
+ 		
+ 		<property name="visitor" ref="visitor2"/>
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="exhibition" ref="exhibition3"/>
+	</bean>
+	
+	<bean id="dayPass7" class="domain.DayPass">
+		<property name="identifier" value="TBM-visitor2-0002"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="30/01/2018 10:58" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 21:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard2"/>
+ 		<property name="price" value="80.00"/>
+ 		
+ 		<property name="visitor" ref="visitor2"/>
+ 		<property name="museum" ref="museum2"/>
+	</bean>
+	
+	<bean id="dayPass8" class="domain.DayPass">
+		<property name="identifier" value="TL-visitor2-0003"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/04/2018 12:40" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/04/2018 15:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard2"/>
+ 		<property name="price" value="67.90"/>
+ 		
+ 		<property name="visitor" ref="visitor2"/>
+ 		<property name="museum" ref="museum5"/>
+	</bean>
+	
+	<bean id="dayPass9" class="domain.DayPass">
+		<property name="identifier" value="EGEC-visitor2-0004"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 21:31" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="25/03/2018 16:30" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard2"/>
+ 		<property name="price" value="35.55"/>
+ 		
+ 		<property name="visitor" ref="visitor2"/>
+ 		<property name="museum" ref="museum11"/>
+ 		<property name="exhibition" ref="exhibition14"/>
+	</bean>
+	
+	<bean id="dayPass10" class="domain.DayPass">
+		<property name="identifier" value="MDP-visitor6-0001"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/02/2018 09:11" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="11/02/2018 20:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard6"/>
+ 		<property name="price" value="68.99"/>
+ 		
+ 		<property name="visitor" ref="visitor6"/>
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="exhibition" ref="exhibition3"/>
+	</bean>
+	
+	<bean id="dayPass11" class="domain.DayPass">
+		<property name="identifier" value="TBM-visitor6-0002"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="06/05/2018 12:58" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 15:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard6"/>
+ 		<property name="price" value="80.00"/>
+ 		
+ 		<property name="visitor" ref="visitor6"/>
+ 		<property name="museum" ref="museum2"/>
+	</bean>
+	
+	<bean id="dayPass12" class="domain.DayPass">
+		<property name="identifier" value="TVM-visitor6-0003"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="29/12/2017 15:29" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="30/12/2017 17:30" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard6"/>
+ 		<property name="price" value="70.50"/>
+ 		
+ 		<property name="visitor" ref="visitor6"/>
+ 		<property name="museum" ref="museum4"/>
+ 		<property name="exhibition" ref="exhibition8"/>
+	</bean>
+	
+	<bean id="dayPass13" class="domain.DayPass">
+		<property name="identifier" value="MDP-visitor4-0001"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/02/2018 18:11" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/02/2018 15:30" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard4"/>
+ 		<property name="price" value="68.99"/>
+ 		
+ 		<property name="visitor" ref="visitor4"/>
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="exhibition" ref="exhibition3"/>
+	</bean>
+	
+	<bean id="dayPass14" class="domain.DayPass">
+		<property name="identifier" value="MT-visitor4-0002"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="06/05/2018 19:44" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 18:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard4"/>
+ 		<property name="price" value="80.00"/>
+ 		
+ 		<property name="visitor" ref="visitor4"/>
+ 		<property name="museum" ref="museum8"/>
+ 		<property name="exhibition" ref="exhibition12"/>
+	</bean>
+	
+	<bean id="dayPass15" class="domain.DayPass">
+		<property name="identifier" value="MDP-visitor5-0001"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="11/02/2018 11:56" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 14:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard5"/>
+ 		<property name="price" value="75.00"/>
+ 		
+ 		<property name="visitor" ref="visitor5"/>
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="exhibition" ref="exhibition3"/>
+	</bean>
+	
+	<bean id="dayPass16" class="domain.DayPass">
+		<property name="identifier" value="TBM-visitor5-0002"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="28/01/2018 19:02" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/02/2018 18:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard5"/>
+ 		<property name="price" value="80.00"/>
+ 		
+ 		<property name="visitor" ref="visitor5"/>
+ 		<property name="museum" ref="museum2"/>
+	</bean>
+	
+	<bean id="dayPass17" class="domain.DayPass">
+		<property name="identifier" value="TL-visitor5-0003"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="09/02/2018 20:28" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/02/2018 19:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard5"/>
+ 		<property name="price" value="67.90"/>
+ 		
+ 		<property name="visitor" ref="visitor5"/>
+ 		<property name="museum" ref="museum5"/>
+	</bean>
+	
+	<bean id="dayPass18" class="domain.DayPass">
+		<property name="identifier" value="MT-visitor5-0004"/>
+		<property name="purchaseMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="04/05/2018 10:19" /> 
+  			</bean>
+ 		</property>
+ 		<property name="visitDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 19:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="creditCard" ref="creditCard5"/>
+ 		<property name="price" value="80.99"/>
+ 		
+ 		<property name="visitor" ref="visitor5"/>
+ 		<property name="museum" ref="museum8"/>
+ 		<property name="exhibition" ref="exhibition12"/>
+	</bean>
+	
 	<!-- Exhibitions -->
 	
 	<bean id="exhibition1" class="domain.Exhibition">
@@ -812,6 +1224,7 @@
  		<property name="room" ref="room1"/>
  		<property name="dayPasses">
  			<list>
+ 				<ref bean="dayPass1"/>
  			</list>
  		</property>
  		<property name="sponsorships">
@@ -903,6 +1316,12 @@
  		<property name="room" ref="room2"/>
  		<property name="dayPasses">
  			<list>
+ 				<ref bean="dayPass2"/>
+ 				<ref bean="dayPass6"/>
+ 				<ref bean="dayPass10"/>
+ 				<ref bean="dayPass13"/>
+ 				<ref bean="dayPass15"/>
+
  			</list>
  		</property>
  		<property name="sponsorships">
@@ -1133,6 +1552,10 @@
  		<property name="room" ref="room10"/>
  		<property name="dayPasses">
  			<list>
+ 				<ref bean="dayPass4"/>
+ 				<ref bean="dayPass12"/>
+ 				<ref bean="dayPass14"/>
+ 				<ref bean="dayPass18"/>
  			</list>
  		</property>
  		<property name="sponsorships">
@@ -1410,6 +1833,8 @@
  		<property name="room" ref="room24"/>
  		<property name="dayPasses">
  			<list>
+ 				<ref bean="dayPass5"/>
+ 				<ref bean="dayPass9"/>
  			</list>
  		</property>
  		<property name="sponsorships">
@@ -2238,6 +2663,12 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass1"/>
+				<ref bean="dayPass2"/>
+				<ref bean="dayPass6"/>
+				<ref bean="dayPass10"/>
+				<ref bean="dayPass13"/>
+				<ref bean="dayPass15"/>
 			</list>
 		</property>
 		<property name="rooms">
@@ -2281,6 +2712,10 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass3"/>
+				<ref bean="dayPass7"/>
+				<ref bean="dayPass11"/>
+				<ref bean="dayPass16"/>
 			</list>
 		</property>
 		<property name="rooms">
@@ -2355,6 +2790,8 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass4"/>
+				<ref bean="dayPass12"/>
 			</list>
 		</property>
 		<property name="rooms">
@@ -2390,6 +2827,8 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass8"/>
+				<ref bean="dayPass17"/>
 			</list>
 		</property>
 		<property name="rooms">
@@ -2502,6 +2941,8 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass14"/>
+				<ref bean="dayPass18"/>
 			</list>
 		</property>
 		<property name="rooms">
@@ -2613,10 +3054,13 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass5"/>
+				<ref bean="dayPass9"/>
 			</list>
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room24"/>
 			</list>
 		</property>
 		<property name="store" ref="store11"/>
@@ -2664,10 +3108,20 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass1"/>
+				<ref bean="dayPass2"/>
+				<ref bean="dayPass3"/>
+				<ref bean="dayPass4"/>
+				<ref bean="dayPass5"/>
 			</list>
 		</property>
 		<property name="reviews">
 			<list>
+				<ref bean="review1"/>
+				<ref bean="review4"/>
+				<ref bean="review8"/>
+				<ref bean="review11"/>
+				<ref bean="review17"/>
 			</list>
 		</property>
 		<property name="receivedInvitations">
@@ -2709,10 +3163,18 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass6"/>
+				<ref bean="dayPass7"/>
+				<ref bean="dayPass8"/>
+				<ref bean="dayPass9"/>
 			</list>
 		</property>
 		<property name="reviews">
 			<list>
+				<ref bean="review2"/>
+				<ref bean="review9"/>
+				<ref bean="review13"/>
+				<ref bean="review18"/>
 			</list>
 		</property>
 		<property name="receivedInvitations">
@@ -2797,10 +3259,14 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass13"/>
+				<ref bean="dayPass14"/>
 			</list>
 		</property>
 		<property name="reviews">
 			<list>
+				<ref bean="review5"/>
+				<ref bean="review15"/>
 			</list>
 		</property>
 		<property name="receivedInvitations">
@@ -2840,10 +3306,18 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass15"/>
+				<ref bean="dayPass16"/>
+				<ref bean="dayPass17"/>
+				<ref bean="dayPass18"/>
 			</list>
 		</property>
 		<property name="reviews">
 			<list>
+				<ref bean="review6"/>
+				<ref bean="review7"/>
+				<ref bean="review14"/>
+				<ref bean="review16"/>
 			</list>
 		</property>
 		<property name="receivedInvitations">
@@ -2882,10 +3356,16 @@
 		</property>
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass10"/>
+				<ref bean="dayPass11"/>
+				<ref bean="dayPass12"/>
 			</list>
 		</property>
 		<property name="reviews">
 			<list>
+				<ref bean="review3"/>
+				<ref bean="review10"/>
+				<ref bean="review12"/>
 			</list>
 		</property>
 		<property name="receivedInvitations">
@@ -2896,6 +3376,260 @@
 			<list>
 			</list>
 		</property>
+	</bean>
+
+	<!-- Reviews -->
+
+	<bean id="review1" class="domain.Review">
+		<property name="body" value="Amazing facilities. I would visit it again without a doubt"/>
+		<property name="score" value="5"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 23:57" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="visitor" ref="visitor1"/>
+	</bean>
+
+	<bean id="review2" class="domain.Review">
+		<property name="body" value="One of the best experiences of my life! Sasha Velour's performance was like porn for the soul"/>
+		<property name="score" value="5"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 23:03" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="visitor" ref="visitor2"/>
+	</bean>
+
+	<bean id="review3" class="domain.Review">
+		<property name="body" value="The customer service could be improved a little bit more, but I have no complains about the rest of the service."/>
+		<property name="score" value="4"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="11/02/2018 19:42" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="visitor" ref="visitor6"/>
+	</bean>
+
+	<bean id="review4" class="domain.Review">
+		<property name="body" value="This time was not as good as the last one. I'm a little bit disappointed with the cleaning service."/>
+		<property name="score" value="3"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/02/2018 20:20" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="visitor" ref="visitor1"/>
+	</bean>
+
+	<bean id="review5" class="domain.Review">
+		<property name="body" value="I had the worst moments of my life in this place. I wouldn't recommend it."/>
+		<property name="score" value="1"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/02/2018 20:12" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="visitor" ref="visitor4"/>
+	</bean>
+
+	<bean id="review6" class="domain.Review">
+		<property name="body" value="Problems at sex? Try our brand new viagra. Buy it here: https://www.medexpress.co.uk/clinics/erectile-dysfunction/viagra"/>
+		<property name="score" value="3"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 02:00" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum1"/>
+ 		<property name="visitor" ref="visitor5"/>
+	</bean>
+
+	<bean id="review7" class="domain.Review">
+		<property name="body" value="Watch the best porn videos right here: https://www.youtube.com/watch?v=OUKj92gY-Bs"/>
+		<property name="score" value="3"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/02/2018 14:27" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum2"/>
+ 		<property name="visitor" ref="visitor5"/>
+	</bean>
+
+	<bean id="review8" class="domain.Review">
+		<property name="body" value="BORING is all I can say about this."/>
+		<property name="score" value="1"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 14:32" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum2"/>
+ 		<property name="visitor" ref="visitor1"/>
+	</bean>
+
+	<bean id="review9" class="domain.Review">
+		<property name="body" value="I fell asleep during a exhibition. I wish I had my money back"/>
+		<property name="score" value="1"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="03/03/2018 20:24" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum2"/>
+ 		<property name="visitor" ref="visitor2"/>
+	</bean>
+
+	<bean id="review10" class="domain.Review">
+		<property name="body" value="I would prefer watching porn that watching this again"/>
+		<property name="score" value="2"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="12/04/2018 09:11" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum2"/>
+ 		<property name="visitor" ref="visitor6"/>
+	</bean>
+
+	<bean id="review11" class="domain.Review">
+		<property name="body" value="It was cute. Nothing else."/>
+		<property name="score" value="3"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/01/2018 17:44" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum4"/>
+ 		<property name="visitor" ref="visitor1"/>
+	</bean>
+
+	<bean id="review12" class="domain.Review">
+		<property name="body" value="Meh."/>
+		<property name="score" value="2"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="30/12/2017 20:48" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum4"/>
+ 		<property name="visitor" ref="visitor6"/>
+	</bean>
+
+	<bean id="review13" class="domain.Review">
+		<property name="body" value="A little bit repetitive to be honest, but it was fun"/>
+		<property name="score" value="4"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/04/2018 23:01" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum5"/>
+ 		<property name="visitor" ref="visitor2"/>
+	</bean>
+
+	<bean id="review14" class="domain.Review">
+		<property name="body" value="FREE SEX HERE Now that I've got yout attention please stream 'Froot' by Marina and The Diamonds right here: https://open.spotify.com/album/1u2ACTYzVNK3vSLG0Ah4H3?si=HxztptI7TuSsyI8kb8Cz4g"/>
+		<property name="score" value="3"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="30/12/2017 20:30" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum5"/>
+ 		<property name="visitor" ref="visitor5"/>
+	</bean>
+
+	<bean id="review15" class="domain.Review">
+		<property name="body" value="Does anyone know where I can buy cialis? Anyways the exhibition was cute"/>
+		<property name="score" value="3"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="04/03/2018 11:23" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum8"/>
+ 		<property name="visitor" ref="visitor4"/>
+	</bean>
+
+	<bean id="review16" class="domain.Review">
+		<property name="body" value="Free Sex for those who buy 'Melodrama' by Lorde on iTunes https://itunes.apple.com/es/album/melodrama/1210856718"/>
+		<property name="score" value="3"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="10/02/2018 10:59" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum8"/>
+ 		<property name="visitor" ref="visitor5"/>
+	</bean>
+
+	<bean id="review17" class="domain.Review">
+		<property name="body" value="Cool and scary at the same time! I've never had so much fun!"/>
+		<property name="score" value="5"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="25/03/2018 15:48" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum11"/>
+ 		<property name="visitor" ref="visitor1"/>
+	</bean>
+
+	<bean id="review18" class="domain.Review">
+		<property name="body" value="I think my girlfriend enjoyed it. Not my case"/>
+		<property name="score" value="2"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="25/03/2018 15:54" /> 
+  			</bean>
+ 		</property>
+
+ 		<property name="museum" ref="museum11"/>
+ 		<property name="visitor" ref="visitor2"/>
 	</bean>
 
 	<!-- Reviewers -->

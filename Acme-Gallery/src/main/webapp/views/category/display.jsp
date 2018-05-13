@@ -29,7 +29,7 @@
 
 <h3><spring:message code="category.childrenCategories"/></h3>
 
-<display:table name="childrenCategories" id="childCategory" requestURI="category/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%">
+<display:table name="childrenCategories" id="childCategory" requestURI="category/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${categoriesSize}">
 	<display:column titleKey="category.name">
 		<a href="category/${actorWS}display.do?categoryId=${childCategory.id}"><jstl:out value="${childCategory.name}"/></a>
 	</display:column>
@@ -39,7 +39,7 @@
 
 <h3><spring:message code="category.exhibitions"/></h3>
 
-<display:table name="exhibitions" id="exhibition" requestURI="category/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%">
+<display:table name="exhibitions" id="exhibition" requestURI="category/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${exhibitionsSize}">
 
 	<display:column titleKey="exhibition.identifier" property="identifier"/>	
 	<display:column titleKey="exhibition.title" property="title"/>

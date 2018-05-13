@@ -19,7 +19,7 @@
 
 <h3><spring:message code="exhibition.searchResults"/> <span style="text-decoration:underline;"><jstl:out value="${keyword}"/></span></h3><br>
 
-<display:table name="exhibitions" id="exhibition" requestURI="exhibition/${actorWS}listResults.do" pagesize="5" class="displaytag" style="width:100%">
+<display:table name="exhibitions" id="exhibition" requestURI="exhibition/${actorWS}listResults.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
 	<display:column titleKey="exhibition.identifier" property="identifier"/>	
 	<display:column titleKey="exhibition.title" property="title"/>

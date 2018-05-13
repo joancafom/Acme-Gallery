@@ -13,6 +13,7 @@ package controllers.visitor;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,14 +51,17 @@ public class ExhibitionVisitorController extends AbstractController {
 
 	// v1.0 - Alicia
 	@RequestMapping(value = "/listResults", method = RequestMethod.GET)
-	public ModelAndView listResults(@RequestParam final String keyword) {
+	public ModelAndView listResults(@RequestParam final String keyword, @RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer page) {
 		ModelAndView res;
 
-		final Collection<Exhibition> exhibitions = this.exhibitionService.getByKeyword(keyword);
+		final Page<Exhibition> pageResult = this.exhibitionService.getByKeyword(keyword, page, 5);
+		final Collection<Exhibition> exhibitions = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
 
 		res = new ModelAndView("exhibition/listResults");
 
 		res.addObject("exhibitions", exhibitions);
+		res.addObject("resultSize", resultSize);
 		res.addObject("keyword", keyword);
 
 		res.addObject("actorWS", this.ACTOR_WS);

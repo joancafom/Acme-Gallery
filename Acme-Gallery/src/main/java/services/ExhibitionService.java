@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ExhibitionRepository;
+import domain.Category;
 import domain.Exhibition;
 
 @Service
@@ -47,6 +48,26 @@ public class ExhibitionService {
 		Assert.notNull(keyword);
 
 		final Page<Exhibition> res = this.exhibitionRepository.findByKeyword(keyword, new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Exhibition> getByCategory(final Category category) {
+		Assert.notNull(category);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.findByCategoryId(category.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Page<Exhibition> getByCategory(final Category category, final int page, final int size) {
+		Assert.notNull(category);
+
+		final Page<Exhibition> res = this.exhibitionRepository.findByCategoryId(category.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
 		return res;

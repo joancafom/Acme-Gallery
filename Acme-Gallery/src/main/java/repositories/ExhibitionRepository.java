@@ -22,4 +22,12 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
 	@Query("select e from Exhibition e where e.identifier like %?1% or e.title like %?1% or e.description like %?1% order by e.endingDate desc")
 	Page<Exhibition> findByKeyword(String keyword, Pageable pageable);
 
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.category.id = ?1")
+	Collection<Exhibition> findByCategoryId(int categoryId);
+
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.category.id = ?1")
+	Page<Exhibition> findByCategoryId(int categoryId, Pageable pageable);
+
 }

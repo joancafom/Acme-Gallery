@@ -43,6 +43,7 @@ window.onload = function(){
     	<ul class="nav navbar-nav">
     		
 			<li ><a href="exhibition/administrator/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			<li ><a href="category/administrator/display.do"><spring:message code="master.page.category.display"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -54,6 +55,7 @@ window.onload = function(){
     	<ul class="nav navbar-nav">
     		
 			<li ><a href="exhibition/director/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			<li ><a href="category/director/display.do"><spring:message code="master.page.category.display"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -65,6 +67,7 @@ window.onload = function(){
     	<ul class="nav navbar-nav">
     		
 			<li ><a href="exhibition/guide/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			<li ><a href="category/guide/display.do"><spring:message code="master.page.category.display"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -76,6 +79,7 @@ window.onload = function(){
     	<ul class="nav navbar-nav">
     		
 			<li ><a href="exhibition/reviewer/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			<li ><a href="category/reviewer/display.do"><spring:message code="master.page.category.display"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -87,6 +91,7 @@ window.onload = function(){
     	<ul class="nav navbar-nav">
     		
 			<li ><a href="exhibition/sponsor/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			<li ><a href="category/sponsor/display.do"><spring:message code="master.page.category.display"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -98,6 +103,7 @@ window.onload = function(){
     	<ul class="nav navbar-nav">
     		
 			<li ><a href="exhibition/visitor/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			<li ><a href="category/visitor/display.do"><spring:message code="master.page.category.display"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -110,6 +116,7 @@ window.onload = function(){
     	
 			<!-- TODO: Place here the entities, actions and messageCodes -->
 			<li ><a href="exhibition/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			<li ><a href="category/display.do"><spring:message code="master.page.category.display"/></a></li>
 			
 		</ul>
 		<ul class="nav navbar-nav navbar-right">

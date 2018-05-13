@@ -57,6 +57,7 @@ window.onload = function(){
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="visitor/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.visitor.signup" /></a></li>
+			<li><a href="sponsor/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.sponsor.signup" /></a></li>
       		<li ><a href="security/login.do"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="master.page.login" /></a></li>
     	</ul>
 	</security:authorize>

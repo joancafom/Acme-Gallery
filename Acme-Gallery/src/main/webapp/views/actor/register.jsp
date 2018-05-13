@@ -22,6 +22,9 @@
 <jstl:if test="${actor == 'visitor'}">
 	<spring:message code="visitorTitle" var="actorTitle"></spring:message>
 </jstl:if>
+<jstl:if test="${actor == 'sponsor'}">
+	<spring:message code="sponsorTitle" var="actorTitle"></spring:message>
+</jstl:if>
 
 <script type="text/javascript">
 

@@ -39,12 +39,12 @@ public class Room extends DomainEntity {
 	}
 
 	@NotNull
-	public boolean isAvailable() {
+	public boolean getIsAvailable() {
 		return this.isAvailable;
 	}
 
 	@NotNull
-	public boolean isInRepair() {
+	public boolean getInRepair() {
 		return this.inRepair;
 	}
 
@@ -56,7 +56,7 @@ public class Room extends DomainEntity {
 		this.area = area;
 	}
 
-	public void setAvailable(final boolean isAvailable) {
+	public void setIsAvailable(final boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
 

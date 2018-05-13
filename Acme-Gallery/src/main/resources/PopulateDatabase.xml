@@ -437,6 +437,298 @@
 		<property name="userAccount" ref="userAccountAdmin"/>
 	</bean>
 	
+	<!-- Categories -->
+	<bean id="category1" class="domain.Category">
+		<property name="name" value="CATEGORY"/>
+		<property name="childrenCategory">
+			<list>
+				<ref bean="category2"/>
+				<ref bean="category3"/>
+				<ref bean="category4"/>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category2" class="domain.Category">
+		<property name="name" value="Paintings"/>
+		<property name="parentCategory" ref="category1"/>
+		<property name="childrenCategory">
+			<list>
+				<ref bean="category5"/>
+				<ref bean="category6"/>
+				<ref bean="category7"/>
+				<ref bean="category8"/>
+				<ref bean="category9"/>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category3" class="domain.Category">
+		<property name="name" value="Sculptures"/>
+		<property name="parentCategory" ref="category1"/>
+		<property name="childrenCategory">
+			<list>
+				<ref bean="category10"/>
+				<ref bean="category11"/>
+				<ref bean="category12"/>
+				<ref bean="category13"/>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category4" class="domain.Category">
+		<property name="name" value="Other Arts"/>
+		<property name="parentCategory" ref="category1"/>
+		<property name="childrenCategory">
+			<list>
+				<ref bean="category14"/>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category5" class="domain.Category">
+		<property name="name" value="Contemporaine"/>
+		<property name="parentCategory" ref="category2"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition9"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category6" class="domain.Category">
+		<property name="name" value="Byzantine Painting"/>
+		<property name="parentCategory" ref="category2"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category7" class="domain.Category">
+		<property name="name" value="Renaissance"/>
+		<property name="parentCategory" ref="category2"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category8" class="domain.Category">
+		<property name="name" value="Baroque"/>
+		<property name="parentCategory" ref="category2"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition3"/>
+				<ref bean="exhibition4"/>
+				<ref bean="exhibition5"/>
+				<ref bean="exhibition6"/>
+				<ref bean="exhibition8"/>
+				<ref bean="exhibition10"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category9" class="domain.Category">
+		<property name="name" value="Rococos"/>
+		<property name="parentCategory" ref="category2"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category10" class="domain.Category">
+		<property name="name" value="Mesopotamia"/>
+		<property name="parentCategory" ref="category3"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category11" class="domain.Category">
+		<property name="name" value="Egypt"/>
+		<property name="parentCategory" ref="category3"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition14"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category12" class="domain.Category">
+		<property name="name" value="Ancient Greece"/>
+		<property name="parentCategory" ref="category3"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition7"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category13" class="domain.Category">
+		<property name="name" value="Gothic"/>
+		<property name="parentCategory" ref="category3"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category14" class="domain.Category">
+		<property name="name" value="Modern Arts"/>
+		<property name="parentCategory" ref="category4"/>
+		<property name="childrenCategory">
+			<list>
+				<ref bean="category15"/>
+				<ref bean="category16"/>
+				<ref bean="category17"/>
+				<ref bean="category18"/>
+				<ref bean="category19"/>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category15" class="domain.Category">
+		<property name="name" value="Pop History"/>
+		<property name="parentCategory" ref="category14"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition12"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category16" class="domain.Category">
+		<property name="name" value="Abstract Art"/>
+		<property name="parentCategory" ref="category14"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category17" class="domain.Category">
+		<property name="name" value="Modern Style"/>
+		<property name="parentCategory" ref="category14"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category18" class="domain.Category">
+		<property name="name" value="Postmodern Era"/>
+		<property name="parentCategory" ref="category14"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition11"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category19" class="domain.Category">
+		<property name="name" value="Avant-Grade"/>
+		<property name="parentCategory" ref="category14"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="category20" class="domain.Category">
+		<property name="name" value="Postimpressionisme"/>
+		<property name="parentCategory" ref="category2"/>
+		<property name="childrenCategory">
+			<list>
+			</list>
+		</property>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition1"/>
+				<ref bean="exhibition13"/>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Coordinates -->
 	
 	<bean id="coordinates1" class="domain.GPSCoordinates">
@@ -493,6 +785,652 @@
 		<property name="latitude" value="45.45482" />
 		<property name="longitude" value="411.939"/>
 	</bean>
+	
+	<!-- Exhibitions -->
+	
+	<bean id="exhibition1" class="domain.Exhibition">
+		<property name="identifier" value="director1-VanGA"/>
+		<property name="title" value="Van Gogh Alive"/>
+		<property name="description" value="Van Gogh Alive is just the kind of inspiring, imagination-expanding experience we're known for delivering to visitors"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 10:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/07/2018 21:00" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="websites">
+ 			<value>https://vangogh.es/es/inicio/</value>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="13.00"/>
+ 		
+ 		<property name="room" ref="room1"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category20"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition2" class="domain.Exhibition">
+		<property name="identifier" value="director1-SashaVelourNG"/>
+		<property name="title" value="Sasha Velour: NIGHTGOWNS"/>
+		<property name="description" value="Nightgowns is a monthly live theatrical showcase dedicated to exceptional drag performance of all kinds! First created at Bizarre Bushwick, the show has now taken residency at National Sawdust in Williamsburg"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/07/2018 20:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/07/2018 23:59" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<value>http://sashavelour.com/nightgowns/</value>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="25.00"/>
+ 		
+ 		<property name="room" ref="room1"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category16"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition3" class="domain.Exhibition">
+		<property name="identifier" value="director1-RubensPS"/>
+		<property name="title" value="Rubens. Painter of Sketches"/>
+		<property name="description" value="The Museo del Prado and the Boijmans Van Beuningen Museum are presenting the exhibition Rubens. Painter of Sketches. Sponsored by Fundación AXA and with the collaboration of the Government of Flanders, it offers an analysis of Rubens as the most important painter of oil sketches in the history of European art."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="10/02/2018 12:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="15/02/2018 22:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.museodelprado.es/en/whats-on/exhibition/rubens-painter-of-sketches/608ff3ed-0823-40a4-bc5a-9a5cb634d8b0</value>
+ 				<value>https://www.museodelprado.es/en</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="true"/>
+ 		<property name="price" value="15.00"/>
+ 		
+ 		<property name="room" ref="room2"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category8"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition4" class="domain.Exhibition">
+		<property name="identifier" value="director1-InLapDep"/>
+		<property name="title" value="In Lapide Depictum"/>
+		<property name="description" value="The exhibition brings together a selection of nine paintings on monochrome stone (slate and white marble) by Italian painters such as Sebastiano del Piombo, Titian, Daniele da Volterra and Leandro Bassano."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="08/08/2018 10:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="18/08/2018 20:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.museodelprado.es/en/whats-on/exhibition/in-lapide-depictum/ef8ddd0c-f7c0-4e75-ba54-22b5af409ec7</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="5.00"/>
+ 		
+ 		<property name="room" ref="room3"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category8"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition5" class="domain.Exhibition">
+		<property name="identifier" value="director1-TheOAD"/>
+		<property name="title" value="The Óscar Alzaga Donation"/>
+		<property name="description" value="The outstanding quality of the Óscar Alzaga Villaamil donation makes it a significant addition to the Museo Nacional del Prado’s collection."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/08/2018 20:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="23/08/2018 23:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.museodelprado.es/en/whats-on/exhibition/the-oscar-alzaga-donation/a01942b7-040b-4247-9193-f254a8002c79</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="true"/>
+ 		<property name="price" value="28.00"/>
+ 		
+ 		<property name="room" ref="room3"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category8"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition6" class="domain.Exhibition">
+		<property name="identifier" value="director1-VLZQZ"/>
+		<property name="title" value="Velázquez and the Celebration of Painting: the Golden Age in the Museo del Prado"/>
+		<property name="description" value="Comprising 61 thematically organised paintings, the exhibition aims to offer Japanese visitors an exceptional opportunity to appreciate the art of Velázquez and to understand it in relation to the art of his Spanish and European contemporaries"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/05/2018 12:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="28/05/2018 17:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.museodelprado.es/en/whats-on/exhibition/velazquez-and-the-celebration-of-painting-the/78975c56-0137-e685-e5d1-48ea49469812</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="45.00"/>
+ 		
+ 		<property name="room" ref="room4"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category8"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition7" class="domain.Exhibition">
+		<property name="identifier" value="director1-Greece"/>
+		<property name="title" value="Charmed lives in Greece"/>
+		<property name="description" value="This exhibition focuses on the friendship of the artists Niko Ghika and John Craxton, and the writer Patrick Leigh Fermor. Their shared love of Greece was fundamental to their work, as they embraced its sights, sounds, colours and people."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="10/07/2018 10:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/07/2018 19:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>http://www.britishmuseum.org/whats_on/exhibitions/charmed_lives_in_greece.aspx</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="3.00"/>
+ 		
+ 		<property name="room" ref="room7"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category12"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition8" class="domain.Exhibition">
+		<property name="identifier" value="director1-Christmas"/>
+		<property name="title" value="Christmas Tree and Neapolitan Baroque Crèche"/>
+		<property name="description" value="The Museum continues a longstanding holiday tradition with the presentation of its Christmas tree, a favorite of Vaticans and visitors from around the world"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="24/12/2017 09:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="06/01/2018 21:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.metmuseum.org/exhibitions/listings/2014/christmas-tree</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="true"/>
+ 		<property name="price" value="99.99"/>
+ 		
+ 		<property name="room" ref="room10"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category8"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition9" class="domain.Exhibition">
+		<property name="identifier" value="director1-IsrSilv"/>
+		<property name="title" value="France Viewed from the Grand Siècle Drawings by Israël Silvestre"/>
+		<property name="description" value="While Silvestre's engravings circulated widely, his drawings remain relatively unknown. The Musée du Louvre is home to a remarkable collection of them, to be shown to the public for the first time."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/07/2018 10:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="24/07/2018 22:30" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.louvre.fr/en/expositions/france-viewed-grand-siecledrawings-israel-silvestre-1621-1691</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="10.00"/>
+ 		
+ 		<property name="room" ref="room11"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category5"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition10" class="domain.Exhibition">
+		<property name="identifier" value="director1-Delacroix"/>
+		<property name="title" value="Delacroix"/>
+		<property name="description" value="Eugène Delacroix was one of the giants of French painting, but his last full retrospective exhibition in Paris dates back to 1963, the centenary year of his death. In collaboration with the Metropolitan Museum of Art in New York, the Louvre is holding a historic exhibition featuring some 180 works—mostly paintings—as a tribute to his entire career."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="18/07/2018 15:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="22/07/2018 15:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.louvre.fr/en/expositions/delacroix-1798-1863</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="true"/>
+ 		<property name="price" value="16.69"/>
+ 		
+ 		<property name="room" ref="room12"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category8"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition11" class="domain.Exhibition">
+		<property name="identifier" value="director2-ArtNChina"/>
+		<property name="title" value="Art and China after 1989: Theater of the World"/>
+		<property name="description" value="Art and China after 1989 presents work by some sixty key artists and groups active across China and worldwide whose critical provocations aim to forge reality free from ideology, to establish the individual apart from the collective, and to define contemporary Chinese experience in universal terms."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/07/2018 10:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/08/2018 20:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://arteychina.guggenheim-bilbao.eus/en/exhibition</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="18.00"/>
+ 		
+ 		<property name="room" ref="room17"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category18"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition12" class="domain.Exhibition">
+		<property name="identifier" value="director4-HERStoryPopStars"/>
+		<property name="title" value="HERStory of the World: Pop Stars"/>
+		<property name="description" value="From legendary icons such as Madonna and Diana Ross, to iconic legends of today as Lady Gaga or Lana Del Rey. This month, in Madame Tussauds, is dedicated to those girls who made an impact in pop culture."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 10:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/07/2018 22:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.madametussauds.com/</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="29.99"/>
+ 		
+ 		<property name="room" ref="room18"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category15"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	<bean id="exhibition13" class="domain.Exhibition">
+		<property name="identifier" value="director5-MonetNArch"/>
+		<property name="title" value="The Credit Suisse Exhibition: Monet and Architecture"/>
+		<property name="description" value="One exhibition featuring Monet’s paintings and nothing else? That’s a rare thing. The last time the UK hosted a Monet exhibition like this was almost 20 years ago. But 'Monet and Architecture' is not just rare, it’s never been done before."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/10/2017 08:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="29/10/2018 22:30" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.nationalgallery.org.uk/whats-on/exhibitions/the-credit-suisse-exhibition-monet-architecture</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="true"/>
+ 		<property name="price" value="10.50"/>
+ 		
+ 		<property name="room" ref="room22"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category20"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
+	
+	<bean id="exhibition14" class="domain.Exhibition">
+		<property name="identifier" value="director6-BatimatEgypt"/>
+		<property name="title" value="BATIMAT EGYPT 2018"/>
+		<property name="description" value="BATIMAT EGYPT will offer the complete range of products and solutions suited to the construction market in Egypt and the Middle East."/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/01/2017 08:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="31/12/2018 23:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="websites">
+ 			<list>
+ 				<value>https://www.eventseye.com/fairs/f-batimat-egypt-25153-1.html</value>
+ 			</list>
+ 		</property>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="5.99"/>
+ 		
+ 		<property name="room" ref="room24"/>
+ 		<property name="dayPasses">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="sponsorships">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="critiques">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="category" ref="category11"/>
+ 		<property name="highlights">
+ 			<list>
+ 			</list>
+ 		</property>
+ 		<property name="guides">
+ 			<list>
+ 			</list>
+ 		</property>
+	</bean>
+	
 
 	<!-- Directors -->
 
@@ -1270,10 +2208,6 @@
 		</property>
 	</bean>
 	
-	
-	
-	
-	
 	<!-- Museums -->
 	
 	<bean id="museum1" class="domain.Museum">
@@ -1308,6 +2242,12 @@
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room1"/>
+				<ref bean="room2"/>
+				<ref bean="room3"/>
+				<ref bean="room4"/>
+				<ref bean="room5"/>
+				<ref bean="room6"/>
 			</list>
 		</property>
 		<property name="store" ref="store1"/>
@@ -1345,6 +2285,9 @@
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room7"/>
+				<ref bean="room8"/>
+				<ref bean="room9"/>
 			</list>
 		</property>
 		<property name="store" ref="store2"/>
@@ -1416,6 +2359,7 @@
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room10"/>
 			</list>
 		</property>
 		<property name="guides">
@@ -1450,6 +2394,9 @@
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room11"/>
+				<ref bean="room12"/>
+				<ref bean="room13"/>
 			</list>
 		</property>
 		<property name="store" ref="store5"/>
@@ -1485,6 +2432,9 @@
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room14"/>
+				<ref bean="room15"/>
+				<ref bean="room16"/>
 			</list>
 		</property>
 		<property name="guides">
@@ -1519,6 +2469,7 @@
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room17"/>
 			</list>
 		</property>
 		<property name="store" ref="store7"/>
@@ -1555,6 +2506,10 @@
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room18"/>
+				<ref bean="room19"/>
+				<ref bean="room20"/>
+				<ref bean="room21"/>
 			</list>
 		</property>
 		<property name="store" ref="store8"/>
@@ -1592,6 +2547,8 @@
 		</property>
 		<property name="rooms">
 			<list>
+				<ref bean="room22"/>
+				<ref bean="room23"/>
 			</list>
 		</property>
 		<property name="guides">
@@ -1669,9 +2626,6 @@
 		</property>
 	</bean>
 	
-	
-	
-
 	<!-- Visitors -->
 
 	<bean id="visitor1" class="domain.Visitor">
@@ -2000,6 +2954,427 @@
 		<property name="userAccount" ref="userAccount10"/>
 
 		<property name="critiques">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Rooms -->
+	
+	<bean id="room1" class="domain.Room">
+		<property name="name" value="A1.10"/>
+		<property name="area" value="58.90"/>
+		<property name="isAvailable" value="false"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition1"/>
+				<ref bean="exhibition2"/>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room2" class="domain.Room">
+		<property name="name" value="A1.20"/>
+		<property name="area" value="88.30"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room3" class="domain.Room">
+		<property name="name" value="A1.30"/>
+		<property name="area" value="30.50"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition4"/>
+				<ref bean="exhibition5"/>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room4" class="domain.Room">
+		<property name="name" value="SP01"/>
+		<property name="area" value="135.78"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition6"/>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room5" class="domain.Room">
+		<property name="name" value="SP02"/>
+		<property name="area" value="156.78"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="true"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room6" class="domain.Room">
+		<property name="name" value="A1.40"/>
+		<property name="area" value="45.50"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum1"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room7" class="domain.Room">
+		<property name="name" value="B2.70"/>
+		<property name="area" value="30.60"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum2"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition7"/>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room8" class="domain.Room">
+		<property name="name" value="B2.80"/>
+		<property name="area" value="54.12"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="true"/>
+		
+		<property name="museum" ref="museum2"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room9" class="domain.Room">
+		<property name="name" value="SC04"/>
+		<property name="area" value="124.30"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="true"/>
+		
+		<property name="museum" ref="museum2"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room10" class="domain.Room">
+		<property name="name" value="V10.1"/>
+		<property name="area" value="545.11"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="true"/>
+		
+		<property name="museum" ref="museum4"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room11" class="domain.Room">
+		<property name="name" value="L4.40"/>
+		<property name="area" value="45.60"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum5"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition9"/>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room12" class="domain.Room">
+		<property name="name" value="L4.50"/>
+		<property name="area" value="35.88"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum5"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition10"/>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room13" class="domain.Room">
+		<property name="name" value="L4.60"/>
+		<property name="area" value="100.13"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum5"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room14" class="domain.Room">
+		<property name="name" value="ST0.0"/>
+		<property name="area" value="450.20"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum6"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room15" class="domain.Room">
+		<property name="name" value="ST0.1"/>
+		<property name="area" value="140.88"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="true"/>
+		
+		<property name="museum" ref="museum6"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room16" class="domain.Room">
+		<property name="name" value="ST0.2"/>
+		<property name="area" value="90.11"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum6"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room17" class="domain.Room">
+		<property name="name" value="G0.12"/>
+		<property name="area" value="34.50"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum7"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition11"/>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room18" class="domain.Room">
+		<property name="name" value="MT0.1-Pop Culture"/>
+		<property name="area" value="80.56"/>
+		<property name="isAvailable" value="false"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum8"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition12"/>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room19" class="domain.Room">
+		<property name="name" value="MT0.2-Sports"/>
+		<property name="area" value="10.1"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="true"/>
+		
+		<property name="museum" ref="museum8"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room20" class="domain.Room">
+		<property name="name" value="MT0.3-Politicias"/>
+		<property name="area" value="30.4"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum8"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room21" class="domain.Room">
+		<property name="name" value="MT0.4-Hollywood"/>
+		<property name="area" value="60.68"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum8"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room22" class="domain.Room">
+		<property name="name" value="NG1.0"/>
+		<property name="area" value="15.60"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum9"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room23" class="domain.Room">
+		<property name="name" value="NG2.0"/>
+		<property name="area" value="30.11"/>
+		<property name="isAvailable" value="true"/>
+		<property name="inRepair" value="true"/>
+		
+		<property name="museum" ref="museum9"/>
+		<property name="exhibitions">
+			<list>
+			</list>
+		</property>
+		<property name="incidents">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="room24" class="domain.Room">
+		<property name="name" value="Common"/>
+		<property name="area" value="340.89"/>
+		<property name="isAvailable" value="false"/>
+		<property name="inRepair" value="false"/>
+		
+		<property name="museum" ref="museum11"/>
+		<property name="exhibitions">
+			<list>
+				<ref bean="exhibition14"/>
+			</list>
+		</property>
+		<property name="incidents">
 			<list>
 			</list>
 		</property>

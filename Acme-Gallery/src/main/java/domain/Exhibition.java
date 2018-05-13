@@ -25,8 +25,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
-import org.hibernate.validator.constraints.URL;
-import org.hibernate.validator.constraints.URL.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -44,7 +42,7 @@ public class Exhibition extends DomainEntity {
 
 
 	@NotBlank
-	@Pattern(regexp = "^([A-Za-z]{5,}-[A-Za-z0-9]{4,})$")
+	@Pattern(regexp = "^([A-Za-z0-9]{5,}-[A-Za-z0-9]{4,})$")
 	@Column(unique = true)
 	public String getIdentifier() {
 		return this.identifier;
@@ -58,6 +56,7 @@ public class Exhibition extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@Column(columnDefinition = "TEXT")
 	public String getDescription() {
 		return this.description;
 	}
@@ -78,15 +77,12 @@ public class Exhibition extends DomainEntity {
 
 	@NotEmpty
 	@ElementCollection
-	@List(value = {
-		@URL
-	})
 	public Collection<String> getWebsites() {
 		return this.websites;
 	}
 
 	@NotNull
-	public boolean isPrivate() {
+	public boolean getIsPrivate() {
 		return this.isPrivate;
 	}
 
@@ -121,7 +117,7 @@ public class Exhibition extends DomainEntity {
 		this.websites = websites;
 	}
 
-	public void setPrivate(final boolean isPrivate) {
+	public void setIsPrivate(final boolean isPrivate) {
 		this.isPrivate = isPrivate;
 	}
 

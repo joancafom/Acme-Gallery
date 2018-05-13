@@ -42,8 +42,7 @@
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
-		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
-		 
+		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
 		<!-- Acme-Gallery Directives go under here -->
 		
@@ -61,6 +60,8 @@
 		<security:intercept-url pattern="/exhibition/sponsor/search.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/exhibition/visitor/listResults.do" access="hasRole('VISITOR')" /> 
 		<security:intercept-url pattern="/exhibition/visitor/search.do" access="hasRole('VISITOR')" /> 
+		
+		<security:intercept-url pattern="/museum/display.do" access="isAnonymous()" /> 
 
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />
 		

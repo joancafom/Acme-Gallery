@@ -10,6 +10,14 @@
  *
  */
 
+.advert{
+	text-align: center;
+}
+
+.advert img{
+	max-height:150px;
+}
+
 .title {
 	color: black;
 	font-weight: bolder;

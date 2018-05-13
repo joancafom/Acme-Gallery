@@ -26,6 +26,7 @@
 		<!-- Acme-Gallery Messages go under here -->
 		<value>/views/actor/messages</value>
 		<value>/views/category/messages</value>
+		<value>/views/critique/messages</value>
 		<value>/views/exhibition/messages</value>
 		<value>/views/museum/messages</value>
 	</util:list>

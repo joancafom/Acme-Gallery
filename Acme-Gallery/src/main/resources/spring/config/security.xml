@@ -55,6 +55,14 @@
 		<security:intercept-url pattern="/category/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/category/visitor/display.do" access="hasRole('VISITOR')" />
 		
+		<security:intercept-url pattern="/critique/display.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/critique/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/critique/director/display.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/critique/guide/display.do" access="hasRole('GUIDE')" />
+		<security:intercept-url pattern="/critique/reviewer/display.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/critique/sponsor/display.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/critique/visitor/display.do" access="hasRole('VISITOR')" />
+		
 		<security:intercept-url pattern="/exhibition/listResults.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/exhibition/search.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/exhibition/administrator/listResults.do" access="hasRole('ADMINISTRATOR')" /> 

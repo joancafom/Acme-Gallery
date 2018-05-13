@@ -16,6 +16,11 @@
        
 <tiles-definitions>
 
+	<definition name="exhibition/display" extends="master.page">	
+		<put-attribute name="title" value="Exhibition" />
+		<put-attribute name="body" value="/views/exhibition/display.jsp" />
+	</definition>
+
 	<definition name="exhibition/search" extends="master.page">	
 		<put-attribute name="title" value="Search for Exhibitions" />
 		<put-attribute name="body" value="/views/exhibition/search.jsp" />

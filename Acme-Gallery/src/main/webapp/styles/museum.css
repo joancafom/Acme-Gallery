@@ -48,3 +48,17 @@ td{
 .messageOk{
 	color: #1ebf59;
 }
+
+.container{
+	clear: both;
+}
+
+#left{
+	float:left;
+	max-width: 50%;
+}
+
+#right{
+	float:right;
+	max-width: 50%;
+}

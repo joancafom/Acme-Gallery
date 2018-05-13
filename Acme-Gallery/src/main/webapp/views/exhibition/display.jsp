@@ -29,31 +29,34 @@
 	<h2><jstl:out value="${exhibition.title}" /></h2>
 </div>
 
-<div id="eInfo" class="info">
+<div id="eInfo" class="info container">
 
-	<h4><spring:message code="exhibition.info"/></h4>
-	
-	<span><spring:message code="exhibition.from"/> <acme:dateFormat code="date.format" value="${exhibition.startingDate}"/> <spring:message code="exhibition.to"/> <acme:dateFormat code="date.format" value="${exhibition.endingDate}"/></span>
-	<span><spring:message code="exhibition.type"/>: 
+	<div id="left">
+		<h4><spring:message code="exhibition.info"/></h4>
+		
+		<p><spring:message code="exhibition.from"/> <acme:dateFormat code="date.format" value="${exhibition.startingDate}"/> <spring:message code="exhibition.to"/> <acme:dateFormat code="date.format" value="${exhibition.endingDate}"/></p>
+		<p><spring:message code="exhibition.type"/>: 
+			<jstl:if test="${exhibition.isPrivate}">
+				<spring:message code="exhibition.private"/>
+			</jstl:if>
+			<jstl:if test="${!exhibition.isPrivate}">
+				<spring:message code="exhibition.public"/>
+			</jstl:if>
+		</p>
 		<jstl:if test="${exhibition.isPrivate}">
-			<spring:message code="exhibition.private"/>
+			<p><spring:message code="exhibition.price"/>: <fmt:formatNumber type="currency" currencySymbol="&#8364;" pattern="${priceFormat}" value="${exhibition.price}" /></p>
 		</jstl:if>
-		<jstl:if test="${!exhibition.isPrivate}">
-			<spring:message code="exhibition.public"/>
-		</jstl:if>
-	</span>
-	<jstl:if test="${exhibition.isPrivate}">
-		<p><spring:message code="exhibition.price"/>: <fmt:formatNumber type="currency" currencySymbol="&#8364;" pattern="${priceFormat}" value="${exhibition.price}" /></p>
-	</jstl:if>
-	<p><spring:message code="exhibition.identifier"/>: <em><jstl:out value="${exhibition.identifier}"/></em></p>
-	<p><spring:message code="exhibition.websites"/>:</p>
-	<jstl:forEach items="${exhibition.websites}" var="link">
-		<a href="<jstl:out value="${link}" />" target="_blank"><jstl:out value="${link}" /></a>
-	</jstl:forEach>
-	
-	<br><br>
-	<p><spring:message code="exhibition.description"/>:</p>
-	<p><jstl:out value="${exhibition.description}"/></p>
+		<p><spring:message code="exhibition.identifier"/>: <em><jstl:out value="${exhibition.identifier}"/></em></p>
+		<p><spring:message code="exhibition.websites"/>:</p>
+		<jstl:forEach items="${exhibition.websites}" var="link">
+			<a href="<jstl:out value="${link}" />" target="_blank"><jstl:out value="${link}" /></a> 
+			<br>
+		</jstl:forEach>
+	</div>
+	<div id="right">
+		<h4><spring:message code="exhibition.description"/></h4>
+		<p><jstl:out value="${exhibition.description}"/></p>
+	</div>
 </div>
 
 <div id="eHighlights" class="info">
@@ -91,7 +94,7 @@
 <div id="eCritiques" class="info">
 	<h4><spring:message code="exhibition.critiques"/></h4>
 	
-	<display:table name="critiques" id="critique" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeE}">
+	<display:table name="critiques" id="critique" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeC}">
 		<display:column titleKey="critique.reviewer">
 			<jstl:out value="${critique.reviewer.name}" /> <jstl:out value="${critique.reviewer.surnames}" />
 		</display:column>

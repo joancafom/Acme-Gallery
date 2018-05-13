@@ -32,6 +32,12 @@ public class ExhibitionService {
 
 	// CRUD Methods -----------------------------------------------------------------------------------
 
+	// v1.0 - JA
+	public Exhibition findOne(final int exhibitionId) {
+
+		return this.exhibitionRepository.findOne(exhibitionId);
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	// v1.0 - Alicia

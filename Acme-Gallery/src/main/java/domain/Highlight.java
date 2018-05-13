@@ -3,6 +3,7 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
@@ -44,6 +45,7 @@ public class Highlight extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@Column(columnDefinition = "TEXT")
 	public String getRemark() {
 		return this.remark;
 	}
@@ -53,7 +55,7 @@ public class Highlight extends DomainEntity {
 	}
 
 	@NotNull
-	public boolean isFinal() {
+	public boolean getIsFinal() {
 		return this.isFinal;
 	}
 
@@ -77,7 +79,7 @@ public class Highlight extends DomainEntity {
 		this.year = year;
 	}
 
-	public void setFinal(final boolean isFinal) {
+	public void setIsFinal(final boolean isFinal) {
 		this.isFinal = isFinal;
 	}
 

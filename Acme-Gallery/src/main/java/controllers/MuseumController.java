@@ -66,4 +66,21 @@ public class MuseumController extends AbstractController {
 		return res;
 	}
 
+	// v1.0 - Alicia
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView listResults(@RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {
+		ModelAndView res;
+
+		final Page<Museum> pageResult = this.museumService.findAllPaginated(page, 5);
+		final Collection<Museum> museums = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("museum/list");
+
+		res.addObject("museums", museums);
+		res.addObject("resultSize", resultSize);
+
+		return res;
+	}
+
 }

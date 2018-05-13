@@ -20,4 +20,9 @@
 		<put-attribute name="body" value="/views/museum/display.jsp" />
 	</definition>
 	
+	<definition name="museum/list" extends="master.page">	
+		<put-attribute name="title" value="Listado de Museos" />
+		<put-attribute name="body" value="/views/museum/list.jsp" />
+	</definition>
+	
 </tiles-definitions>

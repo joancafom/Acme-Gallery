@@ -47,6 +47,7 @@ window.onload = function(){
 			<li ><a href="announcement/administrator/list.do"><spring:message code="master.page.list.announcement"/></a></li>
 			<li ><a href="announcement/administrator/list.do?listTabooed=true"><spring:message code="master.page.taboo.announcement"/></a></li>
 			<li ><a href="museum/administrator/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="administrator/dashboard.do"><spring:message code="master.page.dashboard"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>

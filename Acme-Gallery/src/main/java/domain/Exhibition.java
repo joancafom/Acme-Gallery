@@ -88,7 +88,7 @@ public class Exhibition extends DomainEntity {
 
 	@NotNull
 	@Digits(integer = 4, fraction = 2)
-	@DecimalMin("1.0")
+	@DecimalMin("0.0")
 	public Double getPrice() {
 		return this.price;
 	}

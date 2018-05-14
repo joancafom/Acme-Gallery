@@ -424,7 +424,33 @@
 			</list>
 		</property>
 	</bean>
-
+	
+	<bean id="userAccount31" class="security.UserAccount">
+		<property name="username" value="reviewer5" />
+		<property name="password" value="86045e9e3b2e615d8d2484dc64b3f408" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount32" class="security.UserAccount">
+		<property name="username" value="reviewer6" />
+		<property name="password" value="8c14745274135379448d482d5773ee31" />
+		<property name="isLocked" value="false"/>
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->
 
 	<bean id="admin" class="domain.Administrator">
@@ -843,6 +869,232 @@
 		<property name="CVV" value="110"/>
 		<property name="month" value="3"/>
 		<property name="year" value="2019"/>
+	</bean>
+	
+	<!-- Critiques -->
+	
+	<bean id="critique1" class="domain.Critique">
+		<property name="title" value="Brilliant exhibition"/>
+		<property name="description" value="My friend and I both loved this exhibition. A combination of paintings, quotes, music, history and van Gogh's letters made this a very informative and atmospheric display. Brilliant way to spend a couple of hours. Go and enjoy it."/>
+		<property name="score" value="5"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="08/05/2018 22:28" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="critique2" class="domain.Critique">
+		<property name="title" value="A must see if in Krakow, highly recommended"/>
+		<property name="description" value="Superb exhibition, using different methods of engagement with the art work. The music, sound effects, visuals, and story boards were magnificent. We wandered for one and a half hours. Casual seating available to observe and listen. Only negative, someone was behind a screen, banging and building or dismantling something which detracted from the experience."/>
+		<property name="score" value="4"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="09/05/2018 12:46" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer2"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="critique3" class="domain.Critique">
+		<property name="title" value="Why not"/>
+		<property name="description" value="It was interesting and original from one hand, but exhibition is little bit limited and the main place are showing the same. To see one time but not more"/>
+		<property name="score" value="3"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="11/05/2018 13:50" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer3"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="critique4" class="domain.Critique">
+		<property name="title" value="Very well done!"/>
+		<property name="description" value="Van Gogh Alive is a very well made, informative and emotional multimedia show featuring the works of this extraordinary artist. The images, the music and the storyline are beautifully aligned. The whole exhibition is spread across five large rooms, so there is not a lot of walking. There are benches and armchairs across the place for the guests to sit and savour."/>
+		<property name="score" value="5"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="07/05/2018 19:38" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer4"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="critique5" class="domain.Critique">
+		<property name="title" value="Nice exhibition"/>
+		<property name="description" value="The place is OK for the canvas of the exhibition, although the entrance and the facilities need some serious re-thinking and re-doing for the future exhibitions. If you bring younger children (below 10 I would say), they may get bored, watching art (even if beautifully moving) for an hour straight may be too much of a challenge."/>
+		<property name="score" value="4"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="10/05/2018 20:56" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer5"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="critique6" class="domain.Critique">
+		<property name="title" value="Great exhibition with terrible souvenir shop"/>
+		<property name="description" value="We had a great time. I relaxed watching on a comfortable chair stunning image projections. But after the show we bought two mugs with images of Van Gog in the gift shop. Unfortunately, both are defective. At home when We poured hot water into the mugs, mugs immediately broke. The next day, the saleswoman refused us to replace the defective cups."/>
+		<property name="score" value="3"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="11/05/2018 10:45" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer6"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="critique7" class="domain.Critique">
+		<property name="title" value="Outstanding performance"/>
+		<property name="description" value="Sasha Velour may not quite have cracked the British mass public yet the way Courtney was able to in Big Brother, however she certainly conquered my heart when I went to watch her performance hosted by Klub Kids UK at Heaven Liverpool, at the end of January. Although a nightclub wouldn’t have been my first choice to watch a performance that expertly combined the high camp and theatrics of a drag show and the wild passion of a political rally; Sasha told us it reminded her of the tiny clubs of Brooklyn, New York, where she hails from and it felt like a really special moment for both her and the crowd."/>
+		<property name="score" value="5"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/05/2018 9:35" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="exhibition" ref="exhibition2"/>
+	</bean>
+	
+	<bean id="critique8" class="domain.Critique">
+		<property name="title" value="As good as expected"/>
+		<property name="description" value="Close up, painted faces decompose into an indecipherable mess of dots and dashes, applied by flicks of a brush. Much the same happens when you approach actual people: from a distance they possess the legible lineaments we call character but, once you begin to analyse their actions and speculate about their motives, they lose focus and blur into complexity and confusion."/>
+		<property name="score" value="4"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="11/05/2018 18:59" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="exhibition" ref="exhibition6"/>
+	</bean>
+	
+	<bean id="critique9" class="domain.Critique">
+		<property name="title" value="Velázquez, Without Bells or Whistles"/>
+		<property name="description" value="Her expression is ambiguous, the features half cast in shadow, catching our eye but blurred by a dim light, by the old mirror and by all the soft, veiled edges in the picture. It’s the stripper principle: show less, leave more to the imagination. There isn’t a sexier image in art. Perfect beauty, Velázquez implies, eludes strict definition."/>
+		<property name="score" value="5"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="09/05/2018 19:13" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer2"/>
+ 		<property name="exhibition" ref="exhibition6"/>
+	</bean>
+	
+	<bean id="critique10" class="domain.Critique">
+		<property name="title" value="An interesting new exhibition"/>
+		<property name="description" value="For a short-sighted son of a Paris policeman, Auguste Rodin went on to have a heck of a career – as one of the greatest sculptors of all time. He’s associated with bold realism, translating into art whatever he saw before him and rejecting the polished, idealised figures of academic sculpture. A new exhibition at the British Museum, however, puts a different slant on his genius. It highlights the influence on Rodin of Ancient Greek art, especially the sculptures from the Parthenon temple in Athens."/>
+		<property name="score" value="4"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 16:40" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="exhibition" ref="exhibition7"/>
+	</bean>
+	
+	<bean id="critique11" class="domain.Critique">
+		<property name="title" value="Rodin and the Art of Ancient Greece"/>
+		<property name="description" value="If ever there were an exhibition that plays to a museum’s strengths, it’s this one. Rodin and the Art of Ancient Greece is about the artist’s obsession with Greek statuary in general and the Elgin Marbles in particular. So the exhibition is a kind of dialogue between Rodin and the artefacts of the museum, which he first visited in 1881 and loved. "/>
+		<property name="score" value="3"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="12/05/2018 19:22" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer4"/>
+ 		<property name="exhibition" ref="exhibition7"/>
+	</bean>
+	
+	<bean id="critique12" class="domain.Critique">
+		<property name="title" value="Breathtaking with big crowds!"/>
+		<property name="description" value="I took a midday, guided tour of the Vatican Museums, Sistine Chapel and St. Peter's Basilica. All three are breathtakingly beautiful. Booking a guided tour was the best decision I made as it allowed us to skip the lines. Heavens...the lines! If I'd attempted to navigate the Vatican Museums on my own, I'd still be there right now. Be prepared to do a lot of walking regardless of whether you do a guided tour or self guided tour. Also, the dress code (arms and shoulders must be covered) is enforced. I was stopped by a guard as my group entered St. Peter's Basilica. My shoulders were covered, but my arms were not because my shirt was sleeveless (it was 80 degrees). Luckily for me, my tour guide carried an extra scarf and I was able to cover my arms. "/>
+		<property name="score" value="4"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/12/2017 17:49" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="exhibition" ref="exhibition8"/>
+	</bean>
+	
+	<bean id="critique13" class="domain.Critique">
+		<property name="title" value="France Viewed from the Grand Siècle"/>
+		<property name="description" value="The French artist’s more mature work offers a broad perspective of Paris. The artworks depict royal festivities and changes that the city underwent coupled with the outlines of the cities conquered by Louis XIV in Lorraine and the Ardennes. Silvestre’s series dedicated to the famous châteaux of the Île-de-France —Vaux-le-Vicomte, Meudon, Montmorency, and Versailles among them — also displayed his talent for capturing architecture."/>
+		<property name="score" value="3"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="12/05/2018 16:33" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="exhibition" ref="exhibition9"/>
+	</bean>
+	
+	<bean id="critique14" class="domain.Critique">
+		<property name="title" value="Delacroix and the Rise of Modern Art "/>
+		<property name="description" value="The tempestuous paintings of Delacroix are at odds with a man who was in complete control. You’ll have to search hard to find them, though, in this long overdue show."/>
+		<property name="score" value="4"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 19:21" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer5"/>
+ 		<property name="exhibition" ref="exhibition10"/>
+	</bean>
+	
+	<bean id="critique15" class="domain.Critique">
+		<property name="title" value="A must see attraction if in London"/>
+		<property name="description" value="A really fun place to see, great variety of exhibits to see within from celebrities, royals, animation, something for everyone. The ride towards the end of the tour was most enjoyable as well, well worth the money."/>
+		<property name="score" value="5"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/05/2018 22:11" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer6"/>
+ 		<property name="exhibition" ref="exhibition12"/>
+	</bean>
+	
+	<bean id="critique16" class="domain.Critique">
+		<property name="title" value="Too much to see"/>
+		<property name="description" value="The skip the line with a time works (but not really needed. REMEMBER to cover shoulders and knees. The audio guide is hard to follow and as the tour is so long I just gave up. Some of the items and areas are amazing others you can just speed through. It’s worth a visit (once)."/>
+		<property name="score" value="4"/>
+		<property name="creationDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="19/12/2017 22:49" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="reviewer" ref="reviewer5"/>
+ 		<property name="exhibition" ref="exhibition8"/>
 	</bean>
 	
 	<!-- DayPasses -->
@@ -1343,7 +1595,7 @@
  		<property name="websites">
  			<value>https://vangogh.es/es/inicio/</value>
  		</property>
- 		<property name="isPrivate" value="false"/>
+ 		<property name="isPrivate" value="true"/>
  		<property name="price" value="13.00"/>
  		
  		<property name="room" ref="room1"/>
@@ -1358,6 +1610,12 @@
  		</property>
  		<property name="critiques">
  			<list>
+ 				<ref bean="critique1"/>
+ 				<ref bean="critique2"/>
+ 				<ref bean="critique3"/>
+ 				<ref bean="critique4"/>
+ 				<ref bean="critique5"/>
+ 				<ref bean="critique6"/>
  			</list>
  		</property>
  		<property name="category" ref="category20"/>
@@ -1395,7 +1653,7 @@
  			<value>http://sashavelour.com/nightgowns/</value>
  		</property>
  		<property name="isPrivate" value="false"/>
- 		<property name="price" value="25.00"/>
+ 		<property name="price" value="0.00"/>
  		
  		<property name="room" ref="room1"/>
  		<property name="dayPasses">
@@ -1408,6 +1666,7 @@
  		</property>
  		<property name="critiques">
  			<list>
+ 				<ref bean="critique7"/>
  			</list>
  		</property>
  		<property name="category" ref="category16"/>
@@ -1495,7 +1754,7 @@
  			</list>
  		</property>
  		<property name="isPrivate" value="false"/>
- 		<property name="price" value="5.00"/>
+ 		<property name="price" value="0.00"/>
  		
  		<property name="room" ref="room3"/>
  		<property name="dayPasses">
@@ -1540,7 +1799,7 @@
  				<value>https://www.museodelprado.es/en/whats-on/exhibition/the-oscar-alzaga-donation/a01942b7-040b-4247-9193-f254a8002c79</value>
  			</list>
  		</property>
- 		<property name="isPrivate" value="true"/>
+ 		<property name="isPrivate" value="false"/>
  		<property name="price" value="28.00"/>
  		
  		<property name="room" ref="room3"/>
@@ -1602,6 +1861,8 @@
  		</property>
  		<property name="critiques">
  			<list>
+ 				<ref bean="critique8"/>
+ 				<ref bean="critique9"/>
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
@@ -1635,8 +1896,8 @@
  				<value>http://www.britishmuseum.org/whats_on/exhibitions/charmed_lives_in_greece.aspx</value>
  			</list>
  		</property>
- 		<property name="isPrivate" value="false"/>
- 		<property name="price" value="3.00"/>
+ 		<property name="isPrivate" value="true"/>
+ 		<property name="price" value="0.00"/>
  		
  		<property name="room" ref="room7"/>
  		<property name="dayPasses">
@@ -1649,6 +1910,8 @@
  		</property>
  		<property name="critiques">
  			<list>
+ 				<ref bean="critique10"/>
+ 				<ref bean="critique11"/>
  			</list>
  		</property>
  		<property name="category" ref="category12"/>
@@ -1699,6 +1962,8 @@
  		</property>
  		<property name="critiques">
  			<list>
+ 				<ref bean="critique12"/>
+ 				<ref bean="critique16"/>
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
@@ -1732,7 +1997,7 @@
  				<value>https://www.louvre.fr/en/expositions/france-viewed-grand-siecledrawings-israel-silvestre-1621-1691</value>
  			</list>
  		</property>
- 		<property name="isPrivate" value="false"/>
+ 		<property name="isPrivate" value="true"/>
  		<property name="price" value="10.00"/>
  		
  		<property name="room" ref="room11"/>
@@ -1747,6 +2012,7 @@
  		</property>
  		<property name="critiques">
  			<list>
+ 				<ref bean="critique13"/>
  			</list>
  		</property>
  		<property name="category" ref="category5"/>
@@ -1794,6 +2060,7 @@
  		</property>
  		<property name="critiques">
  			<list>
+ 				<ref bean="critique14"/>
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
@@ -1827,7 +2094,7 @@
  				<value>https://arteychina.guggenheim-bilbao.eus/en/exhibition</value>
  			</list>
  		</property>
- 		<property name="isPrivate" value="false"/>
+ 		<property name="isPrivate" value="true"/>
  		<property name="price" value="18.00"/>
  		
  		<property name="room" ref="room17"/>
@@ -1889,6 +2156,7 @@
  		</property>
  		<property name="critiques">
  			<list>
+ 				<ref bean="critique15"/>
  			</list>
  		</property>
  		<property name="category" ref="category15"/>
@@ -1924,8 +2192,8 @@
  				<value>https://www.nationalgallery.org.uk/whats-on/exhibitions/the-credit-suisse-exhibition-monet-architecture</value>
  			</list>
  		</property>
- 		<property name="isPrivate" value="true"/>
- 		<property name="price" value="10.50"/>
+ 		<property name="isPrivate" value="false"/>
+ 		<property name="price" value="0.00"/>
  		
  		<property name="room" ref="room22"/>
  		<property name="dayPasses">
@@ -1971,7 +2239,7 @@
  				<value>https://www.eventseye.com/fairs/f-batimat-egypt-25153-1.html</value>
  			</list>
  		</property>
- 		<property name="isPrivate" value="false"/>
+ 		<property name="isPrivate" value="true"/>
  		<property name="price" value="5.99"/>
  		
  		<property name="room" ref="room24"/>
@@ -3997,6 +4265,12 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 
 		<property name="critiques">
 			<list>
+				<ref bean="critique1"/>
+				<ref bean="critique7"/>
+				<ref bean="critique8"/>
+				<ref bean="critique10"/>
+				<ref bean="critique12"/>
+				<ref bean="critique13"/>
 			</list>
 		</property>
 	</bean>
@@ -4011,6 +4285,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 
 		<property name="critiques">
 			<list>
+				<ref bean="critique2"/>
+				<ref bean="critique9"/>
 			</list>
 		</property>
 	</bean>
@@ -4026,6 +4302,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 
 		<property name="critiques">
 			<list>
+				<ref bean="critique3"/>
 			</list>
 		</property>
 	</bean>
@@ -4041,6 +4318,43 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 
 		<property name="critiques">
 			<list>
+				<ref bean="critique4"/>
+				<ref bean="critique11"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="reviewer5" class="domain.Reviewer">
+		<property name="name" value="Belinda" />
+		<property name="surnames" value="Obrien"/>
+		<property name="email" value="belinda@gmail.com"/>
+		<property name="phoneNumber" value="+34336887990"/>
+		<property name="address" value="3360 Fire Access Red"/>
+		<property name="gender" value="FEMALE"/>
+		<property name="userAccount" ref="userAccount31"/>
+
+		<property name="critiques">
+			<list>
+				<ref bean="critique5"/>
+				<ref bean="critique14"/>
+				<ref bean="critique16"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="reviewer6" class="domain.Reviewer">
+		<property name="name" value="Protón" />
+		<property name="surnames" value="Walker"/>
+		<property name="email" value="proton@gmail.com"/>
+		<property name="phoneNumber" value="+34655190700"/>
+		<property name="address" value="2960 Roosevelt Street"/>
+		<property name="gender" value="MALE"/>
+		<property name="userAccount" ref="userAccount32"/>
+
+		<property name="critiques">
+			<list>
+				<ref bean="critique6"/>
+				<ref bean="critique15"/>
 			</list>
 		</property>
 	</bean>

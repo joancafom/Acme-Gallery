@@ -18,11 +18,11 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <jstl:if test="${category.name ne 'CATEGORY'}">
-	<h3><spring:message code="category"/><span style="text-decoration:underline;"><jstl:out value="${category.name}"/></span></h3><br/>
+	<h3 style="text-align:center"><spring:message code="category"/> <span style="text-decoration:underline;"><jstl:out value="${category.name}"/></span></h3><br/>
 </jstl:if>
 
 <jstl:if test="${category.parentCategory ne null and category.parentCategory.name ne 'CATEGORY'}">
-	<h4><spring:message code="category.parentCategory.message"/><a href="category/${actorWS}display.do?categoryId=${category.parentCategory.id}"><jstl:out value="${category.parentCategory.name}"/></a></h4><br/><br/>
+	<h4 style="text-align:center"><spring:message code="category.parentCategory.message"/> <a href="category/${actorWS}display.do?categoryId=${category.parentCategory.id}"><jstl:out value="${category.parentCategory.name}"/></a></h4><br/><br/>
 </jstl:if>
 
 <!-- Children Categories -->
@@ -41,8 +41,11 @@
 
 <display:table name="exhibitions" id="exhibition" requestURI="category/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${exhibitionsSize}">
 
-	<display:column titleKey="exhibition.identifier" property="identifier"/>	
-	<display:column titleKey="exhibition.title" property="title"/>
+	<display:column titleKey="exhibition.identifier" property="identifier"/>
+		
+	<display:column titleKey="exhibition.title">
+		<a href="exhibition/${actorWS}display.do?exhibitionId=${exhibition.id}"><jstl:out value="${exhibition.title}"/></a>
+	</display:column>
 	
 	<display:column titleKey="exhibition.startingDate">
 		<acme:dateFormat code="date.format" value="${exhibition.startingDate}"/>

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import services.CategoryService;
 import services.ExhibitionService;
@@ -90,6 +91,27 @@ public class CategoryAdministratorController extends AbstractController {
 
 		final Category category = this.categoryService.create(parentCategory);
 		res = this.createEditModelAndView(category);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int categoryId, final RedirectAttributes redirectAttributes) {
+
+		final ModelAndView res;
+
+		final Category toDelete = this.categoryService.findOne(categoryId);
+		Assert.notNull(toDelete);
+		Assert.notNull(toDelete.getParentCategory());
+
+		res = new ModelAndView("redirect:display.do?categoryId=" + toDelete.getParentCategory().getId());
+
+		try {
+			this.categoryService.delete(toDelete);
+		} catch (final Throwable oops) {
+			redirectAttributes.addFlashAttribute("message", "category.commit.error");
+		}
 
 		return res;
 	}

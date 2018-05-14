@@ -38,6 +38,22 @@ public class ExhibitionService {
 		return this.exhibitionRepository.findOne(exhibitionId);
 	}
 
+	// v1.0 - JA
+	public Exhibition save(final Exhibition exhibition) {
+
+		Assert.notNull(exhibition);
+
+		//Beware to modify this method! CategoryService.delete uses it
+
+		return this.exhibitionRepository.save(exhibition);
+	}
+
+	// v1.0 - JA
+	public void flush() {
+
+		this.exhibitionRepository.flush();
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	// v1.0 - Alicia

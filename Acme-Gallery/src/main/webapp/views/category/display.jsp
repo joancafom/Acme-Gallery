@@ -33,6 +33,11 @@
 	<display:column titleKey="category.name">
 		<a href="category/${actorWS}display.do?categoryId=${childCategory.id}"><jstl:out value="${childCategory.name}"/></a>
 	</display:column>
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<display:column style="width:10%;">
+			<a href="category/administrator/delete.do?categoryId=${childCategory.id}"><spring:message code="category.delete"/></a>
+		</display:column>
+	</security:authorize>
 </display:table>
 
 <!-- Exhibitions -->

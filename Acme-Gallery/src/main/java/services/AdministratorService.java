@@ -37,16 +37,12 @@ public class AdministratorService extends ActorService {
 	// CRUD Methods -----------------------------------------------------------------------------------
 
 	//Other Business Methods --------------------------------------------------------------------------
-	
+
 	public Administrator findByUserAccount(final UserAccount userAccount) {
 
 		//Safety mesurements in supermethod
 
 		return super.findByUserAccount(userAccount, Administrator.class);
-	}
-
-	public Administrator findByUserAccount(final UserAccount userAccount) {
-		return this.administratorRepository.findByUserAccount(userAccount.getId());
 	}
 
 	// ---------------------------------------- QUERY #1 ----------------------------------------------

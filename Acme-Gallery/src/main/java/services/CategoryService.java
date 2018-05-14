@@ -15,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.CategoryRepository;
+import security.LoginService;
+import domain.Administrator;
 import domain.Category;
 import domain.Exhibition;
 
@@ -25,13 +27,19 @@ public class CategoryService {
 	// Managed Repository -----------------------------------------------------------------------------
 
 	@Autowired
-	private CategoryRepository	categoryRepository;
+	private CategoryRepository		categoryRepository;
 
 	// Supporting Services ----------------------------------------------------------------------------
 
+	@Autowired
+	private ExhibitionService		exhibitionService;
+
+	@Autowired
+	private AdministratorService	administratorService;
+
 	// Validator --------------------------------------------------------------------------------------
 	@Autowired
-	private Validator			validator;
+	private Validator				validator;
 
 
 	// CRUD Methods -----------------------------------------------------------------------------------
@@ -49,6 +57,40 @@ public class CategoryService {
 		res.setParentCategory(parentCategory);
 
 		return res;
+	}
+
+	// v1.0 - JA
+	public void delete(final Category category) {
+
+		Assert.notNull(category);
+		Assert.isTrue(this.categoryRepository.exists(category.getId()));
+
+		//Make sure an Admin is the Actor who is trying to perform the operation
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		//Root Category cannot be deleted
+		Assert.isTrue(!this.getRootCategory().equals(category));
+
+		//Every children category will be deleted as well
+		final Collection<Category> childrenCategories = new HashSet<Category>(category.getChildrenCategories());
+		for (final Category childCategory : childrenCategories)
+			this.delete(childCategory);
+
+		//We re-assign every Exhibition to the parent Category
+		final Collection<Exhibition> exhibitions = new HashSet<Exhibition>(category.getExhibitions());
+		for (final Exhibition e : exhibitions) {
+			e.setCategory(category.getParentCategory());
+			this.exhibitionService.save(e);
+		}
+
+		this.exhibitionService.flush();
+
+		//We remove this category from the parent
+		category.getParentCategory().getChildrenCategories().remove(category);
+		this.save(category.getParentCategory());
+
+		this.categoryRepository.delete(category);
 	}
 
 	// v1.0 - Alicia
@@ -111,6 +153,10 @@ public class CategoryService {
 	public Category saveCreate(final Category category) {
 
 		Assert.notNull(category);
+
+		//Make sure an Admin is the Actor who is trying to perform the operation
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
 
 		//As we are creating, the category must be a brand new one
 		Assert.isTrue(category.getId() == 0);

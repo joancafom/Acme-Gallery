@@ -54,6 +54,7 @@
 		
 		<security:intercept-url pattern="/category/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/category/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/category/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/category/administrator/create.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/category/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/category/director/display.do" access="hasRole('DIRECTOR')" />

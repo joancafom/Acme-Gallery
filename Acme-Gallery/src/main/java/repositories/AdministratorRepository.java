@@ -18,10 +18,6 @@ import domain.Museum;
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
 
-	// v1.0 - Alicia
-	@Query("select a from Administrator a where a.userAccount.id=?1")
-	Administrator findByUserAccount(int userAccountId);
-
 	// ---------------------------------------- QUERY #1 ----------------------------------------------
 
 	// v1.0 - Alicia

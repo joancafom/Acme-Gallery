@@ -35,7 +35,7 @@ public class Incident extends DomainEntity {
 	}
 
 	@NotNull
-	public boolean isChecked() {
+	public boolean getIsChecked() {
 		return this.isChecked;
 	}
 
@@ -47,7 +47,7 @@ public class Incident extends DomainEntity {
 		this.level = level;
 	}
 
-	public void setChecked(final boolean isChecked) {
+	public void setIsChecked(final boolean isChecked) {
 		this.isChecked = isChecked;
 	}
 

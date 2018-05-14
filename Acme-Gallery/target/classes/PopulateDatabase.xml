@@ -1631,6 +1631,12 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide1"/>
+ 				<ref bean="guide2"/>
+ 				<ref bean="guide3"/>
+ 				<ref bean="guide4"/>
+ 				<ref bean="guide5"/>
+ 				<ref bean="guide6"/>
  			</list>
  		</property>
 	</bean>
@@ -1676,6 +1682,8 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide2"/>
+ 				<ref bean="guide3"/>
  			</list>
  		</property>
 	</bean>
@@ -1730,6 +1738,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide3"/>
  			</list>
  		</property>
 	</bean>
@@ -1776,6 +1785,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide1"/>
  			</list>
  		</property>
 	</bean>
@@ -1823,6 +1833,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide5"/>
  			</list>
  		</property>
 	</bean>
@@ -1873,6 +1884,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide3"/>
  			</list>
  		</property>
 	</bean>
@@ -1921,6 +1933,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide4"/>
  			</list>
  		</property>
 	</bean>
@@ -1974,6 +1987,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide2"/>
  			</list>
  		</property>
 	</bean>
@@ -2022,6 +2036,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide3"/>
  			</list>
  		</property>
 	</bean>
@@ -2071,6 +2086,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide3"/>
  			</list>
  		</property>
 	</bean>
@@ -2119,6 +2135,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide5"/>
  			</list>
  		</property>
 	</bean>
@@ -2168,7 +2185,9 @@
  			</list>
  		</property>
  		<property name="guides">
- 			<list>
+ 			<list>	
+ 				<ref bean="guide1"/>
+ 				<ref bean="guide7"/>
  			</list>
  		</property>
 	</bean>
@@ -2215,6 +2234,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide8"/>
  			</list>
  		</property>
 	</bean>
@@ -2264,6 +2284,7 @@
  		</property>
  		<property name="guides">
  			<list>
+ 				<ref bean="guide6"/>
  			</list>
  		</property>
 	</bean>
@@ -2383,6 +2404,12 @@
 
 		<property name="incidents">
 			<list>
+				<ref bean="incident1"/>
+				<ref bean="incident2"/>
+				<ref bean="incident3"/>
+				<ref bean="incident4"/>
+				<ref bean="incident5"/>
+				<ref bean="incident6"/>
 			</list>
 		</property>
 		<property name="exhibitions">
@@ -2403,6 +2430,8 @@
 
 		<property name="incidents">
 			<list>
+				<ref bean="incident7"/>
+				<ref bean="incident12"/>
 			</list>
 		</property>
 		<property name="exhibitions">
@@ -2410,6 +2439,7 @@
 				<ref bean="exhibition2"/>
 				<ref bean="exhibition5"/>
 				<ref bean="exhibition8"/>
+				<ref bean="exhibition1"/>
 			</list>
 		</property>
 	</bean>
@@ -2425,6 +2455,8 @@
 
 		<property name="incidents">
 			<list>
+				<ref bean="incident7"/>
+				<ref bean="incident10"/>
 			</list>
 		</property>
 		<property name="exhibitions">
@@ -2433,6 +2465,8 @@
 				<ref bean="exhibition6"/>
 				<ref bean="exhibition9"/>
 				<ref bean="exhibition10"/>
+				<ref bean="exhibition1"/>
+				<ref bean="exhibition2"/>
 			</list>
 		</property>
 	</bean>
@@ -2448,11 +2482,13 @@
 
 		<property name="incidents">
 			<list>
+				<ref bean="incident11"/>
 			</list>
 		</property>
 		<property name="exhibitions">
 			<list>
 				<ref bean="exhibition7"/>
+				<ref bean="exhibition1"/>
 			</list>
 		</property>
 	</bean>
@@ -2468,11 +2504,13 @@
 
 		<property name="incidents">
 			<list>
+				<ref bean="incident9"/>
 			</list>
 		</property>
 		<property name="exhibitions">
 			<list>
 				<ref bean="exhibition11"/>
+				<ref bean="exhibition1"/>
 			</list>
 		</property>
 	</bean>
@@ -2488,11 +2526,13 @@
 
 		<property name="incidents">
 			<list>
+				<ref bean="incident15"/>
 			</list>
 		</property>
 		<property name="exhibitions">
 			<list>
 				<ref bean="exhibition14"/>
+				<ref bean="exhibition1"/>
 			</list>
 		</property>
 	</bean>
@@ -2508,6 +2548,7 @@
 
 		<property name="incidents">
 			<list>
+				<ref bean="incident13"/>
 			</list>
 		</property>
 		<property name="exhibitions">
@@ -2527,6 +2568,7 @@
 
 		<property name="incidents">
 			<list>
+				<ref bean="incident14"/>
 			</list>
 		</property>
 		<property name="exhibitions">
@@ -3205,6 +3247,125 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 	
 	<!-- Incidents -->
 	
+	<bean id="incident1" class="domain.Incident">
+		<property name="text" value="A light bulb is not working"/>
+		<property name="level" value="MEDIUM"/>
+		<property name="isChecked" value="true"/>
+		<property name="guide" ref="guide1"/>
+		<property name="room" ref="room1"/>
+	</bean>
+	
+	<bean id="incident2" class="domain.Incident">
+		<property name="text" value="A chair disappeared"/>
+		<property name="level" value="MEDIUM"/>
+		<property name="isChecked" value="false"/>
+		<property name="guide" ref="guide1"/>
+		<property name="room" ref="room8"/>
+	</bean>
+	
+	<bean id="incident3" class="domain.Incident">
+		<property name="text" value="A wall seems like is about to fall"/>
+		<property name="level" value="HIGH"/>
+		<property name="isChecked" value="true"/>
+		<property name="guide" ref="guide1"/>
+		<property name="room" ref="room10"/>
+	</bean>
+	
+	<bean id="incident4" class="domain.Incident">
+		<property name="text" value="One window is broken"/>
+		<property name="level" value="HIGH"/>
+		<property name="isChecked" value="false"/>
+		<property name="guide" ref="guide1"/>
+		<property name="room" ref="room11"/>
+	</bean>
+	
+	<bean id="incident5" class="domain.Incident">
+		<property name="text" value="The floor is not cleaned"/>
+		<property name="level" value="LOW"/>
+		<property name="isChecked" value="true"/>
+		<property name="guide" ref="guide1"/>
+		<property name="room" ref="room4"/>
+	</bean>
+	
+	<bean id="incident6" class="domain.Incident">
+		<property name="text" value="Someone forgot his or her bag in the room"/>
+		<property name="level" value="LOW"/>
+		<property name="isChecked" value="false"/>
+		<property name="guide" ref="guide1"/>
+		<property name="room" ref="room1"/>
+	</bean>
+	
+	<bean id="incident7" class="domain.Incident">
+		<property name="text" value="A little child has lost his family"/>
+		<property name="level" value="HIGH"/>
+		<property name="isChecked" value="true"/>
+		<property name="guide" ref="guide2"/>
+		<property name="room" ref="room16"/>
+	</bean>
+	
+	<bean id="incident8" class="domain.Incident">
+		<property name="text" value="Electricity is not working"/>
+		<property name="level" value="HIGH"/>
+		<property name="isChecked" value="false"/>
+		<property name="guide" ref="guide3"/>
+		<property name="room" ref="room15"/>
+	</bean>
+	
+	<bean id="incident9" class="domain.Incident">
+		<property name="text" value="Someone started a shooting range"/>
+		<property name="level" value="LOW"/>
+		<property name="isChecked" value="true"/>
+		<property name="guide" ref="guide5"/>
+		<property name="room" ref="room12"/>
+	</bean>
+	
+	<bean id="incident10" class="domain.Incident">
+		<property name="text" value="The fans are not working and about to fall"/>
+		<property name="level" value="HIGH"/>
+		<property name="isChecked" value="false"/>
+		<property name="guide" ref="guide3"/>
+		<property name="room" ref="room4"/>
+	</bean>
+	
+	<bean id="incident11" class="domain.Incident">
+		<property name="text" value="There is a pudde of oil"/>
+		<property name="level" value="MEDIUM"/>
+		<property name="isChecked" value="true"/>
+		<property name="guide" ref="guide4"/>
+		<property name="room" ref="room3"/>
+	</bean>
+	
+	<bean id="incident12" class="domain.Incident">
+		<property name="text" value="Door's hinges need some oil"/>
+		<property name="level" value="LOW"/>
+		<property name="isChecked" value="false"/>
+		<property name="guide" ref="guide2"/>
+		<property name="room" ref="room14"/>
+	</bean>
+	
+	<bean id="incident13" class="domain.Incident">
+		<property name="text" value="A wax figure is about to fall"/>
+		<property name="level" value="HIGH"/>
+		<property name="isChecked" value="false"/>
+		<property name="guide" ref="guide7"/>
+		<property name="room" ref="room18"/>
+	</bean>
+	
+	<bean id="incident14" class="domain.Incident">
+		<property name="text" value="The fishbowl is about to break"/>
+		<property name="level" value="HIGH"/>
+		<property name="isChecked" value="true"/>
+		<property name="guide" ref="guide8"/>
+		<property name="room" ref="room23"/>
+	</bean>
+	
+	<bean id="incident15" class="domain.Incident">
+		<property name="text" value="A mummy has resurrected"/>
+		<property name="level" value="MEDIUM"/>
+		<property name="isChecked" value="false"/>
+		<property name="guide" ref="guide6"/>
+		<property name="room" ref="room24"/>
+	</bean>
 		
 	<!-- Museums -->
 	
@@ -3268,6 +3429,9 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 				<ref bean="guide1"/>
 				<ref bean="guide2"/>
 				<ref bean="guide3"/>
+				<ref bean="guide4"/>
+				<ref bean="guide5"/>
+				<ref bean="guide6"/>
 			</list>
 		</property>
 	</bean>
@@ -4376,6 +4540,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident1"/>
+				<ref bean="incident6"/>
 			</list>
 		</property>
 	</bean>
@@ -4408,10 +4574,12 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 			<list>
 				<ref bean="exhibition4"/>
 				<ref bean="exhibition5"/>
+				
 			</list>
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident11"/>
 			</list>
 		</property>
 	</bean>
@@ -4430,6 +4598,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident5"/>
+				<ref bean="incident10"/>
 			</list>
 		</property>
 	</bean>
@@ -4499,6 +4669,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident2"/>
 			</list>
 		</property>
 	</bean>
@@ -4533,6 +4704,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident3"/>
 			</list>
 		</property>
 	</bean>
@@ -4551,6 +4723,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident4"/>
 			</list>
 		</property>
 	</bean>
@@ -4569,6 +4742,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident9"/>
 			</list>
 		</property>
 	</bean>
@@ -4603,6 +4777,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident12"/>
 			</list>
 		</property>
 	</bean>
@@ -4619,7 +4794,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 			</list>
 		</property>
 		<property name="incidents">
-			<list>
+			<list>	
+				<ref bean="incident8"/>
 			</list>
 		</property>
 	</bean>
@@ -4637,6 +4813,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident7"/>
 			</list>
 		</property>
 	</bean>
@@ -4673,6 +4850,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident13"/>
 			</list>
 		</property>
 	</bean>
@@ -4758,6 +4936,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident14"/>
 			</list>
 		</property>
 	</bean>
@@ -4776,6 +4955,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="incidents">
 			<list>
+				<ref bean="incident15"/>
 			</list>
 		</property>
 	</bean>

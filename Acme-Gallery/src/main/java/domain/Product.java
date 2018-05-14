@@ -18,8 +18,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
-import org.hibernate.validator.constraints.URL;
-import org.hibernate.validator.constraints.URL.List;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -46,9 +44,6 @@ public class Product extends DomainEntity {
 
 	@NotEmpty
 	@ElementCollection
-	@List(value = {
-		@URL
-	})
 	public Collection<String> getPictures() {
 		return this.pictures;
 	}

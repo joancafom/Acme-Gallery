@@ -465,6 +465,169 @@
 	
 	<!-- Announcements -->
 	
+	<bean id="announcement1" class="domain.Announcement">
+		<property name="title" value="Welcome to the Group"/>
+		<property name="description" value="Please, be kind :)"/>
+		<property name="picture" value="https://www.thinkgeek.com/images/products/additional/large/jukg_bff_rainbow_cloud_plush_rainbow.jpg"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="19/04/2018 18:01" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group1"/>
+	</bean>
+	
+	<bean id="announcement2" class="domain.Announcement">
+		<property name="title" value="Considerations"/>
+		<property name="description" value="No drug will be allowed during the meeting. That includes pharmaceuticals such as viagra or cialis."/>
+		<property name="picture" value="https://www.thesignshed.co.uk/ekmps/shops/yorkie1922/images/no-drugs-sign-29837-p.png"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/04/2018 10:22" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group1"/>
+	</bean>
+	
+	<bean id="announcement3" class="domain.Announcement">
+		<property name="title" value="Clothing"/>
+		<property name="description" value="It's predicted that it will be sunny so you don't need to bring any scarf or jacket"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="25/04/2018 18:34" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group1"/>
+	</bean>
+	
+	<bean id="announcement4" class="domain.Announcement">
+		<property name="title" value="Question"/>
+		<property name="description" value="You can ask any question in the comments below and I will answer as soon as possible"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="27/04/2018 20:01" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group1"/>
+	</bean>
+	
+	<bean id="announcement5" class="domain.Announcement">
+		<property name="title" value="IMPORTANT: Bring food"/>
+		<property name="description" value="Museums' restaurants are usually very expensive. It would be a good idea to bring our own food and eat it in a park near the museum."/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="28/04/2018 12:34" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group1"/>
+	</bean>
+	
+	<bean id="announcement6" class="domain.Announcement">
+		<property name="title" value="Last but not least"/>
+		<property name="description" value="Practicing sex is not allowed in the museum. It's very important for you to know that"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/05/2018 02:45" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group1"/>
+	</bean>
+	
+	<bean id="announcement7" class="domain.Announcement">
+		<property name="title" value="Rules"/>
+		<property name="description" value="There are no rules in this group! Just try to have some fun"/>
+		<property name="picture" value="http://www.joshuaratliffphotography.com/wp-content/uploads/2018/04/image_20180413_093036.jpg"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/05/2018 13:14" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group2"/>
+	</bean>
+	
+	<bean id="announcement8" class="domain.Announcement">
+		<property name="title" value="Surprise!"/>
+		<property name="description" value="I love you"/>
+		<property name="picture" value="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Love_Heart_SVG.svg/2000px-Love_Heart_SVG.svg.png"/>
+		<property name="containsTaboo" value="false"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="12/02/2018 13:01" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group3"/>
+	</bean>
+	
+	<bean id="announcement9" class="domain.Announcement">
+		<property name="title" value="FREE SEX"/>
+		<property name="description" value="WATCH FREE PORN VIDEOS RIGHT HERE: https://www.youtube.com/watch?v=3tmd-ClpJxA"/>
+		<property name="picture" value="https://cdn.vectorstock.com/i/1000x1000/99/74/free-sex-rubber-stamp-vector-12979974.jpg"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 23:00" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group9"/>
+	</bean>
+	
+	<bean id="announcement10" class="domain.Announcement">
+		<property name="title" value="Problems at Sex?"/>
+		<property name="description" value="Try our brand new viagra! You can buy it here: https://www.youtube.com/watch?v=J0DjcsK_-HY"/>
+		<property name="picture" value="http://expresspharmacy.net/wp-content/uploads/2013/11/viagra.jpg"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 23:30" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group9"/>
+	</bean>
+	
+	<bean id="announcement11" class="domain.Announcement">
+		<property name="title" value="TIRED OF WATCHING PORN?"/>
+		<property name="description" value="FREE SEX JUST CLICKING HERE: https://www.youtube.com/watch?v=3-NTv0CdFCk"/>
+		<property name="picture" value="http://www.mytinyphone.com/uploads/users/docfle743/515579.gif"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 11:00" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group13"/>
+	</bean>
+	
+	<bean id="announcement12" class="domain.Announcement">
+		<property name="title" value="VIAGRA COULD KILL YOU"/>
+		<property name="description" value="Too good that now we have CIALIS, buy it here: https://www.youtube.com/watch?v=qfAqtFuGjWM"/>
+		<property name="picture" value="http://www.gifmania.com/Gif-Animados-Objetos/Imagenes-Ciencia/Medicina/Viagra/Pastillas-De-Viagra-65809.gif"/>
+		<property name="containsTaboo" value="true"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 12:00" /> 
+  			</bean>
+ 		</property>
+ 		
+ 		<property name="group" ref="group13"/>
+	</bean>
 	
 	<!-- Categories -->
 	<bean id="category1" class="domain.Category">
@@ -758,6 +921,202 @@
 		</property>
 	</bean>
 	
+	<!-- Comments -->
+	<bean id="comment1" class="domain.Comment">
+		<property name="title" value="Hey!" />
+		<property name="description" value="Nice to meet you guys!" />
+		<property name="picture" value="https://media.tenor.com/images/f35aae57f3700459808808ae37886b62/tenor.gif" />
+		<property name="containsTaboo" value="false" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor2" />
+		<property name="group" ref="group1" />
+	</bean>
+	
+	<bean id="comment2" class="domain.Comment">
+		<property name="title" value="Hello" />
+		<property name="description" value="Hello hello hello! Can't wait to visit the museum!" />
+		<property name="containsTaboo" value="false" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor3" />
+		<property name="group" ref="group1" />
+	</bean>
+	
+	<bean id="comment3" class="domain.Comment">
+		<property name="title" value="Important question" />
+		<property name="description" value="Do you know guys if it will be sunny or rainy? Thank you" />
+		<property name="containsTaboo" value="false" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor2" />
+		<property name="group" ref="group1" />
+	</bean>
+	
+	<bean id="comment4" class="domain.Comment">
+		<property name="title" value="Are the restaurants of the museum cheap?" />
+		<property name="description" value="I don't have much money so I need to know that as soon as possible" />
+		<property name="containsTaboo" value="false" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor3" />
+		<property name="group" ref="group1" />
+	</bean>
+	
+	<bean id="comment5" class="domain.Comment">
+		<property name="title" value="I always carry a box of viagra in my bag" />
+		<property name="description" value="Is that allowed?" />
+		<property name="containsTaboo" value="true" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor2" />
+		<property name="group" ref="group1" />
+	</bean>
+	
+	<bean id="comment6" class="domain.Comment">
+		<property name="title" value="Help" />
+		<property name="description" value="I need to have sex with someone" />
+		<property name="containsTaboo" value="true" />
+		
+		<property name="childrenComments">
+			<list>
+				<ref bean="comment7"/>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor2" />
+		<property name="group" ref="group1" />
+	</bean>
+	
+	<bean id="comment7" class="domain.Comment">
+		<property name="title" value="Ew" />
+		<property name="description" value="You're so gross" />
+		<property name="containsTaboo" value="false" />
+		
+		<property name="childrenComments">
+			<list>
+				<ref bean="comment8"/>
+			</list>
+		</property>
+		<property name="parentComment" ref="comment6"/>
+		<property name="visitor" ref="visitor3" />
+		<property name="group" ref="group1" />
+	</bean>
+	
+	<bean id="comment8" class="domain.Comment">
+		<property name="title" value="Oops" />
+		<property name="description" value="Wrong chat! Sorry" />
+		<property name="containsTaboo" value="false" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="parentComment" ref="comment7"/>
+		<property name="visitor" ref="visitor2" />
+		<property name="group" ref="group1" />
+	</bean>
+	
+	<bean id="comment9" class="domain.Comment">
+		<property name="title" value="Hello?" />
+		<property name="description" value="Why is everybody so quiet" />
+		<property name="containsTaboo" value="false" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor4" />
+		<property name="group" ref="group2" />
+	</bean>
+	
+	<bean id="comment10" class="domain.Comment">
+		<property name="title" value="OMGGG" />
+		<property name="description" value="THIS IS SO CUTE" />
+		<property name="picture" value="https://media1.tenor.com/images/4f9e31e2a854c2435d128defd1a1988d/tenor.gif"/>
+		<property name="containsTaboo" value="false" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor2" />
+		<property name="group" ref="group3" />
+	</bean>
+
+	
+	<bean id="comment11" class="domain.Comment">
+		<property name="title" value="FREE SEX" />
+		<property name="description" value="HAVE SOME FUN WITH BOYS AND GIRLS HERE: https://www.youtube.com/watch?v=Rfj2SUnhYCk" />
+		<property name="containsTaboo" value="true" />
+		
+		<property name="childrenComments">
+			<list>
+				<ref bean="comment12"/>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor5" />
+		<property name="group" ref="group9" />
+	</bean>
+	
+	<bean id="comment12" class="domain.Comment">
+		<property name="title" value="Thank you" />
+		<property name="description" value="But none of us need free sex" />
+		<property name="containsTaboo" value="true" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="parentComment" ref="comment11"/>
+		<property name="visitor" ref="visitor6" />
+		<property name="group" ref="group9" />
+	</bean>
+	
+	<bean id="comment13" class="domain.Comment">
+		<property name="title" value="BUY VIAGRA" />
+		<property name="description" value="IT'S GOOD FOR YOUR SOUL" />
+		<property name="containsTaboo" value="true" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor5" />
+		<property name="group" ref="group13" />
+	</bean>
+	
+	<bean id="comment14" class="domain.Comment">
+		<property name="title" value="I need to buy some cialis" />
+		<property name="description" value="I'm just kidding hehe" />
+		<property name="containsTaboo" value="true" />
+		
+		<property name="childrenComments">
+			<list>
+			</list>
+		</property>
+		<property name="visitor" ref="visitor4" />
+		<property name="group" ref="group6" />
+	</bean>
+	
+	
+	
+	
+	
 	<!-- Coordinates -->
 	
 	<bean id="coordinates1" class="domain.GPSCoordinates">
@@ -814,6 +1173,8 @@
 		<property name="latitude" value="30.047778" />
 		<property name="longitude" value="31.233333"/>
 	</bean>
+	
+	
 	
 	<!-- CreditCard -->
 	
@@ -2693,14 +3054,30 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation1"/>
+				<ref bean="invitation2"/>
 			</list>
 		</property>
 		<property name="announcements">
 			<list>
+				<ref bean="announcement1"/>
+				<ref bean="announcement2"/>
+				<ref bean="announcement3"/>
+				<ref bean="announcement4"/>
+				<ref bean="announcement5"/>
+				<ref bean="announcement6"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment1"/>
+				<ref bean="comment2"/>
+				<ref bean="comment3"/>
+				<ref bean="comment4"/>
+				<ref bean="comment5"/>
+				<ref bean="comment6"/>
+				<ref bean="comment7"/>
+				<ref bean="comment8"/>
 			</list>
 		</property>
 	</bean>
@@ -2736,14 +3113,20 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation3"/>
+				<ref bean="invitation4"/>
+				<ref bean="invitation5"/>
+				<ref bean="invitation6"/>
 			</list>
 		</property>
 		<property name="announcements">
 			<list>
+				<ref bean="announcement7"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment9"/>
 			</list>
 		</property>
 	</bean>
@@ -2776,21 +3159,24 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation7"/>
 			</list>
 		</property>
 		<property name="announcements">
 			<list>
+				<ref bean="announcement8"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment10"/>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="group4" class="domain.Group">
 		<property name="name" value="The Squad in El Prado!" />
-		<property name="description" value="We're gonna have so much fun together!!"/>
+		<property name="description" value="We're gonna have so much fun together!! (Without sex)"/>
 		<property name="creationMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="21/04/2018 19:43" /> 
@@ -2803,7 +3189,7 @@
   			</bean>
  		</property>
 		<property name="isClosed" value="true"/>
-		<property name="containsTaboo" value="false"/>
+		<property name="containsTaboo" value="true"/>
 		
 		<property name="museum" ref="museum1"/>
 		<property name="creator" ref="visitor1"/>
@@ -2817,6 +3203,8 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation8"/>
+				<ref bean="invitation9"/>
 			</list>
 		</property>
 		<property name="announcements">
@@ -2857,6 +3245,8 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation10"/>
+				<ref bean="invitation23"/>
 			</list>
 		</property>
 		<property name="announcements">
@@ -2897,6 +3287,8 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation11"/>
+				<ref bean="invitation12"/>
 			</list>
 		</property>
 		<property name="announcements">
@@ -2905,6 +3297,7 @@
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment14"/>
 			</list>
 		</property>
 	</bean>
@@ -2938,6 +3331,9 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation13"/>
+				<ref bean="invitation14"/>
+				<ref bean="invitation17"/>
 			</list>
 		</property>
 		<property name="announcements">
@@ -2977,6 +3373,7 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation18"/>
 			</list>
 		</property>
 		<property name="announcements">
@@ -2990,8 +3387,8 @@
 	</bean>
 	
 	<bean id="group9" class="domain.Group">
-		<property name="name" value="Romantic Date to the National Gallery!!" />
-		<property name="description" value="Surprise! Are you excited?"/>
+		<property name="name" value="Date to the National Gallery!!" />
+		<property name="description" value="Surprise! Are you excited? Don't forget to bring viagra"/>
 		<property name="creationMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="13/02/2018 21:05" /> 
@@ -3004,7 +3401,7 @@
   			</bean>
  		</property>
 		<property name="isClosed" value="true"/>
-		<property name="containsTaboo" value="false"/>
+		<property name="containsTaboo" value="true"/>
 		
 		<property name="museum" ref="museum9"/>
 		<property name="creator" ref="visitor5"/>
@@ -3017,21 +3414,28 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation15"/>
+				<ref bean="invitation19"/>
+				<ref bean="invitation24"/>
 			</list>
 		</property>
 		<property name="announcements">
 			<list>
+				<ref bean="announcement9"/>
+				<ref bean="announcement10"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment11"/>
+				<ref bean="comment12"/>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="group10" class="domain.Group">
 		<property name="name" value="Visiting the National Gallery Tomorrow" />
-		<property name="description" value="Anyone can come with me"/>
+		<property name="description" value="Anyone can come with me? Maybe later we can have sex"/>
 		<property name="creationMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="18/02/2018 13:11" /> 
@@ -3044,7 +3448,7 @@
   			</bean>
  		</property>
 		<property name="isClosed" value="false"/>
-		<property name="containsTaboo" value="false"/>
+		<property name="containsTaboo" value="true"/>
 		
 		<property name="museum" ref="museum9"/>
 		<property name="creator" ref="visitor4"/>
@@ -3056,6 +3460,7 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation20"/>
 			</list>
 		</property>
 		<property name="announcements">
@@ -3070,7 +3475,7 @@
 	
 	<bean id="group11" class="domain.Group">
 		<property name="name" value="Visiting the Vaticano" />
-		<property name="description" value="Any christian who wants to join me?"/>
+		<property name="description" value="Any christian who wants to join me? Your sex doesn't matter"/>
 		<property name="creationMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="25/12/2017 19:43" /> 
@@ -3109,7 +3514,7 @@
 	
 	<bean id="group12" class="domain.Group">
 		<property name="name" value="Visiting El Prado Alone" />
-		<property name="description" value="Finally!"/>
+		<property name="description" value="We're going to attend a exposition about Sex"/>
 		<property name="creationMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="08/05/2018 11:04" /> 
@@ -3122,7 +3527,7 @@
   			</bean>
  		</property>
 		<property name="isClosed" value="true"/>
-		<property name="containsTaboo" value="false"/>
+		<property name="containsTaboo" value="true"/>
 		
 		<property name="museum" ref="museum1"/>
 		<property name="creator" ref="visitor4"/>
@@ -3135,6 +3540,8 @@
 		</property>
 		<property name="invitations">
 			<list>
+				<ref bean="invitation16"/>
+				<ref bean="invitation21"/>
 			</list>
 		</property>
 		<property name="announcements">
@@ -3143,6 +3550,48 @@
 		</property>
 		<property name="comments">
 			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="group13" class="domain.Group">
+		<property name="name" value="Visiting Madame Tussauds" />
+		<property name="description" value="VIRUS 2018 FREE SEX PORN VIAGRA"/>
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 10:59" /> 
+  			</bean>
+ 		</property>
+		<property name="maxParticipants" value="10"/>
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/06/2018 16:00" /> 
+  			</bean>
+ 		</property>
+		<property name="isClosed" value="false"/>
+		<property name="containsTaboo" value="true"/>
+		
+		<property name="museum" ref="museum8"/>
+		<property name="creator" ref="visitor5"/>
+		
+		<property name="participants">
+			<list>
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+				<ref bean="invitation22"/>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+				<ref bean="announcement11"/>
+				<ref bean="announcement12"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment13"/>
 			</list>
 		</property>
 	</bean>
@@ -3408,6 +3857,312 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="isChecked" value="false"/>
 		<property name="guide" ref="guide6"/>
 		<property name="room" ref="room24"/>
+	</bean>
+	
+	<!-- Invitations -->
+	
+	<bean id="invitation1" class="domain.Invitation">
+		<property name="message" value="Do you wanna come to El Prado?"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="19/04/2018 17:34" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group1"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor2"/>
+	</bean>
+	
+	<bean id="invitation2" class="domain.Invitation">
+		<property name="message" value="Do you wanna come to El Prado?"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="19/04/2018 17:35" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group1"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor3"/>
+	</bean>
+	
+	<bean id="invitation3" class="domain.Invitation">
+		<property name="message" value="Let's go to the British Museum!!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/05/2018 13:01" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group2"/>
+ 		<property name="host" ref="visitor2"/>
+ 		<property name="guest" ref="visitor1"/>
+	</bean>
+	
+	<bean id="invitation4" class="domain.Invitation">
+		<property name="message" value="Let's go to the British Museum!!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/05/2018 13:02" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group2"/>
+ 		<property name="host" ref="visitor2"/>
+ 		<property name="guest" ref="visitor6"/>
+	</bean>
+	
+	<bean id="invitation5" class="domain.Invitation">
+		<property name="message" value="Let's go to the British Museum!!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/05/2018 13:01" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group2"/>
+ 		<property name="host" ref="visitor2"/>
+ 		<property name="guest" ref="visitor5"/>
+	</bean>
+	
+	<bean id="invitation6" class="domain.Invitation">
+		<property name="message" value="Let's go to the British Museum!!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="05/05/2018 13:02" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group2"/>
+ 		<property name="host" ref="visitor2"/>
+ 		<property name="guest" ref="visitor4"/>
+	</bean>
+	
+	<bean id="invitation7" class="domain.Invitation">
+		<property name="message" value="Wanna have a date with me?"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="12/02/2018 13:11" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group3"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor2"/>
+	</bean>
+	
+	<bean id="invitation8" class="domain.Invitation">
+		<property name="message" value="let's have some fun!!!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/04/2018 19:51" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group4"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor4"/>
+	</bean>
+	
+	<bean id="invitation9" class="domain.Invitation">
+		<property name="message" value="let's have some fun!!!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/04/2018 19:52" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group4"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor5"/>
+	</bean>
+	
+	<bean id="invitation10" class="domain.Invitation">
+		<property name="message" value="Wanna come to El Prado with me?"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/04/2018 20:25" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group5"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor6"/>
+	</bean>
+	
+	<bean id="invitation11" class="domain.Invitation">
+		<property name="message" value="Accept it please I'm so bored"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="17/12/2017 23:02" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group6"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor2"/>
+	</bean>
+	
+	<bean id="invitation12" class="domain.Invitation">
+		<property name="message" value="Accept it please I'm so bored"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="17/12/2017 23:03" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group6"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor4"/>
+	</bean>
+	
+	<bean id="invitation13" class="domain.Invitation">
+		<property name="message" value="Ha ha ha"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="03/03/2018 20:31" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group7"/>
+ 		<property name="host" ref="visitor2"/>
+ 		<property name="guest" ref="visitor4"/>
+	</bean>
+	
+	<bean id="invitation14" class="domain.Invitation">
+		<property name="message" value="Ha ha ha"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="03/03/2018 20:32" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group7"/>
+ 		<property name="host" ref="visitor2"/>
+ 		<property name="guest" ref="visitor6"/>
+	</bean>
+	
+	<bean id="invitation15" class="domain.Invitation">
+		<property name="message" value="Surprise!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 21:07" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group9"/>
+ 		<property name="host" ref="visitor5"/>
+ 		<property name="guest" ref="visitor6"/>
+	</bean>
+	
+	<bean id="invitation16" class="domain.Invitation">
+		<property name="message" value="yayyyy"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="08/05/2018 11:15" /> 
+  			</bean>
+ 		</property>
+ 		<property name="isAccepted" value="true"/>
+ 		<property name="group" ref="group12"/>
+ 		<property name="host" ref="visitor4"/>
+ 		<property name="guest" ref="visitor5"/>
+	</bean>
+	
+	<bean id="invitation17" class="domain.Invitation">
+		<property name="message" value="Ha ha ha"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="03/03/2018 20:33" /> 
+  			</bean>
+ 		</property>
+ 		<property name="group" ref="group7"/>
+ 		<property name="host" ref="visitor2"/>
+ 		<property name="guest" ref="visitor1"/>
+	</bean>
+	
+	<bean id="invitation18" class="domain.Invitation">
+		<property name="message" value="Hey do you wanna come?"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/02/2018 15:23" /> 
+  			</bean>
+ 		</property>
+ 		<property name="group" ref="group8"/>
+ 		<property name="host" ref="visitor4"/>
+ 		<property name="guest" ref="visitor1"/>
+	</bean>
+	
+	<bean id="invitation19" class="domain.Invitation">
+		<property name="message" value="Surprise!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 21:08" /> 
+  			</bean>
+ 		</property>
+ 		<property name="group" ref="group9"/>
+ 		<property name="host" ref="visitor5"/>
+ 		<property name="guest" ref="visitor1"/>
+	</bean>
+	
+	<bean id="invitation20" class="domain.Invitation">
+		<property name="message" value="Come with me pleaseee :("/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="18/02/2018 13:14" /> 
+  			</bean>
+ 		</property>
+ 		<property name="group" ref="group10"/>
+ 		<property name="host" ref="visitor4"/>
+ 		<property name="guest" ref="visitor1"/>
+	</bean>
+	
+	<bean id="invitation21" class="domain.Invitation">
+		<property name="message" value="yayyyy"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="08/05/2018 11:16" /> 
+  			</bean>
+ 		</property>
+ 		<property name="group" ref="group12"/>
+ 		<property name="host" ref="visitor4"/>
+ 		<property name="guest" ref="visitor1"/>
+	</bean>
+	
+	<bean id="invitation22" class="domain.Invitation">
+		<property name="message" value="Special invitation"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="02/03/2018 11:02" /> 
+  			</bean>
+ 		</property>
+ 		<property name="group" ref="group13"/>
+ 		<property name="host" ref="visitor5"/>
+ 		<property name="guest" ref="visitor1"/>
+	</bean>
+	
+	<bean id="invitation23" class="domain.Invitation">
+		<property name="message" value="Wanna come to El Prado with me?"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/04/2018 20:26" /> 
+  			</bean>
+ 		</property>
+ 		<property name="group" ref="group5"/>
+ 		<property name="host" ref="visitor1"/>
+ 		<property name="guest" ref="visitor4"/>
+	</bean>
+	
+	<bean id="invitation24" class="domain.Invitation">
+		<property name="message" value="Surprise!"/>
+		<property name="sentMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/02/2018 21:07" /> 
+  			</bean>
+ 		</property>
+ 		<property name="group" ref="group9"/>
+ 		<property name="host" ref="visitor5"/>
+ 		<property name="guest" ref="visitor4"/>
 	</bean>
 		
 	<!-- Museums -->
@@ -3744,6 +4499,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="groups">
 			<list>
 				<ref bean="group8"/>
+				<ref bean="group13"/>
 			</list>
 		</property>
 		<property name="reviews">
@@ -3891,6 +4647,172 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 	</bean>
 	
+	<!-- Products -->
+	<bean id="product1" class="domain.Product">
+		<property name="name" value="Red Wooden Menina" />
+		<property name="description" value="3D Menina. Made from eco-friendly birch plywood." />
+		<property name="pictures">
+			<list>
+				<value>http://www.tiendaprado.com/7754-large_default/menina-de-madera-roja-grande.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="50.00"/>
+		<property name="barcode" value="7681234569987"/>
+		<property name="store" ref="store1" />
+	</bean>
+	
+	<bean id="product2" class="domain.Product">
+		<property name="name" value="Fouta (burgundy)" />
+		<property name="description" value="Woven in Tunisia on a traditional loom." />
+		<property name="pictures">
+			<list>
+				<value>http://www.tiendaprado.com/8645-large_default/fouta-fortuny-burdeos.jpg</value>
+				<value>http://www.tiendaprado.com/8646-large_default/fouta-fortuny-burdeos.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="30.00"/>
+		<property name="barcode" value="3681234569982"/>
+		<property name="store" ref="store1" />
+	</bean>
+	
+	<bean id="product3" class="domain.Product">
+		<property name="name" value="'The Garden of Earthly Delights' Glasses Case" />
+		<property name="description" value="Case for glasses which reproduces a detail from the triptych The Garden of Earthly Delights (Hieronymus Bosch, 1500-1505). Cleaning cloth included with other detail from the same work." />
+		<property name="pictures">
+			<list>
+				<value>http://www.tiendaprado.com/6004-large_default/estuche-de-gafas-el-jardin-de-las-delicias-.jpg</value>
+				<value>http://www.tiendaprado.com/6005-large_default/estuche-de-gafas-el-jardin-de-las-delicias-.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="9.00"/>
+		<property name="barcode" value="1684234565932"/>
+		<property name="store" ref="store1" />
+	</bean>
+	
+	<bean id="product4" class="domain.Product">
+		<property name="name" value="Prado Red Bag" />
+		<property name="description" value="Practical cotton bag with the Museo del Prado logo." />
+		<property name="pictures">
+			<list>
+				<value>http://www.tiendaprado.com/6950-large_default/bolsa-prado-roja.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="3.95"/>
+		<property name="barcode" value="2384536567038"/>
+		<property name="store" ref="store1" />
+	</bean>
+	
+	<bean id="product5" class="domain.Product">
+		<property name="name" value="Blue Navy Prado T-shirt" />
+		<property name="description" value="T-shirt with the Museo del Prado logo." />
+		<property name="pictures">
+			<list>
+				<value>http://www.tiendaprado.com/6140-large_default/blue-museo-del-prado-t-shirt-.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="20.00"/>
+		<property name="barcode" value="8987566567234"/>
+		<property name="store" ref="store1" />
+	</bean>
+	
+	<bean id="product6" class="domain.Product">
+		<property name="name" value="'The Garden of Earthly Delights' Glasses Case" />
+		<property name="description" value="Case for glasses which reproduces a detail from the triptych The Garden of Earthly Delights (Hieronymus Bosch, 1500-1505). Cleaning cloth included with other detail from the same work." />
+		<property name="pictures">
+			<list>
+				<value>http://www.tiendaprado.com/6004-large_default/estuche-de-gafas-el-jardin-de-las-delicias-.jpg</value>
+				<value>http://www.tiendaprado.com/6005-large_default/estuche-de-gafas-el-jardin-de-las-delicias-.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="9.00"/>
+		<property name="barcode" value="1684234565932"/>
+		<property name="store" ref="store1" />
+	</bean>
+	
+	<bean id="product7" class="domain.Product">
+		<property name="name" value="Greek pot USB" />
+		<property name="description" value="Created especially for the British Museum, this 4GB USB stick is based on an ancient Greek pot dated to around 540BC-530BC. " />
+		<property name="pictures">
+			<list>
+				<value>https://www.britishmuseumshoponline.org/media/catalog/product/cache/926507dc7f93631a094422215b778fe0/t/m/tmpgreek-pots-usb-cmcs53160_productlarge.jpg</value>
+				<value>https://www.britishmuseumshoponline.org/media/catalog/product/cache/926507dc7f93631a094422215b778fe0/t/m/tmpgreek-pots-usb-cmcs53160_productlargealt1.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="14.99"/>
+		<property name="barcode" value="6571239871241"/>
+		<property name="store" ref="store2" />
+	</bean>
+	
+	<bean id="product8" class="domain.Product">
+		<property name="name" value="Fuji Wave mug" />
+		<property name="description" value="A ceramic mug featuring the iconic image of the famous Japanese print Fuji Wave by Hokusai. " />
+		<property name="pictures">
+			<list>
+				<value>https://www.britishmuseumshoponline.org/media/catalog/product/cache/926507dc7f93631a094422215b778fe0/t/m/tmpFuji-Wave-mug-cmcK58030_productlarge.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="11.99"/>
+		<property name="barcode" value="7682659801233"/>
+		<property name="store" ref="store2" />
+	</bean>
+	
+	<bean id="product9" class="domain.Product">
+		<property name="name" value="Socks Mona Lisa - Lavender for woman" />
+		<property name="description" value="53% cotton, 24% nylon, 22% polyester, 2% elastane." />
+		<property name="pictures">
+			<list>
+				<value>https://www.hotsox.com/data/default/images/catalog/900/Turnkey/1/xHC000076-BRTPK.png.pagespeed.ic.rKI-hbMHMQ.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="9.95"/>
+		<property name="barcode" value="7681239803452"/>
+		<property name="store" ref="store5" />
+	</bean>
+	
+	<bean id="product10" class="domain.Product">
+		<property name="name" value="GREEN PUPPY NOTEBOOK" />
+		<property name="description" value="Spiral notebook with 60 blank pages featuring Jeff Koons’, Puppy, 1992, and Guggenheim Bilbao logo on the cover." />
+		<property name="pictures">
+			<list>
+				<value>https://tienda.guggenheim-bilbao.eus/src/uploads/2017/02/02033448-031.Objetos-tienda_Febrero-2017-cuaderno-guggenheim-puppy-700x700.jpg</value>
+				<value>https://tienda.guggenheim-bilbao.eus/src/uploads/2017/02/02033447-033.Objetos-tienda_Febrero-2017-cuaderno-guggenheim-puppy-700x700.jpg</value>
+				<value>https://tienda.guggenheim-bilbao.eus/src/uploads/2017/02/02033449-029.Objetos-tienda_Febrero-2017-cuaderno-guggenheim-puppy-700x700.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="6.00"/>
+		<property name="barcode" value="1238794651231"/>
+		<property name="store" ref="store7" />
+	</bean>
+	
+	<bean id="product11" class="domain.Product">
+		<property name="name" value="PUPPY T-SHIRT" />
+		<property name="description" value="Women’s 100% cotton t-shirt with representation of Jeff Koons’ Puppy, designed exclusively for the Guggenheim Museum Bilbao by Basque fashion company Minimil." />
+		<property name="pictures">
+			<list>
+				<value>https://tienda.guggenheim-bilbao.eus/src/uploads/2014/03/01009151-01-camiseta-puppy-minimil-guggenheim.jpg</value>
+				<value>https://tienda.guggenheim-bilbao.eus/src/uploads/2014/03/01009151-02-camiseta-puppy-minimil-guggenheim.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="29.70"/>
+		<property name="barcode" value="6758349801027"/>
+		<property name="store" ref="store7" />
+	</bean>
+	
+	<bean id="product12" class="domain.Product">
+		<property name="name" value="Funko Pop: The Countess" />
+		<property name="description" value="Vinyl figure of 9cms" />
+		<property name="pictures">
+			<list>
+				<value>https://figurasdeseries.es/1156-large_default/muneco-funko-pop-ahs-hotel-the-countess.jpg</value>
+				<value>https://images-na.ssl-images-amazon.com/images/I/419G99uAILL.jpg</value>
+			</list>
+		</property>
+		<property name="price" value="15.80"/>
+		<property name="barcode" value="5754658291024"/>
+		<property name="store" ref="store8" />
+	</bean>
+	
+	
 	<!-- Visitors -->
 
 	<bean id="visitor1" class="domain.Visitor">
@@ -3948,10 +4870,24 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="receivedInvitations">
 			<list>
+				<ref bean="invitation3"/>
+				<ref bean="invitation19"/>
+				<ref bean="invitation20"/>
+				<ref bean="invitation21"/>
+				<ref bean="invitation22"/>
 			</list>
 		</property>
 		<property name="sentInvitations">
 			<list>
+				<ref bean="invitation1"/>
+				<ref bean="invitation2"/>
+				<ref bean="invitation7"/>
+				<ref bean="invitation8"/>
+				<ref bean="invitation9"/>
+				<ref bean="invitation10"/>
+				<ref bean="invitation23"/>
+				<ref bean="invitation11"/>
+				<ref bean="invitation12"/>
 			</list>
 		</property>
 	</bean>
@@ -3981,6 +4917,12 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment1"/>
+				<ref bean="comment3"/>
+				<ref bean="comment5"/>
+				<ref bean="comment6"/>
+				<ref bean="comment8"/>
+				<ref bean="comment10"/>
 			</list>
 		</property>
 		<property name="dayPasses">
@@ -4002,10 +4944,20 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="receivedInvitations">
 			<list>
+				<ref bean="invitation1"/>
+				<ref bean="invitation7"/>
+				<ref bean="invitation11"/>
 			</list>
 		</property>
 		<property name="sentInvitations">
 			<list>
+				<ref bean="invitation3"/>
+				<ref bean="invitation4"/>
+				<ref bean="invitation5"/>
+				<ref bean="invitation6"/>
+				<ref bean="invitation13"/>
+				<ref bean="invitation14"/>
+				<ref bean="invitation17"/>
 			</list>
 		</property>
 	</bean>
@@ -4025,10 +4977,14 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="joinedGroups">
 			<list>
+				<ref bean="group1"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment2"/>
+				<ref bean="comment4"/>
+				<ref bean="comment7"/>
 			</list>
 		</property>
 		<property name="dayPasses">
@@ -4041,6 +4997,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="receivedInvitations">
 			<list>
+				<ref bean="invitation2"/>
 			</list>
 		</property>
 		<property name="sentInvitations">
@@ -4078,6 +5035,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment9"/>
+				<ref bean="comment14"/>
 			</list>
 		</property>
 		<property name="dayPasses">
@@ -4095,10 +5054,20 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="receivedInvitations">
 			<list>
+				<ref bean="invitation6"/>
+				<ref bean="invitation8"/>
+				<ref bean="invitation12"/>
+				<ref bean="invitation13"/>
+				<ref bean="invitation23"/>
+				<ref bean="invitation24"/>
 			</list>
 		</property>
 		<property name="sentInvitations">
 			<list>
+				<ref bean="invitation18"/>
+				<ref bean="invitation20"/>
+				<ref bean="invitation16"/>
+				<ref bean="invitation21"/>
 			</list>
 		</property>
 	</bean>
@@ -4114,6 +5083,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="createdGroups">
 			<list>
 				<ref bean="group5"/>
+				<ref bean="group13"/>
 			</list>
 		</property>
 		<property name="joinedGroups">
@@ -4122,10 +5092,13 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 				<ref bean="group2"/>
 				<ref bean="group4"/>
 				<ref bean="group12"/>
+				<ref bean="group13"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment11"/>
+				<ref bean="comment13"/>
 			</list>
 		</property>
 		<property name="dayPasses">
@@ -4147,10 +5120,17 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="receivedInvitations">
 			<list>
+				<ref bean="invitation5"/>
+				<ref bean="invitation9"/>
+				<ref bean="invitation16"/>
 			</list>
 		</property>
 		<property name="sentInvitations">
 			<list>
+				<ref bean="invitation15"/>
+				<ref bean="invitation19"/>
+				<ref bean="invitation24"/>
+				<ref bean="invitation22"/>
 			</list>
 		</property>
 	</bean>
@@ -4177,6 +5157,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment12"/>
 			</list>
 		</property>
 		<property name="dayPasses">
@@ -4197,6 +5178,10 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 		<property name="receivedInvitations">
 			<list>
+				<ref bean="invitation4"/>
+				<ref bean="invitation10"/>
+				<ref bean="invitation14"/>
+				<ref bean="invitation15"/>
 			</list>
 		</property>
 		<property name="sentInvitations">
@@ -5274,6 +6259,12 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="museum" ref="museum1"/>
 		<property name="products">
 			<list>
+				<ref bean="product1"/>
+				<ref bean="product2"/>
+				<ref bean="product3"/>
+				<ref bean="product4"/>
+				<ref bean="product5"/>
+				<ref bean="product6"/>
 			</list>
 		</property>
 	</bean>
@@ -5287,6 +6278,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="museum" ref="museum2"/>
 		<property name="products">
 			<list>
+				<ref bean="product7"/>
+				<ref bean="product8"/>
 			</list>
 		</property>
 	</bean>
@@ -5313,6 +6306,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="museum" ref="museum5"/>
 		<property name="products">
 			<list>
+				<ref bean="product9"/>
 			</list>
 		</property>
 	</bean>
@@ -5326,6 +6320,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="museum" ref="museum7"/>
 		<property name="products">
 			<list>
+				<ref bean="product10"/>
+				<ref bean="product11"/>
 			</list>
 		</property>
 	</bean>
@@ -5339,6 +6335,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="museum" ref="museum8"/>
 		<property name="products">
 			<list>
+				<ref bean="product12"/>
 			</list>
 		</property>
 	</bean>

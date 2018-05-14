@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,6 +76,55 @@ public class CategoryAdministratorController extends AbstractController {
 		res.addObject("exhibitionsSize", exhibitionsSize);
 
 		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int parentCategoryId) {
+		final ModelAndView res;
+
+		final Category parentCategory = this.categoryService.findOne(parentCategoryId);
+		Assert.notNull(parentCategory);
+
+		final Category category = this.categoryService.create(parentCategory);
+		res = this.createEditModelAndView(category);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(final Category prunedCategory, final BindingResult binding) {
+		ModelAndView res = null;
+
+		final Category category = this.categoryService.reconstructEdit(prunedCategory, binding);
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(prunedCategory);
+		else
+			try {
+				final Category savedCategory = this.categoryService.save(category);
+				res = new ModelAndView("redirect:display.do?categoryId=" + savedCategory.getId());
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(prunedCategory, "category.commit.error");
+			}
+
+		return res;
+	}
+
+	//Ancillary Methods
+	protected ModelAndView createEditModelAndView(final Category category) {
+		return this.createEditModelAndView(category, null);
+	}
+
+	protected ModelAndView createEditModelAndView(final Category category, final String message) {
+		final ModelAndView res;
+
+		res = new ModelAndView("category/edit");
+		res.addObject("category", category);
+		res.addObject("message", message);
 
 		return res;
 	}

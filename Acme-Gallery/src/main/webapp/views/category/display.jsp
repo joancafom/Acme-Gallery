@@ -1,5 +1,5 @@
  <%--
- * exhibition/search.jsp
+ * category/display.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -60,3 +60,8 @@
 	</display:column>
 	
 </display:table>
+
+<hr>
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<a href="category/administrator/create.do?parentCategoryId=${category.id}"><spring:message code="category.create"/></a>
+</security:authorize>

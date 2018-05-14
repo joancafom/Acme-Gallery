@@ -20,5 +20,10 @@
 		<put-attribute name="title" value="Exhibitions per Category" />
 		<put-attribute name="body" value="/views/category/display.jsp" />
 	</definition>
+	
+	<definition name="category/edit" extends="master.page">	
+		<put-attribute name="title" value="Create a Category" />
+		<put-attribute name="body" value="/views/category/edit.jsp" />
+	</definition>
 		
 </tiles-definitions>

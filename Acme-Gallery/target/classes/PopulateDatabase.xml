@@ -870,7 +870,42 @@
 		<property name="month" value="3"/>
 		<property name="year" value="2019"/>
 	</bean>
+
+	<bean id="creditCard7" class="domain.CreditCard">
+		<property name="holderName" value="Bombo"/>
+		<property name="brandName" value="Master Card"/>
+		<property name="number" value="5304731338548557"/>
+		<property name="CVV" value="555"/>
+		<property name="month" value="12"/>
+		<property name="year" value="2021"/>
+	</bean>
 	
+	<bean id="creditCard8" class="domain.CreditCard">
+		<property name="holderName" value="Lupe"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="5704414075416561"/>
+		<property name="CVV" value="555"/>
+		<property name="month" value="10"/>
+		<property name="year" value="2025"/>
+	</bean>
+	
+	<bean id="creditCard9" class="domain.CreditCard">
+		<property name="holderName" value="Parches"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4112345017266533"/>
+		<property name="CVV" value="555"/>
+		<property name="month" value="11"/>
+		<property name="year" value="2019"/>
+	</bean>
+	
+	<bean id="creditCard10" class="domain.CreditCard">
+		<property name="holderName" value="Orestes"/>
+		<property name="brandName" value="Master Card"/>
+		<property name="number" value="5156244418841354"/>
+		<property name="CVV" value="555"/>
+		<property name="month" value="12"/>
+		<property name="year" value="2021"/>
+	</bean>
 	<!-- Critiques -->
 	
 	<bean id="critique1" class="domain.Critique">
@@ -1606,6 +1641,10 @@
  		</property>
  		<property name="sponsorships">
  			<list>
+ 				<ref bean="sponsorship1"/>
+ 				<ref bean="sponsorship2"/>
+ 				<ref bean="sponsorship3"/>
+ 				<ref bean="sponsorship8"/>
  			</list>
  		</property>
  		<property name="critiques">
@@ -1668,6 +1707,7 @@
  		</property>
  		<property name="sponsorships">
  			<list>
+ 				<ref bean="sponsorship4"/>
  			</list>
  		</property>
  		<property name="critiques">
@@ -1820,6 +1860,8 @@
  		</property>
  		<property name="sponsorships">
  			<list>
+ 			 	<ref bean="sponsorship6"/>
+ 				<ref bean="sponsorship7"/>
  			</list>
  		</property>
  		<property name="critiques">
@@ -1868,6 +1910,7 @@
  		</property>
  		<property name="sponsorships">
  			<list>
+ 				 <ref bean="sponsorship5"/>
  			</list>
  		</property>
  		<property name="critiques">
@@ -1918,6 +1961,7 @@
  		</property>
  		<property name="sponsorships">
  			<list>
+ 				<ref bean="sponsorship9"/>
  			</list>
  		</property>
  		<property name="critiques">
@@ -1971,6 +2015,7 @@
  		</property>
  		<property name="sponsorships">
  			<list>
+ 				<ref bean="sponsorship10"/>
  			</list>
  		</property>
  		<property name="critiques">
@@ -2169,6 +2214,7 @@
  		</property>
  		<property name="sponsorships">
  			<list>
+ 				<ref bean="sponsorship11"/>
  			</list>
  		</property>
  		<property name="critiques">
@@ -3218,7 +3264,6 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 	<bean id="highlight12" class="domain.Highlight">
 		<property name="title" value="Lady Gaga"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Lady_Gaga_Toronto_Film_Festival_2017_%28cropped%29.jpg/250px-Lady_Gaga_Toronto_Film_Festival_2017_%28cropped%29.jpg"/>
-		<property name="creatorName" value="-"/>
 		<property name="remark" value="Stefani Joanne Angelina Germanotta ()born March 28, 1986), known professionally as Lady Gaga, is an American singer, songwriter, and actress. She is known for her unconventionality and provocative work as well as visual experimentation."/>
 		<property name="year" value="2018"/>
 		<property name="isFinal" value="false"/>
@@ -3228,7 +3273,6 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 	<bean id="highlight13" class="domain.Highlight">
 		<property name="title" value="Lana del Rey"/>
 		<property name="photograph" value="https://media1.popsugar-assets.com/files/thumbor/1WMoil4C4wE3-FDMwUGIQ9AHe9o/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2018/01/28/075/n/1922564/241932035a6e6f6a68c551.57492641_GettyImages-911491980/i/Lana-Del-Rey.jpg"/>
-		<property name="creatorName" value="-"/>
 		<property name="remark" value="Elizabeth Woolridge Grant (born June 21, 1985), known professionally as Lana Del Rey, is an American singer and songwriter. Her music has been noted by critics for its stylized cinematic quality, its preoccupation with themes of tragic romance, glamour, and melancholia, and its references to pop culture, particularly 1950s and 1960s Americana."/>
 		<property name="year" value="2018"/>
 		<property name="isFinal" value="false"/>
@@ -3238,7 +3282,6 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 	<bean id="highlight14" class="domain.Highlight">
 		<property name="title" value="Lorde"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Lorde_Brisbane_Nov_2017_%28cropped%29.jpg/220px-Lorde_Brisbane_Nov_2017_%28cropped%29.jpg"/>
-		<property name="creatorName" value="-"/>
 		<property name="remark" value="Ella Marija Lani Yelich-O'Connor (born 7 November 1996), known professionally as Lorde (pronounced lord), is a New Zealand singer, songwriter, and record producer who holds both New Zealand and Croatian citizenship. Born in the Auckland suburb of Takapuna and raised in neighbouring Devonport, she became interested in performing as a child. In her early teens, she signed with Universal Music Group and was later paired with songwriter and record producer Joel Little."/>
 		<property name="year" value="2018"/>
 		<property name="isFinal" value="false"/>
@@ -4973,6 +5016,13 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 
 		<property name="sponsorships">
 			<list>
+				<ref bean="sponsorship1"/>
+				<ref bean="sponsorship2"/>
+				<ref bean="sponsorship3"/>
+				<ref bean="sponsorship4"/>
+				<ref bean="sponsorship5"/>
+				<ref bean="sponsorship6"/>
+				<ref bean="sponsorship7"/>
 			</list>
 		</property>
 	</bean>
@@ -4988,6 +5038,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 
 		<property name="sponsorships">
 			<list>
+				<ref bean="sponsorship8"/>
+				<ref bean="sponsorship9"/>
 			</list>
 		</property>
 	</bean>
@@ -5017,9 +5069,199 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 
 		<property name="sponsorships">
 			<list>
+				<ref bean="sponsorship10"/>
+				<ref bean="sponsorship11"/>
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Sponsorships -->
+	
+	<bean id="sponsorship1" class="domain.Sponsorship">
+		<property name="status" value="ACCEPTED"/>
+		<property name="creditCard" ref="creditCard7"/>
+		<property name="banner" value="https://static1.squarespace.com/static/58b1faf01b631bccf54e27dc/t/59394dfc20099e3818eda73c/1496927754513/Lorde_Website_TourBanner_Main.jpg"/>
+		<property name="link" value="https://lorde.co.nz/tour/"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="14/05/2018 09:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/07/2018 09:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor1"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="sponsorship2" class="domain.Sponsorship">
+		<property name="status" value="ACCEPTED"/>
+		<property name="creditCard" ref="creditCard7"/>
+		<property name="banner" value="http://www.tinleyparkamphitheater.com/wp-content/uploads/2015/05/lana-del-rey-banner.png"/>
+		<property name="link" value="http://www.tinleyparkamphitheater.com/events/lana-del-rey/#.WvlgRvmF6t8"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 20:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="12/07/2018 20:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor1"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="sponsorship3" class="domain.Sponsorship">
+		<property name="status" value="ACCEPTED"/>
+		<property name="creditCard" ref="creditCard7"/>
+		<property name="banner" value="https://pbs.twimg.com/media/DIDLwnKUwAEAps7.jpg"/>
+		<property name="link" value="https://taylorswift.com/"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="13/05/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="12/07/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor1"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="sponsorship4" class="domain.Sponsorship">
+		<property name="status" value="ACCEPTED"/>
+		<property name="creditCard" ref="creditCard7"/>
+		<property name="banner" value="http://www.generacionpixel.com/wp-content/uploads/2016/05/overwathc.jpg"/>
+		<property name="link" value="http://www.generacionpixel.com/2016/06/05/analisis-overwatch/"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="15/07/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/07/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor1"/>
+ 		<property name="exhibition" ref="exhibition2"/>
+	</bean>
+	
+	<bean id="sponsorship5" class="domain.Sponsorship">
+		<property name="status" value="PENDING"/>
+		<property name="banner" value="http://queermeup.com/wp-content/uploads/2014/09/Charli-XCX-banner.jpg"/>
+		<property name="link" value="http://queermeup.com/music/charli-xcxs-sophomore-album-sucker-arriving-oct-21-via-neon-goldatlantic/"/>
+ 		<property name="sponsor" ref="sponsor1"/>
+ 		<property name="exhibition" ref="exhibition6"/>
+	</bean>
+	
+	<bean id="sponsorship6" class="domain.Sponsorship">
+		<property name="status" value="TIME_NEGOCIATION"/>
+		<property name="banner" value="https://esccronicas.files.wordpress.com/2017/07/esc-2018-portugal.jpg"/>
+		<property name="link" value="https://esccronicas.wordpress.com/2017/07/26/eurovision-vuela-de-kiev-a-lisboa-para-2018-en-los-dias-810-y-12-de-mayo/"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="21/08/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="27/08/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor1"/>
+ 		<property name="exhibition" ref="exhibition5"/>
+	</bean>
+	
+	<bean id="sponsorship7" class="domain.Sponsorship">
+		<property name="status" value="REJECTED"/>
+		<property name="banner" value="http://bornonthisway.files.wordpress.com/2011/05/banner.jpg"/>
+		<property name="link" value="https://www.youtube.com/watch?v=wagn8Wrmzuc"/>
+ 		<property name="sponsor" ref="sponsor1"/>
+ 		<property name="exhibition" ref="exhibition5"/>
+	</bean>
+	
+	<bean id="sponsorship8" class="domain.Sponsorship">
+		<property name="status" value="ACCEPTED"/>
+		<property name="creditCard" ref="creditCard8"/>
+		<property name="banner" value="https://nancyest.files.wordpress.com/2015/06/cropped-taylor-swift-1989-world-tour-vip-tickets-banner-e1416754637309.jpg"/>
+		<property name="link" value="https://www.youtube.com/watch?v=e-ORhEE9VVg"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/05/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/06/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor2"/>
+ 		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="sponsorship9" class="domain.Sponsorship">
+		<property name="status" value="ACCEPTED"/>
+		<property name="creditCard" ref="creditCard8"/>
+		<property name="banner" value="https://vignette.wikia.nocookie.net/lanadelrey/images/6/6a/Love_Banner.jpg"/>
+		<property name="link" value="https://www.youtube.com/watch?v=3-NTv0CdFCk"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="10/07/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="20/07/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor2"/>
+ 		<property name="exhibition" ref="exhibition7"/>
+	</bean>
+	
+	<bean id="sponsorship10" class="domain.Sponsorship">
+		<property name="status" value="REJECTED"/>
+		<property name="banner" value="https://vignette.wikia.nocookie.net/lanadelrey/images/6/6a/Love_Banner.jpg"/>
+		<property name="link" value="https://www.youtube.com/watch?v=3-NTv0CdFCk"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/11/2017 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/01/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor4"/>
+ 		<property name="exhibition" ref="exhibition8"/>
+	</bean>
+	
+	<bean id="sponsorship11" class="domain.Sponsorship">
+		<property name="status" value="ACCEPTED"/>
+		<property name="creditCard" ref="creditCard10"/>
+		<property name="banner" value="http://www.apmusicales.com/wp-content/uploads/Taylor-Swift-1-750x400.jpg"/>
+		<property name="link" value="https://www.youtube.com/watch?v=tCXGJQYZ9JA"/>
+		<property name="startingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/05/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="endingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+  				<constructor-arg value="01/07/2018 00:00" /> 
+  			</bean>
+ 		</property>
+ 		<property name="sponsor" ref="sponsor4"/>
+ 		<property name="exhibition" ref="exhibition12"/>
+	</bean>
+	
 	
 	<!-- Store -->
 	

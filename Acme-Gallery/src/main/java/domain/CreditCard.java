@@ -47,17 +47,20 @@ public class CreditCard {
 
 	@Min(100)
 	@Max(999)
-	public int getCVV() {
+	@NotNull
+	public Integer getCVV() {
 		return this.CVV;
 	}
 
 	@Min(1)
 	@Max(12)
-	public int getMonth() {
+	@NotNull
+	public Integer getMonth() {
 		return this.month;
 	}
 
-	public int getYear() {
+	@NotNull
+	public Integer getYear() {
 		return this.year;
 	}
 
@@ -73,15 +76,15 @@ public class CreditCard {
 		this.number = number;
 	}
 
-	public void setCVV(final int CVV) {
+	public void setCVV(final Integer CVV) {
 		this.CVV = CVV;
 	}
 
-	public void setMonth(final int month) {
+	public void setMonth(final Integer month) {
 		this.month = month;
 	}
 
-	public void setYear(final int year) {
+	public void setYear(final Integer year) {
 		this.year = year;
 	}
 

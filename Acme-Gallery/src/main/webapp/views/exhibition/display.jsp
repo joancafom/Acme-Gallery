@@ -64,7 +64,9 @@
 	<h4><spring:message code="exhibition.highlights"/></h4>
 	
 	<display:table name="highlights" id="highlight" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeH}">
-		<display:column titleKey="highlight.title" property="title"/>
+		<display:column titleKey="highlight.title">
+			<a href="highlight/${actorWS}display.do?highlightId=<jstl:out value="${highlight.id}" />"><jstl:out value="${highlight.title}" /></a>
+		</display:column>
 		<display:column titleKey="highlight.photograph">
 			<img src="${highlight.photograph}" alt="${highlight.title}" title="${highlight.title}" style="max-width:200px;"/>
 		</display:column>

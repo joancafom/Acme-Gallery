@@ -31,6 +31,11 @@ public class HighlightService {
 
 	// CRUD Methods -----------------------------------------------------------------------------------
 
+	// v1.0 - Alicia
+	public Highlight findOne(final int highlightId) {
+		return this.highlightRepository.findOne(highlightId);
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	// v1.0 - JA

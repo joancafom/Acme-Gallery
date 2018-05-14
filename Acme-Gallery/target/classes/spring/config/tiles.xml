@@ -28,6 +28,7 @@
 		<value>/views/category/tiles.xml</value>
 		<value>/views/critique/tiles.xml</value>
 		<value>/views/exhibition/tiles.xml</value>
+		<value>/views/highlight/tiles.xml</value>
 		<value>/views/museum/tiles.xml</value>
 	</util:list>
 

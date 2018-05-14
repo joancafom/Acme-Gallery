@@ -28,6 +28,7 @@
 		<value>/views/category/messages</value>
 		<value>/views/critique/messages</value>
 		<value>/views/exhibition/messages</value>
+		<value>/views/highlight/messages</value>
 		<value>/views/museum/messages</value>
 	</util:list>
 

@@ -53,8 +53,8 @@ public class ExhibitionController extends AbstractController {
 
 	//v1.0 - Implemented by JA
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-1332308-p", defaultValue = "1") final Integer pageH, @RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer pageC, @RequestParam(
-		value = "d-2511045-p", defaultValue = "1") final Integer pageG) {
+	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-3619782-p", defaultValue = "1") final Integer pageH, @RequestParam(value = "d-148442-p", defaultValue = "1") final Integer pageC, @RequestParam(
+		value = "d-148442-p", defaultValue = "1") final Integer pageG) {
 
 		final ModelAndView res;
 
@@ -69,12 +69,12 @@ public class ExhibitionController extends AbstractController {
 		//Critiques are also listed in an Exhibition Profile
 		final Page<Critique> pageResultC = this.critiqueService.findAllByExhibition(exhibition, pageC, 5);
 		final Collection<Critique> critiques = pageResultC.getContent();
-		final Integer resultSizeC = new Long(pageResultH.getTotalElements()).intValue();
+		final Integer resultSizeC = new Long(pageResultC.getTotalElements()).intValue();
 
 		//Guides are also listed in an Exhibition Profile
-		final Page<Guide> pageResultG = this.guideService.findAllByExhibition(exhibition, pageH, 5);
+		final Page<Guide> pageResultG = this.guideService.findAllByExhibition(exhibition, pageG, 5);
 		final Collection<Guide> guides = pageResultG.getContent();
-		final Integer resultSizeG = new Long(pageResultH.getTotalElements()).intValue();
+		final Integer resultSizeG = new Long(pageResultG.getTotalElements()).intValue();
 
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);

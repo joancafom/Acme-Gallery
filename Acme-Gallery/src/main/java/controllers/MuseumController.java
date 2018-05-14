@@ -39,7 +39,7 @@ public class MuseumController extends AbstractController {
 
 	//v1.0 - Implemented by JA
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int museumId, @RequestParam(value = "d-1332308-p", defaultValue = "1") final Integer pageR, @RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer pageE) {
+	public ModelAndView display(@RequestParam final int museumId, @RequestParam(value = "d-447218-p", defaultValue = "1") final Integer pageR, @RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer pageE) {
 
 		final ModelAndView res;
 

@@ -46,7 +46,9 @@
 	
 	<spring:message code="price.format" var="priceFormat"></spring:message>
 	<display:table name="exhibitions" id="exhibition" requestURI="museum/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeE}">
-		<display:column titleKey="exhibition.title" property="title"/>
+		<display:column titleKey="exhibition.title">
+			<a href="exhibition/${actorWS}display.do?exhibitionId=<jstl:out value="${exhibition.id}"/>"><jstl:out value="${exhibition.title}"/></a>
+		</display:column>
 		<display:column titleKey="exhibition.description" property="description" style="width:60%" class="moreInfo"/>
 		<display:column titleKey="exhibition.price" style="width:5%;">
 			<fmt:formatNumber type="currency" currencySymbol="&#8364;" pattern="${priceFormat}" value="${exhibition.price}" />
@@ -61,8 +63,10 @@
 	<h4><spring:message code="museum.reviews"/></h4>
 	
 	<display:table name="reviews" id="review" requestURI="museum/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeR}">
-		<display:column titleKey="review.visitor.name" property="${review.visitor.name}" style="width:20%" />
-		<display:column titleKey="review.body" property="body" style="width:60%" />
+		<display:column titleKey="review.visitor.name" style="width:20%">
+			<jstl:out value="${review.visitor.name}"></jstl:out> <jstl:out value="${review.visitor.surnames}"></jstl:out>
+		</display:column>
+		<display:column titleKey="review.body" property="body" style="width:60%" class="moreInfo" />
 		<display:column titleKey="review.score" style="width:20%">
 			<%-- Loop to print the stars--%>
 			<jstl:set var="counter" value="5"/>

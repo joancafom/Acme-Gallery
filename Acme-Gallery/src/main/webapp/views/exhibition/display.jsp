@@ -66,7 +66,7 @@
 	<display:table name="highlights" id="highlight" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeH}">
 		<display:column titleKey="highlight.title" property="title"/>
 		<display:column titleKey="highlight.photograph">
-			<img src="${highlight.photograph}" alt="${highlight.title}" title="${highlight.title}"/>
+			<img src="${highlight.photograph}" alt="${highlight.title}" title="${highlight.title}" style="max-width:200px;"/>
 		</display:column>
 		<display:column titleKey="highlight.creatorName">
 			<jstl:choose>

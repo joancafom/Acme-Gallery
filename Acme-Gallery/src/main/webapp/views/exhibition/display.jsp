@@ -52,6 +52,8 @@
 			<a href="<jstl:out value="${link}" />" target="_blank"><jstl:out value="${link}" /></a> 
 			<br>
 		</jstl:forEach>
+		<br>
+		<p><spring:message code="exhibition.category"/>: <a href="category/${actorWS}display.do?categoryId=<jstl:out value="${exhibition.category.id}"/>"><jstl:out value="${exhibition.category.name}"/></a></p>
 	</div>
 	<div id="right">
 		<h4><spring:message code="exhibition.description"/></h4>

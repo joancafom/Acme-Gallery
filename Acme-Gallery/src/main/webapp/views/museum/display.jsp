@@ -33,6 +33,29 @@
 	<jstl:if test="${museum.title ne null}">
 		<p><jstl:out value="${museum.title}" /></p>
 	</jstl:if>
+	<jstl:if test="${museum.store ne null}">
+		<p><a href="store/${actorWS}display.do?storeId=<jstl:out value="${museum.store.id}"/>"><img src="https://image.freepik.com/iconos-gratis/cesta-de-la-compra-de-diseno-a-cuadros_318-50865.jpg" style="max-width:50px;"></a></p>
+	</jstl:if>
+</div>
+
+<div id="mInfo" class="info">
+		<h4><spring:message code="museum.info"/></h4>
+		
+		<p><spring:message code="museum.identifier"/>: <em><jstl:out value="${museum.identifier}"/></em></p>
+		<p><spring:message code="museum.address"/>:
+		<jstl:choose>
+			<jstl:when test="${museum.coordinates.latitude ne null and museum.coordinates.longitude ne null}">
+				<a href="http://www.google.com/maps/place/${museum.coordinates.latitude},${museum.coordinates.longitude}" target="_blank"><jstl:out value="${museum.address}"/></a>
+			</jstl:when>
+			<jstl:otherwise>
+				<jstl:out value="${museum.address}"/>
+			</jstl:otherwise>
+		</jstl:choose>
+		 </p>
+		 
+		 <p><spring:message code="museum.email"/>:<a href="mailto:<jstl:out value="${museum.email}"/>"><jstl:out value="${museum.email}"/></a></p>
+		 <p><spring:message code="museum.phoneNumber"/>: <jstl:out value="${museum.phoneNumber}"/></p>
+		 <p><spring:message code="museum.director"/>: <a href="director/${actorWS}display.do?directorId=<jstl:out value="${museum.director.id}"/>"><jstl:out value="${museum.director.name}"/> <jstl:out value="${museum.director.surnames}"/></a></p> 
 </div>
 
 <div id="mExhibitions" class="info">
@@ -82,25 +105,5 @@
 			<acme:dateFormat code="date.format" value="${review.creationDate}"/>
 		</display:column>
 	</display:table>
-</div>
-
-<div id="mInfo" class="info">
-
-	<h4><spring:message code="museum.info"/></h4>
-	
-	<p><spring:message code="museum.identifier"/>: <em><jstl:out value="${museum.identifier}"/></em></p>
-	<p><spring:message code="museum.address"/>:
-	<jstl:choose>
-		<jstl:when test="${museum.coordinates.latitude ne null and museum.coordinates.longitude ne null}">
-			<a href="http://www.google.com/maps/place/${museum.coordinates.latitude},${museum.coordinates.longitude}" target="_blank"><jstl:out value="${museum.address}"/></a>
-		</jstl:when>
-		<jstl:otherwise>
-			<jstl:out value="${museum.address}"/>
-		</jstl:otherwise>
-	</jstl:choose>
-	 </p>
-	 
-	 <p><spring:message code="museum.email"/>:<a href="mailto:<jstl:out value="${museum.email}"/>"><jstl:out value="${museum.email}"/></a></p>
-	 <p><spring:message code="museum.phoneNumber"/>: <jstl:out value="${museum.phoneNumber}"/></p>
 </div>
 

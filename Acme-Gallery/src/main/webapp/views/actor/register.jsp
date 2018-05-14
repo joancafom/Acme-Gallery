@@ -80,6 +80,7 @@
 	<label for="pass2"><strong><spring:message code="actor.userAccount.repeatPassword" />:</strong></label>
 	<form:password id="pass2" path="passwordConfirmation" onkeyup="checkData()" /><br><br>
 	<div id="passwordMatchMessage" style="color:red; text-decoration:underline"></div>
+	<form:errors cssClass="error" path="password"/>
 	
 	<h3 style="text-decoration:underline"><spring:message code="actor.personalData"/></h3>
 	<acme:textbox code="actor.name" path="name"/><br>

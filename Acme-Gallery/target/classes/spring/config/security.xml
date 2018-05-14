@@ -48,6 +48,7 @@
 		<!-- Acme-Gallery Directives go under here -->
 
 		<security:intercept-url pattern="/announcement/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/announcement/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
 	
 		<security:intercept-url pattern="/category/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/category/administrator/display.do" access="hasRole('ADMINISTRATOR')" />

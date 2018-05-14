@@ -30,12 +30,52 @@ public class AnnouncementService {
 	@Autowired
 	private AdministratorService	administratorService;
 
+	@Autowired
+	private GroupService			groupService;
+
 
 	// Validator --------------------------------------------------------------------------------------
 
 	// CRUD Methods -----------------------------------------------------------------------------------
 
+	// v1.0 - JA
+	public Announcement findOne(final int announcementId) {
+
+		return this.announcementRepository.findOne(announcementId);
+	}
+
+	// v1.0 - JA
+	public void delete(final Announcement announcement) {
+
+		Assert.notNull(announcement);
+		Assert.isTrue(this.announcementRepository.exists(announcement.getId()));
+
+		//Make sure an Admin is the Actor who is trying to perform the operation
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		announcement.getGroup().getAnnouncements().remove(announcement);
+		this.groupService.save(announcement.getGroup());
+
+		this.announcementRepository.delete(announcement);
+	}
+
+	// v1.0 - JA
+	public Collection<Announcement> findAll() {
+
+		return this.announcementRepository.findAll();
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
+
+	// v1.0 - JA
+	public Page<Announcement> findAll(final int page, final int size) {
+
+		final Page<Announcement> res = this.announcementRepository.findAll(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
 
 	// v1.0 - JA
 	public Collection<Announcement> findTabooed() {

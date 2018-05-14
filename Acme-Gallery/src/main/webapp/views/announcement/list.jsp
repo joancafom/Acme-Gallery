@@ -18,7 +18,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="announcements" id="announcement" requestURI="announcement/administrator/list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
+<jstl:choose>
+	<jstl:when test="${listTabooed}">
+		<h3><spring:message code="announcement.list.taboo" /></h3>
+	</jstl:when>
+</jstl:choose>
+
+<display:table name="announcements" id="announcement" requestURI="announcement/administrator/list.do" pagesize="5" class="displaytag" style="width:90%" partialList="true" size="${resultSize}">
 	<display:column titleKey="announcement.title" property="title"/>
 	<display:column titleKey="announcement.description" property="description"/>
 	<display:column titleKey="announcement.picture">
@@ -28,5 +34,8 @@
 	</display:column>
 	<display:column titleKey="announcement.creationMoment">
 		<acme:dateFormat code="date.format" value="${announcement.creationMoment}"/>
+	</display:column>
+	<display:column>
+		<a href="announcement/administrator/delete.do?announcementId=${announcement.id}&listTabooed=${listTabooed}"><spring:message code="announcement.delete" /></a>
 	</display:column>
 </display:table>

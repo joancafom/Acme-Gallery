@@ -37,6 +37,12 @@
 		<acme:priceFormat code="price.format" value="${exhibition.price}"/>
 	</display:column>
 	
+	<security:authorize access="hasRole('DIRECTOR')">
+		<display:column titleKey="exhibition.sponsorships">
+			<a href="sponsorship/director/list.do?exhibitionId=${exhibition.id}"><spring:message code="sponsorship.list"/></a>
+		</display:column>
+	</security:authorize>
+	
 </display:table>
 
 <br/>

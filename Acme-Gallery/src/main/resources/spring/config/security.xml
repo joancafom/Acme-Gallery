@@ -151,6 +151,8 @@
 		<security:intercept-url pattern="/reviewer/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />
+		
+		<security:intercept-url pattern="/sponsorship/director/list.do" access="hasRole('DIRECTOR')" />
 
 		<security:intercept-url pattern="/store/display.do" access="isAnonymous()" />  
 		<security:intercept-url pattern="/store/visitor/display.do" access="hasRole('VISITOR')" />  

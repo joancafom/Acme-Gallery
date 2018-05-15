@@ -34,9 +34,10 @@
 		<value>/views/group/messages</value>
 		<value>/views/highlight/messages</value>
 		<value>/views/museum/messages</value>
-		<value>/views/systemConfiguration/messages</value>
 		<value>/views/product/messages</value>
+		<value>/views/sponsorship/messages</value>
 		<value>/views/store/messages</value>
+		<value>/views/systemConfiguration/messages</value>
 	</util:list>
 
 </beans>

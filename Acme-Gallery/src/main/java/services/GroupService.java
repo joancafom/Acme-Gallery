@@ -79,7 +79,7 @@ public class GroupService {
 		Assert.notNull(administrator);
 
 		for (final Announcement a : group.getAnnouncements())
-			this.announcementService.delete(a);
+			this.announcementService.deleteGroup(a);
 
 		this.announcementService.flush();
 

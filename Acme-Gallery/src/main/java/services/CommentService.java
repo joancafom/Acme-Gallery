@@ -2,7 +2,6 @@
 package services;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -57,19 +56,18 @@ public class CommentService extends ActorService {
 		final Administrator administrator = this.adminService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(administrator);
 
-		//Every children comment will be deleted as well
-		final Collection<Comment> childrenComments = new HashSet<Comment>(comment.getChildrenComments());
-		for (final Comment childComment : childrenComments)
-			this.delete(childComment);
+		if (comment.getParentComment() != null) {
+			comment.getParentComment().getChildrenComments().remove(comment);
+			comment.setParentComment(null);
+			this.save(comment.getParentComment());
+			this.flush();
+		}
 
-		//We remove this comment from the parent
-		comment.getParentComment().getChildrenComments().remove(comment);
-		this.save(comment.getParentComment());
-		this.flush();
-
-		comment.getGroup().getComments().remove(comment);
-		this.groupService.save(comment.getGroup());
-		this.groupService.flush();
+		for (final Comment c : comment.getChildrenComments()) {
+			c.setParentComment(null);
+			this.save(c);
+			this.flush();
+		}
 
 		comment.getVisitor().getComments().remove(comment);
 		this.visitorService.save(comment.getVisitor());

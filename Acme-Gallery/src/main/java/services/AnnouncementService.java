@@ -65,7 +65,18 @@ public class AnnouncementService {
 
 		announcement.getGroup().getAnnouncements().remove(announcement);
 		this.groupService.save(announcement.getGroup());
-		this.groupService.flush();
+
+		this.announcementRepository.delete(announcement);
+	}
+
+	// v1.0 - Alicia
+	public void deleteGroup(final Announcement announcement) {
+		Assert.notNull(announcement);
+		Assert.isTrue(this.announcementRepository.exists(announcement.getId()));
+
+		//Make sure an Admin is the Actor who is trying to perform the operation
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
 
 		this.announcementRepository.delete(announcement);
 		this.flush();

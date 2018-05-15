@@ -31,6 +31,7 @@
 		<value>/views/critique/tiles.xml</value>
 		<value>/views/director/tiles.xml</value>
 		<value>/views/exhibition/tiles.xml</value>
+		<value>/views/group/tiles.xml</value>
 		<value>/views/highlight/tiles.xml</value>
 		<value>/views/museum/tiles.xml</value>
 		<value>/views/systemConfiguration/tiles.xml</value>

@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -28,6 +29,12 @@ public class CommentService extends ActorService {
 	@Autowired
 	private AdministratorService	adminService;
 
+	@Autowired
+	private GroupService			groupService;
+
+	@Autowired
+	private VisitorService			visitorService;
+
 
 	//CRUD Methods
 
@@ -38,6 +45,43 @@ public class CommentService extends ActorService {
 
 		Assert.notNull(comment);
 		return this.commentRepository.save(comment);
+	}
+
+	// v1.0 - Alicia
+	public void delete(final Comment comment) {
+
+		Assert.notNull(comment);
+		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+
+		//Make sure an Admin is the Actor who is trying to perform the operation
+		final Administrator administrator = this.adminService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		//Every children comment will be deleted as well
+		final Collection<Comment> childrenComments = new HashSet<Comment>(comment.getChildrenComments());
+		for (final Comment childComment : childrenComments)
+			this.delete(childComment);
+
+		//We remove this comment from the parent
+		comment.getParentComment().getChildrenComments().remove(comment);
+		this.save(comment.getParentComment());
+		this.flush();
+
+		comment.getGroup().getComments().remove(comment);
+		this.groupService.save(comment.getGroup());
+		this.groupService.flush();
+
+		comment.getVisitor().getComments().remove(comment);
+		this.visitorService.save(comment.getVisitor());
+		this.visitorService.flush();
+
+		this.commentRepository.delete(comment);
+		this.flush();
+	}
+
+	// v1.0 - Alicia
+	public void flush() {
+		this.commentRepository.flush();
 	}
 
 	//Other Business Methods

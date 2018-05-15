@@ -54,6 +54,18 @@ public class MuseumService extends ActorService {
 		return res;
 	}
 
+	// v1.0 - Alicia
+	public Museum save(final Museum museum) {
+		//Beware to modify this method! It is being used by other methods!
+		Assert.notNull(museum);
+		return this.museumRepository.save(museum);
+	}
+
+	// v1.0 - Alicia
+	public void flush() {
+		this.museumRepository.flush();
+	}
+
 	//Other Business Methods
 
 }

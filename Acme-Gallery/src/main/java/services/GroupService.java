@@ -14,7 +14,11 @@ import org.springframework.util.Assert;
 import repositories.GroupRepository;
 import security.LoginService;
 import domain.Administrator;
+import domain.Announcement;
+import domain.Comment;
 import domain.Group;
+import domain.Invitation;
+import domain.Visitor;
 
 @Service
 @Transactional
@@ -29,6 +33,21 @@ public class GroupService {
 
 	@Autowired
 	private AdministratorService	adminService;
+
+	@Autowired
+	private AnnouncementService		announcementService;
+
+	@Autowired
+	private CommentService			commentService;
+
+	@Autowired
+	private VisitorService			visitorService;
+
+	@Autowired
+	private InvitationService		invitationService;
+
+	@Autowired
+	private MuseumService			museumService;
 
 
 	// Validator --------------------------------------------------------------------------------------
@@ -47,6 +66,54 @@ public class GroupService {
 		//Beware to change this method! AnnouncementService.delete uses it!
 		//Beware to change this method! SystemConfigurationService.updateTaboo uses it!
 		return this.groupRepository.save(group);
+	}
+
+	// v1.0 - Alicia
+	public void delete(final Group group) {
+
+		Assert.notNull(group);
+		Assert.isTrue(this.groupRepository.exists(group.getId()));
+
+		//Make sure an Admin is the Actor who is trying to perform the operation
+		final Administrator administrator = this.adminService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		for (final Announcement a : group.getAnnouncements())
+			this.announcementService.delete(a);
+
+		this.announcementService.flush();
+
+		for (final Comment c : group.getComments())
+			this.commentService.delete(c);
+
+		this.commentService.flush();
+
+		group.getCreator().getCreatedGroups().remove(group);
+		this.visitorService.save(group.getCreator());
+		this.visitorService.flush();
+
+		for (final Visitor v : group.getParticipants()) {
+			v.getJoinedGroups().remove(group);
+			this.visitorService.save(v);
+			this.visitorService.flush();
+		}
+
+		for (final Invitation i : group.getInvitations())
+			this.invitationService.delete(i);
+
+		this.invitationService.flush();
+
+		group.getMuseum().getGroups().remove(group);
+		this.museumService.save(group.getMuseum());
+		this.museumService.flush();
+
+		this.groupRepository.delete(group);
+		this.flush();
+	}
+
+	// v1.0 - Alicia
+	public void flush() {
+		this.groupRepository.flush();
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------

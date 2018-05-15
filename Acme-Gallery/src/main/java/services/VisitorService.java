@@ -59,6 +59,11 @@ public class VisitorService extends ActorService {
 		return this.visitorRepositories.save(visitorToSave);
 	}
 
+	// v1.0 - Alicia
+	public void flush() {
+		this.visitorRepositories.flush();
+	}
+
 	//Other Business Methods
 
 	//v1.0 - Implemented by JA

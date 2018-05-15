@@ -109,6 +109,9 @@
 		<security:intercept-url pattern="/exhibition/visitor/listResults.do" access="hasRole('VISITOR')" /> 
 		<security:intercept-url pattern="/exhibition/visitor/search.do" access="hasRole('VISITOR')" />
 		
+		<security:intercept-url pattern="/group/administrator/listTaboo.do" access="hasRole('ADMINISTRATOR')"/>
+		<security:intercept-url pattern="/group/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
+		 
 		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 
 		
 		<security:intercept-url pattern="/highlight/display.do" access="isAnonymous()"/> 
@@ -137,7 +140,7 @@
 		<security:intercept-url pattern="/reviewer/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />
-		
+
 		<security:intercept-url pattern="/systemConfiguration/administrator/listTabooWords.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/addTabooWord.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/deleteTabooWord.do" access="hasRole('ADMINISTRATOR')" />

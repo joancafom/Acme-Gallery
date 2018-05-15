@@ -65,14 +65,21 @@ public class AnnouncementService {
 
 		announcement.getGroup().getAnnouncements().remove(announcement);
 		this.groupService.save(announcement.getGroup());
+		this.groupService.flush();
 
 		this.announcementRepository.delete(announcement);
+		this.flush();
 	}
 
 	// v1.0 - JA
 	public Collection<Announcement> findAll() {
 
 		return this.announcementRepository.findAll();
+	}
+
+	// v1.0 - Alicia
+	public void flush() {
+		this.announcementRepository.flush();
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------

@@ -26,4 +26,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 	@Query("select c from Category c where c.name = 'CATEGORY'")
 	Category findRootCategory();
 
+	// v1.0 - Alicia
+	@Query("select c from Category c where c.name != 'CATEGORY'")
+	Collection<Category> findAllExceptRoot();
+
 }

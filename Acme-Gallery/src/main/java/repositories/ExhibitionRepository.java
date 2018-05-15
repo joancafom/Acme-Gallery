@@ -46,4 +46,12 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
 	@Query("select e from Exhibition e, Room r where r.museum.id = ?1 and e member of r.exhibitions")
 	Page<Exhibition> getAllByMuseumId(int museumId, Pageable pageable);
 
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.museum.director.id = ?1")
+	Collection<Exhibition> findByDirectorId(int directorId);
+
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.museum.director.id = ?1")
+	Page<Exhibition> findByDirectorId(int directorId, Pageable pageable);
+
 }

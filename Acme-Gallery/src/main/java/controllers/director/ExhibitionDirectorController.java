@@ -16,20 +16,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import services.CategoryService;
 import services.CritiqueService;
+import services.DirectorService;
 import services.ExhibitionService;
 import services.GuideService;
 import services.HighlightService;
+import services.RoomService;
 import controllers.AbstractController;
+import domain.Category;
 import domain.Critique;
+import domain.Director;
 import domain.Exhibition;
 import domain.Guide;
 import domain.Highlight;
+import domain.Room;
 
 @Controller
 @RequestMapping("/exhibition/director")
@@ -51,8 +59,28 @@ public class ExhibitionDirectorController extends AbstractController {
 	@Autowired
 	private GuideService		guideService;
 
+	@Autowired
+	private DirectorService		directorService;
+
+	@Autowired
+	private CategoryService		categoryService;
+
+	@Autowired
+	private RoomService			roomService;
+
 
 	// Methods ----------------------------------------------------------------------------------------
+
+	// v1.0 - Alicia
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView res;
+		final Exhibition exhibition = this.exhibitionService.create();
+
+		res = this.createEditModelAndView(exhibition);
+
+		return res;
+	}
 
 	//v1.0 - Implemented by JA
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -124,4 +152,75 @@ public class ExhibitionDirectorController extends AbstractController {
 		return res;
 	}
 
+	// v1.0 - Alicia
+	@RequestMapping(value = "/listMine", method = RequestMethod.GET)
+	public ModelAndView listMine(@RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer page) {
+		ModelAndView res;
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Page<Exhibition> pageResult = this.exhibitionService.getByDirector(director, page, 5);
+		final Collection<Exhibition> exhibitions = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("exhibition/listMine");
+
+		res.addObject("exhibitions", exhibitions);
+		res.addObject("resultSize", resultSize);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public ModelAndView edit(final Exhibition prunedExhibition, final BindingResult binding) {
+		ModelAndView res = null;
+
+		final Exhibition exhibition = this.exhibitionService.reconstructSave(prunedExhibition, binding);
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(prunedExhibition);
+		else
+			try {
+				final Exhibition exhibitionS = this.exhibitionService.saveCreateAndEdit(exhibition);
+				res = new ModelAndView("redirect:/exhibition/director/display.do?exhibitionId=" + exhibitionS.getId());
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(exhibition, "exhibition.commit.error");
+			}
+
+		return res;
+
+	}
+
+	// Ancillary Methods ------------------------------------------------------------------------------
+
+	// v1.0 - Alicia
+	protected ModelAndView createEditModelAndView(final Exhibition exhibition) {
+		ModelAndView res;
+		res = this.createEditModelAndView(exhibition, null);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	private ModelAndView createEditModelAndView(final Exhibition exhibition, final String message) {
+		final ModelAndView res;
+
+		res = new ModelAndView("exhibition/edit");
+
+		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
+		final Collection<Room> rooms = this.roomService.getAvailableByPrincipal();
+
+		res.addObject("exhibition", exhibition);
+		res.addObject("categories", categories);
+		res.addObject("rooms", rooms);
+		res.addObject("message", message);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
 }

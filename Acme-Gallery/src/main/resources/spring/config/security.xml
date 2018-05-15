@@ -93,7 +93,10 @@
 		<security:intercept-url pattern="/exhibition/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/exhibition/administrator/listResults.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/exhibition/administrator/search.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/exhibition/director/create.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/display.do" access="hasRole('DIRECTOR')" />  
+		<security:intercept-url pattern="/exhibition/director/edit.do" access="hasRole('DIRECTOR')" />  
+		<security:intercept-url pattern="/exhibition/director/listMine.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/listResults.do" access="hasRole('DIRECTOR')" /> 
 		<security:intercept-url pattern="/exhibition/director/search.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/exhibition/guide/display.do" access="hasRole('GUIDE')" />  

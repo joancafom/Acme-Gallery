@@ -179,4 +179,12 @@ public class CategoryService {
 
 		return savedCategory;
 	}
+
+	// v1.0 - Alicia
+	public Collection<Category> getAllExceptRoot() {
+		final Collection<Category> res = this.categoryRepository.findAllExceptRoot();
+		Assert.notNull(res);
+
+		return res;
+	}
 }

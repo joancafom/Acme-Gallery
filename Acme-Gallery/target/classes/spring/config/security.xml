@@ -70,6 +70,8 @@
 		<security:intercept-url pattern="/critique/reviewer/display.do" access="hasRole('REVIEWER')" />
 		<security:intercept-url pattern="/critique/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/critique/visitor/display.do" access="hasRole('VISITOR')" />
+		
+		<security:intercept-url pattern="/director/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 
 		<security:intercept-url pattern="/exhibition/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/exhibition/listResults.do" access="isAnonymous()" /> 
@@ -93,6 +95,8 @@
 		<security:intercept-url pattern="/exhibition/visitor/listResults.do" access="hasRole('VISITOR')" /> 
 		<security:intercept-url pattern="/exhibition/visitor/search.do" access="hasRole('VISITOR')" />
 		
+		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 
+		
 		<security:intercept-url pattern="/highlight/display.do" access="isAnonymous()"/> 
 		<security:intercept-url pattern="/highlight/administrator/display.do" access="hasRole('ADMINISTRATOR')"/> 
 		<security:intercept-url pattern="/highlight/director/display.do" access="hasRole('DIRECTOR')"/> 
@@ -115,6 +119,8 @@
 		<security:intercept-url pattern="/museum/sponsor/list.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/museum/visitor/display.do" access="hasRole('VISITOR')" /> 
 		<security:intercept-url pattern="/museum/visitor/list.do" access="hasRole('VISITOR')" /> 
+
+		<security:intercept-url pattern="/reviewer/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />
 		

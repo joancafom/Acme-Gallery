@@ -11,22 +11,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
-import repositories.DirectorRepository;
+import repositories.ReviewerRepository;
 import security.LoginService;
-import security.UserAccount;
 import domain.Administrator;
-import domain.Director;
-import domain.Museum;
+import domain.Critique;
+import domain.Reviewer;
 import forms.ActorRegistrationForm;
 
 @Service
 @Transactional
-public class DirectorService extends ActorService {
+public class ReviewerService extends ActorService {
 
 	// Managed Repository -----------------------------------------------------------------------------
 
 	@Autowired
-	private DirectorRepository		directorRepository;
+	private ReviewerRepository		reviewerRepository;
 
 	// Supporting Services ----------------------------------------------------------------------------
 
@@ -37,53 +36,46 @@ public class DirectorService extends ActorService {
 	// CRUD Methods -----------------------------------------------------------------------------------
 
 	// v1.0 - Alicia
-	public Director create() {
-		final Director res = super.create(Director.class);
+	public Reviewer create() {
+		final Reviewer res = super.create(Reviewer.class);
 
-		res.setMuseums(new HashSet<Museum>());
+		res.setCritiques(new HashSet<Critique>());
 
 		return res;
 	}
 
 	// v1.0 - Alicia
-	public Director save(final Director director) {
-		Assert.notNull(director);
+	public Reviewer save(final Reviewer reviewer) {
+		Assert.notNull(reviewer);
 
-		return this.directorRepository.save(director);
+		return this.reviewerRepository.save(reviewer);
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------
 
-	public Director findByUserAccount(final UserAccount userAccount) {
-
-		//Safety mesurements in supermethod
-
-		return super.findByUserAccount(userAccount, Director.class);
-	}
-
 	// v1.0 - Alicia
-	public Director reconstructRegisterForm(final ActorRegistrationForm actorRegistrationForm, final BindingResult binding) {
-		final Director res = this.create();
+	public Reviewer reconstructRegisterForm(final ActorRegistrationForm actorRegistrationForm, final BindingResult binding) {
+		final Reviewer res = this.create();
 
 		return this.reconstructRegisterForm(res, actorRegistrationForm, binding);
 	}
 
 	// v1.0 - Alicia
-	public Director register(final Director director) {
-		Assert.notNull(director);
+	public Reviewer register(final Reviewer reviewer) {
+		Assert.notNull(reviewer);
 
 		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(administrator);
 
-		Assert.isTrue(director.getId() == 0);
-		Assert.notNull(director.getUserAccount());
-		Assert.notNull(director.getUserAccount().getPassword());
+		Assert.isTrue(reviewer.getId() == 0);
+		Assert.notNull(reviewer.getUserAccount());
+		Assert.notNull(reviewer.getUserAccount().getPassword());
 
 		//HashPassword
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		final String hashedPassword = encoder.encodePassword(director.getUserAccount().getPassword(), null);
-		director.getUserAccount().setPassword(hashedPassword);
+		final String hashedPassword = encoder.encodePassword(reviewer.getUserAccount().getPassword(), null);
+		reviewer.getUserAccount().setPassword(hashedPassword);
 
-		return this.save(director);
+		return this.save(reviewer);
 	}
 }

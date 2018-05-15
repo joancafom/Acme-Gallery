@@ -25,6 +25,15 @@
 <jstl:if test="${actor == 'sponsor'}">
 	<spring:message code="sponsorTitle" var="actorTitle"></spring:message>
 </jstl:if>
+<jstl:if test="${actor == 'director'}">
+	<spring:message code="directorTitle" var="actorTitle"></spring:message>
+</jstl:if>
+<jstl:if test="${actor == 'guide'}">
+	<spring:message code="guideTitle" var="actorTitle"></spring:message>
+</jstl:if>
+<jstl:if test="${actor == 'reviewer'}">
+	<spring:message code="reviewerTitle" var="actorTitle"></spring:message>
+</jstl:if>
 
 <script type="text/javascript">
 
@@ -62,7 +71,7 @@
 
 <h3><jstl:out value="${actorTitle}" /></h3>
 
-<form:form action="${actor}/register.do" modelAttribute="actorRegistrationForm">
+<form:form action="${actor}/${actorWS}register.do" modelAttribute="actorRegistrationForm">
 
 	<!-- Hidden Inputs -->
 	

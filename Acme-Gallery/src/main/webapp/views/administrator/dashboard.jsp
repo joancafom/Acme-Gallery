@@ -71,7 +71,6 @@
 <p><strong><spring:message code="ratio.acceptedSponsorships"/>:</strong> <fmt:formatNumber pattern="${numberFormat}" value="${ratioAcceptedSponsorships}" /></p>
 
 <br/>
-
 <h4><spring:message code="exhibitions10MoreSponsorhipsThanAvg"/>:</h4>
 <display:table name="exhibitions10MoreSponsorhipsThanAvg" id="exhibitionB" requestURI="administrator/dashboard.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${exhibitionsSize}">
 	<display:column titleKey="exhibition.title">
@@ -130,7 +129,7 @@
 <br/>
 
 <h4><spring:message code="groups75MoreAnnouncementsThanAvg"/>:</h4>
-<display:table name="groups75MoreAnnouncementsThanAvg" id="group" requestURI="administrator/dashboard.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="groupsSize">
+<display:table name="groups75MoreAnnouncementsThanAvg" id="group" requestURI="administrator/dashboard.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${groupsSize}">
 	<display:column titleKey="group.name" property="name"/>
 	
 	<display:column titleKey="group.creationMoment">

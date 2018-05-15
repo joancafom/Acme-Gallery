@@ -51,6 +51,13 @@ window.onload = function(){
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="director/administrator/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.director.signup" /></a></li>
+			<li><a href="guide/administrator/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.guide.signup" /></a></li>
+			<li><a href="reviewer/administrator/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.reviewer.signup" /></a></li>
+			<li ><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="master.page.logout" /></a></li>
+    	</ul>
 	</security:authorize>
 	
 	<!------------------------------ DIRECTOR ----------------------------->
@@ -64,6 +71,10 @@ window.onload = function(){
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+      		<li ><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="master.page.logout" /></a></li>
+    	</ul>
 	</security:authorize>
 	
 	<!------------------------------- GUIDE ------------------------------->
@@ -77,6 +88,10 @@ window.onload = function(){
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+      		<li ><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="master.page.logout" /></a></li>
+    	</ul>
 	</security:authorize>
 	
 	<!------------------------------ REVIEWER ----------------------------->
@@ -90,6 +105,10 @@ window.onload = function(){
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+      		<li ><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="master.page.logout" /></a></li>
+    	</ul>
 	</security:authorize>
 	
 	<!------------------------------ SPONSOR ------------------------------>
@@ -103,6 +122,10 @@ window.onload = function(){
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+      		<li ><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="master.page.logout" /></a></li>
+    	</ul>
 	</security:authorize>
 	
 	<!------------------------------ VISITOR ------------------------------>
@@ -116,6 +139,10 @@ window.onload = function(){
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+      		<li ><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="master.page.logout" /></a></li>
+    	</ul>
 	</security:authorize>
 	
 	<!-------------------------- UNAUTHENTICATED -------------------------->
@@ -133,12 +160,6 @@ window.onload = function(){
 			<li><a href="visitor/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.visitor.signup" /></a></li>
 			<li><a href="sponsor/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.sponsor.signup" /></a></li>
       		<li ><a href="security/login.do"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="master.page.login" /></a></li>
-    	</ul>
-	</security:authorize>
-	
-	<security:authorize access="isAuthenticated()">
-		<ul class="nav navbar-nav navbar-right">
-      		<li ><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="master.page.logout" /></a></li>
     	</ul>
 	</security:authorize>
   </div>

@@ -33,6 +33,7 @@
 		<value>/views/exhibition/tiles.xml</value>
 		<value>/views/highlight/tiles.xml</value>
 		<value>/views/museum/tiles.xml</value>
+		<value>/views/systemConfiguration/tiles.xml</value>
 	</util:list>
 
 </beans>

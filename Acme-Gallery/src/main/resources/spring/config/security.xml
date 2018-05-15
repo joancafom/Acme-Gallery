@@ -86,8 +86,6 @@
 		<security:intercept-url pattern="/director/reviewer/display.do" access="hasRole('REVIEWER')" />
 		<security:intercept-url pattern="/director/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/director/visitor/display.do" access="hasRole('VISITOR')" />
-		
-		
 
 		<security:intercept-url pattern="/exhibition/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/exhibition/listResults.do" access="isAnonymous()" /> 
@@ -110,7 +108,7 @@
 		<security:intercept-url pattern="/exhibition/visitor/display.do" access="hasRole('VISITOR')" /> 
 		<security:intercept-url pattern="/exhibition/visitor/listResults.do" access="hasRole('VISITOR')" /> 
 		<security:intercept-url pattern="/exhibition/visitor/search.do" access="hasRole('VISITOR')" />
-
+		
 		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 
 		
 		<security:intercept-url pattern="/highlight/display.do" access="isAnonymous()"/> 
@@ -139,6 +137,11 @@
 		<security:intercept-url pattern="/reviewer/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />
+		
+		<security:intercept-url pattern="/systemConfiguration/administrator/listTabooWords.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/systemConfiguration/administrator/addTabooWord.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/systemConfiguration/administrator/deleteTabooWord.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/systemConfiguration/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<security:intercept-url pattern="/visitor/register.do" access="isAnonymous()" />
 

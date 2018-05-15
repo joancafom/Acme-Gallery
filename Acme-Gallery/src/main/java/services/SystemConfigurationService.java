@@ -206,7 +206,7 @@ public class SystemConfigurationService {
 
 		Assert.notNull(tabooWord);
 		Assert.isTrue(!tabooWord.contains("|"));
-		Assert.isTrue(this.getTabooWords().contains("|" + tabooWord + "|"));
+		Assert.isTrue(this.getTabooWords().contains(tabooWord));
 
 		final Administrator admin = this.adminService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(admin);

@@ -4812,6 +4812,13 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="store" ref="store8" />
 	</bean>
 	
+	<!-- SystemConfiguration -->
+	
+	<bean id="systemConfiguration" class="domain.SystemConfiguration">
+		<property name="tabooWords" value="sex|sexo|viagra|cialis|porn"/>
+		<property name="VAT" value="0.21"/>
+	</bean>
+	
 	
 	<!-- Visitors -->
 

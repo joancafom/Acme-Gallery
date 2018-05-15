@@ -44,6 +44,15 @@ public class AnnouncementService {
 		return this.announcementRepository.findOne(announcementId);
 	}
 
+	//v1.0 - Implemented by JA
+	public Announcement save(final Announcement announcement) {
+
+		//Beware to modify this method! It is used by SystemConfigurationService.updateTaboo
+
+		Assert.notNull(announcement);
+		return this.announcementRepository.save(announcement);
+	}
+
 	// v1.0 - JA
 	public void delete(final Announcement announcement) {
 
@@ -96,6 +105,30 @@ public class AnnouncementService {
 		Assert.notNull(administrator);
 
 		final Page<Announcement> res = this.announcementRepository.findTabooed(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	public Collection<Announcement> findNotTabooed() {
+
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		final Collection<Announcement> res = this.announcementRepository.findNotTabooed();
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	public Page<Announcement> findNotTabooed(final int page, final int size) {
+
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		final Page<Announcement> res = this.announcementRepository.findNotTabooed(new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
 		return res;

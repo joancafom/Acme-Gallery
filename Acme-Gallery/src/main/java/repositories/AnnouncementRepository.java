@@ -22,4 +22,12 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Inte
 	@Query("select a from Announcement a where a.containsTaboo = true")
 	Page<Announcement> findTabooed(Pageable pageable);
 
+	// v1.0 - JA
+	@Query("select a from Announcement a where a.containsTaboo = false")
+	Collection<Announcement> findNotTabooed();
+
+	// v1.0 - JA
+	@Query("select a from Announcement a where a.containsTaboo = false")
+	Page<Announcement> findNotTabooed(Pageable pageable);
+
 }

@@ -1,21 +1,27 @@
 
 package controllers.administrator;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.AdministratorService;
 import services.DirectorService;
+import services.MuseumService;
 import controllers.AbstractController;
 import domain.Administrator;
 import domain.Director;
+import domain.Museum;
 import forms.ActorRegistrationForm;
 
 @Controller
@@ -32,7 +38,7 @@ public class DirectorAdministratorController extends AbstractController {
 	private DirectorService			directorService;
 
 	@Autowired
-	private MuseumService	museumService;
+	private MuseumService			museumService;
 
 
 	// v1.0 - Alicia

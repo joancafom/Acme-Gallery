@@ -16,4 +16,8 @@ public interface MuseumRepository extends JpaRepository<Museum, Integer> {
 	@Query("select m from Museum m")
 	Page<Museum> findAllPaginated(int categoryId, Pageable pageable);
 
+	/* v1.0 - josembell */
+	@Query("select m from Museum m where m.director.id=?1")
+	Page<Museum> findAllByDirector(int idPageable, Pageable pageRequest);
+
 }

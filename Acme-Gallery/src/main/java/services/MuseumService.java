@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.MuseumRepository;
+import domain.Director;
 import domain.Museum;
 
 @Service
@@ -42,6 +43,15 @@ public class MuseumService extends ActorService {
 	public Museum findOne(final int museumId) {
 
 		return this.museumRepository.findOne(museumId);
+	}
+
+	/* v1.0 - josembell */
+	public Page<Museum> findAllPaginatedByDirector(final Integer page, final int size, final Director director) {
+		Assert.notNull(director);
+		final Page<Museum> res = this.museumRepository.findAllByDirector(director.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
 	}
 
 	//Other Business Methods

@@ -31,6 +31,9 @@ public class DirectorAdministratorController extends AbstractController {
 	@Autowired
 	private DirectorService			directorService;
 
+	@Autowired
+	private MuseumService	museumService;
+
 
 	// v1.0 - Alicia
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -101,6 +104,41 @@ public class DirectorAdministratorController extends AbstractController {
 		res.addObject("actor", "director");
 		res.addObject("actorWS", this.ACTOR_WS);
 
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping("/list")
+	public ModelAndView list(@RequestParam(value = "d-3996330-p", defaultValue = "1") final Integer page) {
+		final ModelAndView res;
+
+		final Page<Director> pageResult = this.directorService.findAllPaginated(page, 5);
+		final Collection<Director> directors = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("director/list");
+		res.addObject("directors", directors);
+		res.addObject("resultSize", resultSize);
+		res.addObject("actorWS", this.ACTOR_WS);
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping("/display")
+	public ModelAndView display(@RequestParam final int directorId, @RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {
+		final ModelAndView res;
+		final Director director = this.directorService.findOne(directorId);
+		Assert.notNull(director);
+
+		final Page<Museum> pageResult = this.museumService.findAllPaginatedByDirector(page, 5, director);
+		final Collection<Museum> museums = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("director/display");
+		res.addObject("director", director);
+		res.addObject("museums", museums);
+		res.addObject("resultSize", resultSize);
+		res.addObject("actorWS", this.ACTOR_WS);
 		return res;
 	}
 

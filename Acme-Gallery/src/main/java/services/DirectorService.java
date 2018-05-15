@@ -52,6 +52,11 @@ public class DirectorService extends ActorService {
 		return this.directorRepository.save(director);
 	}
 
+	/* v1.0 - josembell */
+	public Director findOne(final int directorId) {
+		return this.directorRepository.findOne(directorId);
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	public Director findByUserAccount(final UserAccount userAccount) {
@@ -85,5 +90,13 @@ public class DirectorService extends ActorService {
 		director.getUserAccount().setPassword(hashedPassword);
 
 		return this.save(director);
+	}
+
+	/* v1.0 - josembell */
+	public Page<Director> findAllPaginated(final Integer page, final int size) {
+		final Page<Director> res = this.directorRepository.findAll(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
 	}
 }

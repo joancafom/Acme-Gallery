@@ -72,6 +72,22 @@
 		<security:intercept-url pattern="/critique/visitor/display.do" access="hasRole('VISITOR')" />
 		
 		<security:intercept-url pattern="/director/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/director/list.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/director/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/director/director/list.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/director/guide/list.do" access="hasRole('GUIDE')" />
+		<security:intercept-url pattern="/director/reviewer/list.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/director/sponsor/list.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/director/visitor/list.do" access="hasRole('VISITOR')" />
+		<security:intercept-url pattern="/director/display.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/director/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/director/director/display.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/director/guide/display.do" access="hasRole('GUIDE')" />
+		<security:intercept-url pattern="/director/reviewer/display.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/director/sponsor/display.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/director/visitor/display.do" access="hasRole('VISITOR')" />
+		
+		
 
 		<security:intercept-url pattern="/exhibition/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/exhibition/listResults.do" access="isAnonymous()" /> 
@@ -94,7 +110,7 @@
 		<security:intercept-url pattern="/exhibition/visitor/display.do" access="hasRole('VISITOR')" /> 
 		<security:intercept-url pattern="/exhibition/visitor/listResults.do" access="hasRole('VISITOR')" /> 
 		<security:intercept-url pattern="/exhibition/visitor/search.do" access="hasRole('VISITOR')" />
-		
+
 		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 
 		
 		<security:intercept-url pattern="/highlight/display.do" access="isAnonymous()"/> 

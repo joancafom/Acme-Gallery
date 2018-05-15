@@ -47,6 +47,7 @@ window.onload = function(){
 			<li ><a href="announcement/administrator/list.do"><spring:message code="master.page.list.announcement"/></a></li>
 			<li ><a href="announcement/administrator/list.do?listTabooed=true"><spring:message code="master.page.taboo.announcement"/></a></li>
 			<li ><a href="museum/administrator/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="director/administrator/list.do"><spring:message code="master.page.director.list"/></a></li>
 			<li ><a href="administrator/dashboard.do"><spring:message code="master.page.dashboard"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
@@ -68,6 +69,7 @@ window.onload = function(){
 			<li ><a href="exhibition/director/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			<li ><a href="category/director/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/director/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="director/director/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -85,6 +87,7 @@ window.onload = function(){
 			<li ><a href="exhibition/guide/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			<li ><a href="category/guide/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/guide/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="director/guide/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -102,6 +105,7 @@ window.onload = function(){
 			<li ><a href="exhibition/reviewer/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			<li ><a href="category/reviewer/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/reviewer/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="director/reviewer/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -119,6 +123,7 @@ window.onload = function(){
 			<li ><a href="exhibition/sponsor/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			<li ><a href="category/sponsor/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/sponsor/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="director/sponsor/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -136,6 +141,7 @@ window.onload = function(){
 			<li ><a href="exhibition/visitor/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			<li ><a href="category/visitor/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/visitor/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="director/visitor/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>
@@ -154,6 +160,7 @@ window.onload = function(){
 			<li ><a href="exhibition/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			<li ><a href="category/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="director/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 		</ul>
 		<ul class="nav navbar-nav navbar-right">

@@ -29,9 +29,6 @@ public class CommentService extends ActorService {
 	private AdministratorService	adminService;
 
 	@Autowired
-	private GroupService			groupService;
-
-	@Autowired
 	private VisitorService			visitorService;
 
 

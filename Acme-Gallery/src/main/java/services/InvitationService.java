@@ -27,9 +27,6 @@ public class InvitationService {
 	private AdministratorService	administratorService;
 
 	@Autowired
-	private GroupService			groupService;
-
-	@Autowired
 	private VisitorService			visitorService;
 
 

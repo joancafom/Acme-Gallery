@@ -125,7 +125,15 @@
 	
 	<br/>
 	
-	<a href="exhibition/director/addGuide.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.guides.add"/></a>
+	<form:label path="guides[0]"><spring:message code="exhibition.guides.add"/>: </form:label>
+	<form:select path="guides[0]">
+		<form:option value="0" label="---"/>
+		<jstl:forEach items="${guides}" var="g">
+			<form:option value="${g.id}" label="${g.name} ${g.surnames}"/>
+		</jstl:forEach>
+	</form:select>
+	<form:errors cssClass="error" path="guides"/>
+	
 	
 	<br/>
 	

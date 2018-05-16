@@ -273,6 +273,7 @@ public class ExhibitionService {
 			res.setCategory(oldExhibition.getCategory());
 			res.setHighlights(oldExhibition.getHighlights());
 			res.setGuides(oldExhibition.getGuides());
+			res.getGuides().addAll(prunedExhibition.getGuides());
 			res.setRoom(oldExhibition.getRoom());
 
 		}

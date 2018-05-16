@@ -233,10 +233,12 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
 		final Collection<Room> rooms = this.roomService.getAvailableByPrincipal();
+		final Collection<Guide> guides = this.guideService.getNotWorkingInExhibition(exhibition);
 
 		res.addObject("exhibition", exhibition);
 		res.addObject("categories", categories);
 		res.addObject("rooms", rooms);
+		res.addObject("guides", guides);
 		res.addObject("message", message);
 
 		res.addObject("actorWS", this.ACTOR_WS);

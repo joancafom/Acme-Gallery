@@ -17,9 +17,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<h3><spring:message code="sponsorship.exhibition"/>: <a href="exhibition/director/display.do?exhibitionId=<jstl:out value="${exhibition.id}" />"><jstl:out value="${exhibition.title}" /></a></h3>
+<h3><spring:message code="sponsorship.exhibition"/>: <a href="exhibition/${actorWS}display.do?exhibitionId=<jstl:out value="${exhibition.id}" />"><jstl:out value="${exhibition.title}" /></a></h3>
 <br>
-<display:table name="sponsorships" id="sponsorship" requestURI="sponsorship/director/list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
+<display:table name="sponsorships" id="sponsorship" requestURI="sponsorship/${actorWS}list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
 	<display:column titleKey="sponsorship.banner">
 		<a href="<jstl:out value="${sponsorship.banner}" />" target="_blank"><img src="<jstl:out value="${sponsorship.banner}" />" style="max-width: 200px;"></a>
@@ -34,7 +34,7 @@
 				<spring:message code="sponsorship.status.accepted"/>
 			</jstl:when>
 			<jstl:when test="${sponsorship.status eq 'PENDING'}">
-				<spring:message code="sponsorship.status.accepted"/>
+				<spring:message code="sponsorship.status.pending"/>
 			</jstl:when>
 			<jstl:when test="${sponsorship.status eq 'REJECTED'}">
 				<spring:message code="sponsorship.status.rejected"/>
@@ -57,4 +57,11 @@
 			<acme:dateFormat code="date.format" value="${sponsorship.endingDate}"/>
 		</jstl:if>
 	</display:column>
+	<security:authorize access="hasRole('DIRECTOR')">
+		<display:column>
+			<jstl:if test="${sponsorship.status eq 'PENDING'}">
+				<a href="sponsorship/${actorWS}edit.do?sponsorshipId=<jstl:out value="${sponsorship.id}" />"><spring:message code="sponsorship.edit"/></a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 </display:table>

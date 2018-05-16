@@ -6154,7 +6154,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 	</bean>
 	
 	<bean id="sponsorship6" class="domain.Sponsorship">
-		<property name="status" value="TIME_NEGOCIATION"/>
+		<property name="status" value="TIME_NEGOTIATION"/>
 		<property name="banner" value="https://esccronicas.files.wordpress.com/2017/07/esc-2018-portugal.jpg"/>
 		<property name="link" value="https://esccronicas.wordpress.com/2017/07/26/eurovision-vuela-de-kiev-a-lisboa-para-2018-en-los-dias-810-y-12-de-mayo/"/>
 		<property name="startingDate">

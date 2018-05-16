@@ -30,7 +30,7 @@ public class Sponsorship extends DomainEntity {
 
 
 	@NotNull
-	@Pattern(regexp = "^(ACCEPTED|PENDING|TIME_NEGOCIATION|REJECTED)$")
+	@Pattern(regexp = "^(ACCEPTED|PENDING|TIME_NEGOTIATION|REJECTED)$")
 	public String getStatus() {
 		return this.status;
 	}

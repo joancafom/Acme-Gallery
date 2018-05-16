@@ -14,10 +14,9 @@ import domain.Sponsorship;
 @Repository
 public interface SponsorshipRepository extends JpaRepository<Sponsorship, Integer> {
 
-	@Query("select s from Sponsorship s where s.exhibition.id = ?1")
+	@Query("select s from Sponsorship s where s.exhibition.id = ?1 order by s.status ASC")
 	Collection<Sponsorship> findAllByExhibitionId(final int exhibitionId);
 
-	@Query("select s from Sponsorship s where s.exhibition.id = ?1")
+	@Query("select s from Sponsorship s where s.exhibition.id = ?1 order by s.status ASC")
 	Page<Sponsorship> findAllByExhibitionId(final int exhibitionId, Pageable pageable);
-
 }

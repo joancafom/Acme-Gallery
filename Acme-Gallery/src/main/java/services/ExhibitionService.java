@@ -317,8 +317,13 @@ public class ExhibitionService {
 		final Collection<Guide> newGuides = new HashSet<Guide>();
 		newGuides.addAll(oldExhibition.getGuides());
 
-		for (final String s : exhibitionForm.getGuides())
-			newGuides.add(this.guideService.findOne(new Integer(s)));
+		for (final String s : exhibitionForm.getGuides()) {
+			final Guide g = this.guideService.findOne(new Integer(s));
+			Assert.notNull(g);
+			newGuides.add(g);
+			g.getExhibitions().add(res);
+			this.guideService.save(g);
+		}
 
 		res.setGuides(newGuides);
 

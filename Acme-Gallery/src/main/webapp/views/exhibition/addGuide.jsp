@@ -18,6 +18,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jstl:if test="${empty guides}">
+	<h4 style="color:red;"><spring:message code="exhibition.guides.empty"/></h4>
+</jstl:if>
+
+<jstl:if test="${not empty guides}">
 <form:form action="exhibition/${actorWS}addGuide.do" modelAttribute="exhibition">
 
 	<!-- Hidden Inputs -->
@@ -28,7 +33,6 @@
 	
 	<form:label path="guides"><spring:message code="exhibition.guides.add"/>: </form:label>
 	<form:select path="guides">
-		<form:option value="0" label="---"/>
 		<jstl:forEach items="${guides}" var="g">
 			<form:option value="${g.id}" label="${g.name} ${g.surnames}"/>
 		</jstl:forEach>
@@ -42,4 +46,5 @@
 	<acme:cancel url="exhibition/${actorWS}listMine.do" code="exhibition.cancel"/>
 	
 </form:form>
+</jstl:if>
 

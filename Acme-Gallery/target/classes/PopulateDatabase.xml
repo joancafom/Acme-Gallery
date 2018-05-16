@@ -2211,7 +2211,7 @@
  			</list>
  		</property>
  		<property name="isPrivate" value="false"/>
- 		<property name="price" value="28.00"/>
+ 		<property name="price" value="0.00"/>
  		
  		<property name="room" ref="room3"/>
  		<property name="dayPasses">
@@ -2260,7 +2260,7 @@
  				<value>https://www.museodelprado.es/en/whats-on/exhibition/velazquez-and-the-celebration-of-painting-the/78975c56-0137-e685-e5d1-48ea49469812</value>
  			</list>
  		</property>
- 		<property name="isPrivate" value="false"/>
+ 		<property name="isPrivate" value="true"/>
  		<property name="price" value="45.00"/>
  		
  		<property name="room" ref="room4"/>
@@ -2312,7 +2312,7 @@
  				<value>http://www.britishmuseum.org/whats_on/exhibitions/charmed_lives_in_greece.aspx</value>
  			</list>
  		</property>
- 		<property name="isPrivate" value="true"/>
+ 		<property name="isPrivate" value="false"/>
  		<property name="price" value="0.00"/>
  		
  		<property name="room" ref="room7"/>
@@ -2566,7 +2566,7 @@
  			</list>
  		</property>
  		<property name="isPrivate" value="false"/>
- 		<property name="price" value="29.99"/>
+ 		<property name="price" value="0.00"/>
  		
  		<property name="room" ref="room18"/>
  		<property name="dayPasses">

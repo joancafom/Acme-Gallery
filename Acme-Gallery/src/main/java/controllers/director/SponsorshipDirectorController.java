@@ -95,6 +95,7 @@ public class SponsorshipDirectorController extends AbstractController {
 		final Director currentDirector = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(currentDirector);
 
+		//Skipping notNull checking as the entity was retrieved from the DB
 		Assert.isTrue(currentDirector.equals(sponsorship.getExhibition().getRoom().getMuseum().getDirector()));
 		Assert.isTrue(sponsorship.getStatus().equals("PENDING"));
 
@@ -102,6 +103,7 @@ public class SponsorshipDirectorController extends AbstractController {
 
 		return res;
 	}
+
 	// v1.0 - JA
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Sponsorship prunedSponsorship, final BindingResult binding) {
@@ -109,14 +111,21 @@ public class SponsorshipDirectorController extends AbstractController {
 
 		final Sponsorship sponsorship = this.sponsorshipService.reconstructUpdateStatus(prunedSponsorship, binding);
 
-		if (binding.hasErrors())
+		//Skip checking for exhibition being null, as it was retrieved from the DB
+
+		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(prunedSponsorship);
-		else
+			res.addObject("exhibitionId", sponsorship.getExhibition().getId());
+		} else
 			try {
 				this.sponsorshipService.updateStatus(sponsorship);
 				res = new ModelAndView("redirect:list.do?exhibitionId=" + sponsorship.getExhibition().getId());
+			} catch (final IllegalStateException oops) {
+				res = this.createEditModelAndView(prunedSponsorship, "sponsorship.dates.unavailable");
+				res.addObject("exhibitionId", sponsorship.getExhibition().getId());
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(prunedSponsorship, "sponsorship.commit.error");
+				res.addObject("exhibitionId", sponsorship.getExhibition().getId());
 			}
 
 		return res;
@@ -126,12 +135,7 @@ public class SponsorshipDirectorController extends AbstractController {
 	//v1.0 - Implemented by JA
 	protected ModelAndView createEditModelAndView(final Sponsorship sponsorship) {
 
-		final ModelAndView res;
-
-		res = this.createEditModelAndView(sponsorship, null);
-
-		return res;
-
+		return this.createEditModelAndView(sponsorship, null);
 	}
 
 	//v1.0 - Implemented by JA

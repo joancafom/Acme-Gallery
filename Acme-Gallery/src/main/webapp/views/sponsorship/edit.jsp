@@ -1,5 +1,5 @@
  <%--
- * category/edit.jsp
+ * sponsorship/edit.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -19,10 +19,34 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<script type="text/javascript" src="scripts/moment-with-locales.js" charset="UTF-8"></script>
-<script type="text/javascript" src="scripts/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript">
 
-<link rel="stylesheet" href="styles/bootstrap-datetimepicker.css" type="text/css">
+	function statusChanged(){
+		
+		/* 
+			Used for hidding inputs accordingly to what is selected.
+		*/
+		
+		var selection = document.getElementById("statusSelector").value;
+		var datesDiv = document.getElementById("dates");
+		var startingDateInput = document.getElementById("startingDateInput");
+		var endingDateInput = document.getElementById("endingDateInput");
+		
+		if(selection == "TIME_NEGOTIATION")
+		{
+			datesDiv.style.display = "block";
+		}else{
+			datesDiv.style.display = "none";
+			startingDateInput.value = "";
+			endingDateInput.value = "";
+		}
+	}
+	
+	$(document).ready(function(){
+		statusChanged();
+	});
+	
+</script>
 
 <form:form action="sponsorship/${actorWS}edit.do" modelAttribute="sponsorship">
 
@@ -40,45 +64,14 @@
 	</form:select>
 	<form:errors path="status" cssClass="error" />
 	
-	<br>
-	<br>
-    <div style="max-width:200px;">
-    	<form:label path="startingDate">
-			<strong><spring:message code="sponsorship.startingDate" /></strong>
-		</form:label>	
-		<br>
-        <div class="form-group">
-        	<div class='input-group date' id='datepicker1'>
-            	<form:input path="startingDate" class="form-control"/>
-                <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-               	</span>
-           	</div>
-        </div>
-    </div>
-    
-    <spring:message code="datepicker.locale" var="datePickerLocale"/>
-    <script type="text/javascript">
-        $(function () {
-            $('#datepicker1').datetimepicker({
-            	locale: moment.locale('${datePickerLocale}'),
-            	format: 'MM/DD/YYYY',
-            	disabledDates: [
-                                moment("05/17/2018")
-                            ]
-            });
-        });
-    </script>
-    
-	<form:errors path="startingDate" cssClass="error" />
-	<br>
-	<br>
-	<jstl:if test="${sponsorship.exhibition ne null}">
-		<acme:cancel url="sponsorship/${actorWS}list.do?exhibitionId=${sponsorship.exhibition.id}" code="sponsorship.cancel"/>
-	</jstl:if>
-	<jstl:if test="${sponsorship.exhibition eq null}">
-		<acme:cancel url="exhibition/director/listMine.do" code="sponsorship.cancel"/>
-	</jstl:if>
-	
+   <br><br>
+   
+   <div id="dates">
+   		<acme:date id="startingDateInput" code="sponsorship.startingDate" path="startingDate" />
+   		<acme:date id="endingDateInput" code="sponsorship.endingDate" path="endingDate"/>
+   </div>
+   
+	<acme:cancel url="sponsorship/${actorWS}list.do?exhibitionId=${exhibitionId}" code="sponsorship.cancel"/>
 	<acme:submit name="save" code="sponsorship.save"/>
+	
 </form:form>

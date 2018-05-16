@@ -28,6 +28,7 @@ import domain.Guide;
 import domain.Highlight;
 import domain.Museum;
 import domain.Sponsorship;
+import forms.ExhibitionForm;
 
 @Service
 @Transactional
@@ -42,6 +43,9 @@ public class ExhibitionService {
 
 	@Autowired
 	private DirectorService			directorService;
+
+	@Autowired
+	private GuideService			guideService;
 
 	@Autowired
 	private RoomService				roomService;
@@ -273,7 +277,6 @@ public class ExhibitionService {
 			res.setCategory(oldExhibition.getCategory());
 			res.setHighlights(oldExhibition.getHighlights());
 			res.setGuides(oldExhibition.getGuides());
-			res.getGuides().addAll(prunedExhibition.getGuides());
 			res.setRoom(oldExhibition.getRoom());
 
 		}
@@ -282,6 +285,46 @@ public class ExhibitionService {
 
 		if (prunedExhibition.getId() == 0)
 			res.setIdentifier(prunedExhibition.getIdentifier());
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Exhibition reconstructSave(final ExhibitionForm exhibitionForm, final BindingResult binding) {
+		Assert.notNull(exhibitionForm);
+
+		final Exhibition res = this.create();
+
+		final Exhibition oldExhibition = this.findOne(exhibitionForm.getExhibition().getId());
+
+		res.setId(oldExhibition.getId());
+
+		res.setIdentifier(oldExhibition.getIdentifier());
+		res.setTitle(oldExhibition.getTitle());
+		res.setDescription(oldExhibition.getDescription());
+		res.setStartingDate(oldExhibition.getStartingDate());
+		res.setEndingDate(oldExhibition.getEndingDate());
+		res.setWebsites(oldExhibition.getWebsites());
+		res.setIsPrivate(oldExhibition.getIsPrivate());
+		res.setPrice(oldExhibition.getPrice());
+
+		res.setDayPasses(oldExhibition.getDayPasses());
+		res.setSponsorships(oldExhibition.getSponsorships());
+		res.setCritiques(oldExhibition.getCritiques());
+		res.setCategory(oldExhibition.getCategory());
+		res.setHighlights(oldExhibition.getHighlights());
+
+		final Collection<Guide> newGuides = new HashSet<Guide>();
+		newGuides.addAll(oldExhibition.getGuides());
+
+		for (final String s : exhibitionForm.getGuides())
+			newGuides.add(this.guideService.findOne(new Integer(s)));
+
+		res.setGuides(newGuides);
+
+		res.setRoom(oldExhibition.getRoom());
+
+		this.validator.validate(res, binding);
 
 		return res;
 	}

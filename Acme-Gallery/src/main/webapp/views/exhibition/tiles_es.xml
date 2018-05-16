@@ -16,6 +16,11 @@
        
 <tiles-definitions>
 
+	<definition name="exhibition/addGuide" extends="master.page">	
+		<put-attribute name="title" value="Añadir un Guía" />
+		<put-attribute name="body" value="/views/exhibition/addGuide.jsp" />
+	</definition>
+
 	<definition name="exhibition/display" extends="master.page">	
 		<put-attribute name="title" value="Exhibición" />
 		<put-attribute name="body" value="/views/exhibition/display.jsp" />

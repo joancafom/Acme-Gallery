@@ -39,6 +39,7 @@ import domain.Exhibition;
 import domain.Guide;
 import domain.Highlight;
 import domain.Room;
+import forms.ExhibitionForm;
 
 @Controller
 @RequestMapping("/exhibition/director")
@@ -97,6 +98,29 @@ public class ExhibitionDirectorController extends AbstractController {
 		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
 
 		res = this.createEditModelAndView(exhibition);
+
+		return res;
+
+	}
+
+	// v1.0 - Alicia
+	@RequestMapping(value = "/addGuide", method = RequestMethod.GET)
+	public ModelAndView addGuide(@RequestParam final int exhibitionId) {
+		final ModelAndView res;
+
+		final ExhibitionForm exhibitionForm = new ExhibitionForm();
+
+		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(exhibition);
+		Assert.notNull(director);
+
+		Assert.isTrue(director.getMuseums().contains(exhibition.getRoom().getMuseum()));
+		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
+
+		exhibitionForm.setExhibition(exhibition);
+
+		res = this.addGuideModelAndView(exhibitionForm);
 
 		return res;
 
@@ -215,12 +239,41 @@ public class ExhibitionDirectorController extends AbstractController {
 
 	}
 
+	// v1.0 - Alicia
+	@RequestMapping(value = "/addGuide", method = RequestMethod.POST, params = "save")
+	public ModelAndView addGuide(final ExhibitionForm exhibitionForm, final BindingResult binding) {
+		ModelAndView res = null;
+
+		final Exhibition exhibition = this.exhibitionService.reconstructSave(exhibitionForm, binding);
+
+		if (binding.hasErrors())
+			res = this.addGuideModelAndView(exhibitionForm);
+		else
+			try {
+				final Exhibition exhibitionS = this.exhibitionService.saveCreateAndEdit(exhibition);
+				res = new ModelAndView("redirect:/exhibition/director/display.do?exhibitionId=" + exhibitionS.getId());
+			} catch (final Throwable oops) {
+				res = this.addGuideModelAndView(exhibitionForm, "exhibition.commit.error");
+			}
+
+		return res;
+
+	}
+
 	// Ancillary Methods ------------------------------------------------------------------------------
 
 	// v1.0 - Alicia
 	protected ModelAndView createEditModelAndView(final Exhibition exhibition) {
 		ModelAndView res;
 		res = this.createEditModelAndView(exhibition, null);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	protected ModelAndView addGuideModelAndView(final ExhibitionForm exhibition) {
+		ModelAndView res;
+		res = this.addGuideModelAndView(exhibition, null);
 
 		return res;
 	}
@@ -233,11 +286,26 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
 		final Collection<Room> rooms = this.roomService.getAvailableByPrincipal();
-		final Collection<Guide> guides = this.guideService.getNotWorkingInExhibition(exhibition);
 
 		res.addObject("exhibition", exhibition);
 		res.addObject("categories", categories);
 		res.addObject("rooms", rooms);
+		res.addObject("message", message);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	private ModelAndView addGuideModelAndView(final ExhibitionForm exhibition, final String message) {
+		final ModelAndView res;
+
+		res = new ModelAndView("exhibition/addGuide");
+
+		final Collection<Guide> guides = this.guideService.getNotWorkingInExhibition(exhibition.getExhibition());
+
+		res.addObject("exhibition", exhibition);
 		res.addObject("guides", guides);
 		res.addObject("message", message);
 

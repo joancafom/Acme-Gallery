@@ -45,6 +45,12 @@
 		</jstl:if>
 	</display:column>
 	
+	<display:column>
+		<jstl:if test="${now < exhibition.startingDate}">
+			<a href="exhibition/director/addGuide.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.edit"/></a>
+		</jstl:if>
+	</display:column>
+	
 	<security:authorize access="hasRole('DIRECTOR')">
 		<display:column titleKey="exhibition.sponsorships">
 			<a href="sponsorship/director/list.do?exhibitionId=${exhibition.id}"><spring:message code="sponsorship.list"/></a>

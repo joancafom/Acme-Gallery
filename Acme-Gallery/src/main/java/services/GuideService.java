@@ -106,4 +106,14 @@ public class GuideService extends ActorService {
 		return this.save(guide);
 	}
 
+	// v1.0 - Alicia
+	public Collection<Guide> getNotWorkingInExhibition(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+
+		final Collection<Guide> res = this.guideRepository.findNotWorkingInExhibition(exhibition);
+		Assert.notNull(res);
+
+		return res;
+	}
+
 }

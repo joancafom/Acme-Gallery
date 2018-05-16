@@ -23,4 +23,8 @@ public interface GuideRepository extends JpaRepository<Guide, Integer> {
 	@Query("select g from Guide g where ?1 member of g.exhibitions")
 	Page<Guide> findAllByExhibition(Exhibition exhibition, Pageable pageable);
 
+	// v1.0 - Alicia
+	@Query("select g from Guide g where ?1 not member of g.exhibitions")
+	Collection<Guide> findNotWorkingInExhibition(Exhibition exhibition);
+
 }

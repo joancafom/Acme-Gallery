@@ -11,6 +11,7 @@
 package controllers.director;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -80,6 +81,25 @@ public class ExhibitionDirectorController extends AbstractController {
 		res = this.createEditModelAndView(exhibition);
 
 		return res;
+	}
+
+	// v1.0 - Alicia
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int exhibitionId) {
+		final ModelAndView res;
+
+		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(exhibition);
+		Assert.notNull(director);
+
+		Assert.isTrue(director.getMuseums().contains(exhibition.getRoom().getMuseum()));
+		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
+
+		res = this.createEditModelAndView(exhibition);
+
+		return res;
+
 	}
 
 	//v1.0 - Implemented by JA
@@ -175,7 +195,7 @@ public class ExhibitionDirectorController extends AbstractController {
 	}
 
 	// v1.0 - Alicia
-	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Exhibition prunedExhibition, final BindingResult binding) {
 		ModelAndView res = null;
 

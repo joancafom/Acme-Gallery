@@ -18,11 +18,35 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		checkIsPublic();
+	});
+
+	function checkIsPublic() {
+		
+		var a = document.getElementById("isPublic").checked;
+		
+		if (a) {
+			document.getElementById("price").disabled = true;
+			document.getElementById("price").value = 0;
+		} else {
+			document.getElementById("price").disabled = false;
+		}
+		
+	}
+
+</script>
+
+
 <form:form action="exhibition/${actorWS}edit.do" modelAttribute="exhibition">
 
 	<!-- Hidden Inputs -->
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+	
+	<jstl:if test="${exhibition.id eq 0}">
 	
 	<!-- Inputs -->
 	<br/>
@@ -43,13 +67,13 @@
 	<br/>
 	
 	<form:label path="isPrivate"><spring:message code="exhibition.isPrivate"/></form:label>
-	<form:radiobutton path="isPrivate" value="false"/><spring:message code="exhibition.public"/>
-	<form:radiobutton path="isPrivate" value="true"/><spring:message code="exhibition.private"/>
+	<form:radiobutton path="isPrivate" value="false" id="isPublic" onchange="checkIsPublic();"/><spring:message code="exhibition.public"/>
+	<form:radiobutton path="isPrivate" value="true" onchange="checkIsPublic();"/><spring:message code="exhibition.private"/>
 	<form:errors cssClass="error" path="isPrivate"/>
 	
 	<br/>
 	
-	<acme:textbox code="exhibition.price" path="price"/><br/>
+	<acme:textbox code="exhibition.price" path="price" id="price"/><br/>
 	
 	<br/>
 	
@@ -84,5 +108,31 @@
 	
 	<acme:submit name="save" code="exhibition.save"/>
 	<acme:cancel url="exhibition/${actorWS}listMine.do" code="exhibition.cancel"/>
+	
+	</jstl:if>
+	
+	<jstl:if test="${exhibition.id ne 0}">
+	
+	<!-- Inputs -->
+	<br/>
+	
+	<acme:textbox code="exhibition.title" path="title"/><br/>
+	<acme:textarea code="exhibition.description" path="description"/><br/>
+	
+	<br/>
+	
+	<acme:textarea code="exhibition.websites" path="websites"/><br/>
+	
+	<br/>
+	
+	<a href="exhibition/director/addGuide.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.guides.add"/></a>
+	
+	<br/>
+	
+	<acme:submit name="save" code="exhibition.save"/>
+	<acme:cancel url="exhibition/${actorWS}listMine.do" code="exhibition.cancel"/>
+	
+	</jstl:if>
+	
 </form:form>
 

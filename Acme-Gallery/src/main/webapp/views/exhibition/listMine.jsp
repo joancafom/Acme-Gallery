@@ -17,6 +17,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jsp:useBean id="now" class="java.util.Date" />
+
 <display:table name="exhibitions" id="exhibition" requestURI="exhibition/${actorWS}listMine.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
 	<display:column titleKey="exhibition.identifier" property="identifier"/>
@@ -35,6 +37,12 @@
 	
 	<display:column titleKey="exhibition.price">
 		<acme:priceFormat code="price.format" value="${exhibition.price}"/>
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${now < exhibition.startingDate}">
+			<a href="exhibition/director/edit.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.edit"/></a>
+		</jstl:if>
 	</display:column>
 	
 	<security:authorize access="hasRole('DIRECTOR')">

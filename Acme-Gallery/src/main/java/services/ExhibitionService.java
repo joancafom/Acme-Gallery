@@ -97,14 +97,13 @@ public class ExhibitionService {
 		Assert.isTrue(director.getMuseums().contains(exhibition.getRoom().getMuseum()));
 		Assert.isTrue(exhibition.getStartingDate().before(exhibition.getEndingDate()));
 		Assert.isTrue((exhibition.getIsPrivate() && exhibition.getPrice() > 0.0) || (!exhibition.getIsPrivate() && exhibition.getPrice() == 0.0));
+		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
 
 		if (exhibition.getId() == 0) {
 			exhibition.getRoom().setIsAvailable(false);
 			this.roomService.save(exhibition.getRoom());
 
 			exhibition.setIdentifier(director.getUserAccount().getUsername() + "-" + exhibition.getIdentifier());
-
-			Assert.isTrue(exhibition.getStartingDate().after(new Date()));
 		}
 
 		Assert.notNull(exhibition.getWebsites());
@@ -232,25 +231,56 @@ public class ExhibitionService {
 	public Exhibition reconstructSave(final Exhibition prunedExhibition, final BindingResult binding) {
 		Assert.notNull(prunedExhibition);
 
+		final Exhibition res = this.create();
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 
-		final Exhibition res = this.create();
+		if (prunedExhibition.getId() == 0) {
 
-		res.setIdentifier(director.getUserAccount().getUsername() + "-" + prunedExhibition.getIdentifier());
-		res.setTitle(prunedExhibition.getTitle());
-		res.setDescription(prunedExhibition.getDescription());
-		res.setStartingDate(prunedExhibition.getStartingDate());
-		res.setEndingDate(prunedExhibition.getEndingDate());
-		res.setWebsites(prunedExhibition.getWebsites());
-		res.setIsPrivate(prunedExhibition.getIsPrivate());
-		res.setPrice(prunedExhibition.getPrice());
+			res.setIdentifier(director.getUserAccount().getUsername() + "-" + prunedExhibition.getIdentifier());
+			res.setTitle(prunedExhibition.getTitle());
+			res.setDescription(prunedExhibition.getDescription());
+			res.setStartingDate(prunedExhibition.getStartingDate());
+			res.setEndingDate(prunedExhibition.getEndingDate());
+			res.setWebsites(prunedExhibition.getWebsites());
+			res.setIsPrivate(prunedExhibition.getIsPrivate());
+			res.setPrice(prunedExhibition.getPrice());
 
-		res.setCategory(prunedExhibition.getCategory());
-		res.setRoom(prunedExhibition.getRoom());
+			res.setCategory(prunedExhibition.getCategory());
+			res.setRoom(prunedExhibition.getRoom());
+
+		} else {
+
+			final Exhibition oldExhibition = this.findOne(prunedExhibition.getId());
+
+			res.setId(oldExhibition.getId());
+
+			res.setIdentifier(oldExhibition.getIdentifier());
+
+			res.setTitle(prunedExhibition.getTitle());
+			res.setDescription(prunedExhibition.getDescription());
+
+			res.setStartingDate(oldExhibition.getStartingDate());
+			res.setEndingDate(oldExhibition.getEndingDate());
+
+			res.setWebsites(prunedExhibition.getWebsites());
+
+			res.setIsPrivate(oldExhibition.getIsPrivate());
+			res.setPrice(oldExhibition.getPrice());
+
+			res.setDayPasses(oldExhibition.getDayPasses());
+			res.setSponsorships(oldExhibition.getSponsorships());
+			res.setCritiques(oldExhibition.getCritiques());
+			res.setCategory(oldExhibition.getCategory());
+			res.setHighlights(oldExhibition.getHighlights());
+			res.setGuides(oldExhibition.getGuides());
+			res.setRoom(oldExhibition.getRoom());
+
+		}
 
 		this.validator.validate(res, binding);
 
-		res.setIdentifier(prunedExhibition.getIdentifier());
+		if (prunedExhibition.getId() == 0)
+			res.setIdentifier(prunedExhibition.getIdentifier());
 
 		return res;
 	}

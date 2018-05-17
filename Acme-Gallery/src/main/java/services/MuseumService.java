@@ -134,10 +134,10 @@ public class MuseumService extends ActorService {
 		reconstructedMuseum.setEmail(prunedMuseum.getEmail());
 		reconstructedMuseum.setPhoneNumber(prunedMuseum.getPhoneNumber());
 
-		if ("".equals(prunedMuseum.getTitle()))
-			reconstructedMuseum.setTitle(null);
+		if ("".equals(prunedMuseum.getSlogan()))
+			reconstructedMuseum.setSlogan(null);
 		else
-			reconstructedMuseum.setTitle(prunedMuseum.getTitle());
+			reconstructedMuseum.setSlogan(prunedMuseum.getSlogan());
 
 		if ("".equals(prunedMuseum.getBanner()))
 			reconstructedMuseum.setBanner(null);

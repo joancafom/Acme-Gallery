@@ -31,8 +31,8 @@
 	<h2><jstl:out value="${exhibition.title}" /></h2>
 </div>
 
-<jstl:if test="${now < exhibition.startingDate}">
-	<a href="exhibition/director/delete.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.delete" /></a>
+<jstl:if test="${canBeDeleted}">
+	<h3 style="text-align:center; text-decoration:underline;"><a href="exhibition/director/delete.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.delete" /></a></h3>
 </jstl:if>
 
 <div id="eInfo" class="info container">

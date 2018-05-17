@@ -125,18 +125,6 @@
 	
 	<br/>
 	
-	<form:label path="guides[0]"><spring:message code="exhibition.guides.add"/>: </form:label>
-	<form:select path="guides[0]">
-		<form:option value="0" label="---"/>
-		<jstl:forEach items="${guides}" var="g">
-			<form:option value="${g.id}" label="${g.name} ${g.surnames}"/>
-		</jstl:forEach>
-	</form:select>
-	<form:errors cssClass="error" path="guides"/>
-	
-	
-	<br/>
-	
 	<acme:submit name="save" code="exhibition.save"/>
 	<acme:cancel url="exhibition/${actorWS}listMine.do" code="exhibition.cancel"/>
 	

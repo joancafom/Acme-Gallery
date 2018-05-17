@@ -44,11 +44,11 @@
 		<a href="museum/${actorWS}display.do?museumId=${museum.id}"><jstl:out value="${museum.name}"/></a>
 	</display:column>
 	
-	<display:column titleKey="museum.title">
-		<jstl:if test="${museum.title ne null}">
-			<jstl:out value="${museum.title}"/>
+	<display:column titleKey="museum.slogan">
+		<jstl:if test="${museum.slogan ne null}">
+			<jstl:out value="${museum.slogan}"/>
 		</jstl:if>
-		<jstl:if test="${museum.title eq null}">
+		<jstl:if test="${museum.slogan eq null}">
 			<jstl:out value="-"/>
 		</jstl:if>
 	</display:column>

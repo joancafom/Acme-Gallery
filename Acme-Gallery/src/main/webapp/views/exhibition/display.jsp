@@ -20,6 +20,8 @@
 
 <link rel="stylesheet" href="styles/museum.css" type="text/css">
 
+<jsp:useBean id="now" class="java.util.Date" />
+
 <div id="eHeader" class="title">
 	<jstl:if test="${ad ne null}">
 		<div class="advert">
@@ -28,6 +30,10 @@
 	</jstl:if>
 	<h2><jstl:out value="${exhibition.title}" /></h2>
 </div>
+
+<jstl:if test="${now < exhibition.startingDate}">
+	<a href="exhibition/director/delete.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.delete" /></a>
+</jstl:if>
 
 <div id="eInfo" class="info container">
 

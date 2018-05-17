@@ -42,6 +42,12 @@ public class ExhibitionService {
 	// Supporting Services ----------------------------------------------------------------------------
 
 	@Autowired
+	private CategoryService			categoryService;
+
+	@Autowired
+	private CritiqueService			critiqueService;
+
+	@Autowired
 	private DirectorService			directorService;
 
 	@Autowired
@@ -73,6 +79,35 @@ public class ExhibitionService {
 		exhibition.setGuides(new HashSet<Guide>());
 
 		return exhibition;
+	}
+
+	// v1.0 - Alicia
+	public void delete(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+		Assert.isTrue(this.exhibitionRepository.exists(exhibition.getId()));
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(exhibition.getRoom().getMuseum()));
+		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
+		Assert.isTrue(exhibition.getDayPasses().isEmpty());
+		Assert.isTrue(exhibition.getSponsorships().isEmpty());
+
+		for (final Critique c : exhibition.getCritiques())
+			this.critiqueService.delete(c);
+
+		exhibition.getCategory().getExhibitions().remove(exhibition);
+		this.categoryService.save(exhibition.getCategory());
+
+		for (final Guide g : exhibition.getGuides()) {
+			g.getExhibitions().remove(exhibition);
+			this.guideService.save(g);
+		}
+
+		exhibition.getRoom().getExhibitions().remove(exhibition);
+		this.roomService.save(exhibition.getRoom());
+
+		this.exhibitionRepository.delete(exhibition);
 	}
 
 	// v1.0 - JA

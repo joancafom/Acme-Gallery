@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import security.LoginService;
 import services.CategoryService;
@@ -127,6 +128,7 @@ public class ExhibitionDirectorController extends AbstractController {
 	}
 
 	//v1.0 - Implemented by JA
+	// v2.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-3619782-p", defaultValue = "1") final Integer pageH, @RequestParam(value = "d-148442-p", defaultValue = "1") final Integer pageC, @RequestParam(
 		value = "d-148442-p", defaultValue = "1") final Integer pageG) {
@@ -135,6 +137,9 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
 		Assert.notNull(exhibition);
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
 
 		//Highlights are also listed in an Exhibition Profile
 		final Page<Highlight> pageResultH = this.highlightService.findAllByExhibition(exhibition, pageH, 5);
@@ -151,6 +156,11 @@ public class ExhibitionDirectorController extends AbstractController {
 		final Collection<Guide> guides = pageResultG.getContent();
 		final Integer resultSizeG = new Long(pageResultG.getTotalElements()).intValue();
 
+		Boolean canBeDeleted = false;
+
+		if (director.getMuseums().contains(exhibition.getRoom().getMuseum()) && exhibition.getStartingDate().after(new Date()) && exhibition.getDayPasses().isEmpty() && exhibition.getSponsorships().isEmpty())
+			canBeDeleted = true;
+
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);
 		res.addObject("highlights", highlights);
@@ -159,6 +169,7 @@ public class ExhibitionDirectorController extends AbstractController {
 		res.addObject("resultSizeC", resultSizeC);
 		res.addObject("guides", guides);
 		res.addObject("resultSizeG", resultSizeG);
+		res.addObject("canBeDeleted", canBeDeleted);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;
@@ -172,6 +183,25 @@ public class ExhibitionDirectorController extends AbstractController {
 		res = new ModelAndView("exhibition/search");
 
 		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int exhibitionId, final RedirectAttributes redirectAttributes) {
+
+		final ModelAndView res;
+		res = new ModelAndView("redirect:listMine.do");
+
+		final Exhibition toDelete = this.exhibitionService.findOne(exhibitionId);
+		Assert.notNull(toDelete);
+
+		try {
+			this.exhibitionService.delete(toDelete);
+		} catch (final Throwable oops) {
+			redirectAttributes.addFlashAttribute("message", "exhibition.commit.error");
+		}
 
 		return res;
 	}

@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.CritiqueRepository;
+import security.LoginService;
 import domain.Critique;
+import domain.Director;
 import domain.Exhibition;
 
 @Service
@@ -24,12 +27,38 @@ public class CritiqueService {
 	@Autowired
 	private CritiqueRepository	critiqueRepository;
 
-
 	// Supporting Services ----------------------------------------------------------------------------
+
+	@Autowired
+	private DirectorService		directorService;
+
+	@Autowired
+	private ReviewerService		reviewerService;
+
 
 	// Validator --------------------------------------------------------------------------------------
 
 	// CRUD Methods -----------------------------------------------------------------------------------
+
+	// v1.0 - Alicia
+	public void delete(final Critique critique) {
+		Assert.notNull(critique);
+		Assert.isTrue(this.critiqueRepository.exists(critique.getId()));
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(critique.getExhibition().getRoom().getMuseum()));
+		Assert.isTrue(critique.getExhibition().getStartingDate().after(new Date()));
+		Assert.isTrue(critique.getExhibition().getDayPasses().isEmpty());
+		Assert.isTrue(critique.getExhibition().getSponsorships().isEmpty());
+
+		critique.getReviewer().getCritiques().remove(critique);
+		this.reviewerService.save(critique.getReviewer());
+
+		critique.getExhibition().getCritiques().remove(critique);
+
+		this.critiqueRepository.delete(critique);
+	}
 
 	// v1.0 - Alicia
 	public Critique findOne(final int critiqueId) {

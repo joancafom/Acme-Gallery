@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.SystemConfigurationRepository;
 import security.LoginService;
@@ -46,6 +48,10 @@ public class SystemConfigurationService {
 
 	@Autowired
 	private AnnouncementService				announcementService;
+
+	//Validator
+	@Autowired
+	private Validator						validator;
 
 
 	// CRUD Methods -----------------------------------
@@ -236,6 +242,23 @@ public class SystemConfigurationService {
 		this.updateTabooElements(tabooWords, tabooedGroups, tabooedAnnouncements, tabooedComments, tabooedReviews);
 
 		return tabooWords;
+	}
+
+	public SystemConfiguration reconstructEdit(final SystemConfiguration prunedSC, final BindingResult binding) {
+
+		Assert.notNull(prunedSC);
+		Assert.notNull(binding);
+
+		final SystemConfiguration currentSC = this.getCurrentSystemConfiguration();
+		Assert.notNull(currentSC);
+
+		final SystemConfiguration res = prunedSC;
+		res.setTabooWords(currentSC.getTabooWords());
+
+		this.validator.validate(prunedSC, binding);
+
+		return res;
+
 	}
 
 	private void updateTabooElements(final String tabooWords, final Collection<Group> groupsToUpdate, final Collection<Announcement> announcementsToUpdate, final Collection<Comment> commentsToUpdate, final Collection<Review> reviewsToUpdate) {

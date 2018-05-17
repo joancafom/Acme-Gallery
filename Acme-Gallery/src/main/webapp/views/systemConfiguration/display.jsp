@@ -18,8 +18,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-
-<display:table name="tabooWords" id="tabooWord" requestURI="systemConfiguration/administrator/listTabooWords.do" pagesize="5" class="displaytag">
+<hr>
+<h4><strong><spring:message code="systemConfiguration.VAT"/></strong>:  <jstl:out value="${VAT}" /><a href="systemConfiguration/administrator/editVat.do">  <spring:message code="systemConfiguration.VAT.edit"/></a></h4>
+<hr>
+<display:table name="tabooWords" id="tabooWord" requestURI="systemConfiguration/administrator/display.do" pagesize="5" class="displaytag">
 	<display:column titleKey="systemConfiguration.tabooWords.tabooWord" sortable="true">
 		<jstl:out value="${tabooWord}"/>
 	</display:column>
@@ -27,6 +29,5 @@
 		<a href="systemConfiguration/administrator/deleteTabooWord.do?tabooWord=${tabooWord}"><spring:message code="systemConfiguration.tabooWords.delete"/></a>
 	</display:column>
 </display:table>
-<br>
-<br>
 <a href="systemConfiguration/administrator/addTabooWord.do"><spring:message code="systemConfiguration.tabooWords.create"/></a>
+

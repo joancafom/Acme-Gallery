@@ -100,12 +100,23 @@ public class CategoryService {
 
 	// v1.0 - JA
 	public Category save(final Category category) {
+
 		Assert.notNull(category);
 
 		return this.categoryRepository.save(category);
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------
+
+	// v1.0 - JA
+	public Category findByParentAndName(final Category parentCategory, final String name) {
+
+		Assert.notNull(name);
+
+		final Category res = this.categoryRepository.findByParentAndName(parentCategory, name);
+
+		return res;
+	}
 
 	// v1.0 - Alicia
 	public Collection<Category> getChildren(final Category category) {
@@ -171,6 +182,10 @@ public class CategoryService {
 		//So does happen with exhibitions
 		Assert.notNull(category.getExhibitions());
 		Assert.isTrue(category.getExhibitions().isEmpty());
+
+		//Business Rule: Category name must be unique within the context
+		final Category foundCategory = this.findByParentAndName(category.getParentCategory(), category.getName());
+		Assert.isNull(foundCategory);
 
 		final Category savedCategory = this.save(category);
 

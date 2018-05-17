@@ -170,10 +170,11 @@
 		<security:intercept-url pattern="/store/director/display.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/store/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 
-		<security:intercept-url pattern="/systemConfiguration/administrator/listTabooWords.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/systemConfiguration/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/addTabooWord.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/deleteTabooWord.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/systemConfiguration/administrator/editVat.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<security:intercept-url pattern="/visitor/register.do" access="isAnonymous()" />
 

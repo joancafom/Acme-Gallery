@@ -18,10 +18,21 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form action="systemConfiguration/administrator/edit.do" method="get">
-	<label><spring:message code="systemConfiguration.tabooWords.tabooWord"/>: </label>
-	<input type="text" name="tabooWord" value="${tabooWord}" />
+<jstl:if test="${editTaboo}">
+	<form action="systemConfiguration/administrator/edit.do" method="get">
+		<label><spring:message code="systemConfiguration.tabooWords.tabooWord"/>: </label>
+		<input type="text" name="tabooWord" value="${tabooWord}" />
+	
+		<acme:submit name="" code="systemConfiguration.save"/>
+		<acme:cancel url="systemConfiguration/administrator/display.do" code="systemConfiguration.cancel"/>
+	</form>
+</jstl:if>
+<jstl:if test="${!editTaboo}">
+	<form:form action="systemConfiguration/administrator/edit.do" modelAttribute="systemConfiguration">
+		<acme:textbox code="systemConfiguration.VAT" path="VAT" />
+		
+		<acme:submit name="saveVAT" code="systemConfiguration.save"/>
+		<acme:cancel url="systemConfiguration/administrator/display.do" code="systemConfiguration.cancel"/>
+	</form:form>
+</jstl:if>
 
-	<acme:submit name="" code="systemConfiguration.save"/>
-	<acme:cancel url="systemConfiguration/administrator/listTabooWords.do" code="systemConfiguration.cancel"/>
-</form>

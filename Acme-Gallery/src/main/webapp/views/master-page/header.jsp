@@ -50,7 +50,7 @@ window.onload = function(){
 			<li ><a href="museum/administrator/list.do"><spring:message code="master.page.museum.list"/></a></li>
 			<li ><a href="director/administrator/list.do"><spring:message code="master.page.director.list"/></a></li>
 			<li ><a href="administrator/dashboard.do"><spring:message code="master.page.dashboard"/></a></li>
-			<li ><a href="systemConfiguration/administrator/listTabooWords.do"><spring:message code="master.page.systemConfiguration"/></a></li>
+			<li ><a href="systemConfiguration/administrator/display.do"><spring:message code="master.page.systemConfiguration"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>

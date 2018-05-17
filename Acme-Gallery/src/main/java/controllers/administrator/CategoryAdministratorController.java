@@ -127,7 +127,7 @@ public class CategoryAdministratorController extends AbstractController {
 			res = this.createEditModelAndView(prunedCategory);
 		else
 			try {
-				final Category savedCategory = this.categoryService.save(category);
+				final Category savedCategory = this.categoryService.saveCreate(category);
 				res = new ModelAndView("redirect:display.do?categoryId=" + savedCategory.getId());
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(prunedCategory, "category.commit.error");

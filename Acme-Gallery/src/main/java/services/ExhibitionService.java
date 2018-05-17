@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -14,7 +15,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
 import repositories.ExhibitionRepository;
@@ -266,15 +271,18 @@ public class ExhibitionService {
 	}
 
 	// v1.0 - Alicia
+	// v2.0 - JA (Errors)
 	public Exhibition reconstructSave(final Exhibition prunedExhibition, final BindingResult binding) {
 		Assert.notNull(prunedExhibition);
 
 		final Exhibition res = this.create();
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 
+		final String tickerPrefix = director.getUserAccount().getUsername() + "-";
+
 		if (prunedExhibition.getId() == 0) {
 
-			res.setTicker(director.getUserAccount().getUsername() + "-" + prunedExhibition.getTicker());
+			res.setTicker(tickerPrefix + prunedExhibition.getTicker());
 			res.setTitle(prunedExhibition.getTitle());
 			res.setDescription(prunedExhibition.getDescription());
 			res.setStartingDate(prunedExhibition.getStartingDate());
@@ -315,10 +323,32 @@ public class ExhibitionService {
 
 		}
 
-		this.validator.validate(res, binding);
+		//Validate the entity, with the prefix in the ticker and keep the errors in an Error object
+		final Errors allErrors = new BeanPropertyBindingResult(res, binding.getObjectName());
+		this.validator.validate(res, allErrors);
 
 		if (prunedExhibition.getId() == 0)
 			res.setTicker(prunedExhibition.getTicker());
+
+		//If it had error in the ticker field, we must remove the prefix from the ticker
+		if (allErrors.hasFieldErrors("ticker")) {
+
+			final FieldError tickerErrors = allErrors.getFieldError("ticker");
+			final List<ObjectError> errors = allErrors.getAllErrors();
+
+			//Add all errors except for the ticker
+			for (final ObjectError oe : errors)
+				if (!oe.equals(tickerErrors))
+					binding.addError(oe);
+
+			//Re-set the ticker to the original
+			res.setTicker(res.getTicker().replaceFirst(tickerPrefix, ""));
+
+			//Add the binding the error we previously had, but now the field value is restored
+			binding.rejectValue("ticker", tickerErrors.getCode(), tickerErrors.getArguments(), tickerErrors.getDefaultMessage());
+		} else
+			//If not we simply add them all
+			binding.addAllErrors(allErrors);
 
 		return res;
 	}

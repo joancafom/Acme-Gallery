@@ -30,8 +30,8 @@
 			<h3 class="messageOk"><spring:message code="museum.yours"/></h3>
 		</jstl:if>
 	</security:authorize>
-	<jstl:if test="${museum.title ne null}">
-		<p><jstl:out value="${museum.title}" /></p>
+	<jstl:if test="${museum.slogan ne null}">
+		<p><jstl:out value="${museum.slogan}" /></p>
 	</jstl:if>
 	<jstl:if test="${museum.store ne null}">
 		<p><a href="store/${actorWS}display.do?storeId=<jstl:out value="${museum.store.id}"/>"><img src="https://image.freepik.com/iconos-gratis/cesta-de-la-compra-de-diseno-a-cuadros_318-50865.jpg" style="max-width:50px;"></a></p>

@@ -15,7 +15,7 @@ import domain.Review;
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 	// v1.0 - Implemented by JA
-	@Query("select r from Review r where r.museum.id = ?1")
+	@Query("select r from Review r where r.museum.id = ?1 order by r.creationDate DESC")
 	Page<Review> findAllByMuseumId(final int museumId, Pageable pageable);
 
 	@Query("select r from Review r where r.containsTaboo = true")

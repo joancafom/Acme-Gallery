@@ -150,6 +150,7 @@ public class SponsorshipService {
 		return this.sponsorshipRepository.findAllByExhibitionId(exhibition.getId());
 	}
 
+	//v1.0 - Implemented by JA
 	public Page<Sponsorship> findAllByExhibition(final Exhibition exhibition, final Integer page, final int size) {
 
 		Assert.notNull(exhibition);
@@ -164,6 +165,13 @@ public class SponsorshipService {
 		Assert.isTrue(currentDirector.equals(exhibition.getRoom().getMuseum().getDirector()));
 
 		return this.sponsorshipRepository.findAllByExhibitionId(exhibition.getId(), new PageRequest(page - 1, size));
+	}
+
+	//v1.0 - Implemented by JA
+	public Sponsorship findCurrentByExhibition(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+
+		return this.sponsorshipRepository.findCurrentByExhibitionId(exhibition.getId());
 	}
 
 	//v1.0 - Implemented by JA

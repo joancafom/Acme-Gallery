@@ -25,10 +25,12 @@ import services.ArtworkService;
 import services.CritiqueService;
 import services.ExhibitionService;
 import services.GuideService;
+import services.SponsorshipService;
 import domain.Artwork;
 import domain.Critique;
 import domain.Exhibition;
 import domain.Guide;
+import domain.Sponsorship;
 
 @Controller
 @RequestMapping("/exhibition")
@@ -47,6 +49,9 @@ public class ExhibitionController extends AbstractController {
 
 	@Autowired
 	private GuideService		guideService;
+
+	@Autowired
+	private SponsorshipService	sponsorshipService;
 
 
 	// Methods ----------------------------------------------------------------------------------------
@@ -77,6 +82,9 @@ public class ExhibitionController extends AbstractController {
 		final Collection<Guide> guides = pageResultG.getContent();
 		final Integer resultSizeG = new Long(pageResultG.getTotalElements()).intValue();
 
+		//We must display the current sponsorship, if any
+		final Sponsorship currentSponsorship = this.sponsorshipService.findCurrentByExhibition(exhibition);
+
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);
 		res.addObject("artworks", artworks);
@@ -85,6 +93,7 @@ public class ExhibitionController extends AbstractController {
 		res.addObject("resultSizeC", resultSizeC);
 		res.addObject("guides", guides);
 		res.addObject("resultSizeG", resultSizeG);
+		res.addObject("ad", currentSponsorship);
 
 		return res;
 	}

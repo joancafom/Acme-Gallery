@@ -15,18 +15,18 @@ import domain.Artwork;
 public interface ArtworkRepository extends JpaRepository<Artwork, Integer> {
 
 	// v1.0 - JA
-	@Query("select h from Artwork h where h.exhibition.id = ?1")
+	@Query("select a from Artwork a where a.exhibition.id = ?1 order by a.isHighlight DESC")
 	Collection<Artwork> findAllByExhibitionId(int exhibitionId);
 
 	// v1.0 - JA
-	@Query("select h from Artwork h where h.exhibition.id = ?1")
+	@Query("select a from Artwork a where a.exhibition.id = ?1 order by a.isHighlight DESC")
 	Page<Artwork> findAllByExhibitionId(int exhibitionId, Pageable pageable);
 
 	// v1.0 - Alicia
-	@Query("select h from Artwork h where h.exhibition.id = ?1 and h.isFinal = true")
+	@Query("select a from Artwork a where a.exhibition.id = ?1 and a.isFinal = true order by a.isHighlight DESC")
 	Collection<Artwork> findFinalByExhibitionId(int exhibitionId);
 
 	// v1.0 - Alicia
-	@Query("select h from Artwork h where h.exhibition.id = ?1 and h.isFinal = true")
+	@Query("select a from Artwork a where a.exhibition.id = ?1 and a.isFinal = true order by a.isHighlight DESC")
 	Page<Artwork> findFinalByExhibitionId(int exhibitionId, Pageable pageable);
 }

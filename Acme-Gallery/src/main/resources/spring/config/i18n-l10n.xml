@@ -27,12 +27,12 @@
 		<value>/views/actor/messages</value>
 		<value>/views/administrator/messages</value>
 		<value>/views/announcement/messages</value>
+		<value>/views/artwork/messages</value>
 		<value>/views/category/messages</value>
 		<value>/views/critique/messages</value>
 		<value>/views/director/messages</value>
 		<value>/views/exhibition/messages</value>
 		<value>/views/group/messages</value>
-		<value>/views/artwork/messages</value>
 		<value>/views/incident/messages</value>
 		<value>/views/museum/messages</value>
 		<value>/views/product/messages</value>

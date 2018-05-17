@@ -54,7 +54,7 @@ public class ExhibitionController extends AbstractController {
 	//v1.0 - Implemented by JA
 	// v2.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-3619782-p", defaultValue = "1") final Integer pageH, @RequestParam(value = "d-148442-p", defaultValue = "1") final Integer pageC, @RequestParam(
+	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-1332818-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-3999872-p", defaultValue = "1") final Integer pageC, @RequestParam(
 		value = "d-148442-p", defaultValue = "1") final Integer pageG) {
 
 		final ModelAndView res;
@@ -63,9 +63,9 @@ public class ExhibitionController extends AbstractController {
 		Assert.notNull(exhibition);
 
 		//Artworks are also listed in an Exhibition Profile
-		final Page<Artwork> pageResultH = this.artworkService.findFinalByExhibition(exhibition, pageH, 5);
-		final Collection<Artwork> artworks = pageResultH.getContent();
-		final Integer resultSizeH = new Long(pageResultH.getTotalElements()).intValue();
+		final Page<Artwork> pageResultA = this.artworkService.findFinalByExhibition(exhibition, pageA, 5);
+		final Collection<Artwork> artworks = pageResultA.getContent();
+		final Integer resultSizeA = new Long(pageResultA.getTotalElements()).intValue();
 
 		//Critiques are also listed in an Exhibition Profile
 		final Page<Critique> pageResultC = this.critiqueService.findAllByExhibition(exhibition, pageC, 5);
@@ -80,7 +80,7 @@ public class ExhibitionController extends AbstractController {
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);
 		res.addObject("artworks", artworks);
-		res.addObject("resultSizeH", resultSizeH);
+		res.addObject("resultSizeA", resultSizeA);
 		res.addObject("critiques", critiques);
 		res.addObject("resultSizeC", resultSizeC);
 		res.addObject("guides", guides);

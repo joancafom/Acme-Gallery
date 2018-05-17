@@ -13,9 +13,11 @@ package controllers.director;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,6 +57,17 @@ public class MuseumDirectorController extends AbstractController {
 
 	// Methods ----------------------------------------------------------------------------------------
 
+	// v1.0 - JA
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView res;
+
+		final Museum museum = this.museumService.create();
+
+		res = this.createEditModelAndView(museum);
+		return res;
+	}
+
 	//v1.0 - Implemented by JA
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int museumId, @RequestParam(value = "d-447218-p", defaultValue = "1") final Integer pageR, @RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer pageE) {
@@ -89,6 +102,28 @@ public class MuseumDirectorController extends AbstractController {
 		return res;
 	}
 
+	// v1.0 - JA
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(final Museum prunedMuseum, final BindingResult binding) {
+		ModelAndView res = null;
+
+		final Museum museum = this.museumService.reconstructEdit(prunedMuseum, binding);
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(prunedMuseum);
+		else
+			try {
+				final Museum savedMuseum = this.museumService.saveCreate(museum);
+				res = new ModelAndView("redirect:display.do?museumId=" + savedMuseum.getId());
+			} catch (final DataIntegrityViolationException oops) {
+				res = this.createEditModelAndView(prunedMuseum, "museum.identifier.error");
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(prunedMuseum, "museum.commit.error");
+			}
+
+		return res;
+	}
+
 	// v1.0 - Alicia
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listResults(@RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {
@@ -103,6 +138,52 @@ public class MuseumDirectorController extends AbstractController {
 		res.addObject("museums", museums);
 		res.addObject("resultSize", resultSize);
 
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	@RequestMapping(value = "/listMine", method = RequestMethod.GET)
+	public ModelAndView listMine(@RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {
+		ModelAndView res;
+
+		final Director currentDirector = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentDirector);
+
+		final Page<Museum> pageResult = this.museumService.findAllPaginatedByDirector(page, 5, currentDirector);
+		final Collection<Museum> museums = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("museum/list");
+
+		res.addObject("museums", museums);
+		res.addObject("resultSize", resultSize);
+		res.addObject("own", true);
+		res.addObject("landing", "listMine");
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	//Ancillary Methods
+
+	//v1.0 - Implemented by JA
+	protected ModelAndView createEditModelAndView(final Museum museum) {
+
+		return this.createEditModelAndView(museum, null);
+	}
+
+	//v1.0 - Implemented by JA
+	protected ModelAndView createEditModelAndView(final Museum museum, final String message) {
+
+		final ModelAndView res;
+
+		Assert.notNull(museum);
+
+		res = new ModelAndView("museum/edit");
+		res.addObject("museum", museum);
+		res.addObject("message", message);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

@@ -83,7 +83,7 @@ public class CategoryAdministratorController extends AbstractController {
 
 	// v1.0 - JA
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int parentCategoryId) {
+	public ModelAndView create(@RequestParam final int parentCategoryId) {
 		final ModelAndView res;
 
 		final Category parentCategory = this.categoryService.findOne(parentCategoryId);

@@ -130,8 +130,11 @@
 		<security:intercept-url pattern="/museum/list.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/museum/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/museum/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/museum/director/create.do" access="hasRole('DIRECTOR')" /> 
 		<security:intercept-url pattern="/museum/director/display.do" access="hasRole('DIRECTOR')" /> 
+		<security:intercept-url pattern="/museum/director/edit.do" access="hasRole('DIRECTOR')" /> 
 		<security:intercept-url pattern="/museum/director/list.do" access="hasRole('DIRECTOR')" /> 
+		<security:intercept-url pattern="/museum/director/listMine.do" access="hasRole('DIRECTOR')" /> 
 		<security:intercept-url pattern="/museum/guide/display.do" access="hasRole('GUIDE')" /> 
 		<security:intercept-url pattern="/museum/guide/list.do" access="hasRole('GUIDE')" /> 
 		<security:intercept-url pattern="/museum/reviewer/display.do" access="hasRole('REVIEWER')" /> 

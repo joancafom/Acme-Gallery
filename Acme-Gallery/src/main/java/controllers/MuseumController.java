@@ -76,7 +76,7 @@ public class MuseumController extends AbstractController {
 		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
 
 		res = new ModelAndView("museum/list");
-
+		res.addObject("landing", "list");
 		res.addObject("museums", museums);
 		res.addObject("resultSize", resultSize);
 

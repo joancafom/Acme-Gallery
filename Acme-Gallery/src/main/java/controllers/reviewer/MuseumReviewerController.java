@@ -92,7 +92,7 @@ public class MuseumReviewerController extends AbstractController {
 
 		res.addObject("museums", museums);
 		res.addObject("resultSize", resultSize);
-
+		res.addObject("landing", "list");
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

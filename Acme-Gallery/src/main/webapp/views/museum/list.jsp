@@ -18,7 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="museums" id="museum" requestURI="museum/${actorWS}list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
+<display:table name="museums" id="museum" requestURI="museum/${actorWS}${landing}.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
 	<display:column titleKey="museum.identifier" property="identifier"/>
 	
@@ -43,3 +43,9 @@
 	<display:column titleKey="museum.email" property="email"/>
 
 </display:table>
+
+<security:authorize access="hasRole('DIRECTOR')">
+	<jstl:if test="${own}">
+		<a href="museum/director/create.do"><spring:message code="museum.create" /></a>
+	</jstl:if>
+</security:authorize>

@@ -6081,7 +6081,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
  		</property>
  		<property name="endingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-  				<constructor-arg value="13/07/2018 09:00" /> 
+  				<constructor-arg value="20/05/2018 09:00" /> 
   			</bean>
  		</property>
  		<property name="sponsor" ref="sponsor1"/>
@@ -6095,12 +6095,12 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="link" value="http://www.tinleyparkamphitheater.com/events/lana-del-rey/#.WvlgRvmF6t8"/>
 		<property name="startingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-  				<constructor-arg value="13/05/2018 20:00" /> 
+  				<constructor-arg value="22/05/2018 20:00" /> 
   			</bean>
  		</property>
  		<property name="endingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-  				<constructor-arg value="12/07/2018 20:00" /> 
+  				<constructor-arg value="10/06/2018 20:00" /> 
   			</bean>
  		</property>
  		<property name="sponsor" ref="sponsor1"/>
@@ -6114,12 +6114,12 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="link" value="https://taylorswift.com/"/>
 		<property name="startingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-  				<constructor-arg value="13/05/2018 00:00" /> 
+  				<constructor-arg value="15/06/2018 00:00" /> 
   			</bean>
  		</property>
  		<property name="endingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-  				<constructor-arg value="12/07/2018 00:00" /> 
+  				<constructor-arg value="30/06/2018 00:00" /> 
   			</bean>
  		</property>
  		<property name="sponsor" ref="sponsor1"/>
@@ -6186,12 +6186,12 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="link" value="https://www.youtube.com/watch?v=e-ORhEE9VVg"/>
 		<property name="startingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-  				<constructor-arg value="20/05/2018 00:00" /> 
+  				<constructor-arg value="01/07/2018 00:00" /> 
   			</bean>
  		</property>
  		<property name="endingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-  				<constructor-arg value="20/06/2018 00:00" /> 
+  				<constructor-arg value="11/07/2018 00:00" /> 
   			</bean>
  		</property>
  		<property name="sponsor" ref="sponsor2"/>

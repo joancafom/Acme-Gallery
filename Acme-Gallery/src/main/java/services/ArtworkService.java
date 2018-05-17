@@ -58,4 +58,24 @@ public class ArtworkService {
 		return res;
 	}
 
+	// v1.0 - Alicia
+	public Collection<Artwork> findFinalByExhibition(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+
+		final Collection<Artwork> res = this.artworkRepository.findFinalByExhibitionId(exhibition.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Page<Artwork> findFinalByExhibition(final Exhibition exhibition, final int page, final int size) {
+		Assert.notNull(exhibition);
+
+		final Page<Artwork> res = this.artworkRepository.findFinalByExhibitionId(exhibition.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
 }

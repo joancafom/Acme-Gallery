@@ -43,7 +43,6 @@ public class ArtworkGuideController extends AbstractController {
 
 		final Artwork artwork = this.artworkService.findOne(artworkId);
 		Assert.notNull(artwork);
-		Assert.isTrue(artwork.getIsFinal());
 
 		res = new ModelAndView("artwork/display");
 

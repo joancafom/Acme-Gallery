@@ -55,6 +55,7 @@ public class ExhibitionVisitorController extends AbstractController {
 	// Methods ----------------------------------------------------------------------------------------
 
 	//v1.0 - Implemented by JA
+	// v2.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-3619782-p", defaultValue = "1") final Integer pageH, @RequestParam(value = "d-148442-p", defaultValue = "1") final Integer pageC, @RequestParam(
 		value = "d-148442-p", defaultValue = "1") final Integer pageG) {
@@ -65,7 +66,7 @@ public class ExhibitionVisitorController extends AbstractController {
 		Assert.notNull(exhibition);
 
 		//Artworks are also listed in an Exhibition Profile
-		final Page<Artwork> pageResultH = this.artworkService.findAllByExhibition(exhibition, pageH, 5);
+		final Page<Artwork> pageResultH = this.artworkService.findFinalByExhibition(exhibition, pageH, 5);
 		final Collection<Artwork> artworks = pageResultH.getContent();
 		final Integer resultSizeH = new Long(pageResultH.getTotalElements()).intValue();
 

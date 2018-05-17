@@ -52,7 +52,7 @@
 		<jstl:if test="${exhibition.isPrivate}">
 			<p><spring:message code="exhibition.price"/>: <fmt:formatNumber type="currency" currencySymbol="&#8364;" pattern="${priceFormat}" value="${exhibition.price}" /></p>
 		</jstl:if>
-		<p><spring:message code="exhibition.identifier"/>: <em><jstl:out value="${exhibition.identifier}"/></em></p>
+		<p><spring:message code="exhibition.ticker"/>: <em><jstl:out value="${exhibition.ticker}"/></em></p>
 		<p><spring:message code="exhibition.websites"/>:</p>
 		<jstl:forEach items="${exhibition.websites}" var="link">
 			<a href="<jstl:out value="${link}" />" target="_blank"><jstl:out value="${link}" /></a> 

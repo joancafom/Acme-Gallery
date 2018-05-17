@@ -21,7 +21,7 @@
 
 <display:table name="exhibitions" id="exhibition" requestURI="exhibition/${actorWS}listResults.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
-	<display:column titleKey="exhibition.identifier" property="identifier"/>
+	<display:column titleKey="exhibition.ticker" property="ticker"/>
 	
 	<display:column titleKey="exhibition.title">
 		<a href="exhibition/${actorWS}display.do?exhibitionId=${exhibition.id}"><jstl:out value="${exhibition.title}"/></a>

@@ -51,7 +51,7 @@
 	<!-- Inputs -->
 	<br/>
 	
-	<acme:textbox code="exhibition.identifier" path="identifier"/><br/>
+	<acme:textbox code="exhibition.ticker" path="ticker"/><br/>
 	<acme:textbox code="exhibition.title" path="title"/><br/>
 	<acme:textarea code="exhibition.description" path="description"/><br/>
 	

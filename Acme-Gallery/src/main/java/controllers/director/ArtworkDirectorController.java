@@ -26,7 +26,7 @@ import domain.Artwork;
 @RequestMapping("/artwork/director")
 public class ArtworkDirectorController extends AbstractController {
 
-	private final String		ACTOR_WS	= "director/";
+	private final String	ACTOR_WS	= "director/";
 
 	// Supporting Services ----------------------------------------------------------------------------
 
@@ -43,7 +43,6 @@ public class ArtworkDirectorController extends AbstractController {
 
 		final Artwork artwork = this.artworkService.findOne(artworkId);
 		Assert.notNull(artwork);
-		Assert.isTrue(artwork.getIsFinal());
 
 		res = new ModelAndView("artwork/display");
 

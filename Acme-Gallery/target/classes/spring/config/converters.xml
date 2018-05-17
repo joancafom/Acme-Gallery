@@ -62,8 +62,8 @@
 		<bean class="converters.GuideToStringConverter"/>
 		<bean class="converters.StringToGuideConverter"/>
 		
-		<bean class="converters.HighlightToStringConverter"/>
-		<bean class="converters.StringToHighlightConverter"/>
+		<bean class="converters.ArtworkToStringConverter"/>
+		<bean class="converters.StringToArtworkConverter"/>
 		
 		<bean class="converters.IncidentToStringConverter"/>
 		<bean class="converters.StringToIncidentConverter"/>
@@ -80,8 +80,8 @@
 		<bean class="converters.ReviewToStringConverter"/>
 		<bean class="converters.StringToReviewConverter"/>
 		
-		<bean class="converters.ReviewerToStringConverter"/>
-		<bean class="converters.StringToReviewerConverter"/>
+		<bean class="converters.CriticToStringConverter"/>
+		<bean class="converters.StringToCriticConverter"/>
 		
 		<bean class="converters.RoomToStringConverter"/>
 		<bean class="converters.StringToRoomConverter"/>

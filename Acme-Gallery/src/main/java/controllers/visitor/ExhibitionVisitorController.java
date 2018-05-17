@@ -21,15 +21,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ArtworkService;
 import services.CritiqueService;
 import services.ExhibitionService;
 import services.GuideService;
-import services.HighlightService;
 import controllers.AbstractController;
+import domain.Artwork;
 import domain.Critique;
 import domain.Exhibition;
 import domain.Guide;
-import domain.Highlight;
 
 @Controller
 @RequestMapping("/exhibition/visitor")
@@ -43,7 +43,7 @@ public class ExhibitionVisitorController extends AbstractController {
 	private ExhibitionService	exhibitionService;
 
 	@Autowired
-	private HighlightService	highlightService;
+	private ArtworkService		artworkService;
 
 	@Autowired
 	private CritiqueService		critiqueService;
@@ -64,9 +64,9 @@ public class ExhibitionVisitorController extends AbstractController {
 		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
 		Assert.notNull(exhibition);
 
-		//Highlights are also listed in an Exhibition Profile
-		final Page<Highlight> pageResultH = this.highlightService.findAllByExhibition(exhibition, pageH, 5);
-		final Collection<Highlight> highlights = pageResultH.getContent();
+		//Artworks are also listed in an Exhibition Profile
+		final Page<Artwork> pageResultH = this.artworkService.findAllByExhibition(exhibition, pageH, 5);
+		final Collection<Artwork> artworks = pageResultH.getContent();
 		final Integer resultSizeH = new Long(pageResultH.getTotalElements()).intValue();
 
 		//Critiques are also listed in an Exhibition Profile
@@ -81,7 +81,7 @@ public class ExhibitionVisitorController extends AbstractController {
 
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);
-		res.addObject("highlights", highlights);
+		res.addObject("artworks", artworks);
 		res.addObject("resultSizeH", resultSizeH);
 		res.addObject("critiques", critiques);
 		res.addObject("resultSizeC", resultSizeC);

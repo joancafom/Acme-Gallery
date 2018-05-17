@@ -106,8 +106,8 @@
 
 <br/>
 
-<p><strong><spring:message code="avg.highlightsPerExhibition"/>:</strong> <fmt:formatNumber pattern="${numberFormat}" value="${avgHighlightsPerExhibition}" /></p>
-<p><strong><spring:message code="std.highlightsPerExhibition"/>:</strong> <fmt:formatNumber pattern="${numberFormat}" value="${stdHighlightsPerExhibition}" /></p>
+<p><strong><spring:message code="avg.artworksPerExhibition"/>:</strong> <fmt:formatNumber pattern="${numberFormat}" value="${avgArtworksPerExhibition}" /></p>
+<p><strong><spring:message code="std.artworksPerExhibition"/>:</strong> <fmt:formatNumber pattern="${numberFormat}" value="${stdArtworksPerExhibition}" /></p>
 
 <br/>
 

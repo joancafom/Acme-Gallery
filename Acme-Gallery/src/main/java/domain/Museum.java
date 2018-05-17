@@ -33,7 +33,7 @@ public class Museum extends DomainEntity {
 	private GPSCoordinates	coordinates;
 	private String			email;
 	private String			phoneNumber;
-	private String			title;
+	private String			slogan;
 	private String			identifier;
 	private String			banner;
 	private Double			price;
@@ -70,8 +70,8 @@ public class Museum extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getTitle() {
-		return this.title;
+	public String getSlogan() {
+		return this.slogan;
 	}
 
 	@NotBlank
@@ -113,8 +113,8 @@ public class Museum extends DomainEntity {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public void setTitle(final String title) {
-		this.title = title;
+	public void setSlogan(final String slogan) {
+		this.slogan = slogan;
 	}
 
 	public void setIdentifier(final String identifier) {

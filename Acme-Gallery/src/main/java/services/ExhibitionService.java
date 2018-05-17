@@ -19,13 +19,13 @@ import org.springframework.validation.Validator;
 
 import repositories.ExhibitionRepository;
 import security.LoginService;
+import domain.Artwork;
 import domain.Category;
 import domain.Critique;
 import domain.DayPass;
 import domain.Director;
 import domain.Exhibition;
 import domain.Guide;
-import domain.Highlight;
 import domain.Museum;
 import domain.Sponsorship;
 import forms.ExhibitionForm;
@@ -75,7 +75,7 @@ public class ExhibitionService {
 		exhibition.setSponsorships(new HashSet<Sponsorship>());
 		exhibition.setCritiques(new HashSet<Critique>());
 
-		exhibition.setHighlights(new HashSet<Highlight>());
+		exhibition.setArtworks(new HashSet<Artwork>());
 		exhibition.setGuides(new HashSet<Guide>());
 
 		return exhibition;
@@ -142,7 +142,7 @@ public class ExhibitionService {
 			exhibition.getRoom().setIsAvailable(false);
 			this.roomService.save(exhibition.getRoom());
 
-			exhibition.setIdentifier(director.getUserAccount().getUsername() + "-" + exhibition.getIdentifier());
+			exhibition.setTicker(director.getUserAccount().getUsername() + "-" + exhibition.getTicker());
 		}
 
 		Assert.notNull(exhibition.getWebsites());
@@ -157,7 +157,6 @@ public class ExhibitionService {
 
 		return this.exhibitionRepository.save(exhibition);
 	}
-
 	// v1.0 - JA
 	public void flush() {
 
@@ -275,7 +274,7 @@ public class ExhibitionService {
 
 		if (prunedExhibition.getId() == 0) {
 
-			res.setIdentifier(director.getUserAccount().getUsername() + "-" + prunedExhibition.getIdentifier());
+			res.setTicker(director.getUserAccount().getUsername() + "-" + prunedExhibition.getTicker());
 			res.setTitle(prunedExhibition.getTitle());
 			res.setDescription(prunedExhibition.getDescription());
 			res.setStartingDate(prunedExhibition.getStartingDate());
@@ -293,7 +292,7 @@ public class ExhibitionService {
 
 			res.setId(oldExhibition.getId());
 
-			res.setIdentifier(oldExhibition.getIdentifier());
+			res.setTicker(oldExhibition.getTicker());
 
 			res.setTitle(prunedExhibition.getTitle());
 			res.setDescription(prunedExhibition.getDescription());
@@ -310,7 +309,7 @@ public class ExhibitionService {
 			res.setSponsorships(oldExhibition.getSponsorships());
 			res.setCritiques(oldExhibition.getCritiques());
 			res.setCategory(oldExhibition.getCategory());
-			res.setHighlights(oldExhibition.getHighlights());
+			res.setArtworks(oldExhibition.getArtworks());
 			res.setGuides(oldExhibition.getGuides());
 			res.setRoom(oldExhibition.getRoom());
 
@@ -319,7 +318,7 @@ public class ExhibitionService {
 		this.validator.validate(res, binding);
 
 		if (prunedExhibition.getId() == 0)
-			res.setIdentifier(prunedExhibition.getIdentifier());
+			res.setTicker(prunedExhibition.getTicker());
 
 		return res;
 	}
@@ -334,7 +333,7 @@ public class ExhibitionService {
 
 		res.setId(oldExhibition.getId());
 
-		res.setIdentifier(oldExhibition.getIdentifier());
+		res.setTicker(oldExhibition.getTicker());
 		res.setTitle(oldExhibition.getTitle());
 		res.setDescription(oldExhibition.getDescription());
 		res.setStartingDate(oldExhibition.getStartingDate());
@@ -347,7 +346,7 @@ public class ExhibitionService {
 		res.setSponsorships(oldExhibition.getSponsorships());
 		res.setCritiques(oldExhibition.getCritiques());
 		res.setCategory(oldExhibition.getCategory());
-		res.setHighlights(oldExhibition.getHighlights());
+		res.setArtworks(oldExhibition.getArtworks());
 
 		final Collection<Guide> newGuides = new HashSet<Guide>();
 		newGuides.addAll(oldExhibition.getGuides());

@@ -114,52 +114,52 @@
 	</bean>
 
 	<bean id="userAccount7" class="security.UserAccount">
-		<property name="username" value="reviewer1" />
+		<property name="username" value="critic1" />
 		<property name="password" value="6ce19528a40dde9521d97cf7ba264eca" />
 		<property name="isLocked" value="false"/>
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="REVIEWER" />
+					<property name="authority" value="CRITIC" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount8" class="security.UserAccount">
-		<property name="username" value="reviewer2" />
+		<property name="username" value="critic2" />
 		<property name="password" value="2693b57f0f59df94caacefb811e99851" />
 		<property name="isLocked" value="false"/>
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="REVIEWER" />
+					<property name="authority" value="CRITIC" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount9" class="security.UserAccount">
-		<property name="username" value="reviewer3" />
+		<property name="username" value="critic3" />
 		<property name="password" value="315d31e7c8f3a136610aafa220d689be" />
 		<property name="isLocked" value="false"/>
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="REVIEWER" />
+					<property name="authority" value="CRITIC" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount10" class="security.UserAccount">
-		<property name="username" value="reviewer4" />
+		<property name="username" value="critic4" />
 		<property name="password" value="5293e8663cbb7c157ff83eeae25177d3" />
 		<property name="isLocked" value="false"/>
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="REVIEWER" />
+					<property name="authority" value="CRITIC" />
 				</bean>
 			</list>
 		</property>
@@ -426,26 +426,26 @@
 	</bean>
 	
 	<bean id="userAccount31" class="security.UserAccount">
-		<property name="username" value="reviewer5" />
+		<property name="username" value="critic5" />
 		<property name="password" value="86045e9e3b2e615d8d2484dc64b3f408" />
 		<property name="isLocked" value="false"/>
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="REVIEWER" />
+					<property name="authority" value="CRITIC" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount32" class="security.UserAccount">
-		<property name="username" value="reviewer6" />
+		<property name="username" value="critic6" />
 		<property name="password" value="8c14745274135379448d482d5773ee31" />
 		<property name="isLocked" value="false"/>
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="REVIEWER" />
+					<property name="authority" value="CRITIC" />
 				</bean>
 			</list>
 		</property>
@@ -1279,7 +1279,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="critic" ref="critic1"/>
  		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -1293,7 +1293,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer2"/>
+ 		<property name="critic" ref="critic2"/>
  		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -1307,7 +1307,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer3"/>
+ 		<property name="critic" ref="critic3"/>
  		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -1321,7 +1321,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer4"/>
+ 		<property name="critic" ref="critic4"/>
  		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -1335,7 +1335,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer5"/>
+ 		<property name="critic" ref="critic5"/>
  		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -1349,7 +1349,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer6"/>
+ 		<property name="critic" ref="critic6"/>
  		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -1363,7 +1363,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="critic" ref="critic1"/>
  		<property name="exhibition" ref="exhibition2"/>
 	</bean>
 	
@@ -1377,7 +1377,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="critic" ref="critic1"/>
  		<property name="exhibition" ref="exhibition6"/>
 	</bean>
 	
@@ -1391,7 +1391,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer2"/>
+ 		<property name="critic" ref="critic2"/>
  		<property name="exhibition" ref="exhibition6"/>
 	</bean>
 	
@@ -1405,7 +1405,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="critic" ref="critic1"/>
  		<property name="exhibition" ref="exhibition7"/>
 	</bean>
 	
@@ -1419,7 +1419,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer4"/>
+ 		<property name="critic" ref="critic4"/>
  		<property name="exhibition" ref="exhibition7"/>
 	</bean>
 	
@@ -1433,7 +1433,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="critic" ref="critic1"/>
  		<property name="exhibition" ref="exhibition8"/>
 	</bean>
 	
@@ -1447,7 +1447,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer1"/>
+ 		<property name="critic" ref="critic1"/>
  		<property name="exhibition" ref="exhibition9"/>
 	</bean>
 	
@@ -1461,7 +1461,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer5"/>
+ 		<property name="critic" ref="critic5"/>
  		<property name="exhibition" ref="exhibition10"/>
 	</bean>
 	
@@ -1475,7 +1475,7 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer6"/>
+ 		<property name="critic" ref="critic6"/>
  		<property name="exhibition" ref="exhibition12"/>
 	</bean>
 	
@@ -1489,14 +1489,14 @@
   			</bean>
  		</property>
  		
- 		<property name="reviewer" ref="reviewer5"/>
+ 		<property name="critic" ref="critic5"/>
  		<property name="exhibition" ref="exhibition8"/>
 	</bean>
 	
 	<!-- DayPasses -->
 	
 	<bean id="dayPass1" class="domain.DayPass">
-		<property name="identifier" value="MDP-visitor1-0001"/>
+		<property name="ticker" value="MDP-visitor1-0001"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="05/05/2018 23:51" /> 
@@ -1509,6 +1509,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="68.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum1"/>
@@ -1516,7 +1517,7 @@
 	</bean>
 	
 	<bean id="dayPass2" class="domain.DayPass">
-		<property name="identifier" value="MDP-visitor1-0002"/>
+		<property name="ticker" value="MDP-visitor1-0002"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="08/02/2018 16:45" /> 
@@ -1529,6 +1530,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="85.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum1"/>
@@ -1536,7 +1538,7 @@
 	</bean>
 	
 	<bean id="dayPass3" class="domain.DayPass">
-		<property name="identifier" value="TBM-visitor1-0003"/>
+		<property name="ticker" value="TBM-visitor1-0003"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="28/01/2018 13:55" /> 
@@ -1549,13 +1551,14 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="80.00"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum2"/>
 	</bean>
 	
 	<bean id="dayPass4" class="domain.DayPass">
-		<property name="identifier" value="TVM-visitor1-0003"/>
+		<property name="ticker" value="TVM-visitor1-0003"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="24/12/2017 21:23" /> 
@@ -1568,6 +1571,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="88.59"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum4"/>
@@ -1575,7 +1579,7 @@
 	</bean>
 	
 	<bean id="dayPass5" class="domain.DayPass">
-		<property name="identifier" value="EGEC-visitor1-0004"/>
+		<property name="ticker" value="EGEC-visitor1-0004"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="02/03/2018 21:29" /> 
@@ -1588,6 +1592,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="35.55"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum11"/>
@@ -1595,7 +1600,7 @@
 	</bean>
 	
 	<bean id="dayPass6" class="domain.DayPass">
-		<property name="identifier" value="MDP-visitor2-0001"/>
+		<property name="ticker" value="MDP-visitor2-0001"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="09/02/2018 08:21" /> 
@@ -1608,6 +1613,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard2"/>
  		<property name="price" value="68.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor2"/>
  		<property name="museum" ref="museum1"/>
@@ -1615,7 +1621,7 @@
 	</bean>
 	
 	<bean id="dayPass7" class="domain.DayPass">
-		<property name="identifier" value="TBM-visitor2-0002"/>
+		<property name="ticker" value="TBM-visitor2-0002"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="30/01/2018 10:58" /> 
@@ -1628,13 +1634,14 @@
  		</property>
  		<property name="creditCard" ref="creditCard2"/>
  		<property name="price" value="80.00"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor2"/>
  		<property name="museum" ref="museum2"/>
 	</bean>
 	
 	<bean id="dayPass8" class="domain.DayPass">
-		<property name="identifier" value="TL-visitor2-0003"/>
+		<property name="ticker" value="TL-visitor2-0003"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="13/04/2018 12:40" /> 
@@ -1647,13 +1654,14 @@
  		</property>
  		<property name="creditCard" ref="creditCard2"/>
  		<property name="price" value="67.90"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor2"/>
  		<property name="museum" ref="museum5"/>
 	</bean>
 	
 	<bean id="dayPass9" class="domain.DayPass">
-		<property name="identifier" value="EGEC-visitor2-0004"/>
+		<property name="ticker" value="EGEC-visitor2-0004"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="02/03/2018 21:31" /> 
@@ -1666,6 +1674,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard2"/>
  		<property name="price" value="35.55"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor2"/>
  		<property name="museum" ref="museum11"/>
@@ -1673,7 +1682,7 @@
 	</bean>
 	
 	<bean id="dayPass10" class="domain.DayPass">
-		<property name="identifier" value="MDP-visitor6-0001"/>
+		<property name="ticker" value="MDP-visitor6-0001"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="02/02/2018 09:11" /> 
@@ -1686,6 +1695,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="68.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum1"/>
@@ -1693,7 +1703,7 @@
 	</bean>
 	
 	<bean id="dayPass11" class="domain.DayPass">
-		<property name="identifier" value="TBM-visitor6-0002"/>
+		<property name="ticker" value="TBM-visitor6-0002"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="06/05/2018 12:58" /> 
@@ -1706,13 +1716,14 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="80.00"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum2"/>
 	</bean>
 	
 	<bean id="dayPass12" class="domain.DayPass">
-		<property name="identifier" value="TVM-visitor6-0003"/>
+		<property name="ticker" value="TVM-visitor6-0003"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="29/12/2017 15:29" /> 
@@ -1725,6 +1736,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="70.50"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum4"/>
@@ -1732,7 +1744,7 @@
 	</bean>
 	
 	<bean id="dayPass13" class="domain.DayPass">
-		<property name="identifier" value="MDP-visitor4-0001"/>
+		<property name="ticker" value="MDP-visitor4-0001"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="01/02/2018 18:11" /> 
@@ -1745,6 +1757,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard4"/>
  		<property name="price" value="68.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor4"/>
  		<property name="museum" ref="museum1"/>
@@ -1752,7 +1765,7 @@
 	</bean>
 	
 	<bean id="dayPass14" class="domain.DayPass">
-		<property name="identifier" value="MT-visitor4-0002"/>
+		<property name="ticker" value="MT-visitor4-0002"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="06/05/2018 19:44" /> 
@@ -1765,6 +1778,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard4"/>
  		<property name="price" value="80.00"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor4"/>
  		<property name="museum" ref="museum8"/>
@@ -1772,7 +1786,7 @@
 	</bean>
 	
 	<bean id="dayPass15" class="domain.DayPass">
-		<property name="identifier" value="MDP-visitor5-0001"/>
+		<property name="ticker" value="MDP-visitor5-0001"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="11/02/2018 11:56" /> 
@@ -1785,6 +1799,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="75.00"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum1"/>
@@ -1792,7 +1807,7 @@
 	</bean>
 	
 	<bean id="dayPass16" class="domain.DayPass">
-		<property name="identifier" value="TBM-visitor5-0002"/>
+		<property name="ticker" value="TBM-visitor5-0002"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="28/01/2018 19:02" /> 
@@ -1805,13 +1820,14 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="80.00"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum2"/>
 	</bean>
 	
 	<bean id="dayPass17" class="domain.DayPass">
-		<property name="identifier" value="TL-visitor5-0003"/>
+		<property name="ticker" value="TL-visitor5-0003"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="09/02/2018 20:28" /> 
@@ -1824,13 +1840,14 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="67.90"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum5"/>
 	</bean>
 	
 	<bean id="dayPass18" class="domain.DayPass">
-		<property name="identifier" value="MT-visitor5-0004"/>
+		<property name="ticker" value="MT-visitor5-0004"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="04/05/2018 10:19" /> 
@@ -1843,6 +1860,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="80.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum8"/>
@@ -1850,7 +1868,7 @@
 	</bean>
 	
 	<bean id="dayPass19" class="domain.DayPass">
-		<property name="identifier" value="MDP-visitor1-0005"/>
+		<property name="ticker" value="MDP-visitor1-0005"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="14/05/2018 01:37" /> 
@@ -1863,6 +1881,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="58.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum1"/>
@@ -1870,7 +1889,7 @@
 	</bean>
 	
 	<bean id="dayPass20" class="domain.DayPass">
-		<property name="identifier" value="MDP-visitor2-0004"/>
+		<property name="ticker" value="MDP-visitor2-0004"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="14/05/2018 00:31" /> 
@@ -1883,6 +1902,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard2"/>
  		<property name="price" value="88.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor2"/>
  		<property name="museum" ref="museum1"/>
@@ -1890,7 +1910,7 @@
 	</bean>
 	
 	<bean id="dayPass21" class="domain.DayPass">
-		<property name="identifier" value="TL-visitor4-1489"/>
+		<property name="ticker" value="TL-visitor4-1489"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="12/04/2018 19:21" /> 
@@ -1903,6 +1923,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard4"/>
  		<property name="price" value="89.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor4"/>
  		<property name="museum" ref="museum5"/>
@@ -1910,7 +1931,7 @@
 	</bean>
 	
 	<bean id="dayPass22" class="domain.DayPass">
-		<property name="identifier" value="TL-visitor5-1299"/>
+		<property name="ticker" value="TL-visitor5-1299"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="03/03/2018 04:34" /> 
@@ -1923,6 +1944,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="83.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum5"/>
@@ -1930,7 +1952,7 @@
 	</bean>
 	
 	<bean id="dayPass23" class="domain.DayPass">
-		<property name="identifier" value="GM-visitor6-0269"/>
+		<property name="ticker" value="GM-visitor6-0269"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="14/04/2018 17:56" /> 
@@ -1943,6 +1965,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="49.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum7"/>
@@ -1950,7 +1973,7 @@
 	</bean>
 	
 	<bean id="dayPass24" class="domain.DayPass">
-		<property name="identifier" value="TNG-visitor6-8394"/>
+		<property name="ticker" value="TNG-visitor6-8394"/>
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
   				<constructor-arg value="05/05/2018 18:23" /> 
@@ -1963,6 +1986,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="49.99"/>
+ 		<property name="VAT" value="0.21"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum9"/>
@@ -1974,7 +1998,7 @@
 	<!-- Exhibitions -->
 	
 	<bean id="exhibition1" class="domain.Exhibition">
-		<property name="identifier" value="director1-VanGA"/>
+		<property name="ticker" value="director1-VanGA"/>
 		<property name="title" value="Van Gogh Alive"/>
 		<property name="description" value="Van Gogh Alive is just the kind of inspiring, imagination-expanding experience we're known for delivering to visitors"/>
 		<property name="startingDate">
@@ -2019,14 +2043,14 @@
  			</list>
  		</property>
  		<property name="category" ref="category20"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
- 				<ref bean="highlight1"/>
- 				<ref bean="highlight2"/>
- 				<ref bean="highlight3"/>
- 				<ref bean="highlight4"/>
- 				<ref bean="highlight5"/>
- 				<ref bean="highlight6"/>
+ 				<ref bean="artwork1"/>
+ 				<ref bean="artwork2"/>
+ 				<ref bean="artwork3"/>
+ 				<ref bean="artwork4"/>
+ 				<ref bean="artwork5"/>
+ 				<ref bean="artwork6"/>
  			</list>
  		</property>
  		<property name="guides">
@@ -2042,7 +2066,7 @@
 	</bean>
 	
 	<bean id="exhibition2" class="domain.Exhibition">
-		<property name="identifier" value="director1-SashaVelourNG"/>
+		<property name="ticker" value="director1-SashaVelourNG"/>
 		<property name="title" value="Sasha Velour: NIGHTGOWNS"/>
 		<property name="description" value="Nightgowns is a monthly live theatrical showcase dedicated to exceptional drag performance of all kinds! First created at Bizarre Bushwick, the show has now taken residency at National Sawdust in Williamsburg"/>
 		<property name="startingDate">
@@ -2077,7 +2101,7 @@
  			</list>
  		</property>
  		<property name="category" ref="category16"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
  			</list>
  		</property>
@@ -2090,7 +2114,7 @@
 	</bean>
 	
 	<bean id="exhibition3" class="domain.Exhibition">
-		<property name="identifier" value="director1-RubensPS"/>
+		<property name="ticker" value="director1-RubensPS"/>
 		<property name="title" value="Rubens. Painter of Sketches"/>
 		<property name="description" value="The Museo del Prado and the Boijmans Van Beuningen Museum are presenting the exhibition Rubens. Painter of Sketches. Sponsored by Fundación AXA and with the collaboration of the Government of Flanders, it offers an analysis of Rubens as the most important painter of oil sketches in the history of European art."/>
 		<property name="startingDate">
@@ -2132,9 +2156,9 @@
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
- 				<ref bean="highlight7"/>
+ 				<ref bean="artwork7"/>
  			</list>
  		</property>
  		<property name="guides">
@@ -2145,7 +2169,7 @@
 	</bean>
 	
 	<bean id="exhibition4" class="domain.Exhibition">
-		<property name="identifier" value="director1-InLapDep"/>
+		<property name="ticker" value="director1-InLapDep"/>
 		<property name="title" value="In Lapide Depictum"/>
 		<property name="description" value="The exhibition brings together a selection of nine paintings on monochrome stone (slate and white marble) by Italian painters such as Sebastiano del Piombo, Titian, Daniele da Volterra and Leandro Bassano."/>
 		<property name="startingDate">
@@ -2180,7 +2204,7 @@
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
  			</list>
  		</property>
@@ -2192,7 +2216,7 @@
 	</bean>
 	
 	<bean id="exhibition5" class="domain.Exhibition">
-		<property name="identifier" value="director1-TheOAD"/>
+		<property name="ticker" value="director1-TheOAD"/>
 		<property name="title" value="The Óscar Alzaga Donation"/>
 		<property name="description" value="The outstanding quality of the Óscar Alzaga Villaamil donation makes it a significant addition to the Museo Nacional del Prado’s collection."/>
 		<property name="startingDate">
@@ -2230,7 +2254,7 @@
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
  			</list>
  		</property>
@@ -2242,7 +2266,7 @@
 	</bean>
 	
 	<bean id="exhibition6" class="domain.Exhibition">
-		<property name="identifier" value="director1-VLZQZ"/>
+		<property name="ticker" value="director1-VLZQZ"/>
 		<property name="title" value="Velázquez and the Celebration of Painting: the Golden Age in the Museo del Prado"/>
 		<property name="description" value="Comprising 61 thematically organised paintings, the exhibition aims to offer Japanese visitors an exceptional opportunity to appreciate the art of Velázquez and to understand it in relation to the art of his Spanish and European contemporaries"/>
 		<property name="startingDate">
@@ -2281,9 +2305,9 @@
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
- 				<ref bean="highlight8"/>
+ 				<ref bean="artwork8"/>
  			</list>
  		</property>
  		<property name="guides">
@@ -2294,7 +2318,7 @@
 	</bean>
 	
 	<bean id="exhibition7" class="domain.Exhibition">
-		<property name="identifier" value="director1-Greece"/>
+		<property name="ticker" value="director1-Greece"/>
 		<property name="title" value="Charmed lives in Greece"/>
 		<property name="description" value="This exhibition focuses on the friendship of the artists Niko Ghika and John Craxton, and the writer Patrick Leigh Fermor. Their shared love of Greece was fundamental to their work, as they embraced its sights, sounds, colours and people."/>
 		<property name="startingDate">
@@ -2332,7 +2356,7 @@
  			</list>
  		</property>
  		<property name="category" ref="category12"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
  			</list>
  		</property>
@@ -2344,7 +2368,7 @@
 	</bean>
 	
 	<bean id="exhibition8" class="domain.Exhibition">
-		<property name="identifier" value="director1-Christmas"/>
+		<property name="ticker" value="director1-Christmas"/>
 		<property name="title" value="Christmas Tree and Neapolitan Baroque Crèche"/>
 		<property name="description" value="The Museum continues a longstanding holiday tradition with the presentation of its Christmas tree, a favorite of Vaticans and visitors from around the world"/>
 		<property name="startingDate">
@@ -2386,9 +2410,9 @@
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
- 				<ref bean="highlight9"/>
+ 				<ref bean="artwork9"/>
  			</list>
  		</property>
  		<property name="guides">
@@ -2399,7 +2423,7 @@
 	</bean>
 	
 	<bean id="exhibition9" class="domain.Exhibition">
-		<property name="identifier" value="director1-IsrSilv"/>
+		<property name="ticker" value="director1-IsrSilv"/>
 		<property name="title" value="France Viewed from the Grand Siècle Drawings by Israël Silvestre"/>
 		<property name="description" value="While Silvestre's engravings circulated widely, his drawings remain relatively unknown. The Musée du Louvre is home to a remarkable collection of them, to be shown to the public for the first time."/>
 		<property name="startingDate">
@@ -2436,7 +2460,7 @@
  			</list>
  		</property>
  		<property name="category" ref="category5"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
  			</list>
  		</property>
@@ -2448,7 +2472,7 @@
 	</bean>
 	
 	<bean id="exhibition10" class="domain.Exhibition">
-		<property name="identifier" value="director1-Delacroix"/>
+		<property name="ticker" value="director1-Delacroix"/>
 		<property name="title" value="Delacroix"/>
 		<property name="description" value="Eugène Delacroix was one of the giants of French painting, but his last full retrospective exhibition in Paris dates back to 1963, the centenary year of his death. In collaboration with the Metropolitan Museum of Art in New York, the Louvre is holding a historic exhibition featuring some 180 works—mostly paintings—as a tribute to his entire career."/>
 		<property name="startingDate">
@@ -2485,9 +2509,9 @@
  			</list>
  		</property>
  		<property name="category" ref="category8"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
- 				<ref bean="highlight10"/>
+ 				<ref bean="artwork10"/>
  			</list>
  		</property>
  		<property name="guides">
@@ -2498,7 +2522,7 @@
 	</bean>
 	
 	<bean id="exhibition11" class="domain.Exhibition">
-		<property name="identifier" value="director2-ArtNChina"/>
+		<property name="ticker" value="director2-ArtNChina"/>
 		<property name="title" value="Art and China after 1989: Theater of the World"/>
 		<property name="description" value="Art and China after 1989 presents work by some sixty key artists and groups active across China and worldwide whose critical provocations aim to forge reality free from ideology, to establish the individual apart from the collective, and to define contemporary Chinese experience in universal terms."/>
 		<property name="startingDate">
@@ -2534,9 +2558,9 @@
  			</list>
  		</property>
  		<property name="category" ref="category18"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
- 				<ref bean="highlight11"/>
+ 				<ref bean="artwork11"/>
  			</list>
  		</property>
  		<property name="guides">
@@ -2547,7 +2571,7 @@
 	</bean>
 	
 	<bean id="exhibition12" class="domain.Exhibition">
-		<property name="identifier" value="director4-HERStoryPopStars"/>
+		<property name="ticker" value="director4-HERStoryPopStars"/>
 		<property name="title" value="HERStory of the World: Pop Stars"/>
 		<property name="description" value="From legendary icons such as Madonna and Diana Ross, to iconic legends of today as Lady Gaga or Lana Del Rey. This month, in Madame Tussauds, is dedicated to those girls who made an impact in pop culture."/>
 		<property name="startingDate">
@@ -2584,11 +2608,11 @@
  			</list>
  		</property>
  		<property name="category" ref="category15"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>	
- 				<ref bean="highlight12"/>
- 				<ref bean="highlight13"/>
- 				<ref bean="highlight14"/>
+ 				<ref bean="artwork12"/>
+ 				<ref bean="artwork13"/>
+ 				<ref bean="artwork14"/>
  			</list>
  		</property>
  		<property name="guides">
@@ -2600,7 +2624,7 @@
 	</bean>
 	
 	<bean id="exhibition13" class="domain.Exhibition">
-		<property name="identifier" value="director5-MonetNArch"/>
+		<property name="ticker" value="director5-MonetNArch"/>
 		<property name="title" value="The Credit Suisse Exhibition: Monet and Architecture"/>
 		<property name="description" value="One exhibition featuring Monet’s paintings and nothing else? That’s a rare thing. The last time the UK hosted a Monet exhibition like this was almost 20 years ago. But 'Monet and Architecture' is not just rare, it’s never been done before."/>
 		<property name="startingDate">
@@ -2635,7 +2659,7 @@
  			</list>
  		</property>
  		<property name="category" ref="category20"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
  			</list>
  		</property>
@@ -2648,7 +2672,7 @@
 	
 	
 	<bean id="exhibition14" class="domain.Exhibition">
-		<property name="identifier" value="director6-BatimatEgypt"/>
+		<property name="ticker" value="director6-BatimatEgypt"/>
 		<property name="title" value="BATIMAT EGYPT 2018"/>
 		<property name="description" value="BATIMAT EGYPT will offer the complete range of products and solutions suited to the construction market in Egypt and the Middle East."/>
 		<property name="startingDate">
@@ -2685,7 +2709,7 @@
  			</list>
  		</property>
  		<property name="category" ref="category11"/>
- 		<property name="highlights">
+ 		<property name="artworks">
  			<list>
  			</list>
  		</property>
@@ -3596,9 +3620,9 @@
 		</property>
 	</bean>
 	
-	<!-- Highlights -->
+	<!-- Artworks -->
 	
-	<bean id="highlight1" class="domain.Highlight">
+	<bean id="artwork1" class="domain.Artwork">
 		<property name="title" value="The Starry Night"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"/>
 		<property name="creatorName" value="Vicent Van Gogh"/>
@@ -3608,7 +3632,7 @@
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
-	<bean id="highlight2" class="domain.Highlight">
+	<bean id="artwork2" class="domain.Artwork">
 		<property name="title" value="Sunflowers (Van Gogh series)"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Vincent_Willem_van_Gogh_127.jpg/300px-Vincent_Willem_van_Gogh_127.jpg"/>
 		<property name="creatorName" value="Vicent Van Gogh"/>
@@ -3618,7 +3642,7 @@
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
-	<bean id="highlight3" class="domain.Highlight">
+	<bean id="artwork3" class="domain.Artwork">
 		<property name="title" value="Bedroom in Arles"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Vincent_van_Gogh_-_De_slaapkamer_-_Google_Art_Project.jpg/300px-Vincent_van_Gogh_-_De_slaapkamer_-_Google_Art_Project.jpg"/>
 		<property name="creatorName" value="Vicent Van Gogh"/>
@@ -3630,7 +3654,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
-	<bean id="highlight4" class="domain.Highlight">
+	<bean id="artwork4" class="domain.Artwork">
 		<property name="title" value="Almond Blossoms"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Vincent_van_Gogh_-_Almond_blossom_-_Google_Art_Project.jpg/300px-Vincent_van_Gogh_-_Almond_blossom_-_Google_Art_Project.jpg"/>
 		<property name="creatorName" value="Vicent Van Gogh"/>
@@ -3640,7 +3664,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
-	<bean id="highlight5" class="domain.Highlight">
+	<bean id="artwork5" class="domain.Artwork">
 		<property name="title" value="Irises"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Irises-Vincent_van_Gogh.jpg/300px-Irises-Vincent_van_Gogh.jpg"/>
 		<property name="creatorName" value="Vicent Van Gogh"/>
@@ -3650,7 +3674,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
-	<bean id="highlight6" class="domain.Highlight">
+	<bean id="artwork6" class="domain.Artwork">
 		<property name="title" value="Van Gogh self-portrait"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg/300px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg"/>
 		<property name="creatorName" value="Vicent Van Gogh"/>
@@ -3660,7 +3684,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
-	<bean id="highlight7" class="domain.Highlight">
+	<bean id="artwork7" class="domain.Artwork">
 		<property name="title" value="The Fall of Phaeton"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Peter_Paul_Rubens_-_The_Fall_of_Phaeton_%28National_Gallery_of_Art%29.jpg/300px-Peter_Paul_Rubens_-_The_Fall_of_Phaeton_%28National_Gallery_of_Art%29.jpg"/>
 		<property name="creatorName" value="Peter Paul Rubens"/>
@@ -3670,7 +3694,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition3"/>
 	</bean>
 	
-	<bean id="highlight8" class="domain.Highlight">
+	<bean id="artwork8" class="domain.Artwork">
 		<property name="title" value="Diego Velázquez"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Las_Meninas%2C_by_Diego_Vel%C3%A1zquez%2C_from_Prado_in_Google_Earth.jpg/360px-Las_Meninas%2C_by_Diego_Vel%C3%A1zquez%2C_from_Prado_in_Google_Earth.jpg"/>
 		<property name="creatorName" value="Peter Paul Rubens"/>
@@ -3680,7 +3704,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition6"/>
 	</bean>
 	
-	<bean id="highlight9" class="domain.Highlight">
+	<bean id="artwork9" class="domain.Artwork">
 		<property name="title" value="The tallest Christmas Tree"/>
 		<property name="photograph" value="https://www.citymetric.com/sites/default/files/styles/large/public/article_body_2015/12/dortmund_christmas_tree.jpg?itok=_MWdjJP7"/>
 		<property name="creatorName" value="Weise Construction Company"/>
@@ -3690,7 +3714,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition8"/>
 	</bean>
 	
-	<bean id="highlight10" class="domain.Highlight">
+	<bean id="artwork10" class="domain.Artwork">
 		<property name="title" value="The Death of Sardanapalus"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Delacroix_-_La_Mort_de_Sardanapale_%281827%29.jpg/280px-Delacroix_-_La_Mort_de_Sardanapale_%281827%29.jpg"/>
 		<property name="creatorName" value="Eugène Delacroix"/>
@@ -3700,7 +3724,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition10"/>
 	</bean>
 	
-	<bean id="highlight11" class="domain.Highlight">
+	<bean id="artwork11" class="domain.Artwork">
 		<property name="title" value="Puppy"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/%22Puppy%22_del_Guggenheim_de_Bilbao_01.JPG/1024px-%22Puppy%22_del_Guggenheim_de_Bilbao_01.JPG"/>
 		<property name="creatorName" value="Jeff Koons"/>
@@ -3710,7 +3734,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition11"/>
 	</bean>
 	
-	<bean id="highlight12" class="domain.Highlight">
+	<bean id="artwork12" class="domain.Artwork">
 		<property name="title" value="Lady Gaga"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Lady_Gaga_Toronto_Film_Festival_2017_%28cropped%29.jpg/250px-Lady_Gaga_Toronto_Film_Festival_2017_%28cropped%29.jpg"/>
 		<property name="remark" value="Stefani Joanne Angelina Germanotta ()born March 28, 1986), known professionally as Lady Gaga, is an American singer, songwriter, and actress. She is known for her unconventionality and provocative work as well as visual experimentation."/>
@@ -3719,7 +3743,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition12"/>
 	</bean>
 	
-	<bean id="highlight13" class="domain.Highlight">
+	<bean id="artwork13" class="domain.Artwork">
 		<property name="title" value="Lana del Rey"/>
 		<property name="photograph" value="https://media1.popsugar-assets.com/files/thumbor/1WMoil4C4wE3-FDMwUGIQ9AHe9o/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2018/01/28/075/n/1922564/241932035a6e6f6a68c551.57492641_GettyImages-911491980/i/Lana-Del-Rey.jpg"/>
 		<property name="remark" value="Elizabeth Woolridge Grant (born June 21, 1985), known professionally as Lana Del Rey, is an American singer and songwriter. Her music has been noted by critics for its stylized cinematic quality, its preoccupation with themes of tragic romance, glamour, and melancholia, and its references to pop culture, particularly 1950s and 1960s Americana."/>
@@ -3728,7 +3752,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="exhibition" ref="exhibition12"/>
 	</bean>
 	
-	<bean id="highlight14" class="domain.Highlight">
+	<bean id="artwork14" class="domain.Artwork">
 		<property name="title" value="Lorde"/>
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Lorde_Brisbane_Nov_2017_%28cropped%29.jpg/220px-Lorde_Brisbane_Nov_2017_%28cropped%29.jpg"/>
 		<property name="remark" value="Ella Marija Lani Yelich-O'Connor (born 7 November 1996), known professionally as Lorde (pronounced lord), is a New Zealand singer, songwriter, and record producer who holds both New Zealand and Croatian citizenship. Born in the Auckland suburb of Takapuna and raised in neighbouring Devonport, she became interested in performing as a child. In her early teens, she signed with Universal Music Group and was later paired with songwriter and record producer Joel Little."/>
@@ -4173,7 +4197,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates1"/>
 		<property name="email" value="padromuseo@gmail.com"/>
 		<property name="phoneNumber" value="+34688912668"/>
-		<property name="title" value="200 Years sharing art with you"/>
+		<property name="slogan" value="200 Years sharing art with you"/>
 		<property name="identifier" value="MDP"/>
 		<property name="banner" value="https://upload.wikimedia.org/wikipedia/commons/9/94/Logo_del_Museo_Nacional_del_Prado.png"/>
 		<property name="price" value="58.99"/>
@@ -4240,7 +4264,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates2"/>
 		<property name="email" value="britishmuseum@gmail.com"/>
 		<property name="phoneNumber" value="+34654112980"/>
-		<property name="title" value="© 2017 Trustees of the British Museum"/>
+		<property name="slogan" value="© 2017 Trustees of the British Museum"/>
 		<property name="identifier" value="TBM"/>
 		<property name="banner" value="http://files.websitebuilder.prositehosting.co.uk/fasthosts23063/image/britishmuseumlogo_6515.jpg"/>
 		<property name="price" value="80.00"/>
@@ -4291,7 +4315,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates3"/>
 		<property name="email" value="newyorkart@gmail.com"/>
 		<property name="phoneNumber" value="+34667120556"/>
-		<property name="title" value="Founded in 1870"/>
+		<property name="slogan" value="Founded in 1870"/>
 		<property name="identifier" value="TMMA"/>
 		<property name="banner" value="https://static.dezeen.com/uploads/2016/02/new-metropolitan-art-museum-logo-wolff-olins_dezeen_1568_0.jpg"/>
 		<property name="price" value="49.99"/>
@@ -4326,7 +4350,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates4"/>
 		<property name="email" value="vaticanmuseums@gmail.com"/>
 		<property name="phoneNumber" value="+34655900879"/>
-		<property name="title" value="Art, aside from being a credible witness to the beauty of creation, is also a tool of evangelisation"/>
+		<property name="slogan" value="Art, aside from being a credible witness to the beauty of creation, is also a tool of evangelisation"/>
 		<property name="identifier" value="TVM"/>
 		<property name="banner" value="http://www.museivaticani.va/etc/designs/museivaticani/release/library/main/images/favicon-social-1500.png"/>
 		<property name="price" value="60.50"/>
@@ -4368,7 +4392,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates5"/>
 		<property name="email" value="thelouvre@gmail.com"/>
 		<property name="phoneNumber" value="+34691122467"/>
-		<property name="title" value="Préparer sa visite, connaître l'actualité du musée, participer aux activités, découvrir les œuvres."/>
+		<property name="slogan" value="Préparer sa visite, connaître l'actualité du musée, participer aux activités, découvrir les œuvres."/>
 		<property name="identifier" value="TL"/>
 		<property name="banner" value="https://d302e0npexowb4.cloudfront.net/wp-content/uploads/2016/11/Louvre-Logo.jpg"/>
 		<property name="price" value="67.90"/>
@@ -4413,7 +4437,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates6"/>
 		<property name="email" value="statehermitage@gmail.com"/>
 		<property name="phoneNumber" value="+34667129433"/>
-		<property name="title" value="Not Everyone will be Taken into the Future"/>
+		<property name="slogan" value="Not Everyone will be Taken into the Future"/>
 		<property name="identifier" value="SH"/>
 		<property name="banner" value="https://s-media-cache-ak0.pinimg.com/originals/3c/18/50/3c1850453a810e9edc8f5b68d560578b.png"/>
 		<property name="price" value="18.99"/>
@@ -4452,7 +4476,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates7"/>
 		<property name="email" value="guggenheim@gmail.com"/>
 		<property name="phoneNumber" value="+34655980600"/>
-		<property name="title" value="© FMGB Guggenheim Bilbao Museoa, 2018"/>
+		<property name="slogan" value="© FMGB Guggenheim Bilbao Museoa, 2018"/>
 		<property name="identifier" value="GM"/>
 		<property name="banner" value="https://d302e0npexowb4.cloudfront.net/wp-content/uploads/2016/11/guggenheim-logo.png"/>
 		<property name="price" value="49.99"/>
@@ -4490,7 +4514,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates8"/>
 		<property name="email" value="tussauds@gmail.com"/>
 		<property name="phoneNumber" value="+34899123666"/>
-		<property name="title" value="Get closer to the stars in London"/>
+		<property name="slogan" value="Get closer to the stars in London"/>
 		<property name="identifier" value="MT"/>
 		<property name="banner" value="http://www.qverlondres.com/wp-content/uploads/2016/10/mdame-tussauds-museo-de-cera-londres.jpg"/>
 		<property name="price" value="60.00"/>
@@ -4536,7 +4560,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates9"/>
 		<property name="email" value="nationalgallery@gmail.com"/>
 		<property name="phoneNumber" value="+34998234776"/>
-		<property name="title" value="The story of European art, masterpiece by masterpiece."/>
+		<property name="slogan" value="The story of European art, masterpiece by masterpiece."/>
 		<property name="identifier" value="TNG"/>
 		<property name="banner" value="http://3.bp.blogspot.com/-vpxgw6XtyDM/TVuxpAMFgnI/AAAAAAAABho/03rIOoY6tsY/s1600/NG_Logo_White.png"/>
 		<property name="price" value="1.0"/>
@@ -4577,7 +4601,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates10"/>
 		<property name="email" value="thyssen@gmail.com"/>
 		<property name="phoneNumber" value="+34665900800"/>
-		<property name="title" value="Un paseo por la historia del arte. Visita obligada en Madrid."/>
+		<property name="slogan" value="Un paseo por la historia del arte. Visita obligada en Madrid."/>
 		<property name="identifier" value="MTB"/>
 		<property name="banner" value="https://www.vectorlogo.es/wp-content/uploads/2016/01/logo-vector-museo-thyssen-bornemisza.jpg"/>
 		<property name="price" value="35.55"/>
@@ -4612,7 +4636,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="coordinates" ref="coordinates11"/>
 		<property name="email" value="elcairomuseum@gmail.com"/>
 		<property name="phoneNumber" value="+34677122980"/>
-		<property name="title" value="Home to an extensive collection of ancient Egyptian antiquities"/>
+		<property name="slogan" value="Home to an extensive collection of ancient Egyptian antiquities"/>
 		<property name="identifier" value="EGEC"/>
 		<property name="banner" value="https://i.pinimg.com/originals/dc/cc/de/dcccde3f0d9d0794318412768bddf5f2.png"/>
 		<property name="price" value="29.99"/>
@@ -5451,9 +5475,9 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
  		<property name="visitor" ref="visitor2"/>
 	</bean>
 
-	<!-- Reviewers -->
+	<!-- Critics -->
 
-	<bean id="reviewer1" class="domain.Reviewer">
+	<bean id="critic1" class="domain.Critic">
 		<property name="name" value="Rubí" />
 		<property name="surnames" value="Koon"/>
 		<property name="email" value="rubi@gmail.com"/>
@@ -5474,7 +5498,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 	</bean>
 
-	<bean id="reviewer2" class="domain.Reviewer">
+	<bean id="critic2" class="domain.Critic">
 		<property name="name" value="Quique" />
 		<property name="surnames" value="Perkins"/>
 		<property name="email" value="quique@gmail.com"/>
@@ -5490,7 +5514,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 	</bean>
 
-	<bean id="reviewer3" class="domain.Reviewer">
+	<bean id="critic3" class="domain.Critic">
 		<property name="name" value="Norberto" />
 		<property name="surnames" value="Sanchez"/>
 		<property name="email" value="norberto@gmail.com"/>
@@ -5506,7 +5530,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 	</bean>
 
-	<bean id="reviewer4" class="domain.Reviewer">
+	<bean id="critic4" class="domain.Critic">
 		<property name="name" value="Minina" />
 		<property name="surnames" value="Juarez"/>
 		<property name="email" value="minina@gmail.com"/>
@@ -5523,7 +5547,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 	</bean>
 	
-	<bean id="reviewer5" class="domain.Reviewer">
+	<bean id="critic5" class="domain.Critic">
 		<property name="name" value="Belinda" />
 		<property name="surnames" value="Obrien"/>
 		<property name="email" value="belinda@gmail.com"/>
@@ -5541,7 +5565,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		</property>
 	</bean>
 	
-	<bean id="reviewer6" class="domain.Reviewer">
+	<bean id="critic6" class="domain.Critic">
 		<property name="name" value="Protón" />
 		<property name="surnames" value="Walker"/>
 		<property name="email" value="proton@gmail.com"/>

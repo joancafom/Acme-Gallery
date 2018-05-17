@@ -25,20 +25,20 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import security.LoginService;
+import services.ArtworkService;
 import services.CategoryService;
 import services.CritiqueService;
 import services.DirectorService;
 import services.ExhibitionService;
 import services.GuideService;
-import services.HighlightService;
 import services.RoomService;
 import controllers.AbstractController;
+import domain.Artwork;
 import domain.Category;
 import domain.Critique;
 import domain.Director;
 import domain.Exhibition;
 import domain.Guide;
-import domain.Highlight;
 import domain.Room;
 import forms.ExhibitionForm;
 
@@ -54,7 +54,7 @@ public class ExhibitionDirectorController extends AbstractController {
 	private ExhibitionService	exhibitionService;
 
 	@Autowired
-	private HighlightService	highlightService;
+	private ArtworkService		artworkService;
 
 	@Autowired
 	private CritiqueService		critiqueService;
@@ -141,9 +141,9 @@ public class ExhibitionDirectorController extends AbstractController {
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
 
-		//Highlights are also listed in an Exhibition Profile
-		final Page<Highlight> pageResultH = this.highlightService.findAllByExhibition(exhibition, pageH, 5);
-		final Collection<Highlight> highlights = pageResultH.getContent();
+		//Artworks are also listed in an Exhibition Profile
+		final Page<Artwork> pageResultH = this.artworkService.findAllByExhibition(exhibition, pageH, 5);
+		final Collection<Artwork> artworks = pageResultH.getContent();
 		final Integer resultSizeH = new Long(pageResultH.getTotalElements()).intValue();
 
 		//Critiques are also listed in an Exhibition Profile
@@ -163,7 +163,7 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);
-		res.addObject("highlights", highlights);
+		res.addObject("artworks", artworks);
 		res.addObject("resultSizeH", resultSizeH);
 		res.addObject("critiques", critiques);
 		res.addObject("resultSizeC", resultSizeC);

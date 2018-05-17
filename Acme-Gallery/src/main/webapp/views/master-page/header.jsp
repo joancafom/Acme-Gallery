@@ -58,7 +58,7 @@ window.onload = function(){
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="director/administrator/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.director.signup" /></a></li>
 			<li><a href="guide/administrator/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.guide.signup" /></a></li>
-			<li><a href="reviewer/administrator/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.reviewer.signup" /></a></li>
+			<li><a href="critic/administrator/register.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.critic.signup" /></a></li>
 			<li ><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="master.page.logout" /></a></li>
     	</ul>
 	</security:authorize>
@@ -73,6 +73,7 @@ window.onload = function(){
 			<li ><a href="exhibition/director/listMine.do"><spring:message code="master.page.exhibition.myList"/></a></li>
 			<li ><a href="museum/director/list.do"><spring:message code="master.page.museum.list"/></a></li>
 			<li ><a href="museum/director/listMine.do"><spring:message code="master.page.museum.listMine"/></a></li>
+			<li ><a href="incident/director/listMine.do"><spring:message code="master.page.incident.listMine"/></a></li>
 			<li ><a href="director/director/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
@@ -101,15 +102,15 @@ window.onload = function(){
     	</ul>
 	</security:authorize>
 	
-	<!------------------------------ REVIEWER ----------------------------->
+	<!------------------------------ CRITIC ----------------------------->
 	
-	<security:authorize access="hasRole('REVIEWER')">
+	<security:authorize access="hasRole('CRITIC')">
     	<ul class="nav navbar-nav">
     		
-			<li ><a href="exhibition/reviewer/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
-			<li ><a href="category/reviewer/display.do"><spring:message code="master.page.category.display"/></a></li>
-			<li ><a href="museum/reviewer/list.do"><spring:message code="master.page.museum.list"/></a></li>
-			<li ><a href="director/reviewer/list.do"><spring:message code="master.page.director.list"/></a></li>
+			<li ><a href="exhibition/critic/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
+			<li ><a href="category/critic/display.do"><spring:message code="master.page.category.display"/></a></li>
+			<li ><a href="museum/critic/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="director/critic/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>

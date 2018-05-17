@@ -78,8 +78,8 @@ public class ActorService {
 			userAuthority.setAuthority(Authority.SPONSOR);
 			break;
 
-		case "DOMAIN.REVIEWER":
-			userAuthority.setAuthority(Authority.REVIEWER);
+		case "DOMAIN.CRITIC":
+			userAuthority.setAuthority(Authority.CRITIC);
 			break;
 
 		default:

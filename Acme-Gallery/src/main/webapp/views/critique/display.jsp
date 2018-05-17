@@ -18,7 +18,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <h1 style="text-align:center"><strong><jstl:out value="${critique.title}"/></strong></h1>
-<p style="text-align:center"><spring:message code="critique.by"/> ${critique.reviewer.name} ${critique.reviewer.surnames} - <acme:dateFormat code="date.format" value="${critique.creationDate}"/></p>
+<p style="text-align:center"><spring:message code="critique.by"/> ${critique.critic.name} ${critique.critic.surnames} - <acme:dateFormat code="date.format" value="${critique.creationDate}"/></p>
 
 <p style="text-align:center"><strong><spring:message code="critique.exhibition"/> <em><a style="text-decoration:underline;" href="exhibition/${actorWS}display.do?exhibitionId=${critique.exhibition.id}"><jstl:out value="${critique.exhibition.title}"/></a></em>.</strong></p>
 

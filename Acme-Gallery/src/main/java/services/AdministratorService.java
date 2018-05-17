@@ -251,19 +251,19 @@ public class AdministratorService extends ActorService {
 	// ---------------------------------------- QUERY #11 ---------------------------------------------
 
 	// v1.0 - Alicia
-	public Double getAvgHighlightsPerExhibition() {
+	public Double getAvgArtworksPerExhibition() {
 		final Administrator admin = this.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(admin);
 
-		return this.administratorRepository.avgHighlightsPerExhibition();
+		return this.administratorRepository.avgArtworksPerExhibition();
 	}
 
 	// v1.0 - Alicia
-	public Double getStdHighlightsPerExhibition() {
+	public Double getStdArtworksPerExhibition() {
 		final Administrator admin = this.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(admin);
 
-		return this.administratorRepository.stdHighlightsPerExhibition();
+		return this.administratorRepository.stdArtworksPerExhibition();
 	}
 
 	// ---------------------------------------- QUERY #12 ---------------------------------------------

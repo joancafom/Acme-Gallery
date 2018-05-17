@@ -65,8 +65,9 @@ public class Incident extends DomainEntity {
 		return this.guide;
 	}
 
+	@NotNull
 	@Valid
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	public Room getRoom() {
 		return this.room;
 	}

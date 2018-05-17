@@ -15,11 +15,11 @@ import domain.Exhibition;
 public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer> {
 
 	// v1.0 - Alicia
-	@Query("select e from Exhibition e where e.identifier like %?1% or e.title like %?1% or e.description like %?1% order by e.endingDate desc")
+	@Query("select e from Exhibition e where e.ticker like %?1% or e.title like %?1% or e.description like %?1% order by e.endingDate desc")
 	Collection<Exhibition> findByKeyword(String keyword);
 
 	// v1.0 - Alicia
-	@Query("select e from Exhibition e where e.identifier like %?1% or e.title like %?1% or e.description like %?1% order by e.endingDate desc")
+	@Query("select e from Exhibition e where e.ticker like %?1% or e.title like %?1% or e.description like %?1% order by e.endingDate desc")
 	Page<Exhibition> findByKeyword(String keyword, Pageable pageable);
 
 	// v1.0 - Alicia

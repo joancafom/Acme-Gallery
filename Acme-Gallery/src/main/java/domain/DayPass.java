@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -22,17 +23,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class DayPass extends DomainEntity {
 
-	private String		identifier;
+	private String		ticker;
 	private Date		purchaseMoment;
 	private Date		visitDate;
 	private CreditCard	creditCard;
 	private Double		price;
+	private Double		VAT;
 
 
 	@NotNull
 	@Pattern(regexp = "^([A-Za-z]{1,4}-[A-Za-z0-9]{5,}-[0-9]{4})$")
-	public String getIdentifier() {
-		return this.identifier;
+	public String getTicker() {
+		return this.ticker;
 	}
 
 	@NotNull
@@ -63,8 +65,15 @@ public class DayPass extends DomainEntity {
 		return this.price;
 	}
 
-	public void setIdentifier(final String identifier) {
-		this.identifier = identifier;
+	@NotNull
+	@DecimalMin("0.0")
+	@DecimalMax("1.0")
+	public Double getVAT() {
+		return this.VAT;
+	}
+
+	public void setTicker(final String ticker) {
+		this.ticker = ticker;
 	}
 
 	public void setPurchaseMoment(final Date purchaseMoment) {
@@ -81,6 +90,10 @@ public class DayPass extends DomainEntity {
 
 	public void setPrice(final Double price) {
 		this.price = price;
+	}
+
+	public void setVAT(final Double vAT) {
+		this.VAT = vAT;
 	}
 
 

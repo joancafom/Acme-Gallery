@@ -59,7 +59,7 @@
 		<security:intercept-url pattern="/category/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/category/director/display.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/category/guide/display.do" access="hasRole('GUIDE')" />
-		<security:intercept-url pattern="/category/reviewer/display.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/category/critic/display.do" access="hasRole('CRITIC')" />
 		<security:intercept-url pattern="/category/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/category/visitor/display.do" access="hasRole('VISITOR')" />
 		
@@ -67,7 +67,7 @@
 		<security:intercept-url pattern="/critique/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/critique/director/display.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/critique/guide/display.do" access="hasRole('GUIDE')" />
-		<security:intercept-url pattern="/critique/reviewer/display.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/critique/critic/display.do" access="hasRole('CRITIC')" />
 		<security:intercept-url pattern="/critique/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/critique/visitor/display.do" access="hasRole('VISITOR')" />
 		
@@ -76,14 +76,14 @@
 		<security:intercept-url pattern="/director/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/director/director/list.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/director/guide/list.do" access="hasRole('GUIDE')" />
-		<security:intercept-url pattern="/director/reviewer/list.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/director/critic/list.do" access="hasRole('CRITIC')" />
 		<security:intercept-url pattern="/director/sponsor/list.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/director/visitor/list.do" access="hasRole('VISITOR')" />
 		<security:intercept-url pattern="/director/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/director/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/director/director/display.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/director/guide/display.do" access="hasRole('GUIDE')" />
-		<security:intercept-url pattern="/director/reviewer/display.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/director/critic/display.do" access="hasRole('CRITIC')" />
 		<security:intercept-url pattern="/director/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/director/visitor/display.do" access="hasRole('VISITOR')" />
 
@@ -95,6 +95,7 @@
 		<security:intercept-url pattern="/exhibition/administrator/search.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/exhibition/director/addGuide.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/create.do" access="hasRole('DIRECTOR')" />  
+		<security:intercept-url pattern="/exhibition/director/delete.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/display.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/edit.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/listMine.do" access="hasRole('DIRECTOR')" />  
@@ -103,9 +104,9 @@
 		<security:intercept-url pattern="/exhibition/guide/display.do" access="hasRole('GUIDE')" />  
 		<security:intercept-url pattern="/exhibition/guide/listResults.do" access="hasRole('GUIDE')" /> 
 		<security:intercept-url pattern="/exhibition/guide/search.do" access="hasRole('GUIDE')" />
-		<security:intercept-url pattern="/exhibition/reviewer/display.do" access="hasRole('REVIEWER')" /> 
-		<security:intercept-url pattern="/exhibition/reviewer/listResults.do" access="hasRole('REVIEWER')" /> 
-		<security:intercept-url pattern="/exhibition/reviewer/search.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/exhibition/critic/display.do" access="hasRole('CRITIC')" /> 
+		<security:intercept-url pattern="/exhibition/critic/listResults.do" access="hasRole('CRITIC')" /> 
+		<security:intercept-url pattern="/exhibition/critic/search.do" access="hasRole('CRITIC')" />
 		<security:intercept-url pattern="/exhibition/sponsor/display.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/exhibition/sponsor/listResults.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/exhibition/sponsor/search.do" access="hasRole('SPONSOR')" />
@@ -118,13 +119,15 @@
 		 
 		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 
 		
-		<security:intercept-url pattern="/highlight/display.do" access="isAnonymous()"/> 
-		<security:intercept-url pattern="/highlight/administrator/display.do" access="hasRole('ADMINISTRATOR')"/> 
-		<security:intercept-url pattern="/highlight/director/display.do" access="hasRole('DIRECTOR')"/> 
-		<security:intercept-url pattern="/highlight/guide/display.do" access="hasRole('GUIDE')"/> 
-		<security:intercept-url pattern="/highlight/reviewer/display.do" access="hasRole('REVIEWER')"/> 
-		<security:intercept-url pattern="/highlight/sponsor/display.do" access="hasRole('SPONSOR')"/> 
-		<security:intercept-url pattern="/highlight/visitor/display.do" access="hasRole('VISITOR')"/> 
+		<security:intercept-url pattern="/artwork/display.do" access="isAnonymous()"/> 
+		<security:intercept-url pattern="/artwork/administrator/display.do" access="hasRole('ADMINISTRATOR')"/> 
+		<security:intercept-url pattern="/artwork/director/display.do" access="hasRole('DIRECTOR')"/> 
+		<security:intercept-url pattern="/artwork/guide/display.do" access="hasRole('GUIDE')"/> 
+		<security:intercept-url pattern="/artwork/critic/display.do" access="hasRole('CRITIC')"/> 
+		<security:intercept-url pattern="/artwork/sponsor/display.do" access="hasRole('SPONSOR')"/> 
+		<security:intercept-url pattern="/artwork/visitor/display.do" access="hasRole('VISITOR')"/> 
+		
+		<security:intercept-url pattern="/incident/director/listMine.do" access="hasRole('DIRECTOR')"/>
 		
 		<security:intercept-url pattern="/museum/display.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/museum/list.do" access="isAnonymous()" /> 
@@ -137,8 +140,8 @@
 		<security:intercept-url pattern="/museum/director/listMine.do" access="hasRole('DIRECTOR')" /> 
 		<security:intercept-url pattern="/museum/guide/display.do" access="hasRole('GUIDE')" /> 
 		<security:intercept-url pattern="/museum/guide/list.do" access="hasRole('GUIDE')" /> 
-		<security:intercept-url pattern="/museum/reviewer/display.do" access="hasRole('REVIEWER')" /> 
-		<security:intercept-url pattern="/museum/reviewer/list.do" access="hasRole('REVIEWER')" /> 
+		<security:intercept-url pattern="/museum/critic/display.do" access="hasRole('CRITIC')" /> 
+		<security:intercept-url pattern="/museum/critic/list.do" access="hasRole('CRITIC')" /> 
 		<security:intercept-url pattern="/museum/sponsor/display.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/museum/sponsor/list.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/museum/visitor/display.do" access="hasRole('VISITOR')" /> 
@@ -147,12 +150,12 @@
 		<security:intercept-url pattern="/product/display.do" access="isAnonymous()" />  
 		<security:intercept-url pattern="/product/visitor/display.do" access="hasRole('VISITOR')" />  
 		<security:intercept-url pattern="/product/sponsor/display.do" access="hasRole('SPONSOR')" />  
-		<security:intercept-url pattern="/product/reviewer/display.do" access="hasRole('REVIEWER')" />  
+		<security:intercept-url pattern="/product/critic/display.do" access="hasRole('CRITIC')" />  
 		<security:intercept-url pattern="/product/guide/display.do" access="hasRole('GUIDE')" />  
 		<security:intercept-url pattern="/product/director/display.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/product/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 
-		<security:intercept-url pattern="/reviewer/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/critic/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />
 		
@@ -162,7 +165,7 @@
 		<security:intercept-url pattern="/store/display.do" access="isAnonymous()" />  
 		<security:intercept-url pattern="/store/visitor/display.do" access="hasRole('VISITOR')" />  
 		<security:intercept-url pattern="/store/sponsor/display.do" access="hasRole('SPONSOR')" />  
-		<security:intercept-url pattern="/store/reviewer/display.do" access="hasRole('REVIEWER')" />  
+		<security:intercept-url pattern="/store/critic/display.do" access="hasRole('CRITIC')" />  
 		<security:intercept-url pattern="/store/guide/display.do" access="hasRole('GUIDE')" />  
 		<security:intercept-url pattern="/store/director/display.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/store/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 

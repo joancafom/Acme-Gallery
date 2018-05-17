@@ -78,15 +78,15 @@ public class Critique extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------------------------------
 
-	private Reviewer	reviewer;
+	private Critic		critic;
 	private Exhibition	exhibition;
 
 
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Reviewer getReviewer() {
-		return this.reviewer;
+	public Critic getCritic() {
+		return this.critic;
 	}
 
 	@NotNull
@@ -96,8 +96,8 @@ public class Critique extends DomainEntity {
 		return this.exhibition;
 	}
 
-	public void setReviewer(final Reviewer reviewer) {
-		this.reviewer = reviewer;
+	public void setCritic(final Critic critic) {
+		this.critic = critic;
 	}
 
 	public void setExhibition(final Exhibition exhibition) {

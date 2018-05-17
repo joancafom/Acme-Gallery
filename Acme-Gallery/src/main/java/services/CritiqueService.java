@@ -33,7 +33,7 @@ public class CritiqueService {
 	private DirectorService		directorService;
 
 	@Autowired
-	private ReviewerService		reviewerService;
+	private CriticService		criticService;
 
 
 	// Validator --------------------------------------------------------------------------------------
@@ -52,8 +52,8 @@ public class CritiqueService {
 		Assert.isTrue(critique.getExhibition().getDayPasses().isEmpty());
 		Assert.isTrue(critique.getExhibition().getSponsorships().isEmpty());
 
-		critique.getReviewer().getCritiques().remove(critique);
-		this.reviewerService.save(critique.getReviewer());
+		critique.getCritic().getCritiques().remove(critique);
+		this.criticService.save(critique.getCritic());
 
 		critique.getExhibition().getCritiques().remove(critique);
 

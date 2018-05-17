@@ -31,7 +31,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Exhibition extends DomainEntity {
 
-	private String				identifier;
+	private String				ticker;
 	private String				title;
 	private String				description;
 	private Date				startingDate;
@@ -44,8 +44,8 @@ public class Exhibition extends DomainEntity {
 	@NotBlank
 	@Pattern(regexp = "^([A-Za-z0-9]{5,}-[A-Za-z0-9]{4,})$")
 	@Column(unique = true)
-	public String getIdentifier() {
-		return this.identifier;
+	public String getTicker() {
+		return this.ticker;
 	}
 
 	@NotBlank
@@ -93,8 +93,8 @@ public class Exhibition extends DomainEntity {
 		return this.price;
 	}
 
-	public void setIdentifier(final String identifier) {
-		this.identifier = identifier;
+	public void setTicker(final String ticker) {
+		this.ticker = ticker;
 	}
 
 	public void setTitle(final String title) {
@@ -132,7 +132,7 @@ public class Exhibition extends DomainEntity {
 	private Collection<Sponsorship>	sponsorships;
 	private Collection<Critique>	critiques;
 	private Category				category;
-	private Collection<Highlight>	highlights;
+	private Collection<Artwork>		artworks;
 	private Collection<Guide>		guides;
 	private Room					room;
 
@@ -168,8 +168,8 @@ public class Exhibition extends DomainEntity {
 	@NotNull
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "exhibition")
-	public Collection<Highlight> getHighlights() {
-		return this.highlights;
+	public Collection<Artwork> getArtworks() {
+		return this.artworks;
 	}
 
 	@NotNull
@@ -202,8 +202,8 @@ public class Exhibition extends DomainEntity {
 		this.category = category;
 	}
 
-	public void setHighlights(final Collection<Highlight> highlights) {
-		this.highlights = highlights;
+	public void setArtworks(final Collection<Artwork> artworks) {
+		this.artworks = artworks;
 	}
 
 	public void setGuides(final Collection<Guide> guides) {

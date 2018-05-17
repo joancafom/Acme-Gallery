@@ -31,8 +31,8 @@
 <jstl:if test="${actor == 'guide'}">
 	<spring:message code="guideTitle" var="actorTitle"></spring:message>
 </jstl:if>
-<jstl:if test="${actor == 'reviewer'}">
-	<spring:message code="reviewerTitle" var="actorTitle"></spring:message>
+<jstl:if test="${actor == 'critic'}">
+	<spring:message code="criticTitle" var="actorTitle"></spring:message>
 </jstl:if>
 
 <script type="text/javascript">

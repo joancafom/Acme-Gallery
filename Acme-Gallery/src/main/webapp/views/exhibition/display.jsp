@@ -67,34 +67,34 @@
 	</div>
 </div>
 
-<div id="eHighlights" class="info">
+<div id="eArtworks" class="info">
 
-	<h4><spring:message code="exhibition.highlights"/></h4>
+	<h4><spring:message code="exhibition.artworks"/></h4>
 	
-	<display:table name="highlights" id="highlight" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeH}">
-		<display:column titleKey="highlight.title">
-			<a href="highlight/${actorWS}display.do?highlightId=<jstl:out value="${highlight.id}" />"><jstl:out value="${highlight.title}" /></a>
+	<display:table name="artworks" id="artwork" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeH}">
+		<display:column titleKey="artwork.title">
+			<a href="artwork/${actorWS}display.do?artworkId=<jstl:out value="${artwork.id}" />"><jstl:out value="${artwork.title}" /></a>
 		</display:column>
-		<display:column titleKey="highlight.photograph">
-			<img src="${highlight.photograph}" alt="${highlight.title}" title="${highlight.title}" style="max-width:200px;"/>
+		<display:column titleKey="artwork.photograph">
+			<img src="${artwork.photograph}" alt="${artwork.title}" title="${artwork.title}" style="max-width:200px;"/>
 		</display:column>
-		<display:column titleKey="highlight.creatorName">
+		<display:column titleKey="artwork.creatorName">
 			<jstl:choose>
-				<jstl:when test="${highlight.creatorName eq null}">
+				<jstl:when test="${artwork.creatorName eq null}">
 					-
 				</jstl:when>
 				<jstl:otherwise>
-					<jstl:out value="${highlight.creatorName}"></jstl:out>
+					<jstl:out value="${artwork.creatorName}"></jstl:out>
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>
-		<display:column titleKey="highlight.year">
+		<display:column titleKey="artwork.year">
 			<jstl:choose>
-				<jstl:when test="${highlight.year eq null}">
+				<jstl:when test="${artwork.year eq null}">
 					-
 				</jstl:when>
 				<jstl:otherwise>
-					<jstl:out value="${highlight.year}"></jstl:out>
+					<jstl:out value="${artwork.year}"></jstl:out>
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>
@@ -105,8 +105,8 @@
 	<h4><spring:message code="exhibition.critiques"/></h4>
 	
 	<display:table name="critiques" id="critique" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeC}">
-		<display:column titleKey="critique.reviewer">
-			<jstl:out value="${critique.reviewer.name}" /> <jstl:out value="${critique.reviewer.surnames}" />
+		<display:column titleKey="critique.critic">
+			<jstl:out value="${critique.critic.name}" /> <jstl:out value="${critique.critic.surnames}" />
 		</display:column>
 		<display:column titleKey="critique.title">
 			<a href="critique/${actorWS}display.do?critiqueId=<jstl:out value="${critique.id}" />"><jstl:out value="${critique.title}" /></a>

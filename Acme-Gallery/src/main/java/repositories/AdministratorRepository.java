@@ -141,12 +141,12 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	// ---------------------------------------- QUERY #11 ---------------------------------------------
 
 	// v1.0 - Alicia
-	@Query("select avg(e.highlights.size) from Exhibition e")
-	Double avgHighlightsPerExhibition();
+	@Query("select avg(e.artworks.size) from Exhibition e")
+	Double avgArtworksPerExhibition();
 
 	// v1.0 - Alicia
-	@Query("select sqrt(sum(e.highlights.size * e.highlights.size) / count(e.highlights.size) - avg(e.highlights.size) * avg(e.highlights.size)) from Exhibition e")
-	Double stdHighlightsPerExhibition();
+	@Query("select sqrt(sum(e.artworks.size * e.artworks.size) / count(e.artworks.size) - avg(e.artworks.size) * avg(e.artworks.size)) from Exhibition e")
+	Double stdArtworksPerExhibition();
 
 	// ---------------------------------------- QUERY #12 ---------------------------------------------
 

@@ -21,8 +21,16 @@
 
 <form:form action="museum/director/edit.do" modelAttribute="museum">
 	
+	<form:hidden path="id"/>
+	
    <acme:textbox code="museum.name" path="name" />
-   <acme:textbox code="museum.identifier" path="identifier" placeholder="MdP"/>
+   
+   <jstl:choose>
+   		<jstl:when test="${museum.id == 0}">
+   			<acme:textbox code="museum.identifier" path="identifier" placeholder="MdP"/>
+   		</jstl:when>
+   </jstl:choose>
+   
    <acme:textbox code="museum.title" path="title" />
    <acme:textbox code="museum.address" path="address" />
    <acme:textbox code="museum.email" path="email" />
@@ -31,6 +39,8 @@
    <acme:textbox code="museum.coordinates.latitude" path="coordinates.latitude" />
    <acme:textbox code="museum.coordinates.longitude" path="coordinates.longitude" />
    <acme:textbox code="museum.banner" path="banner" />
+   
+   <br>
    
 	<acme:cancel url="museum/director/listMine.do" code="museum.cancel"/>
 	<acme:submit name="save" code="museum.save"/>

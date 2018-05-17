@@ -103,6 +103,24 @@ public class MuseumDirectorController extends AbstractController {
 	}
 
 	// v1.0 - JA
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(final int museumId) {
+		ModelAndView res = null;
+
+		final Museum museum = this.museumService.findOne(museumId);
+		Assert.notNull(museum);
+
+		final Director currentDirector = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentDirector);
+
+		Assert.isTrue(currentDirector.equals(museum.getDirector()));
+
+		res = this.createEditModelAndView(museum);
+
+		return res;
+	}
+
+	// v1.0 - JA
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Museum prunedMuseum, final BindingResult binding) {
 		ModelAndView res = null;
@@ -113,7 +131,13 @@ public class MuseumDirectorController extends AbstractController {
 			res = this.createEditModelAndView(prunedMuseum);
 		else
 			try {
-				final Museum savedMuseum = this.museumService.saveCreate(museum);
+				final Museum savedMuseum;
+
+				if (museum.getId() == 0)
+					savedMuseum = this.museumService.saveCreate(museum);
+				else
+					savedMuseum = this.museumService.saveEdit(museum);
+
 				res = new ModelAndView("redirect:display.do?museumId=" + savedMuseum.getId());
 			} catch (final DataIntegrityViolationException oops) {
 				res = this.createEditModelAndView(prunedMuseum, "museum.identifier.error");

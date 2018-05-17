@@ -108,7 +108,25 @@ public class MuseumService extends ActorService {
 
 		Assert.notNull(prunedMuseum);
 
-		final Museum reconstructedMuseum = this.create();
+		final Museum reconstructedMuseum;
+
+		if (prunedMuseum.getId() == 0) {
+			reconstructedMuseum = this.create();
+			reconstructedMuseum.setIdentifier(prunedMuseum.getIdentifier());
+		} else {
+			final Museum retrievedMuseum = this.findOne(prunedMuseum.getId());
+			Assert.notNull(retrievedMuseum);
+
+			reconstructedMuseum = prunedMuseum;
+
+			reconstructedMuseum.setDayPasses(new HashSet<DayPass>(retrievedMuseum.getDayPasses()));
+			reconstructedMuseum.setDirector(retrievedMuseum.getDirector());
+			reconstructedMuseum.setGroups(new HashSet<Group>(retrievedMuseum.getGroups()));
+			reconstructedMuseum.setGuides(new HashSet<Guide>(retrievedMuseum.getGuides()));
+			reconstructedMuseum.setReviews(new HashSet<Review>(retrievedMuseum.getReviews()));
+			reconstructedMuseum.setRooms(new HashSet<Room>(retrievedMuseum.getRooms()));
+			reconstructedMuseum.setIdentifier(retrievedMuseum.getIdentifier());
+		}
 
 		reconstructedMuseum.setName(prunedMuseum.getName());
 		reconstructedMuseum.setAddress(prunedMuseum.getAddress());
@@ -120,7 +138,6 @@ public class MuseumService extends ActorService {
 			reconstructedMuseum.setTitle(null);
 		else
 			reconstructedMuseum.setTitle(prunedMuseum.getTitle());
-		reconstructedMuseum.setIdentifier(prunedMuseum.getIdentifier());
 
 		if ("".equals(prunedMuseum.getBanner()))
 			reconstructedMuseum.setBanner(null);
@@ -133,7 +150,6 @@ public class MuseumService extends ActorService {
 
 		return reconstructedMuseum;
 	}
-
 	// v1.0 - JA
 	public Museum saveCreate(final Museum museum) {
 
@@ -154,6 +170,27 @@ public class MuseumService extends ActorService {
 		//Update the associated director
 		currentDirector.getMuseums().add(savedMuseum);
 		this.directorService.save(currentDirector);
+
+		return savedMuseum;
+	}
+
+	// v1.0 - JA
+	public Museum saveEdit(final Museum museum) {
+
+		Assert.notNull(museum);
+
+		//Make sure an Director is the Actor who is trying to perform the operation
+		final Director currentDirector = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentDirector);
+
+		//As we are creating, the museum must be an existing one
+		Assert.isTrue(museum.getId() != 0);
+		Assert.isTrue(this.museumRepository.exists(museum.getId()));
+
+		//The museum must be assigned to the current Director
+		Assert.isTrue(currentDirector.equals(museum.getDirector()));
+
+		final Museum savedMuseum = this.save(museum);
 
 		return savedMuseum;
 	}

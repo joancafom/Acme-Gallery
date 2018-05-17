@@ -41,6 +41,14 @@
 	
 	<display:column titleKey="museum.address" property="address"/>
 	<display:column titleKey="museum.email" property="email"/>
+	
+	<security:authorize access="hasRole('DIRECTOR')">
+	<jstl:if test="${own}">
+		<display:column>
+			<a href="museum/director/edit.do?museumId=${museum.id}"><spring:message code="museum.edit"/></a>
+		</display:column>
+	</jstl:if>
+</security:authorize>
 
 </display:table>
 

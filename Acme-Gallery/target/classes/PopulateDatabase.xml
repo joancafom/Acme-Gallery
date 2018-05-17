@@ -1530,7 +1530,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="85.99"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.22"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum1"/>
@@ -1551,7 +1551,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="80.00"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.25"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum2"/>
@@ -1613,7 +1613,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard2"/>
  		<property name="price" value="68.99"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.20"/>
  		
  		<property name="visitor" ref="visitor2"/>
  		<property name="museum" ref="museum1"/>
@@ -1634,7 +1634,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard2"/>
  		<property name="price" value="80.00"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.18"/>
  		
  		<property name="visitor" ref="visitor2"/>
  		<property name="museum" ref="museum2"/>
@@ -1654,7 +1654,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard2"/>
  		<property name="price" value="67.90"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.20"/>
  		
  		<property name="visitor" ref="visitor2"/>
  		<property name="museum" ref="museum5"/>
@@ -1716,7 +1716,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="80.00"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.27"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum2"/>
@@ -1736,7 +1736,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="70.50"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.25"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum4"/>
@@ -1757,7 +1757,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard4"/>
  		<property name="price" value="68.99"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.25"/>
  		
  		<property name="visitor" ref="visitor4"/>
  		<property name="museum" ref="museum1"/>
@@ -1778,7 +1778,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard4"/>
  		<property name="price" value="80.00"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.25"/>
  		
  		<property name="visitor" ref="visitor4"/>
  		<property name="museum" ref="museum8"/>
@@ -1820,7 +1820,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="80.00"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.20"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum2"/>
@@ -1840,7 +1840,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="67.90"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.29"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum5"/>
@@ -1860,7 +1860,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="80.99"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.31"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum8"/>
@@ -1881,7 +1881,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard1"/>
  		<property name="price" value="58.99"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.30"/>
  		
  		<property name="visitor" ref="visitor1"/>
  		<property name="museum" ref="museum1"/>
@@ -1944,7 +1944,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard5"/>
  		<property name="price" value="83.99"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.24"/>
  		
  		<property name="visitor" ref="visitor5"/>
  		<property name="museum" ref="museum5"/>
@@ -1965,7 +1965,7 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="49.99"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.28"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum7"/>
@@ -1986,13 +1986,11 @@
  		</property>
  		<property name="creditCard" ref="creditCard6"/>
  		<property name="price" value="49.99"/>
- 		<property name="VAT" value="0.21"/>
+ 		<property name="VAT" value="0.22"/>
  		
  		<property name="visitor" ref="visitor6"/>
  		<property name="museum" ref="museum9"/>
 	</bean>
-	
-	
 	
 	
 	<!-- Exhibitions -->
@@ -2051,6 +2049,12 @@
  				<ref bean="artwork4"/>
  				<ref bean="artwork5"/>
  				<ref bean="artwork6"/>
+ 				<ref bean="artwork15"/>
+ 				<ref bean="artwork16"/>
+ 				<ref bean="artwork17"/>
+ 				<ref bean="artwork18"/>
+ 				<ref bean="artwork19"/>
+ 				<ref bean="artwork20"/>
  			</list>
  		</property>
  		<property name="guides">
@@ -3629,6 +3633,7 @@
 		<property name="remark" value="The Starry Night is an oil on canvas by the Dutch post-impressionist painter Vincent van Gogh. Painted in June 1889, it depicts the view from the east-facing window of his asylum room at Saint-Rémy-de-Provence, just before sunrise, with the addition of an idealized village. It has been in the permanent collection of the Museum of Modern Art in New York City since 1941, acquired through the Lillie P. Bliss Bequest. Regarded as among Van Gogh's finest works, The Starry Night is one of the most recognized paintings in the history of Western culture."/>
 		<property name="year" value="1889"/>
 		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -3639,6 +3644,7 @@
 		<property name="remark" value="Sunflowers (original title, in French: Tournesols) is the name of two series of still life paintings by the Dutch painter Vincent van Gogh. The first series, executed in Paris in 1887, depicts the flowers lying on the ground, while the second set, executed a year later in Arles, shows a bouquet of sunflowers in a vase. In the artist's mind both sets were linked by the name of his friend Paul Gauguin, who acquired two of the Paris versions"/>
 		<property name="year" value="1880"/>
 		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -3651,6 +3657,7 @@
 Van Gogh's own title for this composition was simply The Bedroom (French: La Chambre à coucher). There are three authentic versions described in his letters, easily discernible from one another by the pictures on the wall to the right."/>
 		<property name="year" value="1888"/>
 		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -3661,6 +3668,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="Almond Blossoms is from a group of several paintings made in 1888 and 1890 by Vincent van Gogh in Arles and Saint-Rémy, southern France of blossoming almond trees. Flowering trees were special to van Gogh. They represented awakening and hope. He enjoyed them aesthetically and found joy in painting flowering trees. The works reflect the influence of Impressionism, Divisionism, and Japanese woodcuts."/>
 		<property name="year" value="1890"/>
 		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -3671,6 +3679,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="Irises is one of several paintings of irises by the Dutch artist Vincent van Gogh, and one of a series of paintings he executed at the Saint Paul-de-Mausole asylum in Saint-Rémy-de-Provence, France, in the last year before his death in 1890."/>
 		<property name="year" value="1889"/>
 		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -3681,6 +3690,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="Self portrait is an 1889 oil on canvas painting by the post-impressionist artist Vincent van Gogh. The picture, which may have been van Gogh's last self-portrait, was painted in September that year, shortly before he left Saint-Rémy-de-Provence in southern France."/>
 		<property name="year" value="1889"/>
 		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
@@ -3691,6 +3701,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="The Fall of Phaeton is a painting by the Flemish master Peter Paul Rubens, featuring the ancient Greek myth of Phaeton (Phaethon), a recurring theme in visual arts. Rubens chose to depict the myth at the height of its action, with the thunderbolts hurled by Zeus to the right."/>
 		<property name="year" value="1605"/>
 		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition3"/>
 	</bean>
 	
@@ -3701,6 +3712,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="Las Meninas is a 1656 painting in the Museo del Prado in Madrid, by Diego Velázquez, the leading artist of the Spanish Golden Age. Its complex and enigmatic composition raises questions about reality and illusion, and creates an uncertain relationship between the viewer and the figures depicted. Because of these complexities, Las Meninas has been one of the most widely analyzed works in Western painting."/>
 		<property name="year" value="1656"/>
 		<property name="isFinal" value="false"/>
+		<property name="isHighlight" value="false"/>
 		<property name="exhibition" ref="exhibition6"/>
 	</bean>
 	
@@ -3711,6 +3723,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="The tallest tree of all, in Dortmund, Germany, is a prime example of this more creative approach to tall trees. At around 46m or 150 feet tall every year, it is enormous, the King Kong of Christmas trees."/>
 		<property name="year" value="2017"/>
 		<property name="isFinal" value="false"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition8"/>
 	</bean>
 	
@@ -3721,6 +3734,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="The Death of Sardanapalus (La Mort de Sardanapale) is an oil painting on canvas by Eugène Delacroix, dated 1827. It currently hangs in the Musée du Louvre, Paris. A smaller replica, painted by Delacroix in 1844, is now in the Philadelphia Museum of Art."/>
 		<property name="year" value="1827"/>
 		<property name="isFinal" value="false"/>
+		<property name="isHighlight" value="false"/>
 		<property name="exhibition" ref="exhibition10"/>
 	</bean>
 	
@@ -3731,6 +3745,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="TODO"/>
 		<property name="year" value="1992"/>
 		<property name="isFinal" value="false"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition11"/>
 	</bean>
 	
@@ -3739,7 +3754,8 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Lady_Gaga_Toronto_Film_Festival_2017_%28cropped%29.jpg/250px-Lady_Gaga_Toronto_Film_Festival_2017_%28cropped%29.jpg"/>
 		<property name="remark" value="Stefani Joanne Angelina Germanotta ()born March 28, 1986), known professionally as Lady Gaga, is an American singer, songwriter, and actress. She is known for her unconventionality and provocative work as well as visual experimentation."/>
 		<property name="year" value="2018"/>
-		<property name="isFinal" value="false"/>
+		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="false"/>
 		<property name="exhibition" ref="exhibition12"/>
 	</bean>
 	
@@ -3749,6 +3765,7 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="remark" value="Elizabeth Woolridge Grant (born June 21, 1985), known professionally as Lana Del Rey, is an American singer and songwriter. Her music has been noted by critics for its stylized cinematic quality, its preoccupation with themes of tragic romance, glamour, and melancholia, and its references to pop culture, particularly 1950s and 1960s Americana."/>
 		<property name="year" value="2018"/>
 		<property name="isFinal" value="false"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition12"/>
 	</bean>
 	
@@ -3757,8 +3774,81 @@ Van Gogh's own title for this composition was simply The Bedroom (French: La Cha
 		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Lorde_Brisbane_Nov_2017_%28cropped%29.jpg/220px-Lorde_Brisbane_Nov_2017_%28cropped%29.jpg"/>
 		<property name="remark" value="Ella Marija Lani Yelich-O'Connor (born 7 November 1996), known professionally as Lorde (pronounced lord), is a New Zealand singer, songwriter, and record producer who holds both New Zealand and Croatian citizenship. Born in the Auckland suburb of Takapuna and raised in neighbouring Devonport, she became interested in performing as a child. In her early teens, she signed with Universal Music Group and was later paired with songwriter and record producer Joel Little."/>
 		<property name="year" value="2018"/>
-		<property name="isFinal" value="false"/>
+		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="true"/>
 		<property name="exhibition" ref="exhibition12"/>
+	</bean>
+	
+	<bean id="artwork15" class="domain.Artwork">
+		<property name="title" value="The Yellow House"/>
+		<property name="creatorName" value="Vicent Van Gogh"/>
+		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Vincent_van_Gogh_-_The_yellow_house_%28%27The_street%27%29.jpg/300px-Vincent_van_Gogh_-_The_yellow_house_%28%27The_street%27%29.jpg"/>
+		<property name="remark" value="The Yellow House (Dutch: Het gele huis), alternatively named The Street (Dutch: De straat), is an 1888 oil painting by the 19th-century Dutch Post-Impressionist painter Vincent van Gogh.
+
+The house was the right wing of 2 Place Lamartine, Arles, France, where, on May 1, 1888, Van Gogh rented four rooms. He occupied two large ones on the ground floor to serve as an atelier (workshop) and kitchen, and on the first floor, two smaller ones facing Place Lamartine. The window on the first floor near the corner with both shutters open is that of Van Gogh's guest room, where Paul Gauguin lived for nine weeks from late October 1888. Behind the next window, with one shutter closed, is Van Gogh's bedroom. The two small rooms at the rear were rented by Van Gogh at a later time."/>
+		<property name="year" value="1888"/>
+		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="false"/>
+		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="artwork16" class="domain.Artwork">
+		<property name="title" value="The Potato Eaters"/>
+		<property name="creatorName" value="Vicent Van Gogh"/>
+		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Van-willem-vincent-gogh-die-kartoffelesser-03850.jpg/300px-Van-willem-vincent-gogh-die-kartoffelesser-03850.jpg"/>
+		<property name="remark" value="The Potato Eaters (Dutch: De Aardappeleters) is an oil painting by Dutch artist Vincent van Gogh painted in April 1885 in Nuenen, Netherlands. It is in the Van Gogh Museum in Amsterdam. A preliminary oil sketch of the painting is at the Kröller-Müller Museum in Otterlo, and he also made lithographs of the image, which are held in collections including the Museum of Modern Art in New York City. The painting is considered to be one of Van Gogh's masterpieces."/>
+		<property name="year" value="1885"/>
+		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="false"/>
+		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="artwork17" class="domain.Artwork">
+		<property name="title" value="Wheatfield with Crows"/>
+		<property name="creatorName" value="Vicent Van Gogh"/>
+		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Vincent_Van_Gogh_-_Wheatfield_with_Crows.jpg/300px-Vincent_Van_Gogh_-_Wheatfield_with_Crows.jpg"/>
+		<property name="remark" value="Wheatfield with Crows is a July 1890 painting by Vincent van Gogh. It has been cited by several critics as one of his greatest works.
+
+It is commonly stated that this was van Gogh's final painting. However, art historians are uncertain as to which painting was van Gogh's last, as no clear historical records exist. The evidence of his letters suggests that Wheatfield with Crows was completed around 10 July and predates such paintings as Auvers Town Hall on 14 July 1890 and Daubigny's Garden. Moreover, Jan Hulsker points out that a painting of harvested wheat, Field with Stacks of Wheat (F771), must be a later painting."/>
+		<property name="year" value="1890"/>
+		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="false"/>
+		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="artwork18" class="domain.Artwork">
+		<property name="title" value="The Red Vineyard"/>
+		<property name="creatorName" value="Vicent Van Gogh"/>
+		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Red_vineyards.jpg/300px-Red_vineyards.jpg"/>
+		<property name="remark" value="The Red Vineyards near Arles is an oil painting by the Dutch painter Vincent van Gogh, executed on a privately primed Toile de 30 piece of burlap in early November 1888. The painting is believed to be the only van Gogh painting ever sold in his lifetime and has been listed among his major works."/>
+		<property name="year" value="1888"/>
+		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="false"/>
+		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="artwork19" class="domain.Artwork">
+		<property name="title" value="Café Terrace at Night"/>
+		<property name="creatorName" value="Vicent Van Gogh"/>
+		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Van_Gogh_-_Terrasse_des_Caf%C3%A9s_an_der_Place_du_Forum_in_Arles_am_Abend1.jpeg/300px-Van_Gogh_-_Terrasse_des_Caf%C3%A9s_an_der_Place_du_Forum_in_Arles_am_Abend1.jpeg"/>
+		<property name="remark" value="Café Terrace at Night is a 1888 oil painting by the Dutch artist Vincent van Gogh in 1888. It is also known as The Cafe Terrace on the Place du Forum, and, when first exhibited in 1891, was entitled Coffeehouse, in the evening (Café, le soir).
+
+Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888. The painting is not signed, but described and mentioned by the artist in three letters."/>
+		<property name="year" value="1888"/>
+		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="false"/>
+		<property name="exhibition" ref="exhibition1"/>
+	</bean>
+	
+	<bean id="artwork20" class="domain.Artwork">
+		<property name="title" value="Starry Night Over the Rhône"/>
+		<property name="creatorName" value="Vicent Van Gogh"/>
+		<property name="photograph" value="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Starry_Night_Over_the_Rhone.jpg/300px-Starry_Night_Over_the_Rhone.jpg"/>
+		<property name="remark" value="Starry Night Over the Rhône (September 1888, French: Nuit étoilée sur le Rhône) is one of Vincent van Gogh's paintings of Arles at nighttime. It was painted at a spot on the bank of the Rhône that was only a one or two-minute walk from the Yellow House on the Place Lamartine which Van Gogh was renting at the time. The night sky and the effects of light at night provided the subject for some of his more famous paintings, including Cafe Terrace at Night (painted earlier the same month) and the later canvas from Saint-Rémy, The Starry Night."/>
+		<property name="year" value="1888"/>
+		<property name="isFinal" value="true"/>
+		<property name="isHighlight" value="false"/>
+		<property name="exhibition" ref="exhibition1"/>
 	</bean>
 	
 	<!-- Incidents -->

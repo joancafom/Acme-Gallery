@@ -22,6 +22,7 @@
 <form:form action="museum/director/edit.do" modelAttribute="museum">
 	
 	<form:hidden path="id"/>
+	<form:hidden path="version"/>
 	
    <acme:textbox code="museum.name" path="name" />
    
@@ -31,7 +32,7 @@
    		</jstl:when>
    </jstl:choose>
    
-   <acme:textbox code="museum.title" path="title" />
+   <acme:textbox code="museum.slogan" path="slogan" />
    <acme:textbox code="museum.address" path="address" />
    <acme:textbox code="museum.email" path="email" />
    <acme:textbox code="museum.phoneNumber" path="phoneNumber" />

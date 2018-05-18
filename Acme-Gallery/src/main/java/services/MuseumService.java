@@ -113,26 +113,28 @@ public class MuseumService extends ActorService {
 		if (prunedMuseum.getId() == 0) {
 			reconstructedMuseum = this.create();
 			reconstructedMuseum.setIdentifier(prunedMuseum.getIdentifier());
+			reconstructedMuseum.setName(prunedMuseum.getName());
+			reconstructedMuseum.setAddress(prunedMuseum.getAddress());
+			reconstructedMuseum.setCoordinates(prunedMuseum.getCoordinates());
+			reconstructedMuseum.setEmail(prunedMuseum.getEmail());
+			reconstructedMuseum.setPhoneNumber(prunedMuseum.getPhoneNumber());
+			reconstructedMuseum.setPrice(prunedMuseum.getPrice());
+
 		} else {
 			final Museum retrievedMuseum = this.findOne(prunedMuseum.getId());
 			Assert.notNull(retrievedMuseum);
 
 			reconstructedMuseum = prunedMuseum;
 
-			reconstructedMuseum.setDayPasses(new HashSet<DayPass>(retrievedMuseum.getDayPasses()));
-			reconstructedMuseum.setDirector(retrievedMuseum.getDirector());
-			reconstructedMuseum.setGroups(new HashSet<Group>(retrievedMuseum.getGroups()));
-			reconstructedMuseum.setGuides(new HashSet<Guide>(retrievedMuseum.getGuides()));
-			reconstructedMuseum.setReviews(new HashSet<Review>(retrievedMuseum.getReviews()));
-			reconstructedMuseum.setRooms(new HashSet<Room>(retrievedMuseum.getRooms()));
 			reconstructedMuseum.setIdentifier(retrievedMuseum.getIdentifier());
+			reconstructedMuseum.setVersion(retrievedMuseum.getVersion());
+			reconstructedMuseum.setDayPasses(retrievedMuseum.getDayPasses());
+			reconstructedMuseum.setDirector(retrievedMuseum.getDirector());
+			reconstructedMuseum.setGroups(retrievedMuseum.getGroups());
+			reconstructedMuseum.setGuides(retrievedMuseum.getGuides());
+			reconstructedMuseum.setReviews(retrievedMuseum.getReviews());
+			reconstructedMuseum.setRooms(retrievedMuseum.getRooms());
 		}
-
-		reconstructedMuseum.setName(prunedMuseum.getName());
-		reconstructedMuseum.setAddress(prunedMuseum.getAddress());
-		reconstructedMuseum.setCoordinates(prunedMuseum.getCoordinates());
-		reconstructedMuseum.setEmail(prunedMuseum.getEmail());
-		reconstructedMuseum.setPhoneNumber(prunedMuseum.getPhoneNumber());
 
 		if ("".equals(prunedMuseum.getSlogan()))
 			reconstructedMuseum.setSlogan(null);
@@ -143,8 +145,6 @@ public class MuseumService extends ActorService {
 			reconstructedMuseum.setBanner(null);
 		else
 			reconstructedMuseum.setBanner(prunedMuseum.getBanner());
-
-		reconstructedMuseum.setPrice(prunedMuseum.getPrice());
 
 		this.validator.validate(reconstructedMuseum, binding);
 
@@ -194,5 +194,4 @@ public class MuseumService extends ActorService {
 
 		return savedMuseum;
 	}
-
 }

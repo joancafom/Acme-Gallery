@@ -148,9 +148,9 @@ public class MuseumDirectorController extends AbstractController {
 		return res;
 	}
 
-	// v1.0 - Alicia
+	// v1.0 - JA
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView listResults(@RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {
+	public ModelAndView list(@RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {
 		ModelAndView res;
 
 		final Page<Museum> pageResult = this.museumService.findAllPaginated(page, 5);
@@ -161,7 +161,7 @@ public class MuseumDirectorController extends AbstractController {
 
 		res.addObject("museums", museums);
 		res.addObject("resultSize", resultSize);
-
+		res.addObject("landing", "list");
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

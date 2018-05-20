@@ -115,6 +115,8 @@
 		<security:intercept-url pattern="/exhibition/visitor/search.do" access="hasRole('VISITOR')" />
 		
 		<security:intercept-url pattern="/group/administrator/listTaboo.do" access="hasRole('ADMINISTRATOR')"/>
+		<security:intercept-url pattern="/group/administrator/list.do" access="hasRole('ADMINISTRATOR')"/>
+		<security:intercept-url pattern="/group/administrator/display.do" access="hasRole('ADMINISTRATOR')"/>
 		<security:intercept-url pattern="/group/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
 		 
 		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 

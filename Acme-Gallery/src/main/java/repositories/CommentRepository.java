@@ -26,4 +26,8 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	@Query("select c from Comment c where c.containsTaboo = false")
 	Page<Comment> findNotTabooed(Pageable pageable);
 
+	/* v1.0 - josembell */
+	@Query("select c from Comment c where c.group.id=?1")
+	Page<Comment> findAllRootByGroup(int id, Pageable pageRequest);
+
 }

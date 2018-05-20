@@ -15,6 +15,7 @@ import repositories.AnnouncementRepository;
 import security.LoginService;
 import domain.Administrator;
 import domain.Announcement;
+import domain.Group;
 
 @Service
 @Transactional
@@ -147,6 +148,17 @@ public class AnnouncementService {
 		Assert.notNull(administrator);
 
 		final Page<Announcement> res = this.announcementRepository.findNotTabooed(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	public Page<Announcement> findAllByGroup(final Integer page, final int size, final Group group) {
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		final Page<Announcement> res = this.announcementRepository.findAllByGroup(group.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
 		return res;

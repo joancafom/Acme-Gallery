@@ -30,4 +30,8 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Inte
 	@Query("select a from Announcement a where a.containsTaboo = false")
 	Page<Announcement> findNotTabooed(Pageable pageable);
 
+	/* v1.0 - josembell */
+	@Query("select a from Announcement a where a.group.id=?1")
+	Page<Announcement> findAllByGroup(int id, Pageable pageRequest);
+
 }

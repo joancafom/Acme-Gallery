@@ -18,7 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="groups" id="group" requestURI="group/administrator/listTaboo.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
+<display:table name="groups" id="group" requestURI="group/administrator/list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 	<display:column titleKey="group.name">
 		<a href="group/${actorWS}display.do?groupId=${group.id}"><jstl:out value="${group.name}"/></a>
 	</display:column>

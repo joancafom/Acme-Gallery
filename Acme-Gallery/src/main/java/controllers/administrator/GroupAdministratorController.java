@@ -114,8 +114,8 @@ public class GroupAdministratorController extends AbstractController {
 
 	/* v1.0 - display */
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int groupId, @RequestParam(value = "d-4721629-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-148477-p", defaultValue = "1") final Integer pageP, @RequestParam(
-		value = "d-1332617-p", defaultValue = "1") final Integer pageC) {
+	public ModelAndView display(@RequestParam final int groupId, @RequestParam(value = "d-4721629-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-7822565-p", defaultValue = "1") final Integer pageP, @RequestParam(
+		value = "d-1332617-p", defaultValue = "1") final Integer pageC, @RequestParam(value = "d-7822565-p", defaultValue = "1") final Integer pageR, @RequestParam(required = false) final Integer commentId) {
 		final ModelAndView res;
 		final Group group = this.groupService.findOne(groupId);
 		Assert.notNull(group);
@@ -141,6 +141,22 @@ public class GroupAdministratorController extends AbstractController {
 		res.addObject("resultSizeParticipants", resultSizeParticipant);
 		res.addObject("comments", comments);
 		res.addObject("resultSizeComments", resultSizeComment);
+
+		if (commentId != null) {
+			final Comment parentComment = this.commentService.findOne(commentId);
+			Assert.notNull(parentComment);
+			Assert.isTrue(parentComment.getGroup().equals(group));
+
+			final Page<Comment> pageResultR = this.commentService.findRepliesByComment(pageC, 5, parentComment);
+			final Collection<Comment> replies = pageResultR.getContent();
+			final Integer resultSizeReplies = new Long(pageResultR.getTotalElements()).intValue();
+
+			res.addObject("hasReplies", true);
+			res.addObject("parentComment", parentComment);
+			res.addObject("replies", replies);
+			res.addObject("resultSizeReplies", resultSizeReplies);
+
+		}
 
 		res.addObject("actorWS", this.ACTOR_WS);
 

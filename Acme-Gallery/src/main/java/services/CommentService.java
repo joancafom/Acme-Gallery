@@ -80,6 +80,12 @@ public class CommentService extends ActorService {
 		this.commentRepository.flush();
 	}
 
+	/* v1.0 - josembell */
+	public Comment findOne(final Integer commentId) {
+		Assert.notNull(commentId);
+		return this.commentRepository.findOne(commentId);
+	}
+
 	//Other Business Methods
 
 	public Collection<Comment> findTabooed() {
@@ -121,4 +127,13 @@ public class CommentService extends ActorService {
 
 		return res;
 	}
+
+	/* v1.0 - josembell */
+	public Page<Comment> findRepliesByComment(final Integer page, final int size, final Comment parentComment) {
+		final Page<Comment> res = this.commentRepository.findRepliesByComment(parentComment.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
 }

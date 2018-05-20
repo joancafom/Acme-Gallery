@@ -18,6 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <br>
 
@@ -68,16 +69,49 @@
    </div>
 </div>
 <br><br><br>
-<h3><spring:message code="group.comments"/></h3>
-<display:table name="comments" id="comment" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeComments}">
-	<display:column>
-		<p><strong><jstl:out value="${comment.visitor.name}"/> <jstl:out value="${comment.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${comment.title}"/></p>
-		<p><jstl:out value="${comment.description}"/></p><br>
-		<jstl:if test="${comment.picture!=null or comment.picture!=''}">
-			<img src="${comment.picture}" style="text-align:center;"/>
+<jstl:if test="${hasReplies==null}">
+	<h3><spring:message code="group.comments"/></h3>
+	<display:table name="comments" id="comment" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeComments}">
+		<display:column>
+			<div style="margin: 20px;">
+			<p><strong><jstl:out value="${comment.visitor.name}"/> <jstl:out value="${comment.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${comment.title}"/></p>
+			<p><jstl:out value="${comment.description}"/></p><br>
+			<jstl:if test="${comment.picture!=null or comment.picture!=''}">
+				<img src="${comment.picture}" style="text-align:center;"/>
+			</jstl:if>
+			<jstl:if test="${fn:length(comment.childrenComments)!=0}">
+				<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${comment.id}"><spring:message code="group.comment.replies"/></a>
+			</jstl:if>
+			</div>
+		</display:column>
+		
+	</display:table>
+</jstl:if><br><br>
+<jstl:if test="${hasReplies==true}">
+		<jstl:if test="${parentComment.parentComment==null}">
+			<a href="group/${actorWS}display.do?groupId=${group.id}" style="font-size:18px;"><i class="material-icons" style="font-size:16px;">arrow_back_ios</i><spring:message code="group.goBack"/></a>
 		</jstl:if>
-	</display:column>
-</display:table>
+		<jstl:if test="${parentComment.parentComment!=null}">
+			<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${parentComment.parentComment.id}" style="font-size:18px;"><i class="material-icons" style="font-size:16px;">arrow_back_ios</i><spring:message code="group.goBack"/></a>
+		</jstl:if>
+	<h3><spring:message code="group.replies"/>: <jstl:out value="${parentComment.title}"/></h3>
+	<display:table name="replies" id="reply" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeReplies}">
+		<display:column>
+			<div style="margin: 20px;">
+			<p><strong><jstl:out value="${reply.visitor.name}"/> <jstl:out value="${reply.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${reply.title}"/></p>
+			<p><jstl:out value="${reply.description}"/></p><br>
+			<jstl:if test="${reply.picture!=null or reply.picture!=''}">
+				<img src="${reply.picture}" style="text-align:center;"/>
+			</jstl:if>
+			<jstl:if test="${fn:length(reply.childrenComments)!=0}">
+				<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${reply.id}"><spring:message code="group.comment.replies"/></a>
+			</jstl:if>
+			</div>
+		</display:column>
+	</display:table>
+</jstl:if>
+
 </div>
+
 
 

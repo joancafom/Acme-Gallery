@@ -31,7 +31,7 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Inte
 	Page<Announcement> findNotTabooed(Pageable pageable);
 
 	/* v1.0 - josembell */
-	@Query("select a from Announcement a where a.group.id=?1")
+	@Query("select a from Announcement a where a.group.id=?1 order by a.creationMoment desc")
 	Page<Announcement> findAllByGroup(int id, Pageable pageRequest);
 
 }

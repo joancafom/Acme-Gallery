@@ -27,15 +27,6 @@
 		<jstl:out value="${room.area}"/> m<sup>2</sup>
 	</display:column>
 	
-	<display:column titleKey="room.isAvailable">
-		<jstl:if test="${room.isAvailable eq true}">
-			<spring:message code="room.isAvailable.true"/>
-		</jstl:if>
-		<jstl:if test="${room.isAvailable eq false}">
-			<spring:message code="room.isAvailable.false"/>
-		</jstl:if>
-	</display:column>
-	
 	<display:column titleKey="room.inRepair">
 		<jstl:if test="${room.inRepair eq true}">
 			<spring:message code="room.inRepair.true"/>

@@ -145,12 +145,8 @@ public class ExhibitionService {
 		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
 		Assert.isTrue(this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate()).isEmpty());
 
-		if (exhibition.getId() == 0) {
-			exhibition.getRoom().setIsAvailable(false);
-			this.roomService.save(exhibition.getRoom());
-
+		if (exhibition.getId() == 0)
 			exhibition.setTicker(director.getUserAccount().getUsername() + "-" + exhibition.getTicker());
-		}
 
 		Assert.notNull(exhibition.getWebsites());
 		if (!exhibition.getWebsites().isEmpty())

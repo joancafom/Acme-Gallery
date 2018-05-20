@@ -324,7 +324,7 @@ public class ExhibitionDirectorController extends AbstractController {
 		res = new ModelAndView("exhibition/edit");
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
-		final Collection<Room> rooms = this.roomService.getAvailableByPrincipal();
+		final Collection<Room> rooms = this.roomService.getByPrincipal();
 
 		res.addObject("exhibition", exhibition);
 		res.addObject("categories", categories);

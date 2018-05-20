@@ -22,7 +22,6 @@ public class Room extends DomainEntity {
 
 	private String	name;
 	private Double	area;
-	private boolean	isAvailable;
 	private boolean	inRepair;
 
 
@@ -39,11 +38,6 @@ public class Room extends DomainEntity {
 	}
 
 	@NotNull
-	public boolean getIsAvailable() {
-		return this.isAvailable;
-	}
-
-	@NotNull
 	public boolean getInRepair() {
 		return this.inRepair;
 	}
@@ -54,10 +48,6 @@ public class Room extends DomainEntity {
 
 	public void setArea(final Double area) {
 		this.area = area;
-	}
-
-	public void setIsAvailable(final boolean isAvailable) {
-		this.isAvailable = isAvailable;
 	}
 
 	public void setInRepair(final boolean inRepair) {

@@ -15,10 +15,6 @@ import domain.Room;
 public interface RoomRepository extends JpaRepository<Room, Integer> {
 
 	// v1.0 - Alicia
-	@Query("select r from Room r where r.museum.director.id = ?1 and r.isAvailable = true")
-	Collection<Room> findAvailableByDirectorId(int directorId);
-
-	// v1.0 - Alicia
 	@Query("select r from Room r where r.museum.director.id = ?1")
 	Collection<Room> findByDirectorId(int directorId);
 

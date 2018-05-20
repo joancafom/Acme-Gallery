@@ -29,15 +29,6 @@
 		<a href="museum/director/display.do?museumId=${room.museum.id}"><jstl:out value="${room.museum.name}"/></a>
 	</display:column>
 	
-	<display:column titleKey="room.isAvailable">
-		<jstl:if test="${room.isAvailable eq true}">
-			<spring:message code="room.isAvailable.true"/>
-		</jstl:if>
-		<jstl:if test="${room.isAvailable eq false}">
-			<spring:message code="room.isAvailable.false"/>
-		</jstl:if>
-	</display:column>
-	
 	<display:column titleKey="room.inRepair">
 		<jstl:if test="${room.inRepair eq true}">
 			<spring:message code="room.inRepair.true"/>

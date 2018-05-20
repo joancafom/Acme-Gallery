@@ -24,7 +24,6 @@
 
 <p><strong><spring:message code="room.name"/>:</strong> <jstl:out value="${room.name}"/></p>
 <p><strong><spring:message code="room.area"/>:</strong> <jstl:out value="${room.area}"/> m<sup>2</sup></p>
-<p><strong><spring:message code="room.isAvailable"/>:</strong> <jstl:if test="${room.isAvailable eq true}"><spring:message code="room.isAvailable.true"/></jstl:if><jstl:if test="${room.isAvailable eq false}"><spring:message code="room.isAvailable.false"/></jstl:if></p>
 <p><strong><spring:message code="room.inRepair"/>:</strong> <jstl:if test="${room.inRepair eq true}"><spring:message code="room.inRepair.true"/></jstl:if><jstl:if test="${room.inRepair eq false}"><spring:message code="room.inRepair.false"/></jstl:if></p>
 
 <br/>

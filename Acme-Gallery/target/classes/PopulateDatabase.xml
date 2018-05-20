@@ -5677,7 +5677,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room1" class="domain.Room">
 		<property name="name" value="A1.10"/>
 		<property name="area" value="58.90"/>
-		<property name="isAvailable" value="false"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum1"/>
@@ -5698,7 +5697,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room2" class="domain.Room">
 		<property name="name" value="A1.20"/>
 		<property name="area" value="88.30"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum1"/>
@@ -5715,7 +5713,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room3" class="domain.Room">
 		<property name="name" value="A1.30"/>
 		<property name="area" value="30.50"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum1"/>
@@ -5736,7 +5733,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room4" class="domain.Room">
 		<property name="name" value="SP01"/>
 		<property name="area" value="135.78"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum1"/>
@@ -5756,7 +5752,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room5" class="domain.Room">
 		<property name="name" value="SP02"/>
 		<property name="area" value="156.78"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="true"/>
 		
 		<property name="museum" ref="museum1"/>
@@ -5773,7 +5768,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room6" class="domain.Room">
 		<property name="name" value="A1.40"/>
 		<property name="area" value="45.50"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum1"/>
@@ -5790,7 +5784,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room7" class="domain.Room">
 		<property name="name" value="B2.70"/>
 		<property name="area" value="30.60"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum2"/>
@@ -5808,7 +5801,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room8" class="domain.Room">
 		<property name="name" value="B2.80"/>
 		<property name="area" value="54.12"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="true"/>
 		
 		<property name="museum" ref="museum2"/>
@@ -5826,7 +5818,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room9" class="domain.Room">
 		<property name="name" value="SC04"/>
 		<property name="area" value="124.30"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="true"/>
 		
 		<property name="museum" ref="museum2"/>
@@ -5843,7 +5834,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room10" class="domain.Room">
 		<property name="name" value="V10.1"/>
 		<property name="area" value="545.11"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="true"/>
 		
 		<property name="museum" ref="museum4"/>
@@ -5861,7 +5851,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room11" class="domain.Room">
 		<property name="name" value="L4.40"/>
 		<property name="area" value="45.60"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum5"/>
@@ -5880,7 +5869,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room12" class="domain.Room">
 		<property name="name" value="L4.50"/>
 		<property name="area" value="35.88"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum5"/>
@@ -5899,7 +5887,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room13" class="domain.Room">
 		<property name="name" value="L4.60"/>
 		<property name="area" value="100.13"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum5"/>
@@ -5916,7 +5903,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room14" class="domain.Room">
 		<property name="name" value="ST0.0"/>
 		<property name="area" value="450.20"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum6"/>
@@ -5934,7 +5920,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room15" class="domain.Room">
 		<property name="name" value="ST0.1"/>
 		<property name="area" value="140.88"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="true"/>
 		
 		<property name="museum" ref="museum6"/>
@@ -5952,7 +5937,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room16" class="domain.Room">
 		<property name="name" value="ST0.2"/>
 		<property name="area" value="90.11"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum6"/>
@@ -5970,7 +5954,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room17" class="domain.Room">
 		<property name="name" value="G0.12"/>
 		<property name="area" value="34.50"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum7"/>
@@ -5988,7 +5971,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room18" class="domain.Room">
 		<property name="name" value="MT0.1-Pop Culture"/>
 		<property name="area" value="80.56"/>
-		<property name="isAvailable" value="false"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum8"/>
@@ -6007,7 +5989,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room19" class="domain.Room">
 		<property name="name" value="MT0.2-Sports"/>
 		<property name="area" value="10.1"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="true"/>
 		
 		<property name="museum" ref="museum8"/>
@@ -6024,7 +6005,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room20" class="domain.Room">
 		<property name="name" value="MT0.3-Politicias"/>
 		<property name="area" value="30.4"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum8"/>
@@ -6041,7 +6021,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room21" class="domain.Room">
 		<property name="name" value="MT0.4-Hollywood"/>
 		<property name="area" value="60.68"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum8"/>
@@ -6058,7 +6037,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room22" class="domain.Room">
 		<property name="name" value="NG1.0"/>
 		<property name="area" value="15.60"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum9"/>
@@ -6075,7 +6053,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room23" class="domain.Room">
 		<property name="name" value="NG2.0"/>
 		<property name="area" value="30.11"/>
-		<property name="isAvailable" value="true"/>
 		<property name="inRepair" value="true"/>
 		
 		<property name="museum" ref="museum9"/>
@@ -6093,7 +6070,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 	<bean id="room24" class="domain.Room">
 		<property name="name" value="Common"/>
 		<property name="area" value="340.89"/>
-		<property name="isAvailable" value="false"/>
 		<property name="inRepair" value="false"/>
 		
 		<property name="museum" ref="museum11"/>

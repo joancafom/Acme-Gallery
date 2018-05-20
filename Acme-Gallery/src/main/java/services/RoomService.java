@@ -24,15 +24,12 @@ public class RoomService extends ActorService {
 	// Managed Repository ---------------------------------------------------------------------------------
 
 	@Autowired
-	private RoomRepository		roomRepository;
+	private RoomRepository	roomRepository;
 
 	// Supporting Services --------------------------------------------------------------------------------
 
 	@Autowired
-	private DirectorService		directorService;
-
-	@Autowired
-	private ExhibitionService	exhibitionService;
+	private DirectorService	directorService;
 
 
 	//CRUD Methods ----------------------------------------------------------------------------------------
@@ -52,11 +49,11 @@ public class RoomService extends ActorService {
 	//Other Business Methods ------------------------------------------------------------------------------
 
 	// v1.0 - Alicia
-	public Collection<Room> getAvailableByPrincipal() {
+	public Collection<Room> getByPrincipal() {
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
 
-		final Collection<Room> res = this.roomRepository.findAvailableByDirectorId(director.getId());
+		final Collection<Room> res = this.roomRepository.findByDirectorId(director.getId());
 		Assert.notNull(res);
 
 		return res;
@@ -118,7 +115,7 @@ public class RoomService extends ActorService {
 	public Boolean canBeMarkedAsInRepair(final Room room) {
 		Boolean res = false;
 
-		if (this.exhibitionService.getCurrentByRoom(room).isEmpty() && !room.getInRepair())
+		if (!room.getInRepair())
 			res = true;
 
 		return res;
@@ -135,7 +132,6 @@ public class RoomService extends ActorService {
 		Assert.isTrue(this.canBeMarkedAsInRepair(room));
 
 		room.setInRepair(true);
-		room.setIsAvailable(false);
 
 		this.roomRepository.save(room);
 	}
@@ -159,10 +155,8 @@ public class RoomService extends ActorService {
 		Assert.isTrue(director.getMuseums().contains(room.getMuseum()));
 
 		Assert.isTrue(this.canBeMarkedAsNotInRepair(room));
-		Assert.isTrue(this.exhibitionService.getCurrentByRoom(room).isEmpty());
 
 		room.setInRepair(false);
-		room.setIsAvailable(true);
 
 		this.roomRepository.save(room);
 	}

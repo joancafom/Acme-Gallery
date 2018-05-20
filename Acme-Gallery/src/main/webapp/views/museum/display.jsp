@@ -60,6 +60,7 @@
 
 <jstl:if test="${own}">
 	<h3 style="text-align:center; text-decoration:underline;"><a href="incident/${actorWS}list.do?museumId=${museum.id}"><spring:message code="museum.incidents"/></a></h3>
+	<h3 style="text-align:center; text-decoration:underline;"><a href="room/${actorWS}list.do?museumId=${museum.id}"><spring:message code="museum.rooms"/></a></h3>
 </jstl:if>
 
 <div id="mExhibitions" class="info">

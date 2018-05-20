@@ -32,6 +32,7 @@ import domain.Director;
 import domain.Exhibition;
 import domain.Guide;
 import domain.Museum;
+import domain.Room;
 import domain.Sponsorship;
 import forms.ExhibitionForm;
 
@@ -142,6 +143,7 @@ public class ExhibitionService {
 		Assert.isTrue(exhibition.getStartingDate().before(exhibition.getEndingDate()));
 		Assert.isTrue((exhibition.getIsPrivate() && exhibition.getPrice() > 0.0) || (!exhibition.getIsPrivate() && exhibition.getPrice() == 0.0));
 		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
+		Assert.isTrue(this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate()).isEmpty());
 
 		if (exhibition.getId() == 0) {
 			exhibition.getRoom().setIsAvailable(false);
@@ -394,6 +396,35 @@ public class ExhibitionService {
 		res.setRoom(oldExhibition.getRoom());
 
 		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Exhibition> getCurrentByRoom(final Room room) {
+		Assert.notNull(room);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.findCurrentByRoomId(room.getId());
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Exhibition> getByRoom(final Room room) {
+		Assert.notNull(room);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.findByRoomId(room.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Page<Exhibition> getByRoom(final Room room, final int page, final int size) {
+		Assert.notNull(room);
+
+		final Page<Exhibition> res = this.exhibitionRepository.findByRoomId(room.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
 
 		return res;
 	}

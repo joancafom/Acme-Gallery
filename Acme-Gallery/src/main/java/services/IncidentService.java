@@ -16,6 +16,7 @@ import security.LoginService;
 import domain.Director;
 import domain.Incident;
 import domain.Museum;
+import domain.Room;
 
 @Service
 @Transactional
@@ -134,6 +135,32 @@ public class IncidentService {
 		incident.setIsChecked(true);
 
 		this.incidentRepository.save(incident);
+	}
+
+	// v1.0 - Alicia
+	public Collection<Incident> getByRoom(final Room room) {
+		Assert.notNull(room);
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(director.getMuseums().contains(room.getMuseum()));
+
+		final Collection<Incident> res = this.incidentRepository.findByRoomId(room.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Page<Incident> getByRoom(final Room room, final int page, final int size) {
+		Assert.notNull(room);
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(director.getMuseums().contains(room.getMuseum()));
+
+		final Page<Incident> res = this.incidentRepository.findByMuseumId(room.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
 	}
 
 }

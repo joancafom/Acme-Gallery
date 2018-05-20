@@ -73,6 +73,7 @@ window.onload = function(){
 			<li ><a href="exhibition/director/listMine.do"><spring:message code="master.page.exhibition.myList"/></a></li>
 			<li ><a href="museum/director/list.do"><spring:message code="master.page.museum.list"/></a></li>
 			<li ><a href="museum/director/listMine.do"><spring:message code="master.page.museum.listMine"/></a></li>
+			<li ><a href="room/director/listMine.do"><spring:message code="master.page.room.listMine"/></a></li>
 			<li ><a href="incident/director/listMine.do"><spring:message code="master.page.incident.listMine"/></a></li>
 			<li ><a href="director/director/list.do"><spring:message code="master.page.director.list"/></a></li>
 			

@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,5 +54,21 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
 	// v1.0 - Alicia
 	@Query("select e from Exhibition e where e.room.museum.director.id = ?1")
 	Page<Exhibition> findByDirectorId(int directorId, Pageable pageable);
+
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.id = ?1 and e.startingDate <= CURRENT_TIMESTAMP and e.endingDate >= CURRENT_TIMESTAMP")
+	Collection<Exhibition> findCurrentByRoomId(int roomId);
+
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.id = ?1 order by e.endingDate desc")
+	Collection<Exhibition> findByRoomId(int roomId);
+
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.id = ?1 order by e.endingDate desc")
+	Page<Exhibition> findByRoomId(int roomId, Pageable pageable);
+
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.id = ?1 and ((e.endingDate > ?2 and e.endingDate <= ?3) or (e.startingDate >= ?2 and e.startingDate < ?3))")
+	Collection<Exhibition> findDateAndRoomConflicts(int roomId, Date startingDate, Date endingDate);
 
 }

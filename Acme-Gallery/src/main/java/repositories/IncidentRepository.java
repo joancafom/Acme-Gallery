@@ -30,4 +30,12 @@ public interface IncidentRepository extends JpaRepository<Incident, Integer> {
 	@Query("select i from Incident i where i.room.museum.id = ?1 order by i.isChecked asc")
 	Page<Incident> findByMuseumId(int museumId, Pageable pageable);
 
+	// v1.0 - Alicia
+	@Query("select i from Incident i where i.room.id = ?1 order by i.isChecked asc")
+	Collection<Incident> findByRoomId(int roomId);
+
+	// v1.0 - Alicia
+	@Query("select i from Incident i where i.room.id = ?1 order by i.isChecked asc")
+	Page<Incident> findByRoomId(int roomId, Pageable pageable);
+
 }

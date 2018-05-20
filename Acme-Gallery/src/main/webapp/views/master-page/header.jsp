@@ -148,6 +148,7 @@ window.onload = function(){
 			<li ><a href="category/visitor/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/visitor/list.do"><spring:message code="master.page.museum.list"/></a></li>
 			<li ><a href="director/visitor/list.do"><spring:message code="master.page.director.list"/></a></li>
+			<li ><a href="visitor/visitor/display.do"><spring:message code="master.page.visitor.display"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>

@@ -22,20 +22,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import services.AnnouncementService;
+import services.CommentService;
 import services.GroupService;
+import services.VisitorService;
 import controllers.AbstractController;
+import domain.Announcement;
+import domain.Comment;
 import domain.Group;
+import domain.Visitor;
 
 @Controller
 @RequestMapping("/group/administrator")
 public class GroupAdministratorController extends AbstractController {
 
-	private final String	ACTOR_WS	= "administrator/";
+	private final String		ACTOR_WS	= "administrator/";
 
 	// Supporting Services ----------------------------------------------------------------------------
 
 	@Autowired
-	private GroupService	groupService;
+	private GroupService		groupService;
+
+	@Autowired
+	private AnnouncementService	announcementService;
+
+	@Autowired
+	private VisitorService		visitorService;
+
+	@Autowired
+	private CommentService		commentService;
 
 
 	// Methods ----------------------------------------------------------------------------------------
@@ -74,6 +89,60 @@ public class GroupAdministratorController extends AbstractController {
 		} catch (final Throwable oops) {
 			redirectAttributes.addFlashAttribute("message", "group.commit.error");
 		}
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(value = "d-148477-p", defaultValue = "1") final Integer page) {
+		final ModelAndView res;
+
+		final Page<Group> pageResult = this.groupService.findAll(page, 5);
+		final Collection<Group> groups = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("group/list");
+
+		res.addObject("groups", groups);
+		res.addObject("resultSize", resultSize);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	/* v1.0 - display */
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int groupId, @RequestParam(value = "d-4721629-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-148477-p", defaultValue = "1") final Integer pageP, @RequestParam(
+		value = "d-1332617-p", defaultValue = "1") final Integer pageC) {
+		final ModelAndView res;
+		final Group group = this.groupService.findOne(groupId);
+		Assert.notNull(group);
+
+		final Page<Announcement> pageResultA = this.announcementService.findAllByGroup(pageA, 5, group);
+		final Collection<Announcement> announcements = pageResultA.getContent();
+		final Integer resultSizeAnnouncement = new Long(pageResultA.getTotalElements()).intValue();
+
+		final Page<Visitor> pageResultP = this.visitorService.findAllByGroup(pageP, 5, group);
+		final Collection<Visitor> participants = pageResultP.getContent();
+		final Integer resultSizeParticipant = new Long(pageResultP.getTotalElements()).intValue();
+
+		final Page<Comment> pageResultC = this.commentService.findAllRootByGroup(pageC, 5, group);
+		final Collection<Comment> comments = pageResultC.getContent();
+		final Integer resultSizeComment = new Long(pageResultC.getTotalElements()).intValue();
+
+		res = new ModelAndView("group/display");
+
+		res.addObject("group", group);
+		res.addObject("announcements", announcements);
+		res.addObject("resultSizeAnnouncements", resultSizeAnnouncement);
+		res.addObject("participants", participants);
+		res.addObject("resultSizeParticipants", resultSizeParticipant);
+		res.addObject("comments", comments);
+		res.addObject("resultSizeComments", resultSizeComment);
+
+		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;
 	}

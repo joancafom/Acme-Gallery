@@ -15,6 +15,7 @@ import repositories.CommentRepository;
 import security.LoginService;
 import domain.Administrator;
 import domain.Comment;
+import domain.Group;
 
 @Service
 @Transactional
@@ -111,5 +112,13 @@ public class CommentService extends ActorService {
 		Assert.notNull(admin);
 
 		return this.commentRepository.findNotTabooed(new PageRequest(page - 1, size));
+	}
+
+	/* v1.0 - josembell */
+	public Page<Comment> findAllRootByGroup(final Integer page, final int size, final Group group) {
+		final Page<Comment> res = this.commentRepository.findAllRootByGroup(group.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
 	}
 }

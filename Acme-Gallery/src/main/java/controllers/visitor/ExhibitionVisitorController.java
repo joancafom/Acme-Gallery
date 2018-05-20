@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ArtworkService;
 import services.CritiqueService;
+import services.DayPassService;
 import services.ExhibitionService;
 import services.GuideService;
 import services.SponsorshipService;
@@ -51,6 +52,9 @@ public class ExhibitionVisitorController extends AbstractController {
 	private CritiqueService		critiqueService;
 
 	@Autowired
+	private DayPassService		dayPassService;
+
+	@Autowired
 	private GuideService		guideService;
 
 	@Autowired
@@ -60,7 +64,7 @@ public class ExhibitionVisitorController extends AbstractController {
 	// Methods ----------------------------------------------------------------------------------------
 
 	//v1.0 - Implemented by JA
-	// v2.0 - Alicia
+	// v3.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-1332818-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-3999872-p", defaultValue = "1") final Integer pageC, @RequestParam(
 		value = "d-148442-p", defaultValue = "1") final Integer pageG) {
@@ -88,6 +92,8 @@ public class ExhibitionVisitorController extends AbstractController {
 		//We must display the current sponsorship, if any
 		final Sponsorship currentSponsorship = this.sponsorshipService.findCurrentByExhibition(exhibition);
 
+		final Boolean canBuyADayPass = this.dayPassService.canBuyADayPass(exhibition);
+
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);
 		res.addObject("artworks", artworks);
@@ -97,11 +103,11 @@ public class ExhibitionVisitorController extends AbstractController {
 		res.addObject("guides", guides);
 		res.addObject("resultSizeG", resultSizeG);
 		res.addObject("ad", currentSponsorship);
+		res.addObject("canBuyADayPass", canBuyADayPass);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;
 	}
-
 	// v1.0 - Alicia
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search() {

@@ -149,4 +149,12 @@ public class GroupService {
 
 		return this.groupRepository.findNotTabooed(new PageRequest(page - 1, size));
 	}
+
+	public Page<Group> findAll(final Integer page, final int size) {
+		final Administrator admin = this.adminService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(admin);
+
+		return this.groupRepository.findAll(new PageRequest(page - 1, size));
+	}
+
 }

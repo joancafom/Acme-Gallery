@@ -30,6 +30,7 @@
 		<value>/views/artwork/messages</value>
 		<value>/views/category/messages</value>
 		<value>/views/critique/messages</value>
+		<value>/views/dayPass/messages</value>
 		<value>/views/director/messages</value>
 		<value>/views/exhibition/messages</value>
 		<value>/views/group/messages</value>

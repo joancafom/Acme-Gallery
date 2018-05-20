@@ -168,4 +168,12 @@ public class VisitorService extends ActorService {
 		return super.findByUserAccount(userAccount, Visitor.class);
 	}
 
+	/* v1.0 - josembell */
+	public Page<Visitor> findAllByGroup(final Integer page, final int size, final Group group) {
+		final Page<Visitor> res = this.visitorRepositories.findAllByGroup(group.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
 }

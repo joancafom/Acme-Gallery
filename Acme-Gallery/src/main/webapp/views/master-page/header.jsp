@@ -46,6 +46,7 @@ window.onload = function(){
 			<li ><a href="category/administrator/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="announcement/administrator/list.do"><spring:message code="master.page.list.announcement"/></a></li>
 			<li ><a href="announcement/administrator/list.do?listTabooed=true"><spring:message code="master.page.taboo.announcement"/></a></li>
+			<li ><a href="group/administrator/list.do"><spring:message code="master.page.groups"/></a></li>
 			<li ><a href="group/administrator/listTaboo.do"><spring:message code="master.page.taboo.group"/></a></li>
 			<li ><a href="museum/administrator/list.do"><spring:message code="master.page.museum.list"/></a></li>
 			<li ><a href="director/administrator/list.do"><spring:message code="master.page.director.list"/></a></li>

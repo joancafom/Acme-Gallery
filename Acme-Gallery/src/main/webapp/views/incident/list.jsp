@@ -1,5 +1,5 @@
  <%--
- * exhibition/search.jsp
+ * incident/list.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -17,7 +17,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="incidents" id="incident" requestURI="incident/${actorWS}listMine.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
+<h3 style="text-align:center; text-decoration:underline;"><spring:message code="incident.museum.link"/><a href="museum/director/display.do?museumId=${museum.id}"><jstl:out value="${museum.name}"/></a></h3>
+
+<display:table name="incidents" id="incident" requestURI="incident/${actorWS}list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
 	<display:column titleKey="incident.text" property="text"/>
 	
@@ -50,10 +52,6 @@
 	
 	<display:column titleKey="incident.guide">
 		<jstl:out value="${incident.guide.name} ${incident.guide.surnames}"/>
-	</display:column>
-	
-	<display:column titleKey="incident.museum">
-		<a href="museum/director/display.do?museumId=${incident.room.museum.id}"><jstl:out value="${incident.room.museum.name}"/></a>
 	</display:column>
 	
 	<display:column titleKey="incident.room">

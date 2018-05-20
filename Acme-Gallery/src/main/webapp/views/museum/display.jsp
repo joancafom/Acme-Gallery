@@ -58,6 +58,10 @@
 		 <p><spring:message code="museum.director"/>: <a href="director/${actorWS}display.do?directorId=<jstl:out value="${museum.director.id}"/>"><jstl:out value="${museum.director.name}"/> <jstl:out value="${museum.director.surnames}"/></a></p> 
 </div>
 
+<jstl:if test="${own}">
+	<h3 style="text-align:center; text-decoration:underline;"><a href="incident/${actorWS}list.do?museumId=${museum.id}"><spring:message code="museum.incidents"/></a></h3>
+</jstl:if>
+
 <div id="mExhibitions" class="info">
 
 	<security:authorize access="hasAnyRole('VISITOR','SPONSOR', 'CRITIC') or isAnonymous()">

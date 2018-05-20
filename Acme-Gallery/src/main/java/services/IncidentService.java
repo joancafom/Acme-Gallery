@@ -6,12 +6,16 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.IncidentRepository;
+import security.LoginService;
 import domain.Director;
 import domain.Incident;
+import domain.Museum;
 
 @Service
 @Transactional
@@ -22,22 +26,114 @@ public class IncidentService {
 	@Autowired
 	private IncidentRepository	incidentRepository;
 
-
 	// Supporting Services ----------------------------------------------------------------------------
+
+	@Autowired
+	private DirectorService		directorService;
+
+	@Autowired
+	private GuideService		guideService;
+
+	@Autowired
+	private RoomService			roomService;
+
 
 	// Validator --------------------------------------------------------------------------------------
 
 	// CRUD Methods -----------------------------------------------------------------------------------
 
+	// v1.0 - Alicia
+	public void delete(final Incident incident) {
+		Assert.notNull(incident);
+		Assert.isTrue(this.incidentRepository.exists(incident.getId()));
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(incident.getRoom().getMuseum()));
+
+		Assert.isTrue(!incident.getIsChecked());
+
+		incident.getRoom().getIncidents().remove(incident);
+		this.roomService.save(incident.getRoom());
+
+		incident.getGuide().getIncidents().remove(incident);
+		this.guideService.save(incident.getGuide());
+
+		this.incidentRepository.delete(incident);
+	}
+
+	// v1.0 - Alicia
+	public Incident findOne(final int incidentId) {
+		return this.incidentRepository.findOne(incidentId);
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
+	// v1.0 - Alicia
 	public Collection<Incident> getByDirector(final Director director) {
 		Assert.notNull(director);
+
+		final Director principal = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(director.equals(principal));
 
 		final Collection<Incident> res = this.incidentRepository.findByDirectorId(director.getId());
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	// v1.0 - Alicia
+	public Page<Incident> getByDirector(final Director director, final int page, final int size) {
+		Assert.notNull(director);
+
+		final Director principal = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(director.equals(principal));
+
+		final Page<Incident> res = this.incidentRepository.findByDirectorId(director.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Incident> getByMuseum(final Museum museum) {
+		Assert.notNull(museum);
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(director.getMuseums().contains(museum));
+
+		final Collection<Incident> res = this.incidentRepository.findByMuseumId(museum.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Page<Incident> getByMuseum(final Museum museum, final int page, final int size) {
+		Assert.notNull(museum);
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(director.getMuseums().contains(museum));
+
+		final Page<Incident> res = this.incidentRepository.findByMuseumId(museum.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public void check(final Incident incident) {
+		Assert.notNull(incident);
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(incident.getRoom().getMuseum()));
+
+		Assert.isTrue(!incident.getIsChecked());
+
+		incident.setIsChecked(true);
+
+		this.incidentRepository.save(incident);
 	}
 
 }

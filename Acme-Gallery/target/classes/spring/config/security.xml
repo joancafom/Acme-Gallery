@@ -71,6 +71,9 @@
 		<security:intercept-url pattern="/critique/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/critique/visitor/display.do" access="hasRole('VISITOR')" />
 		
+		<security:intercept-url pattern="/dayPass/visitor/create.do" access="hasRole('VISITOR')" />
+		<security:intercept-url pattern="/dayPass/visitor/edit.do" access="hasRole('VISITOR')" />
+		
 		<security:intercept-url pattern="/director/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/director/list.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/director/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
@@ -188,6 +191,8 @@
 		<security:intercept-url pattern="/systemConfiguration/administrator/editVat.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<security:intercept-url pattern="/visitor/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/visitor/visitor/display.do" access="hasRole('VISITOR')" />
+		<security:intercept-url pattern="/visitor/visitor/edit.do" access="hasRole('VISITOR')" />
 
 		<!-- Any other URL not listed above falls into the following directive and is excluded -->
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

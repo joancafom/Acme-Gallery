@@ -27,9 +27,9 @@
 <h2><strong><jstl:out value="${group.name}"/></strong></h2>
 <h3><jstl:out value="${group.description}"/></h3>
 <security:authorize access="hasRole('VISITOR')">
-<jsp:useBean id="now" class="java.util.Date" />
+	<jsp:useBean id="now" class="java.util.Date" />
 	<jstl:choose>
-		<jstl:when test="${isCreator}">
+		<jstl:when test="${own}">
 			<h4 style="color: #1ebf59;"><spring:message code="group.yours"/></h4>
 			<jstl:if test="${now >= group.meetingDate}">
 				<h4 style="color: #f4e842;"><spring:message code="group.past"/></h4>
@@ -79,6 +79,12 @@
 				<jstl:out value="${participant.name}"/> <jstl:out value="${participant.surnames}"/>
 			</display:column>
 		</display:table>
+		<br>
+		<security:authorize access="hasRole('VISITOR')">
+			<jstl:if test="${group.isClosed and own and now < group.meetingDate}">
+				<a href="invitation/visitor/create.do?groupId=${group.id}"><spring:message code="invitation.create" /></a>
+			</jstl:if>
+		</security:authorize>
    </div>
    <div style="margin-right: 50px;">
    		<br>

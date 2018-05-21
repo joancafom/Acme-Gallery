@@ -137,7 +137,7 @@ public class GroupVisitorController extends AbstractController {
 		res.addObject("comments", comments);
 		res.addObject("resultSizeComments", resultSizeComment);
 		res.addObject("isMember", currentVisitor.getJoinedGroups().contains(group));
-		res.addObject("isCreator", currentVisitor.getCreatedGroups().contains(group));
+		res.addObject("own", currentVisitor.getCreatedGroups().contains(group));
 
 		if (commentId != null) {
 

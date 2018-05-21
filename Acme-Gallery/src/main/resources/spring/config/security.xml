@@ -65,7 +65,7 @@
 		
 		<security:intercept-url pattern="/comment/administrator/listTaboo.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/comment/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
-		
+
 		<security:intercept-url pattern="/critique/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/critique/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/critique/director/display.do" access="hasRole('DIRECTOR')" />
@@ -132,6 +132,9 @@
 		<security:intercept-url pattern="/group/visitor/quit.do" access="hasRole('VISITOR')"/>
 		 
 		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 
+		
+		
+		<security:intercept-url pattern="/invitation/visitor/list.do" access="hasRole('VISITOR')"/> 
 		
 		<security:intercept-url pattern="/artwork/display.do" access="isAnonymous()"/> 
 		<security:intercept-url pattern="/artwork/administrator/display.do" access="hasRole('ADMINISTRATOR')"/> 
@@ -211,6 +214,7 @@
 		<security:intercept-url pattern="/visitor/administrator/listUnlocked.do" access="hasRole('ADMINISTRATOR')" /> 
   		<security:intercept-url pattern="/visitor/administrator/listLocked.do" access="hasRole('ADMINISTRATOR')" /> 
   		<security:intercept-url pattern="/visitor/administrator/ban.do" access="hasRole('ADMINISTRATOR')" />  
+		
 
 		<!-- Any other URL not listed above falls into the following directive and is excluded -->
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

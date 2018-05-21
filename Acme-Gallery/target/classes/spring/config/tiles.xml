@@ -36,6 +36,7 @@
 		<value>/views/exhibition/tiles.xml</value>
 		<value>/views/group/tiles.xml</value>
 		<value>/views/incident/tiles.xml</value>
+		<value>/views/invitation/tiles.xml</value>
 		<value>/views/museum/tiles.xml</value>
 		<value>/views/product/tiles.xml</value>
 		<value>/views/room/tiles.xml</value>

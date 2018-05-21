@@ -1,11 +1,14 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -80,5 +83,21 @@ public class InvitationService {
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------
+
+	//v1.0 - Implemented by JA
+	public Collection<Invitation> findAllReceivedByVisitor(final Visitor visitor) {
+
+		Assert.notNull(visitor);
+
+		return this.invitationRepository.findAllReceivedByVisitorId(visitor.getId());
+	}
+
+	//v1.0 - Implemented by JA
+	public Page<Invitation> findAllReceivedByVisitor(final Visitor visitor, final int page, final int size) {
+
+		Assert.notNull(visitor);
+
+		return this.invitationRepository.findAllReceivedByVisitorId(visitor.getId(), new PageRequest(page - 1, size));
+	}
 
 }

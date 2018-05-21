@@ -27,18 +27,28 @@
 <h2><strong><jstl:out value="${group.name}"/></strong></h2>
 <h3><jstl:out value="${group.description}"/></h3>
 <security:authorize access="hasRole('VISITOR')">
-	<jstl:if test="${isCreator}">
-		<h4 style="color: #1ebf59;"><spring:message code="group.yours"/></h4>
-	</jstl:if>
-	<jstl:if test="${!isCreator and isMember}">
-		<h4 style="color: #1ebf59;"><spring:message code="group.member"/></h4>
-	</jstl:if>
-	<jstl:if test="${!isCreator and !isMember and !isFull}">
-		<h4><a href="group/visitor/joinGroup.do?groupId=${group.id}"><spring:message code="group.notMember"/></a></h4>
-	</jstl:if>
-	<jstl:if test="${!isCreator and !isMember and isFull}">
-		<h4 style="color: ##f44b42;"><spring:message code="group.full"/></h4>
-	</jstl:if>
+
+	<jstl:choose>
+		<jstl:when test="${isCreator}">
+			<h4 style="color: #1ebf59;"><spring:message code="group.yours"/></h4>
+		</jstl:when>
+		<jstl:when test="${isMember}">
+			<h4 style="color: #1ebf59;"><spring:message code="group.member"/></h4>
+		</jstl:when>
+		<jstl:otherwise>
+			<jsp:useBean id="now" class="java.util.Date" />
+			
+			<jstl:if test="${fn:length(group.participants) lt group.maxParticipants and now < group.meetingDate}">
+				<h4><a href="group/visitor/joinGroup.do?groupId=${group.id}"><spring:message code="group.notMember"/></a></h4>
+			</jstl:if>
+			<jstl:if test="${fn:length(group.participants) ge group.maxParticipants}">
+				<h4 style="color: #f44b42;"><spring:message code="group.full"/></h4>
+			</jstl:if>
+			<jstl:if test="${now >= group.meetingDate}">
+				<h4 style="color: #f4e842;"><spring:message code="group.past"/></h4>
+			</jstl:if>
+		</jstl:otherwise>
+	</jstl:choose>
 </security:authorize>
 <br>
 <div>
@@ -84,47 +94,50 @@
    </div>
 </div>
 <br><br><br>
-<jstl:if test="${hasReplies==null}">
-	<h3><spring:message code="group.comments"/></h3>
-	<display:table name="comments" id="comment" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeComments}">
-		<display:column>
-			<div style="margin: 20px;">
-			<p><strong><jstl:out value="${comment.visitor.name}"/> <jstl:out value="${comment.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${comment.title}"/></p>
-			<p><jstl:out value="${comment.description}"/></p><br>
-			<jstl:if test="${comment.picture!=null or comment.picture!=''}">
-				<img src="${comment.picture}" style="text-align:center;"/>
+
+<div id="comments">
+	<jstl:if test="${hasReplies==null}">
+		<h3><spring:message code="group.comments"/></h3>
+		<display:table name="comments" id="comment" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeComments}">
+			<display:column>
+				<div style="margin: 20px;">
+				<p><strong><jstl:out value="${comment.visitor.name}"/> <jstl:out value="${comment.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${comment.title}"/></p>
+				<p><jstl:out value="${comment.description}"/></p><br>
+				<jstl:if test="${comment.picture!=null or comment.picture!=''}">
+					<img src="${comment.picture}" style="text-align:center;"/>
+				</jstl:if>
+				<jstl:if test="${fn:length(comment.childrenComments)!=0}">
+					<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${comment.id}#comments"><spring:message code="group.comment.replies"/></a>
+				</jstl:if>
+				</div>
+			</display:column>
+			
+		</display:table>
+	</jstl:if><br><br>
+	<jstl:if test="${hasReplies==true}">
+			<jstl:if test="${parentComment.parentComment==null}">
+				<a href="group/${actorWS}display.do?groupId=${group.id}#comments" style="font-size:18px;"><i class="material-icons" style="font-size:16px;">arrow_back_ios</i><spring:message code="group.goBack"/></a>
 			</jstl:if>
-			<jstl:if test="${fn:length(comment.childrenComments)!=0}">
-				<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${comment.id}"><spring:message code="group.comment.replies"/></a>
+			<jstl:if test="${parentComment.parentComment!=null}">
+				<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${parentComment.parentComment.id}#comments" style="font-size:18px;"><i class="material-icons" style="font-size:16px;">arrow_back_ios</i><spring:message code="group.goBack"/></a>
 			</jstl:if>
-			</div>
-		</display:column>
-		
-	</display:table>
-</jstl:if><br><br>
-<jstl:if test="${hasReplies==true}">
-		<jstl:if test="${parentComment.parentComment==null}">
-			<a href="group/${actorWS}display.do?groupId=${group.id}" style="font-size:18px;"><i class="material-icons" style="font-size:16px;">arrow_back_ios</i><spring:message code="group.goBack"/></a>
-		</jstl:if>
-		<jstl:if test="${parentComment.parentComment!=null}">
-			<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${parentComment.parentComment.id}" style="font-size:18px;"><i class="material-icons" style="font-size:16px;">arrow_back_ios</i><spring:message code="group.goBack"/></a>
-		</jstl:if>
-	<h3><spring:message code="group.replies"/>: <jstl:out value="${parentComment.title}"/></h3>
-	<display:table name="replies" id="reply" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeReplies}">
-		<display:column>
-			<div style="margin: 20px;">
-			<p><strong><jstl:out value="${reply.visitor.name}"/> <jstl:out value="${reply.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${reply.title}"/></p>
-			<p><jstl:out value="${reply.description}"/></p><br>
-			<jstl:if test="${reply.picture!=null or reply.picture!=''}">
-				<img src="${reply.picture}" style="text-align:center;"/>
-			</jstl:if>
-			<jstl:if test="${fn:length(reply.childrenComments)!=0}">
-				<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${reply.id}"><spring:message code="group.comment.replies"/></a>
-			</jstl:if>
-			</div>
-		</display:column>
-	</display:table>
-</jstl:if>
+		<h3><spring:message code="group.replies"/>: <jstl:out value="${parentComment.title}"/></h3>
+		<display:table name="replies" id="reply" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeReplies}">
+			<display:column>
+				<div style="margin: 20px;">
+				<p><strong><jstl:out value="${reply.visitor.name}"/> <jstl:out value="${reply.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${reply.title}"/></p>
+				<p><jstl:out value="${reply.description}"/></p><br>
+				<jstl:if test="${reply.picture!=null or reply.picture!=''}">
+					<img src="${reply.picture}" style="text-align:center;"/>
+				</jstl:if>
+				<jstl:if test="${fn:length(reply.childrenComments)!=0}">
+					<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${reply.id}#comments"><spring:message code="group.comment.replies"/></a>
+				</jstl:if>
+				</div>
+			</display:column>
+		</display:table>
+	</jstl:if>
+</div>
 
 </div>
 

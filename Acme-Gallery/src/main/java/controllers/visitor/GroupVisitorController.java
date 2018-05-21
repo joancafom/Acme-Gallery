@@ -116,9 +116,9 @@ public class GroupVisitorController extends AbstractController {
 		res.addObject("resultSizeComments", resultSizeComment);
 		res.addObject("isMember", currentVisitor.getJoinedGroups().contains(group));
 		res.addObject("isCreator", currentVisitor.getCreatedGroups().contains(group));
-		res.addObject("isFull", group.getParticipants().size() == group.getMaxParticipants());
 
 		if (commentId != null) {
+
 			final Comment parentComment = this.commentService.findOne(commentId);
 			Assert.notNull(parentComment);
 			Assert.isTrue(parentComment.getGroup().equals(group));

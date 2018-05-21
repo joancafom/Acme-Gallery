@@ -61,10 +61,31 @@ public class CritiqueService {
 	}
 
 	// v1.0 - Alicia
+	public void deleteRoom(final Critique critique) {
+		Assert.notNull(critique);
+		Assert.isTrue(this.critiqueRepository.exists(critique.getId()));
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(critique.getExhibition().getRoom().getMuseum()));
+		Assert.isTrue(critique.getExhibition().getDayPasses().isEmpty() || critique.getExhibition().getEndingDate().before(new Date()));
+		Assert.isTrue(critique.getExhibition().getSponsorships().isEmpty() || critique.getExhibition().getEndingDate().before(new Date()));
+
+		critique.getCritic().getCritiques().remove(critique);
+		this.criticService.save(critique.getCritic());
+
+		this.critiqueRepository.delete(critique);
+	}
+
+	// v1.0 - Alicia
 	public Critique findOne(final int critiqueId) {
 		return this.critiqueRepository.findOne(critiqueId);
 	}
 
+	// v1.0 - Alicia
+	public Critique save(final Critique critique) {
+		return this.critiqueRepository.save(critique);
+	}
 	//Other Business Methods --------------------------------------------------------------------------
 
 	// v1.0 - JA

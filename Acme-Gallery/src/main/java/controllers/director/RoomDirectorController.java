@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,6 +63,17 @@ public class RoomDirectorController extends AbstractController {
 	// Methods ----------------------------------------------------------------------------------------
 
 	// v1.0 - Alicia
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView res;
+		final Room room = this.roomService.create();
+
+		res = this.createEditModelAndView(room);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int roomId) {
 		final ModelAndView res;
@@ -79,6 +91,7 @@ public class RoomDirectorController extends AbstractController {
 
 		final Boolean canBeMarkedAsInRepair = this.roomService.canBeMarkedAsInRepair(room);
 		final Boolean canBeMarkedAsNotInRepair = this.roomService.canBeMarkedAsNotInRepair(room);
+		final Boolean canBeDeleted = this.roomService.canBeDeleted(room);
 
 		res = new ModelAndView("room/display");
 		res.addObject("room", room);
@@ -87,6 +100,7 @@ public class RoomDirectorController extends AbstractController {
 		res.addObject("incidents", incidents);
 		res.addObject("canBeMarkedAsInRepair", canBeMarkedAsInRepair);
 		res.addObject("canBeMarkedAsNotInRepair", canBeMarkedAsNotInRepair);
+		res.addObject("canBeDeleted", canBeDeleted);
 
 		res.addObject("actorWS", this.ACTOR_WS);
 
@@ -138,6 +152,45 @@ public class RoomDirectorController extends AbstractController {
 	}
 
 	// v1.0 - Alicia
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int roomId, final RedirectAttributes redirectAttributes) {
+		final ModelAndView res;
+		res = new ModelAndView("redirect:listMine.do");
+
+		final Room toDelete = this.roomService.findOne(roomId);
+		Assert.notNull(toDelete);
+
+		try {
+			this.roomService.delete(toDelete);
+		} catch (final Throwable oops) {
+			redirectAttributes.addFlashAttribute("message", "room.commit.error");
+		}
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(final Room prunedRoom, final BindingResult binding) {
+		ModelAndView res = null;
+
+		final Room room = this.roomService.reconstructSave(prunedRoom, binding);
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(prunedRoom);
+		else
+			try {
+				final Room roomS = this.roomService.saveCreateAndEdit(room);
+				res = new ModelAndView("redirect:/room/director/display.do?roomId=" + roomS.getId());
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(room, "room.commit.error");
+			}
+
+		return res;
+
+	}
+
+	// v1.0 - Alicia
 	@RequestMapping(value = "/inRepair", method = RequestMethod.GET)
 	public ModelAndView inRepair(@RequestParam final int roomId, final RedirectAttributes redirectAttributes) {
 		final ModelAndView res;
@@ -176,5 +229,30 @@ public class RoomDirectorController extends AbstractController {
 	}
 
 	// Ancillary Methods ------------------------------------------------------------------------------
+
+	// v1.0 - Alicia
+	protected ModelAndView createEditModelAndView(final Room room) {
+		ModelAndView res;
+		res = this.createEditModelAndView(room, null);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	private ModelAndView createEditModelAndView(final Room room, final String message) {
+		final ModelAndView res;
+
+		res = new ModelAndView("room/edit");
+
+		final Collection<Museum> museums = this.museumService.getByPrincipal();
+
+		res.addObject("room", room);
+		res.addObject("museums", museums);
+		res.addObject("message", message);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
 
 }

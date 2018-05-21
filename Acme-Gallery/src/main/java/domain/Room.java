@@ -32,7 +32,7 @@ public class Room extends DomainEntity {
 	}
 
 	@NotNull
-	@DecimalMin("0.0")
+	@DecimalMin("1.0")
 	public Double getArea() {
 		return this.area;
 	}

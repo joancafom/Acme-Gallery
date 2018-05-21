@@ -1,6 +1,8 @@
 
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,5 +21,9 @@ public interface MuseumRepository extends JpaRepository<Museum, Integer> {
 	/* v1.0 - josembell */
 	@Query("select m from Museum m where m.director.id=?1")
 	Page<Museum> findAllByDirector(int idPageable, Pageable pageRequest);
+
+	// v1.0 - Alicia
+	@Query("select m from Museum m where m.director.id = ?1")
+	Collection<Museum> findByDirectorId(int directorId);
 
 }

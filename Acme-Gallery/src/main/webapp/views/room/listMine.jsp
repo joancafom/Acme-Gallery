@@ -43,3 +43,7 @@
 	</display:column>
 	
 </display:table>
+
+<br/>
+
+<a href="room/director/create.do"><spring:message code="room.create"/></a>

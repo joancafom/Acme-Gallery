@@ -20,6 +20,11 @@
 		<put-attribute name="title" value="Detalles de la Sala" />
 		<put-attribute name="body" value="/views/room/display.jsp" />
 	</definition>
+	
+	<definition name="room/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar una Sala" />
+		<put-attribute name="body" value="/views/room/edit.jsp" />
+	</definition>
 
 	<definition name="room/listMine" extends="master.page">	
 		<put-attribute name="title" value="Salas de mis Museos" />

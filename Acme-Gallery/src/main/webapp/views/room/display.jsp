@@ -34,6 +34,9 @@
 <jstl:if test="${canBeMarkedAsNotInRepair}">
 	<h3 style="text-align:center; text-decoration:underline;"><a href="room/${actorWS}notInRepair.do?roomId=${room.id}"><spring:message code="room.markNotInRepair"/></a></h3>
 </jstl:if>
+<jstl:if test="${canBeDeleted}">
+	<h3 style="text-align:center; text-decoration:underline;"><a href="room/${actorWS}delete.do?roomId=${room.id}"><spring:message code="room.delete" /></a></h3>
+</jstl:if>
 
 <br/>
 

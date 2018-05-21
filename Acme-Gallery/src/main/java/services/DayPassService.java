@@ -11,8 +11,10 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.DayPassRepository;
 import security.LoginService;
 import domain.DayPass;
+import domain.Director;
 import domain.Exhibition;
 import domain.Visitor;
 
@@ -22,6 +24,9 @@ public class DayPassService {
 
 	// Managed Repository -----------------------------------------------------------------------------
 
+	@Autowired
+	private DayPassRepository			dayPassRepository;
+
 	// Supporting Services ----------------------------------------------------------------------------
 
 	@Autowired
@@ -29,6 +34,12 @@ public class DayPassService {
 
 	@Autowired
 	private VisitorService				visitorService;
+
+	@Autowired
+	private DirectorService				directorService;
+
+	@Autowired
+	private MuseumService				museumService;
 
 	// Validator --------------------------------------------------------------------------------------
 
@@ -59,6 +70,25 @@ public class DayPassService {
 	}
 
 	// v1.0 - Alicia
+	public void delete(final DayPass dayPass) {
+		Assert.notNull(dayPass);
+		Assert.isTrue(this.dayPassRepository.exists(dayPass.getId()));
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(dayPass.getMuseum()));
+		Assert.notNull(dayPass.getExhibition());
+		Assert.isTrue(dayPass.getExhibition().getEndingDate().before(new Date()));
+
+		dayPass.getMuseum().getDayPasses().remove(dayPass);
+		this.museumService.save(dayPass.getMuseum());
+
+		dayPass.setExhibition(null);
+
+		this.dayPassRepository.delete(dayPass);
+	}
+
+	// v1.0 - Alicia
 	public DayPass saveCreateAndEdit(final DayPass dayPass) {
 		Assert.notNull(dayPass);
 
@@ -71,6 +101,7 @@ public class DayPassService {
 
 	// Other Business Methods -------------------------------------------------------------------------
 
+	// v1.0 - Alicia
 	public Boolean canBuyADayPass(final Exhibition exhibition) {
 		Assert.notNull(exhibition);
 

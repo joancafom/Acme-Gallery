@@ -54,6 +54,9 @@ public class ExhibitionService {
 	private CritiqueService			critiqueService;
 
 	@Autowired
+	private DayPassService			dayPassService;
+
+	@Autowired
 	private DirectorService			directorService;
 
 	@Autowired
@@ -61,6 +64,9 @@ public class ExhibitionService {
 
 	@Autowired
 	private RoomService				roomService;
+
+	@Autowired
+	private SponsorshipService		sponsorshipService;
 
 	// Validator --------------------------------------------------------------------------------------
 
@@ -116,6 +122,36 @@ public class ExhibitionService {
 		this.exhibitionRepository.delete(exhibition);
 	}
 
+	// v1.0 - Alicia
+	public void deleteRoom(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+		Assert.isTrue(this.exhibitionRepository.exists(exhibition.getId()));
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(exhibition.getRoom().getMuseum()));
+		Assert.isTrue(exhibition.getDayPasses().isEmpty() || exhibition.getEndingDate().before(new Date()));
+		Assert.isTrue(exhibition.getSponsorships().isEmpty() || exhibition.getEndingDate().before(new Date()));
+
+		for (final Critique c : exhibition.getCritiques())
+			this.critiqueService.deleteRoom(c);
+
+		exhibition.getCategory().getExhibitions().remove(exhibition);
+		this.categoryService.save(exhibition.getCategory());
+
+		for (final Guide g : exhibition.getGuides()) {
+			g.getExhibitions().remove(exhibition);
+			this.guideService.save(g);
+		}
+
+		for (final DayPass d : exhibition.getDayPasses())
+			this.dayPassService.delete(d);
+
+		for (final Sponsorship s : exhibition.getSponsorships())
+			this.sponsorshipService.delete(s);
+
+		this.exhibitionRepository.delete(exhibition);
+	}
 	// v1.0 - JA
 	public Exhibition findOne(final int exhibitionId) {
 
@@ -480,6 +516,28 @@ public class ExhibitionService {
 		Assert.notNull(director);
 
 		final Collection<String> res = this.exhibitionRepository.findRoomNamesByDirectorId(director.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Exhibition> getFutureExhibitionsWithDayPassesByRoom(final Room room) {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.findFutureExhibitionsWithDayPassesByRoomId(room.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Exhibition> getFutureExhibitionsWithSponsorshipsByRoom(final Room room) {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.findFutureExhibitionsWithSponsorshipsByRoomId(room.getId());
 		Assert.notNull(res);
 
 		return res;

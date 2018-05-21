@@ -87,4 +87,12 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
 	@Query("select e.room.name from Exhibition e where e.room.museum.director.id = ?1")
 	Collection<String> findRoomNamesByDirectorId(int directorId);
 
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.id = ?1 and e.startingDate >= CURRENT_TIMESTAMP and e.dayPasses.size > 0")
+	Collection<Exhibition> findFutureExhibitionsWithDayPassesByRoomId(int roomId);
+
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.id = ?1 and e.startingDate >= CURRENT_TIMESTAMP and e.sponsorships.size > 0")
+	Collection<Exhibition> findFutureExhibitionsWithSponsorshipsByRoomId(int roomId);
+
 }

@@ -64,6 +64,21 @@ public class IncidentService {
 	}
 
 	// v1.0 - Alicia
+	public void deleteRoom(final Incident incident) {
+		Assert.notNull(incident);
+		Assert.isTrue(this.incidentRepository.exists(incident.getId()));
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(incident.getRoom().getMuseum()));
+
+		incident.getGuide().getIncidents().remove(incident);
+		this.guideService.save(incident.getGuide());
+
+		this.incidentRepository.delete(incident);
+	}
+
+	// v1.0 - Alicia
 	public Incident findOne(final int incidentId) {
 		return this.incidentRepository.findOne(incidentId);
 	}

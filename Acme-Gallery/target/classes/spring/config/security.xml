@@ -174,7 +174,10 @@
 
 		<security:intercept-url pattern="/critic/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 
+		<security:intercept-url pattern="/room/director/create.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/room/director/delete.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/room/director/display.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/room/director/edit.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/room/director/inRepair.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/room/director/list.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/room/director/listMine.do" access="hasRole('DIRECTOR')" />

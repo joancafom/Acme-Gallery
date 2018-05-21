@@ -194,4 +194,15 @@ public class MuseumService extends ActorService {
 
 		return savedMuseum;
 	}
+
+	// v1.0 - Alicia
+	public Collection<Museum> getByPrincipal() {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<Museum> res = this.museumRepository.findByDirectorId(director.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
 }

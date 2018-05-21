@@ -36,6 +36,9 @@ public class SponsorshipService {
 	@Autowired
 	private ExhibitionService		exhibitionService;
 
+	@Autowired
+	private SponsorService			sponsorService;
+
 	//Validator
 	@Autowired
 	private Validator				validator;
@@ -54,6 +57,22 @@ public class SponsorshipService {
 		sponsor.getSponsorships().add(res);
 
 		return res;
+	}
+
+	// v1.0 - Alicia
+	public void delete(final Sponsorship sponsorship) {
+		Assert.notNull(sponsorship);
+		Assert.isTrue(this.sponsorshipRepository.exists(sponsorship.getId()));
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(director.getMuseums().contains(sponsorship.getExhibition().getRoom().getMuseum()));
+		Assert.isTrue(sponsorship.getExhibition().getEndingDate().before(new Date()));
+
+		sponsorship.getSponsor().getSponsorships().remove(sponsorship);
+		this.sponsorService.save(sponsorship.getSponsor());
+
+		this.sponsorshipRepository.delete(sponsorship);
 	}
 
 	//v1.0 - Implemented by JA

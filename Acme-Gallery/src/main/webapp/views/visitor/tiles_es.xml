@@ -14,16 +14,21 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
-<tiles-definitions>
-
+<tiles-definitions>	
 	<definition name="visitor/display" extends="master.page">	
-		<put-attribute name="title" value="Mi perfil" />
+		<put-attribute name="title" value="Mi Perfil" />
 		<put-attribute name="body" value="/views/visitor/display.jsp" />
 	</definition>
 	
 	<definition name="visitor/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar mi perfil" />
+		<put-attribute name="title" value="Editar mi Perfil" />
 		<put-attribute name="body" value="/views/visitor/edit.jsp" />
 	</definition>
+	
+	<definition name="visitor/list" extends="master.page">
+  		<put-attribute name="title" value="Visitantes" /> 
+ 		<put-attribute name="body" value="/views/visitor/list.jsp" /> 
+  	</definition>
+	
 	
 </tiles-definitions>

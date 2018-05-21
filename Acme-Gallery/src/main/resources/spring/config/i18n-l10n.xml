@@ -38,6 +38,7 @@
 		<value>/views/museum/messages</value>
 		<value>/views/product/messages</value>
 		<value>/views/room/messages</value>
+		<value>/views/sponsor/messages</value>
 		<value>/views/sponsorship/messages</value>
 		<value>/views/store/messages</value>
 		<value>/views/systemConfiguration/messages</value>

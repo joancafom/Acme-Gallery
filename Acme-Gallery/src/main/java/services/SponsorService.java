@@ -6,6 +6,8 @@ import java.util.HashSet;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 
 import repositories.SponsorRepository;
 import security.LoginService;
+import domain.Administrator;
 import domain.Sponsor;
 import domain.Sponsorship;
 import forms.ActorRegistrationForm;
@@ -23,7 +26,10 @@ public class SponsorService extends ActorService {
 
 	//Managed Repository
 	@Autowired
-	private SponsorRepository	sponsorRepository;
+	private SponsorRepository		sponsorRepository;
+
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	//CRUD Methods
@@ -47,6 +53,11 @@ public class SponsorService extends ActorService {
 		Assert.notNull(sponsorToSave);
 
 		return this.sponsorRepository.save(sponsorToSave);
+	}
+
+	/* v1.0 - josembell */
+	public Sponsor findOne(final int sponsorId) {
+		return this.sponsorRepository.findOne(sponsorId);
 	}
 
 	//Other Business Methods
@@ -82,6 +93,35 @@ public class SponsorService extends ActorService {
 		sponsor.getUserAccount().setPassword(hashedPassword);
 
 		return this.save(sponsor);
+	}
+
+	/* v1.0 - josembell */
+	public Page<Sponsor> findAllUnlocked(final Integer page, final int size) {
+		final Page<Sponsor> res = this.sponsorRepository.findAllUnlocked(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	public Page<Sponsor> findAllLocked(final Integer page, final int size) {
+		final Page<Sponsor> res = this.sponsorRepository.findAllLocked(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	public void ban(final Sponsor sponsor) {
+		Assert.notNull(sponsor);
+		Assert.isTrue(sponsor.getUserAccount().getIsLocked() == false);
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		sponsor.getUserAccount().setIsLocked(true);
+
+		this.sponsorRepository.save(sponsor);
+
 	}
 
 }

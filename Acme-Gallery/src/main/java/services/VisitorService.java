@@ -17,6 +17,7 @@ import org.springframework.validation.Validator;
 import repositories.VisitorRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Administrator;
 import domain.Comment;
 import domain.DayPass;
 import domain.Group;
@@ -32,12 +33,15 @@ public class VisitorService extends ActorService {
 
 	//Managed Repository
 	@Autowired
-	private VisitorRepository	visitorRepositories;
+	private VisitorRepository		visitorRepositories;
 
 	// Validator
 
 	@Autowired
-	private Validator			validator;
+	private Validator				validator;
+
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	//CRUD Methods
@@ -72,6 +76,11 @@ public class VisitorService extends ActorService {
 	// v1.0 - Alicia
 	public void flush() {
 		this.visitorRepositories.flush();
+	}
+
+	/* v1.0 - josembell */
+	public Visitor findOne(final int visitorId) {
+		return this.visitorRepositories.findOne(visitorId);
 	}
 
 	//Other Business Methods
@@ -176,6 +185,35 @@ public class VisitorService extends ActorService {
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	/* v1.0 - josembell */
+	public Page<Visitor> findAllUnlocked(final Integer page, final int size) {
+		final Page<Visitor> res = this.visitorRepositories.findAllUnlocked(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	public Page<Visitor> findAllLocked(final Integer page, final int size) {
+		final Page<Visitor> res = this.visitorRepositories.findAllLocked(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	public void ban(final Visitor visitor) {
+		Assert.notNull(visitor);
+		Assert.isTrue(visitor.getUserAccount().getIsLocked() == false);
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		visitor.getUserAccount().setIsLocked(true);
+
+		this.visitorRepositories.save(visitor);
+
 	}
 
 }

@@ -6154,9 +6154,9 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 
 	<bean id="review18" class="domain.Review">
 		<property name="body"
-			value="I think my girlfriend enjoyed it. Not my case" />
+			value="I think my girlfriend enjoyed it. Not my case cialis" />
 		<property name="score" value="2" />
-		<property name="containsTaboo" value="false" />
+		<property name="containsTaboo" value="true" />
 		<property name="creationDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="25/03/2018 15:54" />

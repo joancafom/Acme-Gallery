@@ -40,6 +40,21 @@ public class ReviewService extends ActorService {
 		return this.reviewRepository.save(review);
 	}
 
+	/* v1.0 - josembell */
+	public Review findOne(final int reviewId) {
+		return this.reviewRepository.findOne(reviewId);
+	}
+
+	/* v1.0 - josembell */
+	public void delete(final Review review) {
+		Assert.notNull(review);
+		final Administrator administrator = this.adminService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		this.reviewRepository.delete(review);
+
+	}
+
 	//Other Business Methods
 
 	//v1.0 - Implemented by JA
@@ -81,4 +96,5 @@ public class ReviewService extends ActorService {
 
 		return this.reviewRepository.findNotTabooed(new PageRequest(page - 1, size));
 	}
+
 }

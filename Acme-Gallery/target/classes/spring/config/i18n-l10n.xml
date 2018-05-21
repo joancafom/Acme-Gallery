@@ -39,6 +39,7 @@
 		<value>/views/invitation/messages</value>
 		<value>/views/museum/messages</value>
 		<value>/views/product/messages</value>
+		<value>/views/review/messages</value>
 		<value>/views/room/messages</value>
 		<value>/views/sponsor/messages</value>
 		<value>/views/sponsorship/messages</value>

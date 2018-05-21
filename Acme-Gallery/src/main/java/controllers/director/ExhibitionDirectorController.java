@@ -317,7 +317,7 @@ public class ExhibitionDirectorController extends AbstractController {
 		return res;
 	}
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	private ModelAndView createEditModelAndView(final Exhibition exhibition, final String message) {
 		final ModelAndView res;
 
@@ -325,6 +325,20 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
 		final Collection<Room> rooms = this.roomService.getByPrincipal();
+
+		if (exhibition.getId() == 0 || exhibition.getDayPasses().isEmpty()) {
+			final Collection<String> tickers = this.exhibitionService.getTickersByPrincipal();
+			final Collection<Date> startingDates = this.exhibitionService.getStartingDatesByPrincipal();
+			final Collection<Date> endingDates = this.exhibitionService.getEndingDatesByPrincipal();
+			final Collection<String> roomNames = this.exhibitionService.getRoomNamesByPrincipal();
+			final Integer exhSize = startingDates.size();
+
+			res.addObject("tickers", tickers);
+			res.addObject("startingDates", startingDates);
+			res.addObject("endingDates", endingDates);
+			res.addObject("roomNames", roomNames);
+			res.addObject("exhSize", exhSize);
+		}
 
 		res.addObject("exhibition", exhibition);
 		res.addObject("categories", categories);
@@ -335,7 +349,6 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		return res;
 	}
-
 	// v1.0 - Alicia
 	private ModelAndView addGuideModelAndView(final ExhibitionForm exhibition, final String message) {
 		final ModelAndView res;

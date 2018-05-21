@@ -17,12 +17,16 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<jstl:if test="${category.name ne 'CATEGORY'}">
-	<h3 style="text-align:center"><spring:message code="category"/> <span style="text-decoration:underline;"><jstl:out value="${category.name}"/></span></h3><br/>
-</jstl:if>
-
 <jstl:if test="${category.parentCategory ne null and category.parentCategory.name ne 'CATEGORY'}">
 	<h4 style="text-align:center"><spring:message code="category.parentCategory.message"/> <a href="category/${actorWS}display.do?categoryId=${category.parentCategory.id}"><jstl:out value="${category.parentCategory.name}"/></a></h4><br/><br/>
+</jstl:if>
+
+<jstl:if test="${category.parentCategory ne null and category.parentCategory.name eq 'CATEGORY'}">
+	<h4 style="text-align:center"><spring:message code="category.parentCategory.message"/> <a href="category/${actorWS}display.do?"><spring:message code="rootCategory"/></a></h4><br/><br/>
+</jstl:if>
+
+<jstl:if test="${category.name ne 'CATEGORY'}">
+	<h3 style="text-align:center"><spring:message code="category"/> <span style="text-decoration:underline;"><jstl:out value="${category.name}"/></span></h3><br/>
 </jstl:if>
 
 <!-- Children Categories -->

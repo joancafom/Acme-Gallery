@@ -132,7 +132,7 @@ public class ExhibitionService {
 		return this.exhibitionRepository.save(exhibition);
 	}
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	public Exhibition saveCreateAndEdit(final Exhibition exhibition) {
 		Assert.notNull(exhibition);
 
@@ -143,10 +143,11 @@ public class ExhibitionService {
 		Assert.isTrue(exhibition.getStartingDate().before(exhibition.getEndingDate()));
 		Assert.isTrue((exhibition.getIsPrivate() && exhibition.getPrice() > 0.0) || (!exhibition.getIsPrivate() && exhibition.getPrice() == 0.0));
 		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
-		Assert.isTrue(this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate()).isEmpty());
 
-		if (exhibition.getId() == 0)
+		if (exhibition.getId() == 0) {
+			Assert.isTrue(this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate()).isEmpty());
 			exhibition.setTicker(director.getUserAccount().getUsername() + "-" + exhibition.getTicker());
+		}
 
 		Assert.notNull(exhibition.getWebsites());
 		if (!exhibition.getWebsites().isEmpty())
@@ -160,6 +161,7 @@ public class ExhibitionService {
 
 		return this.exhibitionRepository.save(exhibition);
 	}
+
 	// v1.0 - JA
 	public void flush() {
 
@@ -270,6 +272,7 @@ public class ExhibitionService {
 
 	// v1.0 - Alicia
 	// v2.0 - JA (Errors)
+	// v3.0 - Alicia
 	public Exhibition reconstructSave(final Exhibition prunedExhibition, final BindingResult binding) {
 		Assert.notNull(prunedExhibition);
 
@@ -278,7 +281,14 @@ public class ExhibitionService {
 
 		final String tickerPrefix = director.getUserAccount().getUsername() + "-";
 
-		if (prunedExhibition.getId() == 0) {
+		final Exhibition oldExhibition = this.findOne(prunedExhibition.getId());
+
+		if (prunedExhibition.getId() == 0 || (oldExhibition != null && oldExhibition.getDayPasses().isEmpty())) {
+
+			if (oldExhibition != null && oldExhibition.getDayPasses().isEmpty()) {
+				res.setId(oldExhibition.getId());
+				res.setVersion(oldExhibition.getVersion());
+			}
 
 			res.setTicker(tickerPrefix + prunedExhibition.getTicker());
 			res.setTitle(prunedExhibition.getTitle());
@@ -289,14 +299,16 @@ public class ExhibitionService {
 			res.setIsPrivate(prunedExhibition.getIsPrivate());
 			res.setPrice(prunedExhibition.getPrice());
 
+			if (!prunedExhibition.getIsPrivate() && prunedExhibition.getPrice() == null)
+				res.setPrice(0.0);
+
 			res.setCategory(prunedExhibition.getCategory());
 			res.setRoom(prunedExhibition.getRoom());
 
 		} else {
 
-			final Exhibition oldExhibition = this.findOne(prunedExhibition.getId());
-
 			res.setId(oldExhibition.getId());
+			res.setVersion(oldExhibition.getVersion());
 
 			res.setTicker(oldExhibition.getTicker());
 
@@ -314,7 +326,9 @@ public class ExhibitionService {
 			res.setDayPasses(oldExhibition.getDayPasses());
 			res.setSponsorships(oldExhibition.getSponsorships());
 			res.setCritiques(oldExhibition.getCritiques());
-			res.setCategory(oldExhibition.getCategory());
+
+			res.setCategory(prunedExhibition.getCategory());
+
 			res.setArtworks(oldExhibition.getArtworks());
 			res.setGuides(oldExhibition.getGuides());
 			res.setRoom(oldExhibition.getRoom());
@@ -351,7 +365,7 @@ public class ExhibitionService {
 		return res;
 	}
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	public Exhibition reconstructSave(final ExhibitionForm exhibitionForm, final BindingResult binding) {
 		Assert.notNull(exhibitionForm);
 
@@ -360,6 +374,7 @@ public class ExhibitionService {
 		final Exhibition oldExhibition = this.findOne(exhibitionForm.getExhibition().getId());
 
 		res.setId(oldExhibition.getId());
+		res.setVersion(oldExhibition.getVersion());
 
 		res.setTicker(oldExhibition.getTicker());
 		res.setTitle(oldExhibition.getTitle());
@@ -379,13 +394,14 @@ public class ExhibitionService {
 		final Collection<Guide> newGuides = new HashSet<Guide>();
 		newGuides.addAll(oldExhibition.getGuides());
 
-		for (final String s : exhibitionForm.getGuides()) {
-			final Guide g = this.guideService.findOne(new Integer(s));
-			Assert.notNull(g);
-			newGuides.add(g);
-			g.getExhibitions().add(res);
-			this.guideService.save(g);
-		}
+		if (exhibitionForm.getGuides() != null)
+			for (final String s : exhibitionForm.getGuides()) {
+				final Guide g = this.guideService.findOne(new Integer(s));
+				Assert.notNull(g);
+				newGuides.add(g);
+				g.getExhibitions().add(res);
+				this.guideService.save(g);
+			}
 
 		res.setGuides(newGuides);
 
@@ -420,6 +436,50 @@ public class ExhibitionService {
 		Assert.notNull(room);
 
 		final Page<Exhibition> res = this.exhibitionRepository.findByRoomId(room.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<String> getTickersByPrincipal() {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<String> res = this.exhibitionRepository.findTickersByDirectorId(director.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Date> getStartingDatesByPrincipal() {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<Date> res = this.exhibitionRepository.findStartingDatesByDirectorId(director.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Date> getEndingDatesByPrincipal() {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<Date> res = this.exhibitionRepository.findEndingDatesByDirectorId(director.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<String> getRoomNamesByPrincipal() {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<String> res = this.exhibitionRepository.findRoomNamesByDirectorId(director.getId());
 		Assert.notNull(res);
 
 		return res;

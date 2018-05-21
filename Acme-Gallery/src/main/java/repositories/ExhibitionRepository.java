@@ -67,8 +67,24 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
 	@Query("select e from Exhibition e where e.room.id = ?1 order by e.endingDate desc")
 	Page<Exhibition> findByRoomId(int roomId, Pageable pageable);
 
-	// v1.0 - Alicia
-	@Query("select e from Exhibition e where e.room.id = ?1 and ((e.endingDate > ?2 and e.endingDate <= ?3) or (e.startingDate >= ?2 and e.startingDate < ?3))")
+	// v2.0 - Alicia
+	@Query("select e.startingDate, e.endingDate from Exhibition e where e.room.id = ?1 and ((e.startingDate <= ?2 and e.endingDate >= ?2) or (e.startingDate <= ?3 and e.endingDate >= ?3))")
 	Collection<Exhibition> findDateAndRoomConflicts(int roomId, Date startingDate, Date endingDate);
+
+	// v1.0 - Alicia
+	@Query("select e.ticker from Exhibition e where e.room.museum.director.id = ?1")
+	Collection<String> findTickersByDirectorId(int directorId);
+
+	// v1.0 - Alicia
+	@Query("select e.startingDate from Exhibition e where e.room.museum.director.id = ?1")
+	Collection<Date> findStartingDatesByDirectorId(int directorId);
+
+	// v1.0 - Alicia
+	@Query("select e.endingDate from Exhibition e where e.room.museum.director.id = ?1")
+	Collection<Date> findEndingDatesByDirectorId(int directorId);
+
+	// v1.0 - Alicia
+	@Query("select e.room.name from Exhibition e where e.room.museum.director.id = ?1")
+	Collection<String> findRoomNamesByDirectorId(int directorId);
 
 }

@@ -29,16 +29,28 @@
 		var a = document.getElementById("isPublic").checked;
 		
 		if (a) {
-			document.getElementById("price").disabled = true;
-			document.getElementById("price").value = 0;
+			document.getElementById("price").hidden = true;
+			document.getElementById("publicPrice").hidden = false;
 		} else {
-			document.getElementById("price").disabled = false;
+			document.getElementById("price").hidden = false;
+			document.getElementById("publicPrice").hidden = true;
 		}
 		
 	}
 
 </script>
 
+<jstl:if test="${exhibition.id eq 0 or empty exhibition.dayPasses}">
+
+	<div style="float: right;">
+	<br/>
+	<h3>Your current exhibitions dates and rooms:</h3><br/>
+	<jstl:forEach var="i" begin="0" end="${exhSize - 1}">
+		<strong><jstl:out value="${tickers[i]} | ${roomNames[i]}"/>:</strong> <acme:dateFormat code="date.format" value="${startingDates[i]}"/> - <acme:dateFormat code="date.format" value="${endingDates[i]}"/><br/>
+	</jstl:forEach>
+	</div>
+
+</jstl:if>
 
 <form:form action="exhibition/${actorWS}edit.do" modelAttribute="exhibition">
 
@@ -46,7 +58,7 @@
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	
-	<jstl:if test="${exhibition.id eq 0}">
+	<jstl:if test="${exhibition.id eq 0 or empty exhibition.dayPasses}">
 	
 	<!-- Inputs -->
 	<br/>
@@ -66,18 +78,18 @@
 	
 	<br/>
 	
-	<form:label path="isPrivate"><spring:message code="exhibition.isPrivate"/></form:label>
+	<strong><form:label path="isPrivate"><spring:message code="exhibition.isPrivate"/>:</form:label></strong>
 	<form:radiobutton path="isPrivate" value="false" id="isPublic" onchange="checkIsPublic();"/><spring:message code="exhibition.public"/>
 	<form:radiobutton path="isPrivate" value="true" onchange="checkIsPublic();"/><spring:message code="exhibition.private"/>
 	<form:errors cssClass="error" path="isPrivate"/>
 	
 	<br/>
 	
-	<acme:textbox code="exhibition.price" path="price" id="price"/><br/>
+	<acme:textbox code="exhibition.price" path="price" id="price"/><p id="publicPrice"><acme:priceFormat code="price.format" value="0"/></p>
 	
 	<br/>
 	
-	<form:label path="category"><spring:message code="exhibition.category"/>: </form:label>
+	<strong><form:label path="category"><spring:message code="exhibition.category"/>: </form:label></strong>
 	<form:select path="category">
 		<form:option value="0" label="---"/>
 		<jstl:forEach items="${categories}" var="c">
@@ -95,7 +107,7 @@
 	
 	<br/>
 	
-	<form:label path="room"><spring:message code="exhibition.room"/>: </form:label>
+	<strong><form:label path="room"><spring:message code="exhibition.room"/>: </form:label></strong>
 	<form:select path="room">
 		<form:option value="0" label="---"/>
 		<jstl:forEach items="${rooms}" var="r">
@@ -104,14 +116,14 @@
 	</form:select>
 	<form:errors cssClass="error" path="room"/>
 	
-	<br/>
+	<br/><br/>
 	
 	<acme:submit name="save" code="exhibition.save"/>
 	<acme:cancel url="exhibition/${actorWS}listMine.do" code="exhibition.cancel"/>
 	
 	</jstl:if>
 	
-	<jstl:if test="${exhibition.id ne 0}">
+	<jstl:if test="${exhibition.id ne 0 and not empty exhibition.dayPasses}">
 	
 	<!-- Inputs -->
 	<br/>
@@ -122,6 +134,24 @@
 	<br/>
 	
 	<acme:textarea code="exhibition.websites" path="websites"/><br/>
+	
+	<br/>
+	
+	<strong><form:label path="category"><spring:message code="exhibition.category"/>: </form:label></strong>
+	<form:select path="category">
+		<form:option value="0" label="---"/>
+		<jstl:forEach items="${categories}" var="c">
+			<jstl:choose>
+				<jstl:when test="${c.parentCategory.name == 'CATEGORY'}">
+					<form:option value="${c.id}" label="${c.name}"/>
+				</jstl:when>
+				<jstl:otherwise>
+					<form:option value="${c.id}" label="${c.parentCategory.name} -> ${c.name}"/>
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:forEach>
+	</form:select>
+	<form:errors cssClass="error" path="category"/>
 	
 	<br/>
 	

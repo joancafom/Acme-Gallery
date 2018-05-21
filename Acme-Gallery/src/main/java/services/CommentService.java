@@ -72,8 +72,8 @@ public class CommentService extends ActorService {
 
 		if (comment.getParentComment() != null) {
 			comment.getParentComment().getChildrenComments().remove(comment);
-			comment.setParentComment(null);
 			this.save(comment.getParentComment());
+			comment.setParentComment(null);
 			this.flush();
 		}
 

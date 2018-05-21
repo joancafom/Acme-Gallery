@@ -29,6 +29,7 @@
 		<value>/views/announcement/messages</value>
 		<value>/views/artwork/messages</value>
 		<value>/views/category/messages</value>
+		<value>/views/comment/messages</value>
 		<value>/views/critique/messages</value>
 		<value>/views/dayPass/messages</value>
 		<value>/views/director/messages</value>
@@ -38,6 +39,7 @@
 		<value>/views/museum/messages</value>
 		<value>/views/product/messages</value>
 		<value>/views/room/messages</value>
+		<value>/views/sponsor/messages</value>
 		<value>/views/sponsorship/messages</value>
 		<value>/views/store/messages</value>
 		<value>/views/systemConfiguration/messages</value>

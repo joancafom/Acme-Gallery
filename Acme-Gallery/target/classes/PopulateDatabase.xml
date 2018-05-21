@@ -444,7 +444,189 @@
 			</list>
 		</property>
 	</bean>
-
+	
+	<bean id="userAccount33" class="security.UserAccount">
+		<property name="username" value="sponsor5" />
+		<property name="password" value="d6d7f85c15bbb451ef50b704b3693033" />
+		<property name="isLocked" value="false" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount34" class="security.UserAccount">
+		<property name="username" value="sponsor6" />
+		<property name="password" value="214a700672abaf88da097fbf5f246252" />
+		<property name="isLocked" value="false" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount35" class="security.UserAccount">
+		<property name="username" value="visitor7" />
+		<property name="password" value="3693575994a2a47ddfd67bd19f37381c" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount36" class="security.UserAccount">
+		<property name="username" value="visitor8" />
+		<property name="password" value="237295a49f2b11e7b9415d1a2cd753d6" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount37" class="security.UserAccount">
+		<property name="username" value="visitor9" />
+		<property name="password" value="5be811d2f99e53b886b2fcbc95dacec0" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount38" class="security.UserAccount">
+		<property name="username" value="visitor10" />
+		<property name="password" value="14afa2b6ad807eed0ce6b4d9e9ab49d6" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount39" class="security.UserAccount">
+		<property name="username" value="visitor11" />
+		<property name="password" value="af25ad4009f90b0afa854443f0206eb7" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount40" class="security.UserAccount">
+		<property name="username" value="visitor12" />
+		<property name="password" value="785495f4278380480c3f2a63fe06e3d9" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VISITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount41" class="security.UserAccount">
+		<property name="username" value="sponsor7" />
+		<property name="password" value="9798bbc9417e0ad8183332d408703757" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount42" class="security.UserAccount">
+		<property name="username" value="sponsor8" />
+		<property name="password" value="8ef13e3e3c71f78fdee0a575c59bbdf5" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount43" class="security.UserAccount">
+		<property name="username" value="sponsor9" />
+		<property name="password" value="504c1ba7b26260e8df9e9cd0c36a5fc3" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount44" class="security.UserAccount">
+		<property name="username" value="sponsor10" />
+		<property name="password" value="a667d56c80461ae8bd64029e955c60ce" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount45" class="security.UserAccount">
+		<property name="username" value="sponsor11" />
+		<property name="password" value="49ea8ae74b49364f5b4740edbe21b99c" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount46" class="security.UserAccount">
+		<property name="username" value="sponsor12" />
+		<property name="password" value="bb18323431ed82889eb5d53a0ac376ba" />
+		<property name="isLocked" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->
 
 	<bean id="admin" class="domain.Administrator">
@@ -5483,6 +5665,238 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="visitor7" class="domain.Visitor">
+		<property name="name" value="Beelén" />
+		<property name="surnames" value="Lucky" />
+		<property name="email" value="beelen@gmail.com" />
+		<property name="phoneNumber" value="+34657198120" />
+		<property name="gender" value="FEMALE" />
+		<property name="userAccount" ref="userAccount35" />
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="visitor8" class="domain.Visitor">
+		<property name="name" value="Jota" />
+		<property name="surnames" value="Morrell" />
+		<property name="email" value="jota@gmail.com" />
+		<property name="phoneNumber" value="+34652998500" />
+		<property name="gender" value="MALE" />
+		<property name="address" value="4446 Sycamore Fork Road"/>
+		<property name="userAccount" ref="userAccount36" />
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="visitor9" class="domain.Visitor">
+		<property name="name" value="Flopi" />
+		<property name="surnames" value="McElroy" />
+		<property name="email" value="flopi@gmail.com" />
+		<property name="phoneNumber" value="+34776900300" />
+		<property name="gender" value="FEMALE" />
+		<property name="address" value="3345 Clearview Drive"/>
+		<property name="userAccount" ref="userAccount37" />
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="visitor10" class="domain.Visitor">
+		<property name="name" value="Patidifú" />
+		<property name="surnames" value="Barker" />
+		<property name="email" value="patidifu@gmail.com" />
+		<property name="phoneNumber" value="+34665111789" />
+		<property name="gender" value="FEMALE" />
+		<property name="address" value="2589 Boggess Street"/>
+		<property name="userAccount" ref="userAccount38" />
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="visitor11" class="domain.Visitor">
+		<property name="name" value="Eto" />
+		<property name="surnames" value="Brown" />
+		<property name="email" value="eto@gmail.com" />
+		<property name="phoneNumber" value="+34661911600" />
+		<property name="gender" value="MALE" />
+		<property name="address" value="1435 Radford Street"/>
+		<property name="userAccount" ref="userAccount39" />
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="visitor12" class="domain.Visitor">
+		<property name="name" value="Paulino" />
+		<property name="surnames" value="Sims" />
+		<property name="email" value="paulino@gmail.com" />
+		<property name="phoneNumber" value="+34655123780" />
+		<property name="gender" value="MALE" />
+		<property name="userAccount" ref="userAccount40" />
+
+		<property name="createdGroups">
+			<list>
+			</list>
+		</property>
+		<property name="joinedGroups">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="dayPasses">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="receivedInvitations">
+			<list>
+			</list>
+		</property>
+		<property name="sentInvitations">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Reviews -->
 
@@ -6341,6 +6755,121 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			<list>
 				<ref bean="sponsorship10" />
 				<ref bean="sponsorship11" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor5" class="domain.Sponsor">
+		<property name="name" value="Cervasio" />
+		<property name="surnames" value="D Long" />
+		<property name="email" value="cervasio@gmail.com" />
+		<property name="phoneNumber" value="+34667496100" />
+		<property name="gender" value="MALE" />
+		<property name="userAccount" ref="userAccount33" />
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor6" class="domain.Sponsor">
+		<property name="name" value="Croco" />
+		<property name="surnames" value="Brewer" />
+		<property name="email" value="croco@gmail.com" />
+		<property name="phoneNumber" value="+34776112980" />
+		<property name="gender" value="MALE" />
+		<property name="userAccount" ref="userAccount34" />
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor7" class="domain.Sponsor">
+		<property name="name" value="Méloni" />
+		<property name="surnames" value="Escamilla" />
+		<property name="email" value="meloni@gmail.com" />
+		<property name="phoneNumber" value="+34665100897" />
+		<property name="address" value="3363 Saints Alley"/>
+		<property name="gender" value="FEMALE" />
+		<property name="userAccount" ref="userAccount41" />
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor8" class="domain.Sponsor">
+		<property name="name" value="Eloísa" />
+		<property name="surnames" value="Hamilton" />
+		<property name="email" value="hamilton@gmail.com" />
+		<property name="phoneNumber" value="+34655112980" />
+		<property name="address" value="1508 Davis Place"/>
+		<property name="gender" value="FEMALE" />
+		<property name="userAccount" ref="userAccount42" />
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor9" class="domain.Sponsor">
+		<property name="name" value="Ava" />
+		<property name="surnames" value="Metzger" />
+		<property name="email" value="avamet@gmail.com" />
+		<property name="phoneNumber" value="+34611922780" />
+		<property name="gender" value="FEMALE" />
+		<property name="userAccount" ref="userAccount43" />
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor10" class="domain.Sponsor">
+		<property name="name" value="Olivia" />
+		<property name="surnames" value="Radcliff" />
+		<property name="email" value="olivia@gmail.com" />
+		<property name="phoneNumber" value="+34651334942" />
+		<property name="address" value="4193 Jarvis Street"/>
+		<property name="gender" value="FEMALE" />
+		<property name="userAccount" ref="userAccount44" />
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor11" class="domain.Sponsor">
+		<property name="name" value="Arsenio" />
+		<property name="surnames" value="Dunn" />
+		<property name="email" value="arsenio@gmail.com" />
+		<property name="phoneNumber" value="+34655222198" />
+		<property name="gender" value="MALE" />
+		<property name="userAccount" ref="userAccount45" />
+
+		<property name="sponsorships">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor12" class="domain.Sponsor">
+		<property name="name" value="Olaf" />
+		<property name="surnames" value="Sommer" />
+		<property name="email" value="olaf@gmail.com" />
+		<property name="phoneNumber" value="+34887123500" />
+		<property name="gender" value="MALE" />
+		<property name="userAccount" ref="userAccount46" />
+
+		<property name="sponsorships">
+			<list>
 			</list>
 		</property>
 	</bean>

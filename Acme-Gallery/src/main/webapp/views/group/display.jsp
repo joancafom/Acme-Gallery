@@ -115,7 +115,11 @@
 				</jstl:if>
 				</div>
 			</display:column>
-			
+			<security:authorize access="hasRole('ADMINISTRATOR')">
+				<display:column>
+					<a href="comment/administrator/delete.do?commentId=${comment.id}"><spring:message code="comment.remove"/></a>
+				</display:column>
+			</security:authorize>
 		</display:table>
 	</jstl:if><br><br>
 	<jstl:if test="${hasReplies==true}">
@@ -139,6 +143,11 @@
 				</jstl:if>
 				</div>
 			</display:column>
+			<security:authorize access="hasRole('ADMINISTRATOR')">
+				<display:column>
+					<a href="comment/administrator/delete.do?commentId=${reply.id}"><spring:message code="comment.remove"/></a>
+				</display:column>
+			</security:authorize>
 		</display:table>
 	</jstl:if>
 </div>

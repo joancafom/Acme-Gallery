@@ -47,7 +47,9 @@
 		<a href="museum/${actorWS}display.do?museumId=${group.museum.id}"><jstl:out value="${group.museum.name}"/></a>
 	</display:column>
 	
-	<display:column>
-		<a href="group/administrator/delete.do?groupId=${group.id}"><spring:message code="group.delete" /></a>
-	</display:column>
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<display:column>
+			<a href="group/administrator/delete.do?groupId=${group.id}"><spring:message code="group.delete" /></a>
+		</display:column>
+	</security:authorize>
 </display:table>

@@ -113,9 +113,12 @@ public class SponsorshipDirectorController extends AbstractController {
 
 		//Skip checking for exhibition being null, as it was retrieved from the DB
 
+		final Collection<Sponsorship> currentSponsorships = this.sponsorshipService.findAcceptedByExhibition(sponsorship.getExhibition());
+
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(prunedSponsorship);
 			res.addObject("exhibitionId", sponsorship.getExhibition().getId());
+			res.addObject("sponsorships", currentSponsorships);
 		} else
 			try {
 				this.sponsorshipService.updateStatus(sponsorship);
@@ -123,13 +126,16 @@ public class SponsorshipDirectorController extends AbstractController {
 			} catch (final IllegalStateException oops) {
 				res = this.createEditModelAndView(prunedSponsorship, "sponsorship.dates.unavailable");
 				res.addObject("exhibitionId", sponsorship.getExhibition().getId());
+				res.addObject("sponsorships", currentSponsorships);
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(prunedSponsorship, "sponsorship.commit.error");
 				res.addObject("exhibitionId", sponsorship.getExhibition().getId());
+				res.addObject("sponsorships", currentSponsorships);
 			}
 
 		return res;
 	}
+
 	//Ancillary Methods -------------------------------
 
 	//v1.0 - Implemented by JA

@@ -134,6 +134,13 @@ public class SponsorshipService {
 	}
 
 	//v1.0 - Implemented by JA
+	public Collection<Sponsorship> findAcceptedByExhibition(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+
+		return this.sponsorshipRepository.findAcceptedByExhibitionId(exhibition.getId());
+	}
+
+	//v1.0 - Implemented by JA
 	public Collection<Sponsorship> findAllByExhibition(final Exhibition exhibition) {
 
 		Assert.notNull(exhibition);

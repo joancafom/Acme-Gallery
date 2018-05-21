@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,9 @@ import org.springframework.util.Assert;
 import repositories.InvitationRepository;
 import security.LoginService;
 import domain.Administrator;
+import domain.Group;
 import domain.Invitation;
+import domain.Visitor;
 
 @Service
 @Transactional
@@ -40,9 +44,23 @@ public class InvitationService {
 		Assert.notNull(invitation);
 		Assert.isTrue(this.invitationRepository.exists(invitation.getId()));
 
-		//Make sure an Admin is the Actor who is trying to perform the operation
+		//Make sure an Admin is the Actor who is trying to perform the operation or the owner
 		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
-		Assert.notNull(administrator);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(administrator != null || visitor != null);
+
+		if (visitor != null) {
+			final Group group = invitation.getGroup();
+
+			Assert.isTrue(visitor.getCreatedGroups().contains(group));
+			final Date now = new Date();
+
+			Assert.notNull(group.getParticipants());
+			Assert.notNull(group.getMeetingDate());
+			Assert.isTrue(group.getParticipants().size() == 1);
+			Assert.isTrue(group.getParticipants().contains(visitor));
+			Assert.isTrue(now.before(group.getMeetingDate()));
+		}
 
 		invitation.getGuest().getReceivedInvitations().remove(invitation);
 		this.visitorService.save(invitation.getGuest());

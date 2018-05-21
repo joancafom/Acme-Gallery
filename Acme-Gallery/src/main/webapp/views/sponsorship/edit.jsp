@@ -69,6 +69,19 @@
    <div id="dates">
    		<acme:date id="startingDateInput" code="sponsorship.startingDate" path="startingDate" />
    		<acme:date id="endingDateInput" code="sponsorship.endingDate" path="endingDate"/>
+   		
+   		<jstl:if test="${not empty sponsorships}">
+   			<spring:message code="dates.unavailable.info" />:
+   			<br>
+   			<br>
+   			<ul>
+		   		<jstl:forEach items="${sponsorships}" var="currentSponsorship">
+		   			<li><acme:dateFormat code="date.format" value="${currentSponsorship.startingDate}"/> - <acme:dateFormat code="date.format" value="${currentSponsorship.endingDate}"/></li>
+		   		</jstl:forEach>
+	   		</ul>
+	   		<br>
+   		</jstl:if>
+   		
    </div>
    
 	<acme:cancel url="sponsorship/${actorWS}list.do?exhibitionId=${exhibitionId}" code="sponsorship.cancel"/>

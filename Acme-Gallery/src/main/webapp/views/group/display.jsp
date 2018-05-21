@@ -27,19 +27,23 @@
 <h2><strong><jstl:out value="${group.name}"/></strong></h2>
 <h3><jstl:out value="${group.description}"/></h3>
 <security:authorize access="hasRole('VISITOR')">
-
+<jsp:useBean id="now" class="java.util.Date" />
 	<jstl:choose>
 		<jstl:when test="${isCreator}">
 			<h4 style="color: #1ebf59;"><spring:message code="group.yours"/></h4>
+			<jstl:if test="${now >= group.meetingDate}">
+				<h4 style="color: #f4e842;"><spring:message code="group.past"/></h4>
+			</jstl:if>
+			<jstl:if test="${now < group.meetingDate and fn:length(group.participants) eq 1}">
+				<h4><a href="group/visitor/delete.do?groupId=${group.id}"><spring:message code="group.remove"/></a></h4>
+			</jstl:if>
 		</jstl:when>
 		<jstl:when test="${isMember}">
-			<h4 style="color: #1ebf59;"><spring:message code="group.member"/></h4>
+			<h4 style="color: #1ebf59;"><span><spring:message code="group.member"/>. <a href="group/visitor/quit.do?groupId=${group.id}"><spring:message code="group.quit"/></a></span></h4>
 		</jstl:when>
 		<jstl:otherwise>
-			<jsp:useBean id="now" class="java.util.Date" />
-			
 			<jstl:if test="${fn:length(group.participants) lt group.maxParticipants and now < group.meetingDate}">
-				<h4><a href="group/visitor/joinGroup.do?groupId=${group.id}"><spring:message code="group.notMember"/></a></h4>
+				<h4><a href="group/visitor/join.do?groupId=${group.id}"><spring:message code="group.notMember"/></a></h4>
 			</jstl:if>
 			<jstl:if test="${fn:length(group.participants) ge group.maxParticipants}">
 				<h4 style="color: #f44b42;"><spring:message code="group.full"/></h4>

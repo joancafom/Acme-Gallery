@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -16,6 +17,7 @@ import security.LoginService;
 import domain.Administrator;
 import domain.Comment;
 import domain.Group;
+import domain.Visitor;
 
 @Service
 @Transactional
@@ -50,9 +52,23 @@ public class CommentService extends ActorService {
 		Assert.notNull(comment);
 		Assert.isTrue(this.commentRepository.exists(comment.getId()));
 
-		//Make sure an Admin is the Actor who is trying to perform the operation
+		//Make sure an Admin is the Actor who is trying to perform the operation or the owner
 		final Administrator administrator = this.adminService.findByUserAccount(LoginService.getPrincipal());
-		Assert.notNull(administrator);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(administrator != null || visitor != null);
+
+		if (visitor != null) {
+			final Group group = comment.getGroup();
+
+			Assert.isTrue(visitor.getCreatedGroups().contains(group));
+			final Date now = new Date();
+
+			Assert.notNull(group.getParticipants());
+			Assert.notNull(group.getMeetingDate());
+			Assert.isTrue(group.getParticipants().size() == 1);
+			Assert.isTrue(group.getParticipants().contains(visitor));
+			Assert.isTrue(now.before(group.getMeetingDate()));
+		}
 
 		if (comment.getParentComment() != null) {
 			comment.getParentComment().getChildrenComments().remove(comment);

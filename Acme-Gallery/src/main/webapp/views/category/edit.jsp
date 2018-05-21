@@ -23,8 +23,11 @@
 
 	<form:hidden path="parentCategory"/>
 	
+	<br>
+	
 	<acme:textbox code="category.name" path="name"/>
 	
-	<acme:cancel url="category/administrator/display.do?categoryId=${category.parentCategory.id}" code="category.cancel"/>
+	<br>
 	<acme:submit name="save" code="category.save"/>
+	<acme:cancel url="category/administrator/display.do?categoryId=${category.parentCategory.id}" code="category.cancel"/>
 </form:form>

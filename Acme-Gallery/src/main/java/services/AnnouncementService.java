@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -75,13 +76,28 @@ public class AnnouncementService {
 	}
 
 	// v1.0 - Alicia
+	// v2.0 - JA (owner)
 	public void deleteGroup(final Announcement announcement) {
 		Assert.notNull(announcement);
 		Assert.isTrue(this.announcementRepository.exists(announcement.getId()));
 
-		//Make sure an Admin is the Actor who is trying to perform the operation
+		//Make sure an Admin is the Actor who is trying to perform the operation or the owner
 		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
-		Assert.notNull(administrator);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(administrator != null || visitor != null);
+
+		if (visitor != null) {
+			final Group group = announcement.getGroup();
+
+			Assert.isTrue(visitor.getCreatedGroups().contains(group));
+			final Date now = new Date();
+
+			Assert.notNull(group.getParticipants());
+			Assert.notNull(group.getMeetingDate());
+			Assert.isTrue(group.getParticipants().size() == 1);
+			Assert.isTrue(group.getParticipants().contains(visitor));
+			Assert.isTrue(now.before(group.getMeetingDate()));
+		}
 
 		this.announcementRepository.delete(announcement);
 		this.flush();

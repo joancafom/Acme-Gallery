@@ -119,6 +119,62 @@ public class GroupService {
 
 	//Other Business Methods --------------------------------------------------------------------------
 
+	// v1.0 - JA
+	public void deleteOwner(final Group group) {
+
+		Assert.notNull(group);
+		Assert.isTrue(this.groupRepository.exists(group.getId()));
+
+		//Make sure the owner is the Actor who is trying to perform the operation
+		//Or the owner
+
+		final Visitor owner = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(owner);
+		Assert.isTrue(owner.getCreatedGroups().contains(group));
+
+		//She or he may only remove it if he is the only member in that group and meeting date is in future
+
+		final Date now = new Date();
+
+		Assert.notNull(group.getParticipants());
+		Assert.notNull(group.getMeetingDate());
+		Assert.isTrue(group.getParticipants().size() == 1);
+		Assert.isTrue(group.getParticipants().contains(owner));
+		Assert.isTrue(now.before(group.getMeetingDate()));
+
+		for (final Announcement a : group.getAnnouncements())
+			this.announcementService.deleteGroup(a);
+
+		this.announcementService.flush();
+
+		for (final Comment c : group.getComments())
+			this.commentService.delete(c);
+
+		this.commentService.flush();
+
+		for (final Invitation i : group.getInvitations())
+			this.invitationService.delete(i);
+
+		owner.getCreatedGroups().remove(group);
+		this.visitorService.save(owner);
+		this.visitorService.flush();
+
+		for (final Visitor v : group.getParticipants()) {
+			v.getJoinedGroups().remove(group);
+			this.visitorService.save(v);
+			this.visitorService.flush();
+		}
+
+		this.invitationService.flush();
+
+		group.getMuseum().getGroups().remove(group);
+		this.museumService.save(group.getMuseum());
+		this.museumService.flush();
+
+		this.groupRepository.delete(group);
+		this.flush();
+	}
+
 	public Collection<Group> findTabooed() {
 
 		final Administrator admin = this.adminService.findByUserAccount(LoginService.getPrincipal());
@@ -189,6 +245,32 @@ public class GroupService {
 		this.visitorService.save(currentVisitor);
 
 		group.getParticipants().add(currentVisitor);
+		this.save(retrievedGroup);
+	}
+
+	//v1.0 - Implemented by JA
+	public void quitGroup(final Group group) {
+
+		Assert.notNull(group);
+
+		//Retrieve the group from the BD to ensure valid Data
+		final Group retrievedGroup = this.findOne(group.getId());
+		Assert.notNull(retrievedGroup);
+
+		//Retrieve the current Visitor
+		final Visitor currentVisitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentVisitor);
+
+		final Date now = new Date();
+
+		Assert.isTrue(now.before(retrievedGroup.getMeetingDate()));
+		Assert.isTrue(retrievedGroup.getParticipants().contains(currentVisitor));
+		Assert.isTrue(!retrievedGroup.getCreator().equals(currentVisitor));
+
+		currentVisitor.getJoinedGroups().remove(retrievedGroup);
+		this.visitorService.save(currentVisitor);
+
+		group.getParticipants().remove(currentVisitor);
 		this.save(retrievedGroup);
 	}
 

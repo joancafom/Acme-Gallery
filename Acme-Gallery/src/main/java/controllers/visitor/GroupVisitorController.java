@@ -78,6 +78,28 @@ public class GroupVisitorController extends AbstractController {
 	}
 
 	// v1.0 - Implemented by JA
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(final int groupId, final RedirectAttributes redirectAttributes) {
+
+		final Group groupToDelete = this.groupService.findOne(groupId);
+		Assert.notNull(groupToDelete);
+
+		ModelAndView res;
+
+		try {
+
+			this.groupService.deleteOwner(groupToDelete);
+			res = new ModelAndView("redirect:list.do");
+
+		} catch (final Throwable oops) {
+			res = new ModelAndView("redirect:display.do?groupId=" + groupId);
+			redirectAttributes.addFlashAttribute("message", "group.commit.error");
+		}
+
+		return res;
+	}
+
+	// v1.0 - Implemented by JA
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int groupId, @RequestParam(value = "d-4721629-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-7822565-p", defaultValue = "1") final Integer pageP, @RequestParam(
 		value = "d-1332617-p", defaultValue = "1") final Integer pageC, @RequestParam(value = "d-7822565-p", defaultValue = "1") final Integer pageR, @RequestParam(required = false) final Integer commentId) {
@@ -140,7 +162,7 @@ public class GroupVisitorController extends AbstractController {
 	}
 
 	// v1.0 - Implemented by JA
-	@RequestMapping(value = "/joinGroup", method = RequestMethod.GET)
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public ModelAndView joinGroup(final int groupId, final RedirectAttributes redirectAttributes) {
 
 		final Group groupToJoin = this.groupService.findOne(groupId);
@@ -151,6 +173,31 @@ public class GroupVisitorController extends AbstractController {
 		try {
 			this.groupService.joinPublicGroup(groupToJoin);
 		} catch (final Throwable oops) {
+			redirectAttributes.addFlashAttribute("message", "group.commit.error");
+		}
+
+		return res;
+	}
+
+	// v1.0 - Implemented by JA
+	@RequestMapping(value = "/quit", method = RequestMethod.GET)
+	public ModelAndView quitGroup(final int groupId, final RedirectAttributes redirectAttributes) {
+
+		final Group groupToQuit = this.groupService.findOne(groupId);
+		Assert.notNull(groupToQuit);
+
+		ModelAndView res;
+
+		try {
+
+			this.groupService.quitGroup(groupToQuit);
+
+			if (groupToQuit.getIsClosed())
+				res = new ModelAndView("redirect:list.do");
+			else
+				res = new ModelAndView("redirect:display.do?groupId=" + groupId);
+		} catch (final Throwable oops) {
+			res = new ModelAndView("redirect:display.do?groupId=" + groupId);
 			redirectAttributes.addFlashAttribute("message", "group.commit.error");
 		}
 

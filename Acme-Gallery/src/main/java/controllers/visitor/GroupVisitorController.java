@@ -79,57 +79,8 @@ public class GroupVisitorController extends AbstractController {
 
 	// v1.0 - Implemented by JA
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-public ModelAndView display(@RequestParam final int groupId, @RequestParam(value = "d-4721629-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-7822565-p", defaultValue = "1") final Integer pageP, @RequestParam(
+	public ModelAndView display(@RequestParam final int groupId, @RequestParam(value = "d-4721629-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-7822565-p", defaultValue = "1") final Integer pageP, @RequestParam(
 		value = "d-1332617-p", defaultValue = "1") final Integer pageC, @RequestParam(value = "d-7822565-p", defaultValue = "1") final Integer pageR, @RequestParam(required = false) final Integer commentId) {
-	
-		final ModelAndView res;
-		final Group group = this.groupService.findOne(groupId);
-		Assert.notNull(group);
-
-		final Page<Announcement> pageResultA = this.announcementService.findAllByGroup(pageA, 5, group);
-		final Collection<Announcement> announcements = pageResultA.getContent();
-		final Integer resultSizeAnnouncement = new Long(pageResultA.getTotalElements()).intValue();
-
-		final Page<Visitor> pageResultP = this.visitorService.findAllByGroup(pageP, 5, group);
-		final Collection<Visitor> participants = pageResultP.getContent();
-		final Integer resultSizeParticipant = new Long(pageResultP.getTotalElements()).intValue();
-
-		final Page<Comment> pageResultC = this.commentService.findAllRootByGroup(pageC, 5, group);
-		final Collection<Comment> comments = pageResultC.getContent();
-		final Integer resultSizeComment = new Long(pageResultC.getTotalElements()).intValue();
-
-		res = new ModelAndView("group/display");
-
-		res.addObject("group", group);
-		res.addObject("announcements", announcements);
-		res.addObject("resultSizeAnnouncements", resultSizeAnnouncement);
-		res.addObject("participants", participants);
-		res.addObject("resultSizeParticipants", resultSizeParticipant);
-		res.addObject("comments", comments);
-		res.addObject("resultSizeComments", resultSizeComment);
-
-		if (commentId != null) {
-			final Comment parentComment = this.commentService.findOne(commentId);
-			Assert.notNull(parentComment);
-			Assert.isTrue(parentComment.getGroup().equals(group));
-
-			final Page<Comment> pageResultR = this.commentService.findRepliesByComment(pageC, 5, parentComment);
-			final Collection<Comment> replies = pageResultR.getContent();
-			final Integer resultSizeReplies = new Long(pageResultR.getTotalElements()).intValue();
-
-			res.addObject("hasReplies", true);
-			res.addObject("parentComment", parentComment);
-			res.addObject("replies", replies);
-			res.addObject("resultSizeReplies", resultSizeReplies);
-
-		}
-
-		res.addObject("actorWS", this.ACTOR_WS);
-
-		return res;
-	}
-}
-
 
 		final ModelAndView res;
 		final Group group = this.groupService.findOne(groupId);
@@ -166,6 +117,22 @@ public ModelAndView display(@RequestParam final int groupId, @RequestParam(value
 		res.addObject("isMember", currentVisitor.getJoinedGroups().contains(group));
 		res.addObject("isCreator", currentVisitor.getCreatedGroups().contains(group));
 		res.addObject("isFull", group.getParticipants().size() == group.getMaxParticipants());
+
+		if (commentId != null) {
+			final Comment parentComment = this.commentService.findOne(commentId);
+			Assert.notNull(parentComment);
+			Assert.isTrue(parentComment.getGroup().equals(group));
+
+			final Page<Comment> pageResultR = this.commentService.findRepliesByComment(pageC, 5, parentComment);
+			final Collection<Comment> replies = pageResultR.getContent();
+			final Integer resultSizeReplies = new Long(pageResultR.getTotalElements()).intValue();
+
+			res.addObject("hasReplies", true);
+			res.addObject("parentComment", parentComment);
+			res.addObject("replies", replies);
+			res.addObject("resultSizeReplies", resultSizeReplies);
+
+		}
 
 		res.addObject("actorWS", this.ACTOR_WS);
 

@@ -16,6 +16,7 @@ import security.LoginService;
 import domain.Administrator;
 import domain.Announcement;
 import domain.Group;
+import domain.Visitor;
 
 @Service
 @Transactional
@@ -33,6 +34,9 @@ public class AnnouncementService {
 
 	@Autowired
 	private GroupService			groupService;
+
+	@Autowired
+	private VisitorService			visitorService;
 
 
 	// Validator --------------------------------------------------------------------------------------
@@ -154,9 +158,13 @@ public class AnnouncementService {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - JA
 	public Page<Announcement> findAllByGroup(final Integer page, final int size, final Group group) {
+
 		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
-		Assert.notNull(administrator);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+
+		Assert.isTrue(administrator != null || visitor != null);
 
 		final Page<Announcement> res = this.announcementRepository.findAllByGroup(group.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);

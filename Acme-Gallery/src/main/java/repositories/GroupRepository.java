@@ -10,9 +10,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Group;
+import domain.Visitor;
 
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Integer> {
+
+	// v1.0 - Implemented by JA
+	@Query("select g from Group g where g.isClosed = false or (g.isClosed = true and ?1 member of g.participants)")
+	Page<Group> findAllOpenAndMember(Visitor visitor, Pageable pageable);
 
 	@Query("select g from Group g where g.containsTaboo = true")
 	Collection<Group> findTabooed();

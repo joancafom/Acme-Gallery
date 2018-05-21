@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -155,6 +156,40 @@ public class GroupService {
 		Assert.notNull(admin);
 
 		return this.groupRepository.findAll(new PageRequest(page - 1, size));
+	}
+
+	public Page<Group> findAllOpenAndMember(final Integer page, final int size) {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		return this.groupRepository.findAllOpenAndMember(visitor, new PageRequest(page - 1, size));
+	}
+
+	//v1.0 - Implemented by JA
+	public void joinPublicGroup(final Group group) {
+
+		Assert.notNull(group);
+
+		//Retrieve the group from the BD to ensure valid Data
+		final Group retrievedGroup = this.findOne(group.getId());
+		Assert.notNull(retrievedGroup);
+
+		//Retrieve the current Visitor
+		final Visitor currentVisitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentVisitor);
+
+		final Date now = new Date();
+
+		Assert.isTrue(!retrievedGroup.getIsClosed());
+		Assert.isTrue(now.before(retrievedGroup.getMeetingDate()));
+		Assert.isTrue(retrievedGroup.getMaxParticipants() > retrievedGroup.getParticipants().size());
+		Assert.isTrue(!retrievedGroup.getParticipants().contains(currentVisitor));
+
+		currentVisitor.getJoinedGroups().add(retrievedGroup);
+		this.visitorService.save(currentVisitor);
+
+		group.getParticipants().add(currentVisitor);
+		this.save(retrievedGroup);
 	}
 
 }

@@ -18,6 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <br>
@@ -25,6 +26,20 @@
 <div style="margin: 0 auto; width:1200px; display:block;">
 <h2><strong><jstl:out value="${group.name}"/></strong></h2>
 <h3><jstl:out value="${group.description}"/></h3>
+<security:authorize access="hasRole('VISITOR')">
+	<jstl:if test="${isCreator}">
+		<h4 style="color: #1ebf59;"><spring:message code="group.yours"/></h4>
+	</jstl:if>
+	<jstl:if test="${!isCreator and isMember}">
+		<h4 style="color: #1ebf59;"><spring:message code="group.member"/></h4>
+	</jstl:if>
+	<jstl:if test="${!isCreator and !isMember and !isFull}">
+		<h4><a href="group/visitor/joinGroup.do?groupId=${group.id}"><spring:message code="group.notMember"/></a></h4>
+	</jstl:if>
+	<jstl:if test="${!isCreator and !isMember and isFull}">
+		<h4 style="color: ##f44b42;"><spring:message code="group.full"/></h4>
+	</jstl:if>
+</security:authorize>
 <br>
 <div>
 <h3><spring:message code="group.announcements"/></h3>

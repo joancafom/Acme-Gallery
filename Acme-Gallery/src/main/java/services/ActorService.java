@@ -96,6 +96,7 @@ public class ActorService {
 	//Other Business Methods
 
 	//v1.0 - Implemented by JA
+	//v2.0 - Updated by JA
 	protected <T extends Actor> T findByUserAccount(final UserAccount userAccount, final Class<T> clase) {
 
 		Assert.notNull(userAccount);
@@ -103,12 +104,10 @@ public class ActorService {
 		final Actor res = this.actorRepository.findByUserAccountId(userAccount.getId());
 		Assert.notNull(res);
 
-		if (res == null)
+		if (res == null || !clase.isInstance(res))
 			return null;
-		else {
-			Assert.isTrue(clase.isInstance(res));
+		else
 			return clase.cast(res);
-		}
 	}
 
 	//v1.0 - Implemented by JA

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ProductRepository;
+import security.LoginService;
+import domain.Director;
 import domain.Product;
 import domain.Store;
 
@@ -22,14 +24,28 @@ public class ProductService extends ActorService {
 	@Autowired
 	private ProductRepository	productRepository;
 
-
 	// Supporting Services ----------------------------------------------------------------------------
+
+	@Autowired
+	private DirectorService		directorService;
+
 
 	// CRUD Methods -----------------------------------------------------------------------------------
 
 	/* v1.0 - josembell */
 	public Product findOne(final int productId) {
 		return this.productRepository.findOne(productId);
+	}
+
+	/* v1.0 - josembell */
+	public void delete(final Product product) {
+		Assert.notNull(product);
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(product.getStore().getMuseum().getDirector().equals(director));
+
+		product.getStore().getProducts().remove(product);
+		this.productRepository.delete(product);
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------
@@ -40,4 +56,5 @@ public class ProductService extends ActorService {
 
 		return res;
 	}
+
 }

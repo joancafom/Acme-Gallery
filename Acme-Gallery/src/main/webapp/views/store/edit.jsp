@@ -19,20 +19,39 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="store/director/edit.do?museumId=${museum.id}" modelAttribute="store">
-	<br>
-	<form:hidden path="id"/>
-	<form:hidden path="version"/>
+<jstl:if test="${toCreateEdit==true}">
+	<form:form action="store/director/edit.do?museumId=${museum.id}" modelAttribute="store">
+		<br>
+		<form:hidden path="id"/>
+		<form:hidden path="version"/>
 	
-	<!-- Inputs -->
+		<!-- Inputs -->
+		
+		<acme:textbox code="store.name" path="name"/><br>
+		<acme:textbox code="store.logo" path="logo"/><br>
+		<acme:textbox code="store.phoneNumber" path="phoneNumber"/><br>
+		<acme:textbox code="store.email" path="email"/>
+		<br>
+		<jstl:if test="${store.id==0}">
+			<acme:cancel url="museum/director/display.do?museumId=${museum.id}" code="store.cancel"/>
+		</jstl:if>
+		<jstl:if test="${store.id!=0}">
+			<acme:cancel url="store/director/display.do?storeId=${store.id}" code="store.cancel"/>
+		</jstl:if>
+		<acme:submit name="save" code="store.save"/>
+	</form:form>
+</jstl:if>
+<jstl:if test="${toDelete==true }">
+	<form:form action="store/director/delete.do" modelAttribute="store" style="text-align:center;">
+		<br>
+		<form:hidden path="id"/>
+		<form:hidden path="version"/>
 	
-	<acme:textbox code="store.name" path="name"/><br>
-	<acme:textbox code="store.logo" path="logo"/><br>
-	<acme:textbox code="store.phoneNumber" path="phoneNumber"/><br>
-	<acme:textbox code="store.email" path="email"/>
-	<br>
-	<acme:cancel url="museum/director/display.do?museumId=${museum.id}" code="store.cancel"/>
-	<acme:submit name="save" code="store.save"/>
-	
-	
-</form:form>
+		<p style="color:red; font-size:20px"><spring:message code="store.delete.confirmation"/></p>
+		<br>
+		<jstl:if test="${store.id!=0}">
+			<acme:cancel url="store/director/display.do?storeId=${store.id}" code="store.cancel"/>
+		</jstl:if>
+		<acme:submit name="delete" code="store.delete"/>
+	</form:form>
+</jstl:if>

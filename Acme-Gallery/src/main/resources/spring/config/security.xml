@@ -216,7 +216,8 @@
 		<security:intercept-url pattern="/store/director/display.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/store/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/store/director/create.do" access="hasRole('DIRECTOR')" /> 
-		<security:intercept-url pattern="/store/director/edit.do" access="hasRole('DIRECTOR')" />   
+		<security:intercept-url pattern="/store/director/edit.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/store/director/delete.do" access="hasRole('DIRECTOR')" />      
 
 		<security:intercept-url pattern="/systemConfiguration/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/addTabooWord.do" access="hasRole('ADMINISTRATOR')" />

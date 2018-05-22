@@ -76,6 +76,7 @@
 		
 		<security:intercept-url pattern="/dayPass/visitor/create.do" access="hasRole('VISITOR')" />
 		<security:intercept-url pattern="/dayPass/visitor/edit.do" access="hasRole('VISITOR')" />
+		<security:intercept-url pattern="/dayPass/visitor/listMine.do" access="hasRole('VISITOR')" />
 		
 		<security:intercept-url pattern="/director/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/director/list.do" access="isAnonymous()" />
@@ -137,7 +138,9 @@
 		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 
 		
 		
-		<security:intercept-url pattern="/invitation/visitor/list.do" access="hasRole('VISITOR')"/> 
+		<security:intercept-url pattern="/invitation/visitor/list.do" access="hasRole('VISITOR')"/>
+		<security:intercept-url pattern="/invitation/visitor/display.do" access="hasRole('VISITOR')"/> 
+		<security:intercept-url pattern="/invitation/visitor/process.do" access="hasRole('VISITOR')"/> 
 		
 		<security:intercept-url pattern="/artwork/display.do" access="isAnonymous()"/> 
 		<security:intercept-url pattern="/artwork/administrator/display.do" access="hasRole('ADMINISTRATOR')"/> 
@@ -199,6 +202,11 @@
 		
 		<security:intercept-url pattern="/sponsorship/director/list.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/sponsorship/director/edit.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/accept.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/create.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/edit.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/listMine.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/reject.do" access="hasRole('SPONSOR')" />
 
 		<security:intercept-url pattern="/store/display.do" access="isAnonymous()" />  
 		<security:intercept-url pattern="/store/visitor/display.do" access="hasRole('VISITOR')" />  
@@ -208,7 +216,8 @@
 		<security:intercept-url pattern="/store/director/display.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/store/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/store/director/create.do" access="hasRole('DIRECTOR')" /> 
-		<security:intercept-url pattern="/store/director/edit.do" access="hasRole('DIRECTOR')" />   
+		<security:intercept-url pattern="/store/director/edit.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/store/director/delete.do" access="hasRole('DIRECTOR')" />      
 
 		<security:intercept-url pattern="/systemConfiguration/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/addTabooWord.do" access="hasRole('ADMINISTRATOR')" />

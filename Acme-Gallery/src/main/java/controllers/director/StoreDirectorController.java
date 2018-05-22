@@ -62,6 +62,8 @@ public class StoreDirectorController extends AbstractController {
 		final ModelAndView res;
 		final Store store = this.storeService.findOne(storeId);
 		Assert.notNull(store);
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
 
 		final Page<Product> pageResult = this.productService.findAllPaginatedByStore(page, 5, store);
 		final Collection<Product> products = pageResult.getContent();
@@ -72,6 +74,10 @@ public class StoreDirectorController extends AbstractController {
 		res.addObject("products", products);
 		res.addObject("resultSize", resultSize);
 		res.addObject("actorWS", this.ACTOR_WS);
+
+		if (store.getMuseum().getDirector().equals(director))
+			res.addObject("own", true);
+
 		return res;
 	}
 
@@ -91,6 +97,41 @@ public class StoreDirectorController extends AbstractController {
 		final Store store = this.storeService.create(museum);
 
 		res = this.createEditModelAndView(store);
+		res.addObject("toCreateEdit", true);
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int storeId) {
+		final ModelAndView res;
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		final Store store = this.storeService.findOne(storeId);
+		Assert.notNull(store);
+
+		Assert.isTrue(store.getMuseum().getDirector().equals(director));
+
+		res = this.createEditModelAndView(store);
+		res.addObject("toCreateEdit", true);
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int storeId) {
+		final ModelAndView res;
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		final Store store = this.storeService.findOne(storeId);
+		Assert.notNull(store);
+
+		Assert.isTrue(store.getMuseum().getDirector().equals(director));
+
+		res = this.createEditModelAndView(store);
+		res.addObject("toDelete", true);
 
 		return res;
 	}
@@ -106,17 +147,37 @@ public class StoreDirectorController extends AbstractController {
 
 		final Store store = this.storeService.reconstruct(prunedStore, binding);
 
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(prunedStore);
-		else
+			res.addObject("toCreateEdit", true);
+		} else
 			try {
 				final Store saved = this.storeService.save(store);
 				res = new ModelAndView("redirect:display.do?storeId=" + saved.getId());
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(store, "museum.commit.error");
+				res.addObject("toCreateEdit", true);
 			}
 
 		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Store storeNull, final BindingResult binding) {
+		ModelAndView result = null;
+		Assert.notNull(storeNull);
+		final Store store = this.storeService.findOne(storeNull.getId());
+		Assert.notNull(store);
+		try {
+			this.storeService.delete(store);
+			result = new ModelAndView("redirect:/museum/director/display.do?museumId=" + store.getMuseum().getId());
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(store, "store.commit.error");
+			result.addObject("toDelete", true);
+		}
+
+		return result;
 	}
 
 	protected ModelAndView createEditModelAndView(final Store store) {

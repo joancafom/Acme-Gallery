@@ -44,9 +44,6 @@
 	
 	<security:authorize access="hasRole('DIRECTOR')">
 	<jstl:if test="${own}">
-		<display:column titleKey="museum.groups" style="text-align:center;">
-			<a href="group/director/list.do?museumId=${museum.id}"><spring:message code="museum.group.list"/></a>
-		</display:column>
 		<display:column>
 			<a href="museum/director/edit.do?museumId=${museum.id}"><spring:message code="museum.edit"/></a>
 		</display:column>

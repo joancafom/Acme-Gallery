@@ -35,6 +35,11 @@
 	<img src="${store.logo}" alt="${store.name}">
 	<br><br>
 	<p><strong><i class="material-icons" style="font-size:12px">contacts</i> <spring:message code="store.contact"/>:</strong> <spring:message code="store.email"/>: <jstl:out value="${store.email}"/> - <spring:message code="store.phoneNumber"/>: <jstl:out value="${store.phoneNumber}"/></p>
+	<br>
+	<jstl:if test="${own==true}">
+		<p style="color:#1ebf59; font-size:20px;"><spring:message code="store.own"/></p>
+		<p><a href="store/director/edit.do?storeId=${store.id}"><spring:message code="store.edit"/></a> - <a href="store/director/delete.do?storeId=${store.id}"><spring:message code="store.delete"/></a></p>
+	</jstl:if>
 </div>
 <br><br>
 

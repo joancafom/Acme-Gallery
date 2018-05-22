@@ -133,6 +133,13 @@
 					<a href="comment/administrator/delete.do?commentId=${comment.id}"><spring:message code="comment.remove"/></a>
 				</display:column>
 			</security:authorize>
+			<security:authorize access="hasRole('VISITOR')">
+				<display:column>
+					<jstl:if test="${isMember or own}">
+						<a href="comment/visitor/create.do?commentId=${comment.id}"><spring:message code="comment.reply"/></a>
+					</jstl:if>
+				</display:column>
+			</security:authorize>
 		</display:table>
 	</jstl:if><br><br>
 	<jstl:if test="${hasReplies==true}">
@@ -161,8 +168,20 @@
 					<a href="comment/administrator/delete.do?commentId=${reply.id}"><spring:message code="comment.remove"/></a>
 				</display:column>
 			</security:authorize>
+			<security:authorize access="hasRole('VISITOR')">
+				<display:column>
+					<jstl:if test="${isMember or own}">
+						<a href="comment/visitor/create.do?commentId=${comment.id}"><spring:message code="comment.reply"/></a>
+					</jstl:if>
+				</display:column>
+			</security:authorize>
 		</display:table>
 	</jstl:if>
+	<security:authorize access="hasRole('VISITOR')">
+		<jstl:if test="${isMember or own}">
+			<a href="comment/visitor/create.do?groupId=${group.id}"><spring:message code="comment.create"/></a>
+		</jstl:if>
+	</security:authorize>
 </div>
 
 </div>

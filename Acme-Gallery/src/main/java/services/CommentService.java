@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CommentRepository;
 import security.LoginService;
@@ -25,17 +28,62 @@ public class CommentService extends ActorService {
 
 	//Managed Repository
 	@Autowired
-	private CommentRepository		commentRepository;
+	private CommentRepository			commentRepository;
 
 	//Supporting Services
 	@Autowired
-	private AdministratorService	adminService;
+	private AdministratorService		adminService;
 
 	@Autowired
-	private VisitorService			visitorService;
+	private SystemConfigurationService	systemConfigurationService;
+
+	@Autowired
+	private VisitorService				visitorService;
+
+	// Validator --------------------------------------------------------------------------------------
+
+	@Autowired
+	private Validator					validator;
 
 
 	//CRUD Methods
+
+	// v1.0 - Alicia
+	public Comment create(final Group group) {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		Assert.isTrue(visitor.getJoinedGroups().contains(group) || visitor.getCreatedGroups().contains(group));
+
+		final Comment comment = new Comment();
+
+		comment.setContainsTaboo(false);
+
+		comment.setChildrenComments(new HashSet<Comment>());
+		comment.setVisitor(visitor);
+
+		comment.setGroup(group);
+
+		return comment;
+	}
+
+	// v1.0 - Alicia
+	public Comment create(final Comment parentComment) {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		Assert.isTrue(visitor.getJoinedGroups().contains(parentComment.getGroup()) || visitor.getCreatedGroups().contains(parentComment.getGroup()));
+
+		final Comment comment = new Comment();
+
+		comment.setContainsTaboo(false);
+
+		comment.setChildrenComments(new HashSet<Comment>());
+		comment.setVisitor(visitor);
+
+		comment.setParentComment(parentComment);
+		comment.setGroup(parentComment.getGroup());
+
+		return comment;
+	}
 
 	//v1.0 - Implemented by JA
 	public Comment save(final Comment comment) {
@@ -43,6 +91,26 @@ public class CommentService extends ActorService {
 		//Beware to modify this method! It is used by SystemConfigurationService.updateTaboo
 
 		Assert.notNull(comment);
+		return this.commentRepository.save(comment);
+	}
+
+	// v1.0 - Alicia
+	public Comment saveCreate(final Comment comment) {
+		Assert.notNull(comment);
+		Assert.isTrue(comment.getId() == 0);
+
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		Assert.isTrue(visitor.equals(comment.getVisitor()));
+		Assert.isTrue(visitor.getJoinedGroups().contains(comment.getGroup()) || visitor.getCreatedGroups().contains(comment.getGroup()));
+
+		if (comment.getParentComment() != null)
+			Assert.isTrue(comment.getParentComment().getGroup().equals(comment.getGroup()));
+
+		final Boolean containsTabooVeredict = this.systemConfigurationService.containsTaboo(comment.getTitle() + " " + comment.getDescription());
+		comment.setContainsTaboo(containsTabooVeredict);
+
 		return this.commentRepository.save(comment);
 	}
 
@@ -148,6 +216,33 @@ public class CommentService extends ActorService {
 	public Page<Comment> findRepliesByComment(final Integer page, final int size, final Comment parentComment) {
 		final Page<Comment> res = this.commentRepository.findRepliesByComment(parentComment.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Comment reconstruct(final Comment prunedComment, final BindingResult binding) {
+		Assert.notNull(prunedComment);
+		Assert.isTrue(prunedComment.getId() == 0);
+
+		Comment res = null;
+
+		if (prunedComment.getParentComment() != null)
+			res = this.create(prunedComment.getParentComment());
+		else {
+			Assert.notNull(prunedComment.getGroup());
+			res = this.create(prunedComment.getGroup());
+		}
+
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		Assert.isTrue(res.getVisitor().equals(visitor));
+
+		res.setTitle(prunedComment.getTitle());
+		res.setDescription(prunedComment.getDescription());
+		res.setPicture(prunedComment.getPicture());
+
+		this.validator.validate(res, binding);
 
 		return res;
 	}

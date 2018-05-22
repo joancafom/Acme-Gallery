@@ -15,6 +15,11 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
        
 <tiles-definitions>
+
+	<definition name="comment/edit" extends="master.page">
+  		<put-attribute name="title" value="Create a comment" /> 
+ 		<put-attribute name="body" value="/views/comment/edit.jsp" /> 
+  	</definition>
 	
 	<definition name="comment/list" extends="master.page">
   		<put-attribute name="title" value="Tabooed comments" /> 

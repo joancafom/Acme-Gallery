@@ -65,6 +65,8 @@
 		
 		<security:intercept-url pattern="/comment/administrator/listTaboo.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/comment/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/comment/visitor/create.do" access="hasRole('VISITOR')" />
+		<security:intercept-url pattern="/comment/visitor/edit.do" access="hasRole('VISITOR')" />
 
 		<security:intercept-url pattern="/critique/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/critique/administrator/display.do" access="hasRole('ADMINISTRATOR')" />

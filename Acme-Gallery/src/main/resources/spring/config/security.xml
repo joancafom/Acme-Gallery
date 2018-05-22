@@ -138,7 +138,7 @@
 		<security:intercept-url pattern="/guide/administrator/register.do" access="hasRole('ADMINISTRATOR')"/> 
 		
 		
-		<security:intercept-url pattern="/invitation/visitor/list.do" access="hasRole('VISITOR')"/> 
+		<security:intercept-url pattern="/invitation/visitor/list.do" access="hasRole('VISITOR')"/>
 		<security:intercept-url pattern="/invitation/visitor/display.do" access="hasRole('VISITOR')"/> 
 		<security:intercept-url pattern="/invitation/visitor/process.do" access="hasRole('VISITOR')"/> 
 		
@@ -215,6 +215,8 @@
 		<security:intercept-url pattern="/store/guide/display.do" access="hasRole('GUIDE')" />  
 		<security:intercept-url pattern="/store/director/display.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/store/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/store/director/create.do" access="hasRole('DIRECTOR')" /> 
+		<security:intercept-url pattern="/store/director/edit.do" access="hasRole('DIRECTOR')" />   
 
 		<security:intercept-url pattern="/systemConfiguration/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/addTabooWord.do" access="hasRole('ADMINISTRATOR')" />
@@ -227,7 +229,9 @@
 		<security:intercept-url pattern="/visitor/visitor/edit.do" access="hasRole('VISITOR')" />
 		<security:intercept-url pattern="/visitor/administrator/listUnlocked.do" access="hasRole('ADMINISTRATOR')" /> 
   		<security:intercept-url pattern="/visitor/administrator/listLocked.do" access="hasRole('ADMINISTRATOR')" /> 
-  		<security:intercept-url pattern="/visitor/administrator/ban.do" access="hasRole('ADMINISTRATOR')" />  
+  		<security:intercept-url pattern="/visitor/administrator/ban.do" access="hasRole('ADMINISTRATOR')" /> 
+  		<security:intercept-url pattern="/visitor/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
+  		<security:intercept-url pattern="/visitor/director/display.do" access="hasRole('DIRECTOR')" />
 		
 
 		<!-- Any other URL not listed above falls into the following directive and is excluded -->

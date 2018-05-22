@@ -96,4 +96,21 @@ public class VisitorAdministratorController extends AbstractController {
 		return result;
 	}
 
+	/* v2.0 - josembell */
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int visitorId) {
+		final ModelAndView res;
+		Visitor visitor = null;
+
+		res = new ModelAndView("visitor/display");
+
+		visitor = this.visitorService.findOne(visitorId);
+		Assert.notNull(visitor);
+
+		res.addObject("visitor", visitor);
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
 }

@@ -26,7 +26,7 @@
 	<strong><spring:message code="visitor.phoneNumber"/>:</strong> <jstl:out value="${visitor.phoneNumber}"/><br/>
 	<strong><spring:message code="visitor.address"/>:</strong> <jstl:if test="${visitor.address ne null}"><jstl:out value="${visitor.address}"/></jstl:if><jstl:if test="${visitor.address eq null}"><jstl:out value="-"/></jstl:if><br/>
 	<strong><spring:message code="visitor.gender"/>:</strong> <jstl:if test="${visitor.gender eq 'MALE'}"><spring:message code="visitor.gender.male"/></jstl:if><jstl:if test="${visitor.gender eq 'FEMALE'}"><spring:message code="visitor.gender.female"/></jstl:if><jstl:if test="${visitor.gender eq 'OTHER'}"><spring:message code="visitor.gender.other"/></jstl:if><jstl:if test="${visitor.gender eq null}"><jstl:out value="-"/></jstl:if><br/>
-	
-	<h4><a href="visitor/visitor/edit.do"><spring:message code="visitor.edit"/></a></h4>
-	
+	<jstl:if test="${own==true}">
+		<h4><a href="visitor/visitor/edit.do"><spring:message code="visitor.edit"/></a></h4>
+	</jstl:if>
 </div>

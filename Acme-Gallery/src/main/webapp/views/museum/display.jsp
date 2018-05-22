@@ -17,6 +17,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <link rel="stylesheet" href="styles/museum.css" type="text/css">
 
@@ -35,6 +36,11 @@
 	</jstl:if>
 	<jstl:if test="${museum.store ne null}">
 		<p><a href="store/${actorWS}display.do?storeId=<jstl:out value="${museum.store.id}"/>"><img src="https://image.freepik.com/iconos-gratis/cesta-de-la-compra-de-diseno-a-cuadros_318-50865.jpg" style="max-width:50px;"></a></p>
+	</jstl:if>
+	<jstl:if test="${museum.store ==null}">
+		<jstl:if test="${own}">
+			<p><a href="store/director/create.do?museumId=${museum.id}"><i class="material-icons" style="font-size:16px;">add</i> <spring:message code="museum.store.create"/></a></p>
+		</jstl:if>
 	</jstl:if>
 </div>
 

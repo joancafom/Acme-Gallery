@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
@@ -25,14 +26,25 @@ public class VisitorVisitorController extends AbstractController {
 
 
 	// v1.0 - Alicia
+	/* v2.0 - josembell */
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display() {
+	public ModelAndView display(@RequestParam final Integer visitorId) {
 		final ModelAndView res;
-
-		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
-		Assert.notNull(visitor);
+		Visitor visitor = null;
 
 		res = new ModelAndView("visitor/display");
+
+		if (visitorId == null) {
+			visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+			Assert.notNull(visitor);
+			res.addObject("own", true);
+		}
+
+		else {
+			visitor = this.visitorService.findOne(visitorId);
+			Assert.notNull(visitor);
+		}
+
 		res.addObject("visitor", visitor);
 
 		return res;

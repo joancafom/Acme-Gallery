@@ -82,7 +82,7 @@
    		<h3><spring:message code="group.participants"/></h3>
 		<display:table name="participants" id="participant" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%;" partialList="true" size="${resultSizeParticipants}">
 			<display:column titleKey="group.participants.name">
-				<jstl:out value="${participant.name}"/> <jstl:out value="${participant.surnames}"/>
+				<a href="visitor/${actorWS}display.do?visitorId=${participant.id}"><jstl:out value="${participant.name}"/> <jstl:out value="${participant.surnames}"/></a>
 			</display:column>
 		</display:table>
 		<br>
@@ -95,7 +95,8 @@
    <div style="margin-right: 50px;">
    		<br>
    		<h3><spring:message code="group.details"/></h3>
-			<p><strong><spring:message code="group.creator"/>:</strong> <jstl:out value="${group.creator.name}"/> <jstl:out value="${group.creator.surnames}"/></p>
+			<p><strong><spring:message code="group.creator"/>:</strong> <a href="visitor/${actorWS}display.do?visitorId=${group.creator.id}"><jstl:out value="${group.creator.name}"/> <jstl:out value="${group.creator.surnames}"/></a></p>
+			<p><strong><spring:message code="group.museum"/>:</strong> <a href="museum/${actorWS}display.do?museumId=${group.museum.id}"><jstl:out value="${group.museum.name}"/></a></p>
 			<p><strong><spring:message code="group.creationMoment"/>:</strong> <acme:dateFormat code="date.format" value="${group.creationMoment}"/></p>
 			<p><strong><spring:message code="group.meetingDate"/>:</strong> <acme:dateFormat code="date.format" value="${group.meetingDate}"/></p>
 			<p><strong><spring:message code="group.participants"/>:</strong> <jstl:out value="${fn:length(group.participants)}"/>/<jstl:out value="${group.maxParticipants}"/></p>

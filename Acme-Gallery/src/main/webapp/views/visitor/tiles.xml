@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="visitor/display" extends="master.page">	
-		<put-attribute name="title" value="My profile" />
+		<put-attribute name="title" value="Profile" />
 		<put-attribute name="body" value="/views/visitor/display.jsp" />
 	</definition>
 	

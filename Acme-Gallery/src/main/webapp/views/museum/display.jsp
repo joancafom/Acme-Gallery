@@ -38,6 +38,10 @@
 	</jstl:if>
 </div>
 
+<security:authorize access="hasRole('VISITOR')">
+	<h3 style="text-align:center;"><a href="dayPass/visitor/create.do?museumId=${museum.id}"><spring:message code="museum.buy"/></a></h3>
+</security:authorize>
+
 <div id="mInfo" class="info">
 		<h4><spring:message code="museum.info"/></h4>
 		

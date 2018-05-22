@@ -21,7 +21,7 @@
 
 <spring:message code="number.format" var="numberFormat"/>
 
-<display:table name="dayPasses" id="dayPass" requestURI="dayPass/${actorWS}listMine.do" pagesize="5" class="displaytag" style="width:100%">
+<display:table name="dayPasses" id="dayPass" requestURI="dayPass/${actorWS}listMine.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
 	<display:column titleKey="dayPass.ticker" property="ticker"/>
 	

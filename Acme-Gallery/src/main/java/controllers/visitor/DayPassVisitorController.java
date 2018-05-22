@@ -13,6 +13,7 @@ package controllers.visitor;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -24,10 +25,12 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.DayPassService;
 import services.ExhibitionService;
+import services.MuseumService;
 import services.VisitorService;
 import controllers.AbstractController;
 import domain.DayPass;
 import domain.Exhibition;
+import domain.Museum;
 import domain.Visitor;
 
 @Controller
@@ -45,61 +48,89 @@ public class DayPassVisitorController extends AbstractController {
 	private DayPassService		dayPassService;
 
 	@Autowired
+	private MuseumService		museumService;
+
+	@Autowired
 	private VisitorService		visitorService;
 
 
 	// Methods ----------------------------------------------------------------------------------------
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int exhibitionId) {
+	public ModelAndView create(@RequestParam(required = false) final Integer exhibitionId, @RequestParam(required = false) final Integer museumId) {
 		final ModelAndView res;
 
-		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
-		Assert.notNull(exhibition);
+		Assert.isTrue(exhibitionId != null || museumId != null);
+		Assert.isTrue(!(exhibitionId != null && museumId != null));
 
-		Assert.isTrue(this.dayPassService.canBuyADayPass(exhibition));
+		DayPass dayPass = null;
 
-		final DayPass dayPass = this.dayPassService.create(exhibition);
+		if (exhibitionId != null) {
+
+			final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
+			Assert.notNull(exhibition);
+
+			Assert.isTrue(this.dayPassService.canBuyADayPass(exhibition));
+
+			dayPass = this.dayPassService.create(exhibition);
+
+		} else if (museumId != null) {
+
+			final Museum museum = this.museumService.findOne(museumId);
+			Assert.notNull(museum);
+
+			dayPass = this.dayPassService.create(museum);
+		}
 
 		res = this.createEditModelAndView(dayPass);
 
 		return res;
 	}
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	@RequestMapping(value = "/listMine", method = RequestMethod.GET)
-	public ModelAndView listMine() {
+	public ModelAndView listMine(@RequestParam(value = "d-1330111-p", defaultValue = "1") final Integer page) {
 		ModelAndView res;
 
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(visitor);
 
-		final Collection<DayPass> dayPasses = this.dayPassService.getByPrincipal();
-
-		//final Page<Exhibition> pageResult = this.exhibitionService.getByDirector(director, page, 5);
-		//final Collection<Exhibition> exhibitions = pageResult.getContent();
-		//final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+		final Page<DayPass> pageResult = this.dayPassService.getByPrincipal(page, 5);
+		final Collection<DayPass> dayPasses = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
 
 		res = new ModelAndView("dayPass/listMine");
 
 		res.addObject("dayPasses", dayPasses);
-		//res.addObject("resultSize", resultSize);
+		res.addObject("resultSize", resultSize);
 
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;
 	}
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(@RequestParam final int exhibitionId, final DayPass prunedDayPass, final BindingResult binding) {
-		ModelAndView res;
+	public ModelAndView edit(@RequestParam(required = false) final Integer exhibitionId, @RequestParam(required = false) final Integer museumId, final DayPass prunedDayPass, final BindingResult binding) {
+		ModelAndView res = null;
 
-		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
-		Assert.notNull(exhibition);
+		Assert.isTrue(exhibitionId != null || museumId != null);
+		Assert.isTrue(!(exhibitionId != null && museumId != null));
 
-		prunedDayPass.setExhibition(exhibition);
+		if (exhibitionId != null) {
+			final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
+			Assert.notNull(exhibition);
+
+			prunedDayPass.setExhibition(exhibition);
+
+		} else if (museumId != null) {
+			final Museum museum = this.museumService.findOne(museumId);
+			Assert.notNull(museum);
+
+			prunedDayPass.setMuseum(museum);
+		}
+
 		final DayPass dayPass = this.dayPassService.reconstruct(prunedDayPass, binding);
 
 		if (binding.hasErrors())
@@ -107,7 +138,12 @@ public class DayPassVisitorController extends AbstractController {
 		else
 			try {
 				final DayPass dayPassS = this.dayPassService.saveCreateAndEdit(dayPass);
-				res = new ModelAndView("redirect:/exhibition/visitor/display.do?exhibitionId=" + dayPassS.getExhibition().getId());
+
+				if (exhibitionId != null)
+					res = new ModelAndView("redirect:/exhibition/visitor/display.do?exhibitionId=" + dayPassS.getExhibition().getId());
+				else if (museumId != null)
+					res = new ModelAndView("redirect:/museum/visitor/display.do?museumId=" + dayPassS.getMuseum().getId());
+
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(dayPass, "dayPass.commit.error");
 			}

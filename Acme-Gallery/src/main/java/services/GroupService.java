@@ -19,6 +19,7 @@ import domain.Announcement;
 import domain.Comment;
 import domain.Group;
 import domain.Invitation;
+import domain.Museum;
 import domain.Visitor;
 
 @Service
@@ -272,6 +273,11 @@ public class GroupService {
 
 		group.getParticipants().remove(currentVisitor);
 		this.save(retrievedGroup);
+	}
+
+	/* v1.0 - josembell */
+	public Page<Group> findByMuseum(final Museum museum, final Integer page, final int size) {
+		return this.groupRepository.findByMuseum(museum.getId(), new PageRequest(page - 1, size));
 	}
 
 }

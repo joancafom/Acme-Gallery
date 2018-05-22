@@ -109,6 +109,12 @@
 		<display:column titleKey="review.creationDate" style="width:20%">
 			<acme:dateFormat code="date.format" value="${review.creationDate}"/>
 		</display:column>
+		<security:authorize access="hasRole('ADMINISTRATOR')">
+			<display:column>
+				<a href="review/administrator/delete.do?reviewId=${review.id}"><spring:message code="review.delete"/></a>
+			</display:column>
+		</security:authorize>
 	</display:table>
+	
 </div>
 

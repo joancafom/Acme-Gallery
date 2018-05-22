@@ -1720,7 +1720,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="13/05/2018 17:30" />
+				<constructor-arg value="13/05/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
@@ -1741,7 +1741,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="14/02/2018 12:15" />
+				<constructor-arg value="14/02/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
@@ -1762,7 +1762,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="02/03/2018 10:00" />
+				<constructor-arg value="02/03/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
@@ -1782,7 +1782,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="05/01/2018 16:30" />
+				<constructor-arg value="05/01/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
@@ -1803,7 +1803,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="25/03/2018 16:30" />
+				<constructor-arg value="25/03/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
@@ -1824,7 +1824,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="13/02/2018 18:00" />
+				<constructor-arg value="13/02/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard2" />
@@ -1845,7 +1845,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="02/03/2018 21:00" />
+				<constructor-arg value="02/03/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard2" />
@@ -1865,7 +1865,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="14/04/2018 15:00" />
+				<constructor-arg value="14/04/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard2" />
@@ -1885,7 +1885,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="25/03/2018 16:30" />
+				<constructor-arg value="25/03/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard2" />
@@ -1906,7 +1906,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="11/02/2018 20:00" />
+				<constructor-arg value="11/02/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard6" />
@@ -1927,7 +1927,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="13/05/2018 15:00" />
+				<constructor-arg value="13/05/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard6" />
@@ -1947,7 +1947,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="30/12/2017 17:30" />
+				<constructor-arg value="30/12/2017" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard6" />
@@ -1968,7 +1968,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="14/02/2018 15:30" />
+				<constructor-arg value="14/02/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard4" />
@@ -1989,7 +1989,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="13/05/2018 18:00" />
+				<constructor-arg value="13/05/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard4" />
@@ -2010,7 +2010,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="13/02/2018 14:00" />
+				<constructor-arg value="13/02/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard5" />
@@ -2031,7 +2031,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="01/02/2018 18:00" />
+				<constructor-arg value="01/02/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard5" />
@@ -2051,7 +2051,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="14/02/2018 19:00" />
+				<constructor-arg value="14/02/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard5" />
@@ -2071,7 +2071,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="13/05/2018 19:00" />
+				<constructor-arg value="13/05/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard5" />
@@ -2092,7 +2092,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="21/08/2018 20:00" />
+				<constructor-arg value="21/08/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
@@ -2113,7 +2113,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="27/05/2018 16:00" />
+				<constructor-arg value="27/05/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard2" />
@@ -2134,7 +2134,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="15/07/2018 19:15" />
+				<constructor-arg value="15/07/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard4" />
@@ -2155,7 +2155,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="19/07/2018 10:00" />
+				<constructor-arg value="19/07/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard5" />
@@ -2176,7 +2176,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="03/08/2018 13:00" />
+				<constructor-arg value="03/08/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard6" />
@@ -2197,7 +2197,7 @@
 		</property>
 		<property name="visitDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="16/06/2018 18:00" />
+				<constructor-arg value="16/06/2018" />
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard6" />
@@ -6154,9 +6154,9 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 
 	<bean id="review18" class="domain.Review">
 		<property name="body"
-			value="I think my girlfriend enjoyed it. Not my case" />
+			value="I think my girlfriend enjoyed it. Not my case cialis" />
 		<property name="score" value="2" />
-		<property name="containsTaboo" value="false" />
+		<property name="containsTaboo" value="true" />
 		<property name="creationDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="25/03/2018 15:54" />

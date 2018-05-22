@@ -30,4 +30,8 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
 
 	@Query("select g from Group g where g.containsTaboo = false")
 	Page<Group> findNotTabooed(Pageable pageable);
+
+	/* v1.0 - josembell */
+	@Query("select g from Group g where g.museum.id=?1")
+	Page<Group> findByMuseum(int id, Pageable pageRequest);
 }

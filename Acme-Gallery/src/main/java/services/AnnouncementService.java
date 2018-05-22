@@ -16,6 +16,7 @@ import repositories.AnnouncementRepository;
 import security.LoginService;
 import domain.Administrator;
 import domain.Announcement;
+import domain.Director;
 import domain.Group;
 import domain.Visitor;
 
@@ -38,6 +39,9 @@ public class AnnouncementService {
 
 	@Autowired
 	private VisitorService			visitorService;
+
+	@Autowired
+	private DirectorService			directorService;
 
 
 	// Validator --------------------------------------------------------------------------------------
@@ -179,13 +183,13 @@ public class AnnouncementService {
 
 		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 
-		Assert.isTrue(administrator != null || visitor != null);
+		Assert.isTrue(administrator != null || visitor != null || director != null);
 
 		final Page<Announcement> res = this.announcementRepository.findAllByGroup(group.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
 		return res;
 	}
-
 }

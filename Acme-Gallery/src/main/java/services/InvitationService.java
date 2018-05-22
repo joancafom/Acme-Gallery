@@ -36,10 +36,27 @@ public class InvitationService {
 	@Autowired
 	private VisitorService			visitorService;
 
+	@Autowired
+	private GroupService			groupService;
+
 
 	// Validator --------------------------------------------------------------------------------------
 
 	// CRUD Methods -----------------------------------------------------------------------------------
+
+	// v1.0 - JA
+	public Invitation findOne(final int invitationId) {
+
+		return this.invitationRepository.findOne(invitationId);
+	}
+
+	// v1.0 - JA
+	public Invitation save(final Invitation invitation) {
+
+		Assert.notNull(invitation);
+
+		return this.invitationRepository.save(invitation);
+	}
 
 	// v1.0 - Alicia
 	public void delete(final Invitation invitation) {
@@ -83,6 +100,36 @@ public class InvitationService {
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------
+
+	//v1.0 - Implemented by JA
+	public void accept(final Invitation invitation) {
+
+		Assert.notNull(invitation);
+		Assert.isTrue(this.invitationRepository.exists(invitation.getId()));
+
+		final Visitor currentVisitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentVisitor);
+
+		Assert.isTrue(currentVisitor.equals(invitation.getGuest()));
+
+		Assert.notNull(invitation.getGroup());
+		final Group groupToJoin = this.groupService.findOne(invitation.getGroup().getId());
+		Assert.notNull(groupToJoin);
+
+		Assert.isTrue(groupToJoin.getInvitations().contains(invitation));
+		Assert.isTrue(groupToJoin.getCreator().equals(invitation.getHost()));
+		Assert.isTrue(!currentVisitor.getJoinedGroups().contains(groupToJoin));
+
+		invitation.setIsAccepted(true);
+		this.save(invitation);
+
+		groupToJoin.getParticipants().add(currentVisitor);
+		this.groupService.save(groupToJoin);
+
+		currentVisitor.getJoinedGroups().add(groupToJoin);
+		this.visitorService.save(currentVisitor);
+
+	}
 
 	//v1.0 - Implemented by JA
 	public Collection<Invitation> findAllReceivedByVisitor(final Visitor visitor) {

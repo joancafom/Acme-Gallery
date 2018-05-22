@@ -139,6 +139,8 @@
 		
 		
 		<security:intercept-url pattern="/invitation/visitor/list.do" access="hasRole('VISITOR')"/> 
+		<security:intercept-url pattern="/invitation/visitor/display.do" access="hasRole('VISITOR')"/> 
+		<security:intercept-url pattern="/invitation/visitor/process.do" access="hasRole('VISITOR')"/> 
 		
 		<security:intercept-url pattern="/artwork/display.do" access="isAnonymous()"/> 
 		<security:intercept-url pattern="/artwork/administrator/display.do" access="hasRole('ADMINISTRATOR')"/> 

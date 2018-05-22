@@ -18,6 +18,7 @@ import repositories.MuseumRepository;
 import security.LoginService;
 import domain.DayPass;
 import domain.Director;
+import domain.GPSCoordinates;
 import domain.Group;
 import domain.Guide;
 import domain.Museum;
@@ -90,12 +91,19 @@ public class MuseumService extends ActorService {
 	}
 
 	// v1.0 - Alicia
+	// v2.0 - JA
 	public Museum save(final Museum museum) {
 		//Beware to modify this method! It is being used by other methods!
 		Assert.notNull(museum);
+
+		//Museums can never have null Coordinates!
+
+		Assert.notNull(museum.getCoordinates());
+		Assert.notNull(museum.getCoordinates().getLatitude());
+		Assert.notNull(museum.getCoordinates().getLongitude());
+
 		return this.museumRepository.save(museum);
 	}
-
 	// v1.0 - Alicia
 	public void flush() {
 		this.museumRepository.flush();
@@ -104,6 +112,7 @@ public class MuseumService extends ActorService {
 	//Other Business Methods
 
 	//v1.0 - Implemented by JA
+	//v2.0 - JA (GPS)
 	public Museum reconstructEdit(final Museum prunedMuseum, final BindingResult binding) {
 
 		Assert.notNull(prunedMuseum);
@@ -148,8 +157,21 @@ public class MuseumService extends ActorService {
 
 		this.validator.validate(reconstructedMuseum, binding);
 
+		if (reconstructedMuseum.getCoordinates() != null) {
+
+			final GPSCoordinates mCoord = reconstructedMuseum.getCoordinates();
+
+			if (mCoord.getLatitude() == null)
+				binding.rejectValue("coordinates.latitude", "javax.validation.constraints.NotNull.message", "Latitude is required");
+
+			if (mCoord.getLongitude() == null)
+				binding.rejectValue("coordinates.longitude", "javax.validation.constraints.NotNull.message", "Longitude is required");
+
+		}
+
 		return reconstructedMuseum;
 	}
+
 	// v1.0 - JA
 	public Museum saveCreate(final Museum museum) {
 

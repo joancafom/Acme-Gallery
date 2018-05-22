@@ -24,7 +24,7 @@
 		<jstl:out value="${invitation.host.name}" /> <jstl:out value="${invitation.host.surnames}" />
 	</display:column>
 	
-	<display:column>
+	<display:column titleKey="invitation.group">
 		<jstl:out value="${invitation.group.name}" />
 	</display:column>
 	
@@ -34,7 +34,7 @@
 		<acme:dateFormat code="date.format" value="${invitation.sentMoment}"/> 
 	</display:column>
 	
-	<display:column titleKey="invitation.status">
+	<display:column titleKey="invitation.status" sortable="true">
 		<jstl:if test="${invitation.isAccepted eq true}">
 			<spring:message code="invitation.isAccepted.accepted"/>
 		</jstl:if>
@@ -44,6 +44,10 @@
 		<jstl:if test="${invitation.isAccepted eq null}">
 			<spring:message code="invitation.isAccepted.pending"/>
 		</jstl:if>
+		
+	</display:column>
+	<display:column>
+		<a href="invitation/${actorWS}display.do?invitationId=${invitation.id}"><spring:message code="invitation.show"/></a>
 	</display:column>
 
 </display:table>

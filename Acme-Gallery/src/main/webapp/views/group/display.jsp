@@ -39,7 +39,13 @@
 			</jstl:if>
 		</jstl:when>
 		<jstl:when test="${isMember}">
-			<h4 style="color: #1ebf59;"><span><spring:message code="group.member"/>. <a href="group/visitor/quit.do?groupId=${group.id}"><spring:message code="group.quit"/></a></span></h4>
+			<h4 style="color: #1ebf59;"><spring:message code="group.member"/>.</h4> 
+			<jstl:if test="${now >= group.meetingDate}">
+				<h4 style="color: #f4e842;"><spring:message code="group.past"/></h4>
+			</jstl:if>
+			<jstl:if test="${now < group.meetingDate}">
+				<h4><a href="group/visitor/quit.do?groupId=${group.id}"><spring:message code="group.quit"/></a></h4>
+			</jstl:if>
 		</jstl:when>
 		<jstl:otherwise>
 			<jstl:if test="${fn:length(group.participants) lt group.maxParticipants and now < group.meetingDate}">

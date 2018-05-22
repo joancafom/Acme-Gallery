@@ -22,7 +22,7 @@
 <spring:message code="dayPass.priceWithTaxes"/> <acme:priceFormat code="price.format" value="${dayPass.price}"/>.<br/>
 <p><spring:message code="dayPass.exhibition.from"/> <acme:dateFormat code="date.format" value="${dayPass.exhibition.startingDate}"/> <spring:message code="dayPass.exhibition.to"/> <acme:dateFormat code="date.format" value="${dayPass.exhibition.endingDate}"/></p>
 
-<form:form action="dayPass/${actorWS}edit.do" modelAttribute="dayPass">
+<form:form action="dayPass/${actorWS}edit.do?exhibitionId=${dayPass.exhibition.id}" modelAttribute="dayPass">
 
 	<!-- Hidden Inputs -->
 	<form:hidden path="id"/>
@@ -31,7 +31,13 @@
 	<!-- Inputs -->
 	<br/>
 	
-	<acme:date code="dayPass.visitDate" path="visitDate"/><br/>
+	<div>
+		<form:label path="visitDate">
+			<strong><spring:message code="dayPass.visitDate"/>:</strong>
+		</form:label>
+		<form:input path="visitDate" placeholder="dd/MM/yyyy"/>
+		<form:errors cssClass="error" path="visitDate"/><br><br>
+	</div>	
 	
 	<br/>
 	

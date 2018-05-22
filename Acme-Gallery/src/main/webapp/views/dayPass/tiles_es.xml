@@ -20,5 +20,10 @@
 		<put-attribute name="title" value="Editar un pase diario" />
 		<put-attribute name="body" value="/views/dayPass/edit.jsp" />
 	</definition>
+	
+	<definition name="dayPass/listMine" extends="master.page">	
+		<put-attribute name="title" value="Mis pases diarios" />
+		<put-attribute name="body" value="/views/dayPass/listMine.jsp" />
+	</definition>
 		
 </tiles-definitions>

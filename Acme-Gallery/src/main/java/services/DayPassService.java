@@ -1,10 +1,12 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.DateTimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -59,7 +61,9 @@ public class DayPassService {
 		final Double priceWithoutTaxes = exhibition.getRoom().getMuseum().getPrice() + exhibition.getPrice();
 		final Double priceWithTaxes = priceWithoutTaxes * (1 + this.systemConfigurationService.getCurrentSystemConfiguration().getVAT());
 
-		dayPass.setPrice(priceWithTaxes);
+		final Double finalPrice = Math.floor(priceWithTaxes * 100) / 100;
+
+		dayPass.setPrice(finalPrice);
 		dayPass.setVAT(this.systemConfigurationService.getCurrentSystemConfiguration().getVAT());
 
 		dayPass.setVisitor(visitor);
@@ -95,7 +99,14 @@ public class DayPassService {
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(visitor);
 
-		return null;
+		Assert.isTrue(visitor.equals(dayPass.getVisitor()));
+
+		final int compareStartingDate = DateTimeComparator.getDateOnlyInstance().compare(dayPass.getVisitDate(), dayPass.getExhibition().getStartingDate());
+		Assert.isTrue(compareStartingDate >= 0);
+		final int compareEndingDate = DateTimeComparator.getDateOnlyInstance().compare(dayPass.getVisitDate(), dayPass.getExhibition().getEndingDate());
+		Assert.isTrue(compareEndingDate <= 0);
+
+		return this.dayPassRepository.save(dayPass);
 
 	}
 
@@ -120,19 +131,30 @@ public class DayPassService {
 
 		final DayPass res = this.create(prunedDayPass.getExhibition());
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
 
-		res.setTicker(prunedDayPass.getMuseum().getIdentifier() + "-" + visitor.getUserAccount().getUsername() + "-" + prunedDayPass.getMuseum().getDayPasses().size());
+		final int number = prunedDayPass.getExhibition().getRoom().getMuseum().getDayPasses().size();
+		final String formatedNumber = String.format("%04d", number);
+
+		res.setTicker(prunedDayPass.getExhibition().getRoom().getMuseum().getIdentifier() + "-" + visitor.getUserAccount().getUsername() + "-" + formatedNumber);
 		res.setPurchaseMoment(new Date(System.currentTimeMillis() - 1000));
 		res.setVisitDate(prunedDayPass.getVisitDate());
 		res.setCreditCard(prunedDayPass.getCreditCard());
-		res.setPrice(prunedDayPass.getPrice());
-		res.setVAT(prunedDayPass.getVAT());
 
-		res.setVisitor(prunedDayPass.getVisitor());
-		res.setExhibition(prunedDayPass.getExhibition());
-		res.setMuseum(prunedDayPass.getMuseum());
+		res.setVisitor(visitor);
 
 		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<DayPass> getByPrincipal() {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		final Collection<DayPass> res = this.dayPassRepository.findByVisitorId(visitor.getId());
+		Assert.notNull(res);
 
 		return res;
 	}

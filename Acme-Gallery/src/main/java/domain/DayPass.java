@@ -47,7 +47,7 @@ public class DayPass extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getVisitDate() {
 		return this.visitDate;
 	}

@@ -76,6 +76,7 @@
 		
 		<security:intercept-url pattern="/dayPass/visitor/create.do" access="hasRole('VISITOR')" />
 		<security:intercept-url pattern="/dayPass/visitor/edit.do" access="hasRole('VISITOR')" />
+		<security:intercept-url pattern="/dayPass/visitor/listMine.do" access="hasRole('VISITOR')" />
 		
 		<security:intercept-url pattern="/director/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/director/list.do" access="isAnonymous()" />

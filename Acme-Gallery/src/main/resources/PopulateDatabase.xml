@@ -13,6 +13,10 @@
 	<bean class="java.text.SimpleDateFormat" id="dateFormat">
 		<constructor-arg value="dd/MM/yyyy HH:mm" />
 	</bean>
+	
+	<bean class="java.text.SimpleDateFormat" id="dateFormat2">
+		<constructor-arg value="dd/MM/yyyy"/>
+	</bean>
 
 	<!-- User accounts -->
 
@@ -1712,14 +1716,14 @@
 	<!-- DayPasses -->
 
 	<bean id="dayPass1" class="domain.DayPass">
-		<property name="ticker" value="MDP-visitor1-0001" />
+		<property name="ticker" value="MDP-visitor1-0005" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="05/05/2018 23:51" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="13/05/2018" />
 			</bean>
 		</property>
@@ -1740,7 +1744,7 @@
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="14/02/2018" />
 			</bean>
 		</property>
@@ -1754,14 +1758,14 @@
 	</bean>
 
 	<bean id="dayPass3" class="domain.DayPass">
-		<property name="ticker" value="TBM-visitor1-0003" />
+		<property name="ticker" value="TBM-visitor1-0000" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="28/01/2018 13:55" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="02/03/2018" />
 			</bean>
 		</property>
@@ -1774,14 +1778,14 @@
 	</bean>
 
 	<bean id="dayPass4" class="domain.DayPass">
-		<property name="ticker" value="TVM-visitor1-0003" />
+		<property name="ticker" value="TVM-visitor1-0000" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="24/12/2017 21:23" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="05/01/2018" />
 			</bean>
 		</property>
@@ -1795,14 +1799,14 @@
 	</bean>
 
 	<bean id="dayPass5" class="domain.DayPass">
-		<property name="ticker" value="EGEC-visitor1-0004" />
+		<property name="ticker" value="EGEC-visitor1-0000" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="02/03/2018 21:29" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="25/03/2018" />
 			</bean>
 		</property>
@@ -1816,14 +1820,14 @@
 	</bean>
 
 	<bean id="dayPass6" class="domain.DayPass">
-		<property name="ticker" value="MDP-visitor2-0001" />
+		<property name="ticker" value="MDP-visitor2-0003" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="09/02/2018 08:21" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="13/02/2018" />
 			</bean>
 		</property>
@@ -1844,7 +1848,7 @@
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="02/03/2018" />
 			</bean>
 		</property>
@@ -1864,7 +1868,7 @@
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="14/04/2018" />
 			</bean>
 		</property>
@@ -1877,14 +1881,14 @@
 	</bean>
 
 	<bean id="dayPass9" class="domain.DayPass">
-		<property name="ticker" value="EGEC-visitor2-0004" />
+		<property name="ticker" value="EGEC-visitor2-0001" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="02/03/2018 21:31" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="25/03/2018" />
 			</bean>
 		</property>
@@ -1905,7 +1909,7 @@
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="11/02/2018" />
 			</bean>
 		</property>
@@ -1919,14 +1923,14 @@
 	</bean>
 
 	<bean id="dayPass11" class="domain.DayPass">
-		<property name="ticker" value="TBM-visitor6-0002" />
+		<property name="ticker" value="TBM-visitor6-0003" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="06/05/2018 12:58" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="13/05/2018" />
 			</bean>
 		</property>
@@ -1939,14 +1943,14 @@
 	</bean>
 
 	<bean id="dayPass12" class="domain.DayPass">
-		<property name="ticker" value="TVM-visitor6-0003" />
+		<property name="ticker" value="TVM-visitor6-0001" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="29/12/2017 15:29" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="30/12/2017" />
 			</bean>
 		</property>
@@ -1960,14 +1964,14 @@
 	</bean>
 
 	<bean id="dayPass13" class="domain.DayPass">
-		<property name="ticker" value="MDP-visitor4-0001" />
+		<property name="ticker" value="MDP-visitor4-0000" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="01/02/2018 18:11" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="14/02/2018" />
 			</bean>
 		</property>
@@ -1981,14 +1985,14 @@
 	</bean>
 
 	<bean id="dayPass14" class="domain.DayPass">
-		<property name="ticker" value="MT-visitor4-0002" />
+		<property name="ticker" value="MT-visitor4-0001" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="06/05/2018 19:44" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="13/05/2018" />
 			</bean>
 		</property>
@@ -2002,14 +2006,14 @@
 	</bean>
 
 	<bean id="dayPass15" class="domain.DayPass">
-		<property name="ticker" value="MDP-visitor5-0001" />
+		<property name="ticker" value="MDP-visitor5-0004" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="11/02/2018 11:56" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="13/02/2018" />
 			</bean>
 		</property>
@@ -2023,14 +2027,14 @@
 	</bean>
 
 	<bean id="dayPass16" class="domain.DayPass">
-		<property name="ticker" value="TBM-visitor5-0002" />
+		<property name="ticker" value="TBM-visitor5-0001" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="28/01/2018 19:02" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="01/02/2018" />
 			</bean>
 		</property>
@@ -2043,14 +2047,14 @@
 	</bean>
 
 	<bean id="dayPass17" class="domain.DayPass">
-		<property name="ticker" value="TL-visitor5-0003" />
+		<property name="ticker" value="TL-visitor5-0000" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="09/02/2018 20:28" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="14/02/2018" />
 			</bean>
 		</property>
@@ -2063,14 +2067,14 @@
 	</bean>
 
 	<bean id="dayPass18" class="domain.DayPass">
-		<property name="ticker" value="MT-visitor5-0004" />
+		<property name="ticker" value="MT-visitor5-0000" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="04/05/2018 10:19" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="13/05/2018" />
 			</bean>
 		</property>
@@ -2084,14 +2088,14 @@
 	</bean>
 
 	<bean id="dayPass19" class="domain.DayPass">
-		<property name="ticker" value="MDP-visitor1-0005" />
+		<property name="ticker" value="MDP-visitor1-0006" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="14/05/2018 01:37" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="21/08/2018" />
 			</bean>
 		</property>
@@ -2105,14 +2109,14 @@
 	</bean>
 
 	<bean id="dayPass20" class="domain.DayPass">
-		<property name="ticker" value="MDP-visitor2-0004" />
+		<property name="ticker" value="MDP-visitor2-0007" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="14/05/2018 00:31" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="27/05/2018" />
 			</bean>
 		</property>
@@ -2126,14 +2130,14 @@
 	</bean>
 
 	<bean id="dayPass21" class="domain.DayPass">
-		<property name="ticker" value="TL-visitor4-1489" />
+		<property name="ticker" value="TL-visitor4-0002" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="12/04/2018 19:21" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="15/07/2018" />
 			</bean>
 		</property>
@@ -2147,14 +2151,14 @@
 	</bean>
 
 	<bean id="dayPass22" class="domain.DayPass">
-		<property name="ticker" value="TL-visitor5-1299" />
+		<property name="ticker" value="TL-visitor5-0001" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="03/03/2018 04:34" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="19/07/2018" />
 			</bean>
 		</property>
@@ -2168,14 +2172,14 @@
 	</bean>
 
 	<bean id="dayPass23" class="domain.DayPass">
-		<property name="ticker" value="GM-visitor6-0269" />
+		<property name="ticker" value="GM-visitor6-0000" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="14/04/2018 17:56" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="03/08/2018" />
 			</bean>
 		</property>
@@ -2189,14 +2193,14 @@
 	</bean>
 
 	<bean id="dayPass24" class="domain.DayPass">
-		<property name="ticker" value="TNG-visitor6-8394" />
+		<property name="ticker" value="TNG-visitor6-0000" />
 		<property name="purchaseMoment">
 			<bean factory-method="parse" factory-bean="dateFormat">
 				<constructor-arg value="05/05/2018 18:23" />
 			</bean>
 		</property>
 		<property name="visitDate">
-			<bean factory-method="parse" factory-bean="dateFormat">
+			<bean factory-method="parse" factory-bean="dateFormat2">
 				<constructor-arg value="16/06/2018" />
 			</bean>
 		</property>
@@ -3327,8 +3331,6 @@
 		</property>
 		<property name="invitations">
 			<list>
-				<ref bean="invitation1" />
-				<ref bean="invitation2" />
 			</list>
 		</property>
 		<property name="announcements">
@@ -3650,7 +3652,6 @@
 		</property>
 		<property name="invitations">
 			<list>
-				<ref bean="invitation18" />
 			</list>
 		</property>
 		<property name="announcements">
@@ -3739,7 +3740,6 @@
 		</property>
 		<property name="invitations">
 			<list>
-				<ref bean="invitation20" />
 			</list>
 		</property>
 		<property name="announcements">
@@ -3860,7 +3860,7 @@
 		</property>
 		<property name="invitations">
 			<list>
-				<ref bean="invitation22" />
+				
 			</list>
 		</property>
 		<property name="announcements">
@@ -4266,32 +4266,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 
 	<!-- Invitations -->
 
-	<bean id="invitation1" class="domain.Invitation">
-		<property name="message" value="Do you wanna come to El Prado?" />
-		<property name="sentMoment">
-			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="19/04/2018 17:34" />
-			</bean>
-		</property>
-		<property name="isAccepted" value="true" />
-		<property name="group" ref="group1" />
-		<property name="host" ref="visitor1" />
-		<property name="guest" ref="visitor2" />
-	</bean>
-
-	<bean id="invitation2" class="domain.Invitation">
-		<property name="message" value="Do you wanna come to El Prado?" />
-		<property name="sentMoment">
-			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="19/04/2018 17:35" />
-			</bean>
-		</property>
-		<property name="isAccepted" value="true" />
-		<property name="group" ref="group1" />
-		<property name="host" ref="visitor1" />
-		<property name="guest" ref="visitor3" />
-	</bean>
-
 	<bean id="invitation3" class="domain.Invitation">
 		<property name="message" value="Let's go to the British Museum!!" />
 		<property name="sentMoment">
@@ -4486,18 +4460,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="guest" ref="visitor1" />
 	</bean>
 
-	<bean id="invitation18" class="domain.Invitation">
-		<property name="message" value="Hey do you wanna come?" />
-		<property name="sentMoment">
-			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="01/02/2018 15:23" />
-			</bean>
-		</property>
-		<property name="group" ref="group8" />
-		<property name="host" ref="visitor4" />
-		<property name="guest" ref="visitor1" />
-	</bean>
-
 	<bean id="invitation19" class="domain.Invitation">
 		<property name="message" value="Surprise!" />
 		<property name="sentMoment">
@@ -4510,17 +4472,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="guest" ref="visitor1" />
 	</bean>
 
-	<bean id="invitation20" class="domain.Invitation">
-		<property name="message" value="Come with me pleaseee :(" />
-		<property name="sentMoment">
-			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="18/02/2018 13:14" />
-			</bean>
-		</property>
-		<property name="group" ref="group10" />
-		<property name="host" ref="visitor4" />
-		<property name="guest" ref="visitor1" />
-	</bean>
 
 	<bean id="invitation21" class="domain.Invitation">
 		<property name="message" value="yayyyy" />
@@ -4531,18 +4482,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		</property>
 		<property name="group" ref="group12" />
 		<property name="host" ref="visitor4" />
-		<property name="guest" ref="visitor1" />
-	</bean>
-
-	<bean id="invitation22" class="domain.Invitation">
-		<property name="message" value="Special invitation" />
-		<property name="sentMoment">
-			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="02/03/2018 11:02" />
-			</bean>
-		</property>
-		<property name="group" ref="group13" />
-		<property name="host" ref="visitor5" />
 		<property name="guest" ref="visitor1" />
 	</bean>
 
@@ -5344,15 +5283,11 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			<list>
 				<ref bean="invitation3" />
 				<ref bean="invitation19" />
-				<ref bean="invitation20" />
 				<ref bean="invitation21" />
-				<ref bean="invitation22" />
 			</list>
 		</property>
 		<property name="sentInvitations">
 			<list>
-				<ref bean="invitation1" />
-				<ref bean="invitation2" />
 				<ref bean="invitation7" />
 				<ref bean="invitation8" />
 				<ref bean="invitation9" />
@@ -5417,7 +5352,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		</property>
 		<property name="receivedInvitations">
 			<list>
-				<ref bean="invitation1" />
 				<ref bean="invitation7" />
 				<ref bean="invitation11" />
 			</list>
@@ -5472,7 +5406,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		</property>
 		<property name="receivedInvitations">
 			<list>
-				<ref bean="invitation2" />
 				<ref bean="invitation25"/>
 			</list>
 		</property>
@@ -5540,8 +5473,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		</property>
 		<property name="sentInvitations">
 			<list>
-				<ref bean="invitation18" />
-				<ref bean="invitation20" />
 				<ref bean="invitation16" />
 				<ref bean="invitation21" />
 			</list>
@@ -5606,7 +5537,6 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 				<ref bean="invitation15" />
 				<ref bean="invitation19" />
 				<ref bean="invitation24" />
-				<ref bean="invitation22" />
 			</list>
 		</property>
 	</bean>

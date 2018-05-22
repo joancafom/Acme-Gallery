@@ -52,7 +52,15 @@
 <h4><spring:message code="group.details2" /></h4>
 
 <p>
-	<strong><spring:message code="group.name" /></strong>: <jstl:out value="${invitation.group.name}" />
+	<jstl:choose>
+		<jstl:when test="${invitation.isAccepted}">
+			<strong><spring:message code="group.name" /></strong>: <a href="group/visitor/display.do?groupId=${invitation.group.id}"><jstl:out value="${invitation.group.name}" /></a>
+		</jstl:when>
+		<jstl:otherwise>
+			<strong><spring:message code="group.name" /></strong>: <jstl:out value="${invitation.group.name}" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
 </p>
 <p>
 	<strong><spring:message code="group.description" /></strong>: <jstl:out value="${invitation.group.description}" />

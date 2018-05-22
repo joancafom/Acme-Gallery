@@ -34,7 +34,7 @@
 		<acme:dateFormat code="date.format" value="${invitation.sentMoment}"/> 
 	</display:column>
 	
-	<display:column titleKey="invitation.status" sortable="true">
+	<display:column titleKey="invitation.status">
 		<jstl:if test="${invitation.isAccepted eq true}">
 			<spring:message code="invitation.isAccepted.accepted"/>
 		</jstl:if>

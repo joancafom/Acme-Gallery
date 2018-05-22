@@ -87,7 +87,7 @@
 		</display:table>
 		<br>
 		<security:authorize access="hasRole('VISITOR')">
-			<jstl:if test="${group.isClosed and own and now < group.meetingDate}">
+			<jstl:if test="${group.isClosed and own and now < group.meetingDate and fn:length(group.participants) lt group.maxParticipants}">
 				<a href="invitation/visitor/create.do?groupId=${group.id}"><spring:message code="invitation.create" /></a>
 			</jstl:if>
 		</security:authorize>

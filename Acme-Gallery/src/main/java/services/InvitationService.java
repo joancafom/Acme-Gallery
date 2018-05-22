@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.InvitationRepository;
 import security.LoginService;
@@ -39,10 +41,39 @@ public class InvitationService {
 	@Autowired
 	private GroupService			groupService;
 
-
 	// Validator --------------------------------------------------------------------------------------
 
+	@Autowired
+	private Validator				validator;
+
+
 	// CRUD Methods -----------------------------------------------------------------------------------
+
+	// v1.0 - JA
+	public Invitation create(final Group group) {
+
+		Assert.notNull(group);
+		Assert.isTrue(group.getIsClosed());
+
+		final Visitor currentVisitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentVisitor);
+
+		Assert.isTrue(group.getCreator().equals(currentVisitor));
+
+		final Date now = new Date();
+		Assert.isTrue(now.before(group.getMeetingDate()));
+
+		//An invitation cannot be create if the group does not allow more participants
+		Assert.isTrue(group.getMaxParticipants() > group.getParticipants().size());
+
+		final Invitation res = new Invitation();
+
+		res.setGroup(group);
+		res.setHost(currentVisitor);
+		res.setSentMoment(new Date(System.currentTimeMillis() - 1000L));
+
+		return res;
+	}
 
 	// v1.0 - JA
 	public Invitation findOne(final int invitationId) {
@@ -102,10 +133,13 @@ public class InvitationService {
 	//Other Business Methods --------------------------------------------------------------------------
 
 	//v1.0 - Implemented by JA
-	public void accept(final Invitation invitation) {
+	public void process(final Invitation invitation, final boolean isAccepted) {
 
 		Assert.notNull(invitation);
 		Assert.isTrue(this.invitationRepository.exists(invitation.getId()));
+
+		//Assert is a pending invitation
+		Assert.isNull(invitation.getIsAccepted());
 
 		final Visitor currentVisitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(currentVisitor);
@@ -120,14 +154,16 @@ public class InvitationService {
 		Assert.isTrue(groupToJoin.getCreator().equals(invitation.getHost()));
 		Assert.isTrue(!currentVisitor.getJoinedGroups().contains(groupToJoin));
 
-		invitation.setIsAccepted(true);
+		invitation.setIsAccepted(isAccepted);
 		this.save(invitation);
 
-		groupToJoin.getParticipants().add(currentVisitor);
-		this.groupService.save(groupToJoin);
+		if (isAccepted) {
+			groupToJoin.getParticipants().add(currentVisitor);
+			this.groupService.save(groupToJoin);
 
-		currentVisitor.getJoinedGroups().add(groupToJoin);
-		this.visitorService.save(currentVisitor);
+			currentVisitor.getJoinedGroups().add(groupToJoin);
+			this.visitorService.save(currentVisitor);
+		}
 
 	}
 
@@ -147,4 +183,55 @@ public class InvitationService {
 		return this.invitationRepository.findAllReceivedByVisitorId(visitor.getId(), new PageRequest(page - 1, size));
 	}
 
+	//v1.0 - Implemented by JA
+	public Invitation reconstructCreate(final Invitation invitationToReconstruct, final BindingResult binding) {
+
+		Assert.notNull(invitationToReconstruct);
+		Assert.notNull(invitationToReconstruct.getGroup());
+
+		final Invitation res = this.create(invitationToReconstruct.getGroup());
+
+		if ("".equals(invitationToReconstruct.getMessage()))
+			res.setMessage(null);
+		else
+			res.setMessage(invitationToReconstruct.getMessage());
+
+		res.setGuest(invitationToReconstruct.getGuest());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	//v1.0 - Implemented by JA
+	public Invitation sendInvitation(final Invitation invitation) {
+
+		Assert.notNull(invitation);
+		Assert.isTrue(invitation.getId() == 0);
+
+		final Group group = invitation.getGroup();
+		Assert.notNull(group);
+		Assert.isTrue(group.getIsClosed());
+
+		final Visitor currentVisitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentVisitor);
+
+		Assert.isTrue(currentVisitor.equals(invitation.getHost()));
+
+		//Don't need to check if they are the same, as the owner is implicitly contained in a Group
+		Assert.notNull(invitation.getGuest());
+		Assert.notNull(group.getParticipants());
+		Assert.isTrue(!group.getParticipants().contains(invitation.getGuest()));
+
+		final Date now = new Date();
+		Assert.isTrue(now.before(group.getMeetingDate()));
+
+		//An invitation cannot be sent if the group does not allow more participants
+		Assert.isTrue(group.getMaxParticipants() > group.getParticipants().size());
+
+		//Make sure it does it does not belong to the group or has any pending invitation
+		Assert.isTrue(this.visitorService.canBeSentInvitation(invitation.getGuest(), group));
+
+		return this.save(invitation);
+	}
 }

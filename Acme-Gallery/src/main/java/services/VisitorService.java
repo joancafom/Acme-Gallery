@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.HashSet;
 
 import javax.transaction.Transactional;
@@ -84,6 +85,15 @@ public class VisitorService extends ActorService {
 	}
 
 	//Other Business Methods
+
+	//v1.0 - JA
+	public Boolean canBeSentInvitation(final Visitor visitor, final Group group) {
+
+		Assert.notNull(visitor);
+		Assert.notNull(group);
+
+		return this.visitorRepositories.fulfillReqsNotToBeSent(visitor.getId(), group) == null ? true : false;
+	}
 
 	//v1.0 - Implemented by JA
 	public Visitor reconstructRegisterForm(final ActorRegistrationForm actorRegistrationForm, final BindingResult binding) {
@@ -201,6 +211,14 @@ public class VisitorService extends ActorService {
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	//v1.0 - JA
+	public Collection<Visitor> findRemainingByGroup(final Group group) {
+
+		Assert.notNull(group);
+
+		return this.visitorRepositories.findRemainingByGroup(group);
 	}
 
 	/* v1.0 - josembell */

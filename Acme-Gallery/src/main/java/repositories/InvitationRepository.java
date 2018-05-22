@@ -19,4 +19,7 @@ public interface InvitationRepository extends JpaRepository<Invitation, Integer>
 
 	@Query("select i from Invitation i where i.guest.id = ?1 order by i.sentMoment DESC")
 	Page<Invitation> findAllReceivedByVisitorId(final int visitorId, Pageable pageable);
+
+	@Query("select i from Invitation i where i.guest.id = ?1 and i.group.id = ?2 and (i.isAccepted = null or i.isAccepted = true)")
+	Collection<Invitation> findAcceptedAndPendingByGuestIdAndGroupId(final int guestId, final int groupId);
 }

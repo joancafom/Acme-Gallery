@@ -60,6 +60,20 @@ public class SponsorshipService {
 	}
 
 	// v1.0 - Alicia
+	public Sponsorship create(final Exhibition exhibition) {
+		final Sponsor sponsor = this.sponsorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(sponsor);
+
+		final Sponsorship sponsorship = new Sponsorship();
+
+		sponsorship.setExhibition(exhibition);
+		sponsorship.setSponsor(sponsor);
+		sponsorship.setStatus("PENDING");
+
+		return sponsorship;
+	}
+
+	// v1.0 - Alicia
 	public void delete(final Sponsorship sponsorship) {
 		Assert.notNull(sponsorship);
 		Assert.isTrue(this.sponsorshipRepository.exists(sponsorship.getId()));
@@ -282,6 +296,35 @@ public class SponsorshipService {
 		res.setVersion(oldSponsorship.getVersion());
 
 		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Sponsorship reconstructCreate(final Sponsorship prunedSponsorship, final BindingResult binding) {
+		Assert.notNull(prunedSponsorship);
+		Assert.isTrue(prunedSponsorship.getId() == 0);
+
+		final Sponsor sponsor = this.sponsorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(sponsor);
+
+		final Sponsorship res = this.create(prunedSponsorship.getExhibition());
+
+		res.setBanner(prunedSponsorship.getBanner());
+		res.setLink(prunedSponsorship.getLink());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Sponsorship> getBySponsorPrincipal() {
+		final Sponsor sponsor = this.sponsorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(sponsor);
+
+		final Collection<Sponsorship> res = this.sponsorshipRepository.findBySponsorId(sponsor.getId());
+		Assert.notNull(res);
 
 		return res;
 	}

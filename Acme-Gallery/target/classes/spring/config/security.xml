@@ -200,6 +200,9 @@
 		
 		<security:intercept-url pattern="/sponsorship/director/list.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/sponsorship/director/edit.do" access="hasRole('DIRECTOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/create.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/edit.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/listMine.do" access="hasRole('SPONSOR')" />
 
 		<security:intercept-url pattern="/store/display.do" access="isAnonymous()" />  
 		<security:intercept-url pattern="/store/visitor/display.do" access="hasRole('VISITOR')" />  

@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 
 import repositories.SponsorRepository;
 import security.LoginService;
+import security.UserAccount;
 import domain.Administrator;
 import domain.Sponsor;
 import domain.Sponsorship;
@@ -61,6 +62,11 @@ public class SponsorService extends ActorService {
 	}
 
 	//Other Business Methods
+
+	// v1.0 - Alicia
+	public Sponsor findByUserAccount(final UserAccount userAccount) {
+		return super.findByUserAccount(userAccount, Sponsor.class);
+	}
 
 	//v1.0 - Implemented by JA
 	public Sponsor reconstructRegisterForm(final ActorRegistrationForm actorRegistrationForm, final BindingResult binding) {

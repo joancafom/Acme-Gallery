@@ -162,9 +162,10 @@ public class DayPassService {
 
 	}
 
-	// v2.0 - Alicia
+	// v3.0 - Alicia
 	public DayPass reconstruct(final DayPass prunedDayPass, final BindingResult binding) {
 		Assert.notNull(prunedDayPass);
+		Assert.isTrue(prunedDayPass.getId() == 0);
 
 		DayPass res = null;
 		int number = 0;

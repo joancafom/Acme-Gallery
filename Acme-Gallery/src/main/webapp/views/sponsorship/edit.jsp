@@ -48,6 +48,7 @@
 	
 </script>
 
+<security:authorize access="hasRole('DIRECTOR')">
 <form:form action="sponsorship/${actorWS}edit.do" modelAttribute="sponsorship">
 
 	<form:hidden path="id"/>
@@ -88,3 +89,21 @@
 	<acme:submit name="save" code="sponsorship.save"/>
 	
 </form:form>
+</security:authorize>
+
+<security:authorize access="hasRole('SPONSOR')">
+<form:form action="sponsorship/${actorWS}edit.do?exhibitionId=${sponsorship.exhibition.id}" modelAttribute="sponsorship">
+
+	<!-- Hidden Inputs -->
+	<form:hidden path="id"/>
+	
+	<!-- Inputs -->
+	
+	<acme:textbox code="sponsorship.banner" path="banner"/><br/>
+	<acme:textbox code="sponsorship.link" path="link"/><br/>
+	
+	<acme:submit name="save" code="sponsorship.save"/>
+	<acme:cancel url="exhibition/${actorWS}display.do?exhibitionId=${sponsorship.exhibition.id}" code="sponsorship.cancel"/>
+	
+</form:form>
+</security:authorize>

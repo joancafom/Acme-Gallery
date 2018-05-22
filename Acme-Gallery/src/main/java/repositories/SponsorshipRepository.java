@@ -34,4 +34,8 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 	//v1.0 - Implemented by JA
 	@Query("select s from Sponsorship s where s.exhibition.id = ?1 and s.status = 'ACCEPTED'")
 	Collection<Sponsorship> findAcceptedByExhibitionId(final int exhibitionId);
+
+	// v1.0 - Alicia
+	@Query("select s from Sponsorship s where s.sponsor.id = ?1 order by s.status asc")
+	Collection<Sponsorship> findBySponsorId(int sponsorId);
 }

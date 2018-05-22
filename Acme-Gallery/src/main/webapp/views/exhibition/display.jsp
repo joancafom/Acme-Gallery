@@ -31,14 +31,20 @@
 	<h2><jstl:out value="${exhibition.title}" /></h2>
 </div>
 
-<jstl:if test="${canBeDeleted}">
-	<h3 style="text-align:center; text-decoration:underline;"><a href="exhibition/director/delete.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.delete" /></a></h3>
-</jstl:if>
+<security:authorize access="hasRole('DIRECTOR')">
+	<jstl:if test="${canBeDeleted}">
+		<h3 style="text-align:center; text-decoration:underline;"><a href="exhibition/director/delete.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.delete" /></a></h3>
+	</jstl:if>
+</security:authorize>
 
 <security:authorize access="hasRole('VISITOR')">
 	<jstl:if test="${canBuyADayPass}">
 		<h3 style="text-align:center;"><a href="dayPass/visitor/create.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.buy"/></a></h3>
 	</jstl:if>
+</security:authorize>
+
+<security:authorize access="hasRole('SPONSOR')">
+	<h3 style="text-align:center;"><a href="sponsorship/sponsor/create.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.sponsor"/></a></h3>
 </security:authorize>
 
 <div id="eInfo" class="info container">

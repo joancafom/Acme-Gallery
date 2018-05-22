@@ -137,6 +137,7 @@ window.onload = function(){
 			<li ><a href="category/sponsor/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/sponsor/list.do"><spring:message code="master.page.museum.list"/></a></li>
 			<li ><a href="director/sponsor/list.do"><spring:message code="master.page.director.list"/></a></li>
+			<li ><a href="sponsorship/sponsor/listMine.do"><spring:message code="master.page.sponsorship.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>
 		</ul>

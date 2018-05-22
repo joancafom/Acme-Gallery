@@ -38,4 +38,8 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 	// v1.0 - Alicia
 	@Query("select s from Sponsorship s where s.sponsor.id = ?1 order by s.status asc")
 	Collection<Sponsorship> findBySponsorId(int sponsorId);
+
+	// v1.0 - Alicia
+	@Query("select s from Sponsorship s where s.sponsor.id = ?1 order by s.status asc")
+	Page<Sponsorship> findBySponsorId(int sponsorId, Pageable pageable);
 }

@@ -18,7 +18,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-<display:table name="sponsorships" id="sponsorship" requestURI="sponsorship/${actorWS}listMine.do" pagesize="5" class="displaytag" style="width:100%">
+<display:table name="sponsorships" id="sponsorship" requestURI="sponsorship/${actorWS}listMine.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
 	<display:column titleKey="sponsorship.banner">
 		<a href="<jstl:out value="${sponsorship.banner}" />" target="_blank"><img src="<jstl:out value="${sponsorship.banner}" />" style="max-width: 200px;"></a>
@@ -72,6 +72,18 @@
 		</jstl:if>
 		<jstl:if test="${sponsorship.endingDate eq null}">
 			<jstl:out value="-"/>
+		</jstl:if>
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate > currentDate)}">
+			<a href="sponsorship/sponsor/accept.do?sponsorshipId=${sponsorship.id}"><spring:message code="sponsorship.accept"/></a>
+		</jstl:if>
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate > currentDate)}">
+			<a href="sponsorship/sponsor/reject.do?sponsorshipId=${sponsorship.id}"><spring:message code="sponsorship.reject"/></a>
 		</jstl:if>
 	</display:column>
 </display:table>

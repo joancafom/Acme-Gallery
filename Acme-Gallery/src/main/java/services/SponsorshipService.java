@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -96,6 +97,7 @@ public class SponsorshipService {
 	}
 
 	//v1.0 - Implemented by JA
+	// v2.0 - Alicia
 	public Sponsorship save(final Sponsorship sponsorship) {
 
 		Assert.notNull(sponsorship);
@@ -131,6 +133,12 @@ public class SponsorshipService {
 			Assert.notNull(sponsorship.getCreditCard().getNumber());
 			Assert.notNull(sponsorship.getEndingDate());
 			Assert.notNull(sponsorship.getStartingDate());
+
+			final LocalDate current = new LocalDate();
+			// Assert (year == current && month == current) || year == future || (year == current && month == future)
+			Assert.isTrue((current.getYear() == sponsorship.getCreditCard().getYear() && current.getMonthOfYear() == sponsorship.getCreditCard().getMonth()) || (current.getYear() < sponsorship.getCreditCard().getYear())
+				|| (current.getYear() == sponsorship.getCreditCard().getYear() && current.getMonthOfYear() < sponsorship.getCreditCard().getMonth()));
+
 		} else if (sponsorship.getStatus().equals("PENDING")) {
 			Assert.isTrue(sponsorship.getCreditCard() == null || sponsorship.getCreditCard().getNumber() == null);
 			Assert.isNull(sponsorship.getEndingDate());
@@ -325,6 +333,62 @@ public class SponsorshipService {
 
 		final Collection<Sponsorship> res = this.sponsorshipRepository.findBySponsorId(sponsor.getId());
 		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public void reject(final Sponsorship sponsorship) {
+		Assert.notNull(sponsorship);
+
+		final Sponsor sponsor = this.sponsorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(sponsor);
+
+		Assert.isTrue(sponsorship.getSponsor().equals(sponsor));
+		Assert.isTrue(sponsorship.getStatus().equals("TIME_NEGOTIATION"));
+
+		sponsorship.setStatus("REJECTED");
+
+		this.sponsorshipRepository.save(sponsorship);
+	}
+
+	// v1.0 - Alicia
+	public Page<Sponsorship> getBySponsorPrincipal(final int page, final int size) {
+		final Sponsor sponsor = this.sponsorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(sponsor);
+
+		final Page<Sponsorship> res = this.sponsorshipRepository.findBySponsorId(sponsor.getId(), new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Sponsorship reconstructAccept(final Sponsorship prunedSponsorship, final BindingResult binding) {
+		Assert.notNull(prunedSponsorship);
+
+		final Sponsorship oldSponsorship = this.sponsorshipRepository.findOne(prunedSponsorship.getId());
+		Assert.notNull(oldSponsorship);
+		Assert.isTrue(oldSponsorship.getStatus().equals("TIME_NEGOTIATION"));
+
+		final Sponsor sponsor = this.sponsorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(sponsor);
+		Assert.isTrue(oldSponsorship.getSponsor().equals(sponsor));
+
+		final Sponsorship res = this.create(oldSponsorship.getExhibition());
+
+		res.setId(oldSponsorship.getId());
+		res.setVersion(oldSponsorship.getVersion());
+
+		res.setStatus("ACCEPTED");
+		res.setCreditCard(prunedSponsorship.getCreditCard());
+
+		res.setBanner(oldSponsorship.getBanner());
+		res.setLink(oldSponsorship.getLink());
+		res.setStartingDate(oldSponsorship.getStartingDate());
+		res.setEndingDate(oldSponsorship.getEndingDate());
+
+		this.validator.validate(res, binding);
 
 		return res;
 	}

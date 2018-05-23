@@ -19,36 +19,43 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="incident/guide/edit.do" modelAttribute="incident">
-	
-   <acme:textarea code="incident.text" path="text" />
-   
-   <spring:message code="incident.level.low" var="levelLow"/>
-   <spring:message code="incident.level.medium" var="levelMedium"/>
-   <spring:message code="incident.level.high" var="levelHigh"/>
-   	<strong><form:label path="level"><spring:message code="incident.level"/>: </form:label></strong>
-	<form:select path="level">
-		<form:option value="LOW" label="${levelLow}"/>
-		<form:option value="MEDIUM" label="${levelMedium}"/>
-		<form:option value="HIGH" label="${levelHigh}"/>
-	</form:select>
-	<form:errors cssClass="error" path="room"/>
-   
-   <br>
-   
-	<strong><form:label path="room"><spring:message code="incident.room"/>: </form:label></strong>
-	<form:select path="room">
-		<form:option value="0" label="---"/>
-		<jstl:forEach items="${rooms}" var="r">
-			<form:option value="${r.id}" label="${r.name} - ${r.museum.name}"/>
-		</jstl:forEach>
-	</form:select>
-	<form:errors cssClass="error" path="room"/>
-   
-   <br>
-   <br>
-   
-   	<acme:submit name="save" code="incident.save"/>
-	<acme:cancel url="incident/guide/list.do" code="incident.cancel"/>
-	
-</form:form>
+<jstl:if test="${empty rooms}">
+	<h4 style="color:#4286f4" ><spring:message code="incident.message.noRooms" /></h4>
+	<br>
+	<acme:cancel url="incident/guide/list.do?museumId=${museumId}" code="incident.back"/>
+</jstl:if>
+<jstl:if test="${not empty rooms}">
+	<form:form action="incident/guide/edit.do" modelAttribute="incident">
+		
+	   <acme:textarea code="incident.text" path="text" />
+	   
+	   <spring:message code="incident.level.low" var="levelLow"/>
+	   <spring:message code="incident.level.medium" var="levelMedium"/>
+	   <spring:message code="incident.level.high" var="levelHigh"/>
+	   	<strong><form:label path="level"><spring:message code="incident.level"/>: </form:label></strong>
+		<form:select path="level">
+			<form:option value="LOW" label="${levelLow}"/>
+			<form:option value="MEDIUM" label="${levelMedium}"/>
+			<form:option value="HIGH" label="${levelHigh}"/>
+		</form:select>
+		<form:errors cssClass="error" path="level"/>
+	   
+	   <br>
+	   
+		<strong><form:label path="room"><spring:message code="incident.room"/>: </form:label></strong>
+		<form:select path="room">
+			<jstl:forEach items="${rooms}" var="r">
+				<form:option value="${r.id}" label="${r.name} - ${r.museum.name}"/>
+				<jstl:set var="museumId" value="${r.museum.id}" />
+			</jstl:forEach>
+		</form:select>
+		<form:errors cssClass="error" path="room"/>
+	   
+	   <br>
+	   <br>
+	   
+	   	<acme:submit name="save" code="incident.save"/>
+		<acme:cancel url="incident/guide/list.do?museumId=${museumId}" code="incident.cancel"/>
+		
+	</form:form>
+</jstl:if>

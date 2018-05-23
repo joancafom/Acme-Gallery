@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.IncidentRepository;
 import security.LoginService;
@@ -39,8 +41,11 @@ public class IncidentService {
 	@Autowired
 	private RoomService			roomService;
 
-
 	// Validator --------------------------------------------------------------------------------------
+
+	@Autowired
+	private Validator			validator;
+
 
 	// CRUD Methods -----------------------------------------------------------------------------------
 
@@ -57,6 +62,14 @@ public class IncidentService {
 
 		return res;
 
+	}
+
+	// v1.0 - JA
+	public Incident save(final Incident incident) {
+
+		Assert.notNull(incident);
+
+		return this.incidentRepository.save(incident);
 	}
 
 	// v1.0 - Alicia
@@ -200,4 +213,37 @@ public class IncidentService {
 		return res;
 	}
 
+	//v1.0 - Implemented by JA
+	public Incident reconstructCreate(final Incident prunedIncident, final BindingResult binding) {
+
+		Assert.notNull(prunedIncident);
+
+		final Incident res = this.create();
+
+		res.setText(prunedIncident.getText());
+		res.setLevel(prunedIncident.getLevel());
+		res.setRoom(prunedIncident.getRoom());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	//v1.0 - Implemented by JA
+	public Incident saveCreate(final Incident incident) {
+
+		Assert.notNull(incident);
+		Assert.isTrue(incident.getId() == 0);
+		Assert.notNull(incident.getGuide());
+		Assert.notNull(incident.getRoom());
+		Assert.notNull(incident.getRoom().getMuseum());
+
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+
+		Assert.isTrue(incident.getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(!incident.getIsChecked());
+
+		return this.save(incident);
+	}
 }

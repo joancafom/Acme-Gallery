@@ -112,6 +112,22 @@ public class MuseumService extends ActorService {
 	//Other Business Methods
 
 	//v1.0 - Implemented by JA
+	public Collection<Museum> findWorkplacesByGuide(final Guide guide) {
+
+		Assert.notNull(guide);
+
+		return this.museumRepository.findWorkplacesByGuide(guide);
+	}
+
+	//v1.0 - Implemented by JA
+	public Page<Museum> findWorkplacesByGuide(final Guide guide, final Integer page, final int size) {
+
+		Assert.notNull(guide);
+
+		return this.museumRepository.findWorkplacesByGuide(guide, new PageRequest(page - 1, size));
+	}
+
+	//v1.0 - Implemented by JA
 	//v2.0 - JA (GPS)
 	public Museum reconstructEdit(final Museum prunedMuseum, final BindingResult binding) {
 

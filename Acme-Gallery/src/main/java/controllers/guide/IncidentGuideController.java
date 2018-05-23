@@ -70,6 +70,7 @@ public class IncidentGuideController extends AbstractController {
 
 		res = this.createEditModelAndView(incident);
 		res.addObject("rooms", rooms);
+		res.addObject("museumId", museum.getId());
 
 		return res;
 	}
@@ -78,18 +79,24 @@ public class IncidentGuideController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Incident prunedIncident, final BindingResult binding) {
 
-		//final Incident incidentToSave = this.incidentService.reconstructCreate(prunedIncident, binding);
+		final Incident incidentToSave = this.incidentService.reconstructCreate(prunedIncident, binding);
 
 		ModelAndView res = null;
+		Assert.notNull(incidentToSave.getRoom());
+		Assert.notNull(incidentToSave.getRoom().getMuseum());
 
-		if (binding.hasErrors())
+		final Collection<Room> rooms = this.roomService.getByMuseum(incidentToSave.getRoom().getMuseum());
+
+		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(prunedIncident);
-		else
+			res.addObject("rooms", rooms);
+		} else
 			try {
-				//this.incidentService.saveCreate(incidentToSave);
-				//res = new ModelAndView("redirect:list.do?museumId=" + incidentToSave.getRoom().getMuseum().getId());
+				this.incidentService.saveCreate(incidentToSave);
+				res = new ModelAndView("redirect:list.do?museumId=" + incidentToSave.getRoom().getMuseum().getId());
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(prunedIncident, "incident.commit.error");
+				res.addObject("rooms", rooms);
 			}
 
 		return res;

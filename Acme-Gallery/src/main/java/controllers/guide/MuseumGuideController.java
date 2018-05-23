@@ -90,6 +90,7 @@ public class MuseumGuideController extends AbstractController {
 
 		return res;
 	}
+
 	// v1.0 - Alicia
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listResults(@RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {
@@ -104,6 +105,28 @@ public class MuseumGuideController extends AbstractController {
 		res.addObject("museums", museums);
 		res.addObject("resultSize", resultSize);
 		res.addObject("landing", "list");
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	@RequestMapping(value = "/listWorkplaces", method = RequestMethod.GET)
+	public ModelAndView listWorkplaces(@RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {
+		ModelAndView res;
+
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+
+		final Page<Museum> pageResult = this.museumService.findWorkplacesByGuide(guide, page, 5);
+		final Collection<Museum> museums = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("museum/list");
+
+		res.addObject("museums", museums);
+		res.addObject("resultSize", resultSize);
+		res.addObject("landing", "listWorkplaces");
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

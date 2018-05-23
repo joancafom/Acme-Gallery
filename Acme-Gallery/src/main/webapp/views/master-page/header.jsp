@@ -100,6 +100,7 @@ window.onload = function(){
 			<li ><a href="exhibition/guide/search.do"><spring:message code="master.page.exhibition.search"/></a></li>
 			<li ><a href="category/guide/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/guide/list.do"><spring:message code="master.page.museum.list"/></a></li>
+			<li ><a href="museum/guide/listWorkplaces.do"><spring:message code="master.page.museum.listMine"/></a></li>
 			<li ><a href="director/guide/list.do"><spring:message code="master.page.director.list"/></a></li>
 			
 			<li ><a href="#"><security:authentication property="principal.username" /></a></li>

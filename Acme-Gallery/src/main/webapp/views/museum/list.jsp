@@ -18,6 +18,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<security:authorize access="hasRole('GUIDE')">
+	<jstl:if test="${landing eq 'listWorkplaces'}">
+		<br>
+		<h4><spring:message code="museum.workplaces" /></h4>
+	</jstl:if>
+</security:authorize>
+
 <display:table name="museums" id="museum" requestURI="museum/${actorWS}${landing}.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
 	<display:column titleKey="museum.identifier" property="identifier"/>

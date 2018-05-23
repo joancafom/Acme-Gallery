@@ -9,11 +9,11 @@
 <jstl:if test="${cookie.language.value eq null or cookie.language.value eq 'en'}">
 <div id="info_en">
 	<p>
-	Acme Rendezvous, Inc. provides a fast and convenient way to arrange meetings with other people, from employees to friends!
+	Acme Gallery, Inc. provides services in order to manage museums and organize their visits.
 	</p>
 	
 	<p>
-	Acme Rendevous Inc, is a part of Acme Inc., a worldwide holding that encompasses many other companies.
+	Acme Gallery Inc, is a part of Acme Inc., a worldwide holding that encompasses many other companies.
 	</p>
 	
 	<p>
@@ -21,7 +21,7 @@
 	</p>
 	<ul>
 		<li>Hotline 24/7 on +34 600000001</li>
-		<li>rendezvous@acme.com</li>
+		<li>gallery@acme.com</li>
 	</ul>
 	
 	<p>
@@ -41,11 +41,11 @@
 <jstl:if test="${cookie.language.value eq 'es'}">
 <div id="info_es">
 	<p>
-	Acme Rendezvous, Inc. le proporciona una manera fácil y rápida de organizar reuniones con otras personas, ¡desde empleados hasta amigos!
+	Acme Gallery, Inc. proporciona servicios para la gestión de museos y organización de sus visitas.
 	</p>
 	
 	<p>
-	Acme Rendevous Inc, forma parte de Acme Inc., un holding mundial que cuenta con muchas otras compañías.
+	Acme Gallery Inc, forma parte de Acme Inc., un holding mundial que cuenta con muchas otras compañías.
 	</p>
 	
 	<p>
@@ -53,7 +53,7 @@
 	</p>
 	<ul>
 		<li>Línea de Atención al cliente 24h - 600000001</li>
-		<li>rendezvous@acme.com</li>
+		<li>gallery@acme.com</li>
 	</ul>
 	
 	<p>

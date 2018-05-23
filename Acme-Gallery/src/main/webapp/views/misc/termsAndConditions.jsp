@@ -76,16 +76,25 @@ practices, including the collection, the utilization, the processing and the sha
 information, as well as the transfer and the processing of your information in Spain and other 
 countries where we have or use facilities, service providers or partners, no matter where you use our 
 services.</p>
-<p>In any moment, you can send a message to <strong>rendezvous@acme.com</strong> requesting to modify 
+<p>In any moment, you can send a message to <strong>gallery@acme.com</strong> requesting to modify 
 or delete (as well as to see) any of the information we store about you in our servers. You will be 
 sent in the next 24h further instructions on how to continue with this process.</p>
 
-<h3>8. Applicable laws, competent jurisdiction and notifications</h3>
+<h3>8. Inappropriate elements</h3>
+<p>The Company reserves the right to remove, and won't allow to manage in the website, any group, announcement, comment or review 
+that may be considered inappropiate by any of the following reasons: It encourages vandalism, racism, 
+eating disorders, bullying, gambling, self-harm, hate to either people or animals, or any illegal 
+action.</p>
+<p>Also, the Compnay can revoke the access to the system to any visitor who is not properly using the system, 
+that is, he or she is encourages any of the concepts just mentioned. Furthermore, spammers or scammers sponsor
+can also be banned from the system.</p>
+
+<h3>9. Applicable laws, competent jurisdiction and notifications</h3>
 <p>The current conditions are subject and interpreted according to the spanish Laws. For any demand the 
 competent authorities will be the courts and tribunals of <strong>Madrid</strong>. All the 
 notifications, requirements, petitions and other communications that the User desires to make to the 
 Company owner of the web Portal must be written and will be consider correctly made when they are 
-received in the following address <strong>rendezvous@acme.com</strong>.</p>
+received in the following address <strong>gallery@acme.com</strong>.</p>
 
 </jstl:if>
 
@@ -154,17 +163,26 @@ aceptas nuestras prácticas de datos, que incluyen la recopilación, la utilizació
 el uso compartido de tu información, así como la transferencia y el procesamiento de tu información en 
 España y otros países donde tenemos o usamos instalaciones, proveedores de servicios o socios, sin 
 importar dónde uses nuestros Servicios.</p>
-<p>En cualquier momento, puedes enviar un mensaje a <strong>rendezvous@acme.com</strong> para solicitar 
+<p>En cualquier momento, puedes enviar un mensaje a <strong>gallery@acme.com</strong> para solicitar 
 la modificación o eliminación (además de ver) toda la información sobre ti que guardamos en nuestros 
 servidores. Se te enviará en las siguientes 24h instrucciones más a fondo sobre cómo continuar con el 
 proceso.</p>
 
-<h3>8. Legislación aplicable, jurisdicción competente y notificaciones</h3>
+<h3>8. Elementos inapropiados</h3>
+<p>La Compañía se reserva el derecho de eliminar, y no permitirá gestionar en la página web, cualquier 
+grupo, anuncio, comentario u opiniones escritas por los visitantes que puedan ser consideradas inapropiadas por cualquiera de las siguientes razones: Incentiva el
+vandalismo, el racismo, los desórdenes alimenticios, el acoso, las apuestas, la autolesión, el 
+odio a personas o animales, o cualquier acción ilegal.</p>
+<p>También, la Compañía puede revocar el acceso al sistema a cualquier visitante que no esté usando el sistema
+de manera apropiada, esto es, que él o ella fomenta cualquiera de los conceptos previamente mencionados. 
+Además, patrocinadores spammers o scammers también pueden ser baneados del sistema.</p>
+
+<h3>9. Legislación aplicable, jurisdicción competente y notificaciones</h3>
 <p>Las presentes condiciones se rigen y se interpretan de acuerdo con las Leyes de España. Para 
 cualquier reclamación serán competentes los juzgados y tribunales de <strong>Madrid</strong>. Todas 
 las notificaciones, requerimientos, peticiones y otras comunicaciones que el Usuario desee efectuar a 
 la Empresa titular del Portal deberán realizarse por escrito y se entenderá que han sido correctamente 
-realizadas cuando hayan sido recibidas en la siguiente dirección <strong>rendezvous@acme.com</strong>.
+realizadas cuando hayan sido recibidas en la siguiente dirección <strong>gallery@acme.com</strong>.
 </p>
 
 </jstl:if>

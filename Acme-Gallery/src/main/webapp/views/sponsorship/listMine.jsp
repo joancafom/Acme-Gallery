@@ -38,23 +38,46 @@
 		</jstl:if>
 	</display:column>
 	
-	<jstl:choose>
-		<jstl:when test="${sponsorship.status eq 'ACCEPTED'}">
-			<jstl:set var="backColor" value="#42f46b"/>
-		</jstl:when>
-		<jstl:when test="${sponsorship.status eq 'PENDING'}">
-			<jstl:set var="backColor" value="#41a6f4"/>
-		</jstl:when>
-		<jstl:when test="${sponsorship.status eq 'REJECTED'}">
-			<jstl:set var="backColor" value="#f45642"/>
-		</jstl:when>
-		<jstl:when test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate < currentDate)}">
-			<jstl:set var="backColor" value="#d9baff"/>
-		</jstl:when>
-		<jstl:otherwise>
-			<jstl:set var="backColor" value="#e9f241"/>
-		</jstl:otherwise>
-	</jstl:choose>
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate var="day" value="${now}" pattern="dd"/>
+	<fmt:formatDate var="month" value="${now}" pattern="MM"/>
+	<fmt:formatDate var="year" value="${now}" pattern="yyyy"/>
+	<fmt:formatDate var="time" value="${now}" pattern="HH:mm"/>
+
+	<jstl:if test="${month == 12}">
+		<jstl:set var="nextMonth" value="01"></jstl:set>
+		<jstl:set var="nextYear" value="${year+1}"></jstl:set>	
+	</jstl:if>
+
+	<jstl:if test="${month < 12}">
+		<jstl:set var="nextMonth" value="${month+1}"></jstl:set>
+		<jstl:set var="nextYear" value="${year}"></jstl:set>	
+	</jstl:if>
+
+	<jstl:set var="nextDate" value="${day}/${nextMonth}/${nextYear} ${time}"></jstl:set>
+	<fmt:parseDate value = "${nextDate}" type="both" var = "parsedNextDate" pattern = "dd/MM/yyyy HH:mm" />
+
+	<fmt:formatDate var="startDate" value="${sponsorship.startingDate}" pattern="dd/MM/yyyy HH:mm"/>
+	<fmt:parseDate value = "${startDate}" type="both" var = "startDate" pattern = "dd/MM/yyyy HH:mm" />
+	
+	<jstl:if test="${sponsorship.status eq 'ACCEPTED'}">
+		<jstl:set var="backColor" value="#42f46b"/>
+	</jstl:if>
+	<jstl:if test="${sponsorship.status eq 'PENDING'}">
+		<jstl:set var="backColor" value="#41a6f4"/>
+	</jstl:if>
+	<jstl:if test="${sponsorship.status eq 'REJECTED'}">
+		<jstl:set var="backColor" value="#f45642"/>
+	</jstl:if>
+	<jstl:if test="${sponsorship.status eq 'TIME_NEGOTIATION'}">
+		<jstl:set var="backColor" value="#e9f241"/>
+		<jstl:if test="${startDate < parsedNextDate}">
+			<jstl:set var="backColor" value="#f4aa42"></jstl:set>
+		</jstl:if>
+	</jstl:if>
+	<jstl:if test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate < currentDate)}">
+		<jstl:set var="backColor" value="#d9baff"/>
+	</jstl:if>
 	
 	<display:column titleKey="sponsorship.status" style="background-color:${backColor};">
 		<jstl:choose>

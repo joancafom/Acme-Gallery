@@ -18,7 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="groups" id="group" requestURI="group/${actorWS}list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
+<display:table name="groups" id="group" requestURI="group/${actorWS}list${listType}.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 	<display:column titleKey="group.name">
 		<a href="group/${actorWS}display.do?groupId=${group.id}"><jstl:out value="${group.name}"/></a>
 	</display:column>
@@ -53,3 +53,7 @@
 		</display:column>
 	</security:authorize>
 </display:table>
+
+<security:authorize access="hasRole('VISITOR')">
+	<a href="group/visitor/create.do"><spring:message code="group.create" /></a>
+</security:authorize>

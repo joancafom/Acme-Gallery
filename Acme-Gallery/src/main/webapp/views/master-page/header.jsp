@@ -157,6 +157,8 @@ window.onload = function(){
 			<li ><a href="category/visitor/display.do"><spring:message code="master.page.category.display"/></a></li>
 			<li ><a href="museum/visitor/list.do"><spring:message code="master.page.museum.list"/></a></li>
 			<li ><a href="group/visitor/list.do"><spring:message code="master.page.group.list"/></a></li>
+			<li ><a href="group/visitor/listJoined.do"><spring:message code="master.page.group.listJoined"/></a></li>
+			<li ><a href="group/visitor/listCreated.do"><spring:message code="master.page.group.listCreated"/></a></li>
 			<li ><a href="director/visitor/list.do"><spring:message code="master.page.director.list"/></a></li>
 			<li ><a href="invitation/visitor/list.do"><spring:message code="master.page.invitation.list"/></a></li>
 			<li ><a href="dayPass/visitor/listMine.do"><spring:message code="master.page.dayPass.list"/></a></li>

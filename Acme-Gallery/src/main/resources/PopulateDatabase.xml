@@ -2879,7 +2879,7 @@
 			value="One exhibition featuring Monet’s paintings and nothing else? That’s a rare thing. The last time the UK hosted a Monet exhibition like this was almost 20 years ago. But 'Monet and Architecture' is not just rare, it’s never been done before." />
 		<property name="startingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="05/10/2017 08:00" />
+				<constructor-arg value="01/10/2018 08:00" />
 			</bean>
 		</property>
 		<property name="endingDate">

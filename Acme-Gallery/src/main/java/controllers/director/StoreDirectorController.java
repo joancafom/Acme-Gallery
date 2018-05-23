@@ -155,7 +155,7 @@ public class StoreDirectorController extends AbstractController {
 				final Store saved = this.storeService.save(store);
 				res = new ModelAndView("redirect:display.do?storeId=" + saved.getId());
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(store, "museum.commit.error");
+				res = this.createEditModelAndView(store, "store.commit.error");
 				res.addObject("toCreateEdit", true);
 			}
 

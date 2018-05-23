@@ -36,7 +36,7 @@
 <br><br>
 
 <div style="width: 100%;">
-	<div style="float:left; width: 50%; text-align:center">
+	<div style="float:left; width: 50%; text-align:center; min-height:500px;">
    		<div class="container" style="width: 70%"> 
   		<div id="myCarousel" class="carousel slide" data-ride="carousel">
     	<div class="carousel-inner">
@@ -64,7 +64,7 @@
  	 </div>
 	</div>
    </div>
-   <div style="margin-right: 100px;">
+   <div style="margin-right: 100px; max-height:500px;">
    		<h2><jstl:out value="${product.name}"/></h2><br>
    		<p><jstl:out value="${product.description}"/></p><br></br>
    		<h3><acme:priceFormat code="price.format" value="${product.price}"/></h3>

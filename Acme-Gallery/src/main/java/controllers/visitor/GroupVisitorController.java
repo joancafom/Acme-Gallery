@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import security.LoginService;
 import services.AnnouncementService;
 import services.CommentService;
 import services.GroupService;
+import services.MuseumService;
 import services.VisitorService;
 import controllers.AbstractController;
 import domain.Announcement;
@@ -53,6 +55,9 @@ public class GroupVisitorController extends AbstractController {
 	@Autowired
 	private CommentService		commentService;
 
+	@Autowired
+	private MuseumService		museumService;
+
 
 	// Methods ----------------------------------------------------------------------------------------
 
@@ -61,9 +66,7 @@ public class GroupVisitorController extends AbstractController {
 	public ModelAndView list(@RequestParam(value = "d-148477-p", defaultValue = "1") final Integer page) {
 		final ModelAndView res;
 
-		//A visitor can list all the open groups + the ones she or he is member of
-
-		final Page<Group> pageResult = this.groupService.findAllOpenAndMember(page, 5);
+		final Page<Group> pageResult = this.groupService.findAllOpen(page, 5);
 		final Collection<Group> groups = pageResult.getContent();
 		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
 
@@ -73,6 +76,78 @@ public class GroupVisitorController extends AbstractController {
 		res.addObject("resultSize", resultSize);
 
 		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/listJoined", method = RequestMethod.GET)
+	public ModelAndView listJoined(@RequestParam(value = "d-148477-p", defaultValue = "1") final Integer page) {
+		final ModelAndView res;
+
+		final Page<Group> pageResult = this.groupService.findAllJoinedByPrincipal(page, 5);
+		final Collection<Group> groups = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("group/list");
+
+		res.addObject("groups", groups);
+		res.addObject("resultSize", resultSize);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+		res.addObject("listType", "Joined");
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/listCreated", method = RequestMethod.GET)
+	public ModelAndView listCreated(@RequestParam(value = "d-148477-p", defaultValue = "1") final Integer page) {
+		final ModelAndView res;
+
+		final Page<Group> pageResult = this.groupService.findAllCreatedByPrincipal(page, 5);
+		final Collection<Group> groups = pageResult.getContent();
+		final Integer resultSize = new Long(pageResult.getTotalElements()).intValue();
+
+		res = new ModelAndView("group/list");
+
+		res.addObject("groups", groups);
+		res.addObject("resultSize", resultSize);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+		res.addObject("listType", "Created");
+
+		return res;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView result;
+		final Group group = this.groupService.create();
+
+		result = this.createEditModelAndView(group);
+
+		return result;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(final Group prunedGroup, final BindingResult binding) {
+		ModelAndView res = null;
+
+		final Group group = this.groupService.reconstruct(prunedGroup, binding);
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(prunedGroup);
+		else
+			try {
+				final Group saved = this.groupService.saveCreate(group);
+				res = new ModelAndView("redirect:display.do?groupId=" + saved.getId());
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(group, "group.commit.error");
+
+			}
 
 		return res;
 	}
@@ -202,5 +277,19 @@ public class GroupVisitorController extends AbstractController {
 		}
 
 		return res;
+	}
+
+	protected ModelAndView createEditModelAndView(final Group group) {
+		return this.createEditModelAndView(group, null);
+	}
+
+	protected ModelAndView createEditModelAndView(final Group group, final String message) {
+		ModelAndView result;
+		result = new ModelAndView("group/edit");
+		result.addObject("group", group);
+		result.addObject("museums", this.museumService.findAll());
+		result.addObject("message", message);
+
+		return result;
 	}
 }

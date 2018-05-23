@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.GroupRepository;
 import security.LoginService;
@@ -29,32 +32,54 @@ public class GroupService {
 	// Managed Repository -----------------------------------------------------------------------------
 
 	@Autowired
-	private GroupRepository			groupRepository;
+	private GroupRepository				groupRepository;
 
 	// Supporting Services ----------------------------------------------------------------------------
 
 	@Autowired
-	private AdministratorService	adminService;
+	private AdministratorService		adminService;
 
 	@Autowired
-	private AnnouncementService		announcementService;
+	private AnnouncementService			announcementService;
 
 	@Autowired
-	private CommentService			commentService;
+	private CommentService				commentService;
 
 	@Autowired
-	private VisitorService			visitorService;
+	private VisitorService				visitorService;
 
 	@Autowired
-	private InvitationService		invitationService;
+	private InvitationService			invitationService;
 
 	@Autowired
-	private MuseumService			museumService;
+	private MuseumService				museumService;
+
+	@Autowired
+	private Validator					validator;
+
+	@Autowired
+	private SystemConfigurationService	sysConfigService;
 
 
 	// Validator --------------------------------------------------------------------------------------
 
 	// CRUD Methods -----------------------------------------------------------------------------------
+
+	/* v1.0 - josembell */
+	public Group create() {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		final Group group = new Group();
+		group.setAnnouncements(new HashSet<Announcement>());
+		group.setComments(new HashSet<Comment>());
+		group.setCreator(visitor);
+		group.setInvitations(new HashSet<Invitation>());
+		group.setParticipants(new HashSet<Visitor>());
+		group.getParticipants().add(visitor);
+
+		return group;
+	}
 
 	// v1.0 - JA
 	public Group findOne(final int groupId) {
@@ -68,6 +93,39 @@ public class GroupService {
 		//Beware to change this method! AnnouncementService.delete uses it!
 		//Beware to change this method! SystemConfigurationService.updateTaboo uses it!
 		return this.groupRepository.save(group);
+	}
+
+	/* v1.0 - josembell */
+	public Group saveCreate(final Group group) {
+		Assert.notNull(group);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.isTrue(group.getCreator().equals(visitor));
+
+		/* Make sure that the meeting date is in the future */
+		final Date now = new Date();
+		Assert.isTrue(group.getMeetingDate().after(now));
+
+		/* Set the creation date */
+		group.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
+
+		/* Add the creator to the collection of participants */
+		group.getParticipants().add(visitor);
+
+		/* Check if it contains a taboo word */
+		final Boolean result = this.sysConfigService.containsTaboo(group.getName() + group.getDescription());
+		group.setContainsTaboo(result);
+
+		final Group saved = this.groupRepository.save(group);
+
+		visitor.getCreatedGroups().add(saved);
+		visitor.getJoinedGroups().add(saved);
+		saved.getMuseum().getGroups().add(saved);
+
+		this.visitorService.save(visitor);
+		this.museumService.save(saved.getMuseum());
+
+		return saved;
+
 	}
 
 	// v1.0 - Alicia
@@ -278,6 +336,48 @@ public class GroupService {
 	/* v1.0 - josembell */
 	public Page<Group> findByMuseum(final Museum museum, final Integer page, final int size) {
 		return this.groupRepository.findByMuseum(museum.getId(), new PageRequest(page - 1, size));
+	}
+
+	/* v1.0 - josembell */
+	public Group reconstruct(final Group prunedGroup, final BindingResult binding) {
+		Assert.notNull(prunedGroup);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		Group group = new Group();
+
+		if (prunedGroup.getId() == 0) {
+			group = prunedGroup;
+			group.setAnnouncements(new HashSet<Announcement>());
+			group.setComments(new HashSet<Comment>());
+			group.setContainsTaboo(false);
+			group.setCreator(visitor);
+			group.setInvitations(new HashSet<Invitation>());
+			group.setParticipants(new HashSet<Visitor>());
+			group.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
+		}
+
+		this.validator.validate(group, binding);
+		return group;
+	}
+
+	/* v1.0 - josembell */
+	public Page<Group> findAllOpen(final Integer page, final int size) {
+		return this.groupRepository.findAllOpen(new PageRequest(page - 1, size));
+	}
+
+	/* v1.0 - josembell */
+	public Page<Group> findAllJoinedByPrincipal(final Integer page, final int size) {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		return this.groupRepository.findAllJoinedByPrinciapl(visitor.getId(), new PageRequest(page - 1, size));
+	}
+
+	/* v1.0 - josembell */
+	public Page<Group> findAllCreatedByPrincipal(final Integer page, final int size) {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		return this.groupRepository.findAllCreatedByPrinciapl(visitor.getId(), new PageRequest(page - 1, size));
 	}
 
 }

@@ -101,9 +101,9 @@
 	<spring:message code="actor.gender.male" var="genderMale" />
 	<spring:message code="actor.gender.female" var="genderFemale" />
 	<spring:message code="actor.gender.other" var="genderOther" />
-	<form:label path="gender">
-		<spring:message code="actor.gender" />
-	</form:label>	
+	<strong><form:label path="gender">
+		<spring:message code="actor.gender" />:
+	</form:label></strong>	
 	<form:select path="gender">
 		<form:option value="" label="----" />
 		<form:option value="MALE" label="${genderMale}" />
@@ -112,7 +112,7 @@
 	</form:select>
 	<form:errors path="gender" cssClass="error" />
 	<br><br>
-	<form:checkbox path="acceptedTerms" onchange="checkData()" id="checkbox" name="checkbox" /><spring:message code="actor.accept"/> <a href="misc/termsAndConditions.do" target="_blank"><spring:message code="actor.termsAndConditions"/></a>
+	<form:checkbox path="acceptedTerms" onchange="checkData()" id="checkbox" name="checkbox" /> <spring:message code="actor.accept"/> <a href="misc/termsAndConditions.do" target="_blank"><spring:message code="actor.termsAndConditions"/></a>
 	<br><br>
 	
 	<input type="submit" name="save" value="<spring:message code="actor.save"/>" id="boton" disabled="disabled"/>

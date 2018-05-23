@@ -27,8 +27,9 @@ public class VisitorVisitorController extends AbstractController {
 
 	// v1.0 - Alicia
 	/* v2.0 - josembell */
+	// v3.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final Integer visitorId) {
+	public ModelAndView display(@RequestParam(required = false) final Integer visitorId) {
 		final ModelAndView res;
 		Visitor visitor = null;
 

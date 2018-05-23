@@ -45,9 +45,9 @@
 	<spring:message code="visitor.gender.male" var="genderMale" />
 	<spring:message code="visitor.gender.female" var="genderFemale" />
 	<spring:message code="visitor.gender.other" var="genderOther" />
-	<form:label path="gender">
-		<spring:message code="visitor.gender" />
-	</form:label>	
+	<strong><form:label path="gender">
+		<spring:message code="visitor.gender" />:
+	</form:label></strong>	
 	<form:select path="gender">
 		<form:option value="" label="----" />
 		<form:option value="MALE" label="${genderMale}" />

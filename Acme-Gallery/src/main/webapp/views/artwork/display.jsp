@@ -20,6 +20,10 @@
 <h1 style="text-align:center"><strong><jstl:out value="${artwork.title}"/></strong></h1>
 <img src="${artwork.photograph}" alt="${artwork.title}" title="${artwork.title}" style="max-width:200px; display:block; margin-left: auto; margin-right:auto; text-align:center;"/><br/>
 
+<jstl:if test="${artwork.isHighlight eq true}">
+	<h3 style="color:gold; text-align:center;"><spring:message code="artwork.highlight"/></h3>
+</jstl:if>
+
 <div style="display:block; margin-left: auto; margin-right:auto; text-align:center; font-weight: bold;">
 	<jstl:if test="${artwork.creatorName ne null}">
 		<jstl:out value="${artwork.creatorName}"/> - 

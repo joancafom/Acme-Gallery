@@ -18,6 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jsp:useBean id="now" class="java.util.Date" />
 <spring:message code="number.format" var="numberFormat"/>
 
 <p><strong><spring:message code="avg.museumsPerDirector"/>:</strong> <fmt:formatNumber pattern="${numberFormat}" value="${avgMuseumsPerDirector}" /></p>
@@ -45,6 +46,12 @@
 	
 	<display:column titleKey="exhibition.dates" style="width:20%">
 		<spring:message code="exhibition.from"/> <acme:dateFormat code="date.format" value="${exhibitionA.startingDate}"/> <spring:message code="exhibition.to"/> <acme:dateFormat code="date.format" value="${exhibitionA.endingDate}"/> 
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${now > exhibitionA.endingDate}">
+			<p style="color:red;"><spring:message code="exhibition.passed"/></p>
+		</jstl:if>
 	</display:column>
 </display:table>
 
@@ -85,6 +92,12 @@
 	
 	<display:column titleKey="exhibition.dates" style="width:20%">
 		<spring:message code="exhibition.from"/> <acme:dateFormat code="date.format" value="${exhibitionB.startingDate}"/> <spring:message code="exhibition.to"/> <acme:dateFormat code="date.format" value="${exhibitionB.endingDate}"/> 
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${now > exhibitionB.endingDate}">
+			<p style="color:red;"><spring:message code="exhibition.passed"/></p>
+		</jstl:if>
 	</display:column>
 </display:table>
 

@@ -34,6 +34,6 @@
 	<br/>
 </div>
 
-<div style="padding-left:70px; padding-right:70px; padding-bottom:70px; padding-top:20px;">
+<div style="padding-left:350px; padding-right:350px; padding-bottom:70px; padding-top:20px;">
 	<jstl:out value="${critique.description}"/>
 </div>

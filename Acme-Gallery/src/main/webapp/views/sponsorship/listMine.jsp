@@ -11,6 +11,7 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
@@ -37,7 +38,25 @@
 		</jstl:if>
 	</display:column>
 	
-	<display:column titleKey="sponsorship.status">
+	<jstl:choose>
+		<jstl:when test="${sponsorship.status eq 'ACCEPTED'}">
+			<jstl:set var="backColor" value="#42f46b"/>
+		</jstl:when>
+		<jstl:when test="${sponsorship.status eq 'PENDING'}">
+			<jstl:set var="backColor" value="#41a6f4"/>
+		</jstl:when>
+		<jstl:when test="${sponsorship.status eq 'REJECTED'}">
+			<jstl:set var="backColor" value="#f45642"/>
+		</jstl:when>
+		<jstl:when test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate < currentDate)}">
+			<jstl:set var="backColor" value="#d9baff"/>
+		</jstl:when>
+		<jstl:otherwise>
+			<jstl:set var="backColor" value="#e9f241"/>
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<display:column titleKey="sponsorship.status" style="background-color:${backColor};">
 		<jstl:choose>
 			<jstl:when test="${sponsorship.status eq 'ACCEPTED'}">
 				<spring:message code="sponsorship.status.accepted"/>

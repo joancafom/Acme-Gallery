@@ -46,7 +46,7 @@ public class CategoryAdministratorController extends AbstractController {
 
 	// Methods ----------------------------------------------------------------------------------------
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam(required = false) final Integer categoryId, @RequestParam(value = "d-5218124-p", defaultValue = "1") final Integer categoriesPage,
 		@RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer exhibitionsPage) {
@@ -64,7 +64,7 @@ public class CategoryAdministratorController extends AbstractController {
 		final Collection<Category> childrenCategories = categoriesResult.getContent();
 		final Integer categoriesSize = new Long(categoriesResult.getTotalElements()).intValue();
 
-		final Page<Exhibition> exhibitionsResult = this.exhibitionService.getByCategory(category, categoriesPage, 5);
+		final Page<Exhibition> exhibitionsResult = this.exhibitionService.getByCategory(category, exhibitionsPage, 5);
 		final Collection<Exhibition> exhibitions = exhibitionsResult.getContent();
 		final Integer exhibitionsSize = new Long(exhibitionsResult.getTotalElements()).intValue();
 

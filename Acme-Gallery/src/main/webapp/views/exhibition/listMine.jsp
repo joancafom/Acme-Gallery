@@ -35,6 +35,12 @@
 		<acme:dateFormat code="date.format" value="${exhibition.endingDate}"/>
 	</display:column>
 	
+	<display:column>
+		<jstl:if test="${now > exhibition.endingDate}">
+			<p style="color:red;"><spring:message code="exhibition.passed"/></p>
+		</jstl:if>
+	</display:column>
+	
 	<display:column titleKey="exhibition.price">
 		<acme:priceFormat code="price.format" value="${exhibition.price}"/>
 	</display:column>

@@ -29,6 +29,9 @@
 		</div>
 	</jstl:if>
 	<h2><jstl:out value="${exhibition.title}" /></h2>
+	<jstl:if test="${now > exhibition.endingDate}">
+		<h4 style="color:red;"><spring:message code="exhibition.passed"/></h4>
+	</jstl:if>
 </div>
 
 <security:authorize access="hasRole('DIRECTOR')">

@@ -38,7 +38,7 @@
 	<br>
 	<jstl:if test="${own==true}">
 		<p style="color:#1ebf59; font-size:20px;"><spring:message code="store.own"/></p>
-		<p><a href="store/director/edit.do?storeId=${store.id}"><spring:message code="store.edit"/></a> - <a href="store/director/delete.do?storeId=${store.id}"><spring:message code="store.delete"/></a></p>
+		<p><a href="store/director/edit.do?storeId=${store.id}"><spring:message code="store.edit"/></a> - <a href="store/director/delete.do?storeId=${store.id}" style="color:red;"><spring:message code="store.delete"/></a></p>
 	</jstl:if>
 </div>
 <br><br>
@@ -61,6 +61,8 @@
 		<p style="font-size:25px"><acme:priceFormat code="price.format" value="${product.price}"/></p>
 	</display:column>
 </display:table>
+
+<a href="product/director/create.do?storeId=${store.id}"><spring:message code="store.product.create"/></a>
 	
 </div>
 

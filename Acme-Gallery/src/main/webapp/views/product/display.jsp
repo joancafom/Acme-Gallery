@@ -30,7 +30,9 @@
 <div id="backToStore">
 	<a href="store/${actorWS}display.do?storeId=${product.store.id}" style="font-size:18px;"><i class="material-icons" style="font-size:16px;">arrow_back_ios</i><spring:message code="product.goBack"/></a>
 </div>
-
+	<jstl:if test="${own}">
+		<p style="color:#1ebf59; font-size:20px; text-align: center;"><spring:message code="product.own"/></p>
+	</jstl:if>
 <br><br>
 
 <div style="width: 100%;">
@@ -68,6 +70,22 @@
    		<h3><acme:priceFormat code="price.format" value="${product.price}"/></h3>
    		<br><br><br>
    		<p><spring:message code="product.barcode"/>: <jstl:out value="${product.barcode}"/></p>
+   		<br><br>
+   		<jstl:if test="${own}">
+   		<jstl:if test="${showConfirmation==false}">
+   			<a href="product/director/display.do?productId=${product.id}&deleteConfirmation=true" style="color:red; font-size:20px;"><spring:message code="product.delete"/></a>
+   		</jstl:if>
+   		<jstl:if test="${showConfirmation==true}">
+   			<form:form action="product/director/delete.do" modelAttribute="product">
+				<form:hidden path="id"/>
+	
+				<p style="color:red; font-size:20px"><spring:message code="product.delete.confirmation"/></p>
+				<br>
+				<acme:cancel url="product/director/display.do?productId=${product.id}" code="product.cancel"/>
+				<acme:cancel url="product/director/delete.do?productId=${product.id}" code="product.delete"/>
+			</form:form>
+   		</jstl:if>
+   		</jstl:if>
    </div>
 </div>
 <div style="clear:both"></div>

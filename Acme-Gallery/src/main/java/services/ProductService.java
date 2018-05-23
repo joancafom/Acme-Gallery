@@ -1,6 +1,10 @@
 
 package services;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashSet;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ProductRepository;
 import security.LoginService;
@@ -17,7 +23,7 @@ import domain.Store;
 
 @Service
 @Transactional
-public class ProductService extends ActorService {
+public class ProductService {
 
 	// Managed Repository -----------------------------------------------------------------------------
 
@@ -28,6 +34,9 @@ public class ProductService extends ActorService {
 
 	@Autowired
 	private DirectorService		directorService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	// CRUD Methods -----------------------------------------------------------------------------------
@@ -48,13 +57,66 @@ public class ProductService extends ActorService {
 		this.productRepository.delete(product);
 	}
 
+	/* v1.0 - josembell */
+	public Product create(final Store store) {
+		Assert.notNull(store);
+
+		final Product product = new Product();
+		product.setPictures(new HashSet<String>());
+		product.setStore(store);
+
+		return product;
+	}
+
+	/* v1.0 - josembell */
+	public Product save(final Product product) {
+		Assert.notNull(product);
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+		Assert.isTrue(product.getStore().getMuseum().getDirector().equals(director));
+
+		Assert.notNull(product.getPictures());
+		Assert.isTrue(!product.getPictures().isEmpty());
+		for (final String s : product.getPictures())
+			try {
+				@SuppressWarnings("unused")
+				final URL url = new java.net.URL(s);
+			} catch (final MalformedURLException e) {
+				throw new IllegalArgumentException();
+			}
+
+		return this.productRepository.save(product);
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
+	/* v1.0 - josembell */
 	public Page<Product> findAllPaginatedByStore(final Integer page, final int size, final Store store) {
 		final Page<Product> res = this.productRepository.findAllByStore(store.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	/* v1.0 - josembell */
+	public Product reconstruct(final Product prunedProduct, final BindingResult binding) {
+
+		Assert.notNull(prunedProduct);
+
+		final Product product = new Product();
+
+		if (prunedProduct.getId() == 0) {
+			product.setBarcode(prunedProduct.getBarcode());
+			product.setDescription(prunedProduct.getDescription());
+			product.setName(prunedProduct.getName());
+			product.setPictures(prunedProduct.getPictures());
+			product.setPrice(prunedProduct.getPrice());
+			product.setStore(prunedProduct.getStore());
+		}
+
+		this.validator.validate(product, binding);
+
+		return product;
 	}
 
 }

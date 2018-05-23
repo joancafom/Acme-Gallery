@@ -113,7 +113,7 @@
 
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="critic1" />
-		<property name="password" value="6ce19528a40dde9521d97cf7ba264eca" />
+		<property name="password" value="165d185050bab438668aef6faeee3be5" />
 		<property name="isLocked" value="false" />
 		<property name="authorities">
 			<list>
@@ -126,7 +126,7 @@
 
 	<bean id="userAccount8" class="security.UserAccount">
 		<property name="username" value="critic2" />
-		<property name="password" value="2693b57f0f59df94caacefb811e99851" />
+		<property name="password" value="88fc227c1f12e1f11b8b1584991c88fe" />
 		<property name="isLocked" value="false" />
 		<property name="authorities">
 			<list>
@@ -139,7 +139,7 @@
 
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="critic3" />
-		<property name="password" value="315d31e7c8f3a136610aafa220d689be" />
+		<property name="password" value="8a253092f1d177ba06d104b69a159d93" />
 		<property name="isLocked" value="false" />
 		<property name="authorities">
 			<list>
@@ -152,7 +152,7 @@
 
 	<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="critic4" />
-		<property name="password" value="5293e8663cbb7c157ff83eeae25177d3" />
+		<property name="password" value="7ca0505ccfc49a367e7e0e9340d6656d" />
 		<property name="isLocked" value="false" />
 		<property name="authorities">
 			<list>
@@ -425,7 +425,7 @@
 
 	<bean id="userAccount31" class="security.UserAccount">
 		<property name="username" value="critic5" />
-		<property name="password" value="86045e9e3b2e615d8d2484dc64b3f408" />
+		<property name="password" value="18c7b56054e6b8da311caf45bf3efd79" />
 		<property name="isLocked" value="false" />
 		<property name="authorities">
 			<list>
@@ -438,7 +438,7 @@
 
 	<bean id="userAccount32" class="security.UserAccount">
 		<property name="username" value="critic6" />
-		<property name="password" value="8c14745274135379448d482d5773ee31" />
+		<property name="password" value="e5c68eddb605466c498f1391c20ab175" />
 		<property name="isLocked" value="false" />
 		<property name="authorities">
 			<list>

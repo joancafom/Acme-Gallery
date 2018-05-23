@@ -20,4 +20,9 @@
 		<put-attribute name="body" value="/views/product/display.jsp" />
 	</definition>
 	
+	<definition name="product/edit" extends="master.page">
+		<put-attribute name="title" value="Edit a product"/>
+		<put-attribute name="body" value="/views/product/edit.jsp" />
+	</definition>
+	
 </tiles-definitions>

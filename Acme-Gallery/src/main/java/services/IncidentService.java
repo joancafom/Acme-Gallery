@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.IncidentRepository;
 import security.LoginService;
 import domain.Director;
+import domain.Guide;
 import domain.Incident;
 import domain.Museum;
 import domain.Room;
@@ -42,6 +43,21 @@ public class IncidentService {
 	// Validator --------------------------------------------------------------------------------------
 
 	// CRUD Methods -----------------------------------------------------------------------------------
+
+	// v1.0 - JA
+	public Incident create() {
+
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+
+		final Incident res = new Incident();
+
+		res.setGuide(guide);
+		res.setIsChecked(false);
+
+		return res;
+
+	}
 
 	// v1.0 - Alicia
 	public void delete(final Incident incident) {
@@ -129,14 +145,20 @@ public class IncidentService {
 		Assert.notNull(museum);
 
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
-		Assert.isTrue(director.getMuseums().contains(museum));
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+
+		Assert.isTrue(director != null || guide != null);
+
+		if (director != null)
+			Assert.isTrue(director.getMuseums().contains(museum));
+		else
+			Assert.isTrue(museum.getGuides().contains(guide));
 
 		final Page<Incident> res = this.incidentRepository.findByMuseumId(museum.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
 		return res;
 	}
-
 	// v1.0 - Alicia
 	public void check(final Incident incident) {
 		Assert.notNull(incident);

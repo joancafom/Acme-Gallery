@@ -158,6 +158,10 @@
 		<security:intercept-url pattern="/incident/director/delete.do" access="hasRole('DIRECTOR')"/>
 		<security:intercept-url pattern="/incident/director/list.do" access="hasRole('DIRECTOR')"/>
 		<security:intercept-url pattern="/incident/director/listMine.do" access="hasRole('DIRECTOR')"/>
+		<security:intercept-url pattern="/incident/guide/create.do" access="hasRole('GUIDE')"/>
+		<security:intercept-url pattern="/incident/guide/edit.do" access="hasRole('GUIDE')"/>
+		<security:intercept-url pattern="/incident/guide/list.do" access="hasRole('GUIDE')"/>
+
 		
 		<security:intercept-url pattern="/museum/display.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/museum/list.do" access="isAnonymous()" /> 

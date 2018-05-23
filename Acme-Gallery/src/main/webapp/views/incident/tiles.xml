@@ -25,5 +25,10 @@
 		<put-attribute name="title" value="Incidents" />
 		<put-attribute name="body" value="/views/incident/list.jsp" />
 	</definition>
+	
+	<definition name="incident/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit Incident" />
+		<put-attribute name="body" value="/views/incident/edit.jsp" />
+	</definition>
 		
 </tiles-definitions>

@@ -21,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
 import services.ExhibitionService;
+import services.GuideService;
 import services.MuseumService;
 import services.ReviewService;
 import controllers.AbstractController;
 import domain.Exhibition;
+import domain.Guide;
 import domain.Museum;
 import domain.Review;
 
@@ -46,6 +49,9 @@ public class MuseumGuideController extends AbstractController {
 	@Autowired
 	private ExhibitionService	exhibitionService;
 
+	@Autowired
+	private GuideService		guideService;
+
 
 	// Methods ----------------------------------------------------------------------------------------
 
@@ -58,6 +64,9 @@ public class MuseumGuideController extends AbstractController {
 		final Museum museum = this.museumService.findOne(museumId);
 		Assert.notNull(museum);
 
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+
 		//Reviews are also listed in a Museum's Profile
 		final Page<Review> pageResultR = this.reviewService.findAllByMuseum(museum, pageR, 5);
 		final Collection<Review> reviews = pageResultR.getContent();
@@ -68,17 +77,19 @@ public class MuseumGuideController extends AbstractController {
 		final Collection<Exhibition> exhibitions = pageResultE.getContent();
 		final Integer resultSizeE = new Long(pageResultE.getTotalElements()).intValue();
 
+		final Boolean worksFor = museum.getGuides().contains(guide);
+
 		res = new ModelAndView("museum/display");
 		res.addObject("museum", museum);
 		res.addObject("reviews", reviews);
 		res.addObject("resultSizeR", resultSizeR);
 		res.addObject("exhibitions", exhibitions);
 		res.addObject("resultSizeE", resultSizeE);
+		res.addObject("worksFor", worksFor);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;
 	}
-
 	// v1.0 - Alicia
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listResults(@RequestParam(value = "d-447220-p", defaultValue = "1") final Integer page) {

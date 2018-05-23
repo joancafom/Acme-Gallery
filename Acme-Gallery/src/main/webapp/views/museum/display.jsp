@@ -68,11 +68,16 @@
 		 <p><spring:message code="museum.director"/>: <a href="director/${actorWS}display.do?directorId=<jstl:out value="${museum.director.id}"/>"><jstl:out value="${museum.director.name}"/> <jstl:out value="${museum.director.surnames}"/></a></p> 
 </div>
 
+<security:authorize access="hasRole('GUIDE')">
+	<jstl:if test="${worksFor}">
+		<h3 style="text-align:center; text-decoration:underline;"><a href="incident/guide/list.do?museumId=${museum.id}"><spring:message code="museum.incidents"/></a></h3>
+	</jstl:if>
+</security:authorize>
+
 <jstl:if test="${own}">
 	<h3 style="text-align:center; text-decoration:underline;"><a href="incident/${actorWS}list.do?museumId=${museum.id}"><spring:message code="museum.incidents"/></a></h3>
 	<h3 style="text-align:center; text-decoration:underline;"><a href="room/${actorWS}list.do?museumId=${museum.id}"><spring:message code="museum.rooms"/></a></h3>
 	<h3 style="text-align:center; text-decoration:underline;"><a href="group/${actorWS}list.do?museumId=${museum.id}"><spring:message code="museum.groups"/></a></h3>
-	
 </jstl:if>
 
 <div id="mExhibitions" class="info">

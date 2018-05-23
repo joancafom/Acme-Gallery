@@ -18,6 +18,7 @@ import repositories.RoomRepository;
 import security.LoginService;
 import domain.Director;
 import domain.Exhibition;
+import domain.Guide;
 import domain.Incident;
 import domain.Museum;
 import domain.Room;
@@ -35,6 +36,9 @@ public class RoomService extends ActorService {
 
 	@Autowired
 	private DirectorService		directorService;
+
+	@Autowired
+	private GuideService		guideService;
 
 	@Autowired
 	private ExhibitionService	exhibitionService;
@@ -153,11 +157,19 @@ public class RoomService extends ActorService {
 	}
 
 	// v1.0 - Alicia
+	// v2.0 - JA
 	public Collection<Room> getByMuseum(final Museum museum) {
 		Assert.notNull(museum);
 
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
-		Assert.isTrue(director.getMuseums().contains(museum));
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+
+		Assert.isTrue(director != null || guide != null);
+
+		if (director != null)
+			Assert.isTrue(director.getMuseums().contains(museum));
+		else
+			Assert.isTrue(museum.getGuides().contains(guide));
 
 		final Collection<Room> res = this.roomRepository.findByMuseumId(museum.getId());
 		Assert.notNull(res);

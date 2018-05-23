@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 
 import repositories.GuideRepository;
 import security.LoginService;
+import security.UserAccount;
 import domain.Administrator;
 import domain.Exhibition;
 import domain.Guide;
@@ -83,6 +84,14 @@ public class GuideService extends ActorService {
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	// v1.0 - JA
+	public Guide findByUserAccount(final UserAccount userAccount) {
+
+		Assert.notNull(userAccount);
+
+		return super.findByUserAccount(userAccount, Guide.class);
 	}
 
 	// v1.0 - Alicia

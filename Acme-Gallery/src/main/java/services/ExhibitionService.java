@@ -326,7 +326,11 @@ public class ExhibitionService {
 				res.setVersion(oldExhibition.getVersion());
 			}
 
-			res.setTicker(tickerPrefix + prunedExhibition.getTicker());
+			if (prunedExhibition.getId() == 0)
+				res.setTicker(tickerPrefix + prunedExhibition.getTicker());
+			else if (oldExhibition != null && oldExhibition.getDayPasses().isEmpty())
+				res.setTicker(oldExhibition.getTicker());
+
 			res.setTitle(prunedExhibition.getTitle());
 			res.setDescription(prunedExhibition.getDescription());
 			res.setStartingDate(prunedExhibition.getStartingDate());

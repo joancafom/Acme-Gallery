@@ -124,7 +124,7 @@ public class GuideService extends ActorService {
 	public Collection<Guide> getNotWorkingInExhibition(final Exhibition exhibition) {
 		Assert.notNull(exhibition);
 
-		final Collection<Guide> res = this.guideRepository.findNotWorkingInExhibition(exhibition);
+		final Collection<Guide> res = this.guideRepository.findByMuseumIdNotInExhibition(exhibition.getRoom().getMuseum().getId(), exhibition);
 		Assert.notNull(res);
 
 		return res;

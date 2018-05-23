@@ -63,7 +63,9 @@
 	<!-- Inputs -->
 	<br/>
 	
+	<jstl:if test="${exhibition.id eq 0}">
 	<acme:textbox code="exhibition.ticker" path="ticker"/><br/>
+	</jstl:if>
 	<acme:textbox code="exhibition.title" path="title"/><br/>
 	<acme:textarea code="exhibition.description" path="description"/><br/>
 	
@@ -123,7 +125,7 @@
 	
 	</jstl:if>
 	
-	<jstl:if test="${exhibition.id ne 0 and not empty exhibition.dayPasses}">
+	<jstl:if test="${not empty exhibition.dayPasses}">
 	
 	<!-- Inputs -->
 	<br/>

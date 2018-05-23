@@ -72,6 +72,8 @@
 		<security:intercept-url pattern="/critique/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/critique/director/display.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/critique/guide/display.do" access="hasRole('GUIDE')" />
+		<security:intercept-url pattern="/critique/critic/create.do" access="hasRole('CRITIC')" />
+		<security:intercept-url pattern="/critique/critic/edit.do" access="hasRole('CRITIC')" />
 		<security:intercept-url pattern="/critique/critic/display.do" access="hasRole('CRITIC')" />
 		<security:intercept-url pattern="/critique/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/critique/visitor/display.do" access="hasRole('VISITOR')" />

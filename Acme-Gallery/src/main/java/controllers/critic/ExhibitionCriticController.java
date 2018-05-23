@@ -21,13 +21,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
 import services.ArtworkService;
+import services.CriticService;
 import services.CritiqueService;
 import services.ExhibitionService;
 import services.GuideService;
 import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Artwork;
+import domain.Critic;
 import domain.Critique;
 import domain.Exhibition;
 import domain.Guide;
@@ -52,6 +55,9 @@ public class ExhibitionCriticController extends AbstractController {
 
 	@Autowired
 	private GuideService		guideService;
+
+	@Autowired
+	private CriticService		criticService;
 
 	@Autowired
 	private SponsorshipService	sponsorshipService;
@@ -87,6 +93,13 @@ public class ExhibitionCriticController extends AbstractController {
 		//We must display the current sponsorship, if any
 		final Sponsorship currentSponsorship = this.sponsorshipService.findCurrentByExhibition(exhibition);
 
+		final Critic currentCritic = this.criticService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentCritic);
+
+		//Check if she or he has already a critique
+		final Critique oldCritique = this.critiqueService.findByCriticAndExhibition(currentCritic, exhibition);
+		final Boolean canCreateCritic = oldCritique == null ? true : false;
+
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);
 		res.addObject("artworks", artworks);
@@ -96,6 +109,7 @@ public class ExhibitionCriticController extends AbstractController {
 		res.addObject("guides", guides);
 		res.addObject("resultSizeG", resultSizeG);
 		res.addObject("ad", currentSponsorship);
+		res.addObject("canCreateCritic", canCreateCritic);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

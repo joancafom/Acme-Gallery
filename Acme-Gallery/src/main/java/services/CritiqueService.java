@@ -11,9 +11,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CritiqueRepository;
 import security.LoginService;
+import domain.Critic;
 import domain.Critique;
 import domain.Director;
 import domain.Exhibition;
@@ -35,10 +38,33 @@ public class CritiqueService {
 	@Autowired
 	private CriticService		criticService;
 
-
 	// Validator --------------------------------------------------------------------------------------
 
+	@Autowired
+	private Validator			validator;
+
+
 	// CRUD Methods -----------------------------------------------------------------------------------
+
+	//v1.0 - JA
+	public Critique create(final Exhibition exhibition) {
+
+		Assert.notNull(exhibition);
+
+		final Critic currentCritic = this.criticService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentCritic);
+
+		final Date now = new Date();
+		Assert.isTrue(now.before(exhibition.getStartingDate()));
+
+		final Critique res = new Critique();
+
+		res.setExhibition(exhibition);
+		res.setCritic(currentCritic);
+		res.setCreationDate(now);
+
+		return res;
+	}
 
 	// v1.0 - Alicia
 	public void delete(final Critique critique) {
@@ -84,8 +110,12 @@ public class CritiqueService {
 
 	// v1.0 - Alicia
 	public Critique save(final Critique critique) {
+
+		Assert.notNull(critique);
+
 		return this.critiqueRepository.save(critique);
 	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	// v1.0 - JA
@@ -106,6 +136,61 @@ public class CritiqueService {
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	// v1.0 - JA
+	public Critique findByCriticAndExhibition(final Critic critic, final Exhibition exhibition) {
+
+		Assert.notNull(critic);
+		Assert.notNull(exhibition);
+
+		return this.critiqueRepository.findByCriticIdAndExhibitionId(critic.getId(), exhibition.getId());
+	}
+
+	//v1.0 - Implemented by JA
+	public Critique reconstructCreate(final Critique prunedCritique, final BindingResult binding) {
+
+		Assert.notNull(prunedCritique);
+		Assert.notNull(prunedCritique.getExhibition());
+
+		final Critique res = this.create(prunedCritique.getExhibition());
+
+		res.setTitle(prunedCritique.getTitle());
+		res.setDescription(prunedCritique.getDescription());
+		res.setScore(prunedCritique.getScore());
+
+		final Critic currentCritic = this.criticService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentCritic);
+
+		//Check that it does not have a critique already
+		Assert.isNull(this.findByCriticAndExhibition(currentCritic, prunedCritique.getExhibition()));
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	public Critique saveCreate(final Critique critique) {
+
+		Assert.notNull(critique);
+		Assert.isTrue(critique.getId() == 0);
+		Assert.notNull(critique.getExhibition());
+
+		final Critic currentCritic = this.criticService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentCritic);
+
+		Assert.isTrue(currentCritic.equals(critique.getCritic()));
+
+		//Assert the exhibition has not passed
+		final Date now = new Date();
+		Assert.notNull(critique.getExhibition());
+		Assert.isTrue(now.before(critique.getExhibition().getStartingDate()));
+
+		//Assert that she or he does not already have a critique
+		Assert.isNull(this.findByCriticAndExhibition(currentCritic, critique.getExhibition()));
+
+		return this.critiqueRepository.save(critique);
 	}
 
 }

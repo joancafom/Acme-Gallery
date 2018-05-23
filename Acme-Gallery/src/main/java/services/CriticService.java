@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 
 import repositories.CriticRepository;
 import security.LoginService;
+import security.UserAccount;
 import domain.Administrator;
 import domain.Critic;
 import domain.Critique;
@@ -52,6 +53,13 @@ public class CriticService extends ActorService {
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------
+
+	//v1.0 - Implemented by JA
+	public Critic findByUserAccount(final UserAccount userAccount) {
+		Assert.notNull(userAccount);
+
+		return super.findByUserAccount(userAccount, Critic.class);
+	}
 
 	// v1.0 - Alicia
 	public Critic reconstructRegisterForm(final ActorRegistrationForm actorRegistrationForm, final BindingResult binding) {

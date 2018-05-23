@@ -134,6 +134,13 @@
 			</jstl:forEach>
 		</display:column>
 	</display:table>
+	<security:authorize access="hasRole('CRITIC')">
+		<jstl:if test="${now < exhibition.startingDate and canCreateCritic}">
+			<br>
+			<br>
+			<a href="critique/critic/create.do?exhibitionId=${exhibition.id}"><spring:message code="critique.create"/></a>
+		</jstl:if>
+</security:authorize>
 </div>
 
 <div id="eGuides" class="info">

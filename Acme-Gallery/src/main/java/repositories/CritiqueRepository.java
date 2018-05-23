@@ -22,4 +22,8 @@ public interface CritiqueRepository extends JpaRepository<Critique, Integer> {
 	@Query("select c from Critique c where c.exhibition.id = ?1")
 	Page<Critique> findAllByExhibitionId(int exhibitionId, Pageable pageable);
 
+	// v1.0 - JA
+	@Query("select c from Critique c where c.critic.id = ?1 and c.exhibition.id = ?2")
+	Critique findByCriticIdAndExhibitionId(final int criticId, final int exhibitionId);
+
 }

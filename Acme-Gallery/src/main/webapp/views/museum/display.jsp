@@ -35,7 +35,7 @@
 		<p><jstl:out value="${museum.slogan}" /></p>
 	</jstl:if>
 	<jstl:if test="${museum.store ne null}">
-		<p><a href="store/${actorWS}display.do?storeId=<jstl:out value="${museum.store.id}"/>"><img src="https://image.freepik.com/iconos-gratis/cesta-de-la-compra-de-diseno-a-cuadros_318-50865.jpg" style="max-width:50px;"></a></p>
+		<p><a href="store/${actorWS}display.do?storeId=<jstl:out value="${museum.store.id}"/>"><img src="https://cdn3.iconfinder.com/data/icons/shopping-solid-icons-vol-1/64/001-512.png" style="max-width:50px;"></a></p>
 	</jstl:if>
 	<jstl:if test="${museum.store ==null}">
 		<jstl:if test="${own}">

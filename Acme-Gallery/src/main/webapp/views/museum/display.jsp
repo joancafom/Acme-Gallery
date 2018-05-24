@@ -132,6 +132,9 @@
 			</display:column>
 		</security:authorize>
 	</display:table>
+	<jstl:if test="${alreadyVisited==true}">
+		<a href="review/visitor/create.do?museumId=${museum.id}"><spring:message code="review.create"/></a>
+	</jstl:if>
 	
 </div>
 

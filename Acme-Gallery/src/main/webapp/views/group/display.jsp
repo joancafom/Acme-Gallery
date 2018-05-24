@@ -74,6 +74,9 @@
 		<p><jstl:out value="${announcement.description}"/></p>
 	</display:column>
 </display:table>
+<jstl:if test="${ own}">
+	<a href="announcement/visitor/create.do?groupId=${group.id}"><spring:message code="announcement.create"/></a>
+</jstl:if>
 </div>
 <br><br>
 

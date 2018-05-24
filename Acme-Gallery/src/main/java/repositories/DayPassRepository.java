@@ -22,4 +22,7 @@ public interface DayPassRepository extends JpaRepository<DayPass, Integer> {
 	@Query("select dp from DayPass dp where dp.visitor.id = ?1")
 	Page<DayPass> findByVisitorId(int visitorId, Pageable pageable);
 
+	@Query("select dp from DayPass dp where dp.visitor.id = ?2 and dp.museum.id=?1")
+	Collection<DayPass> findAllByMuseumAndPrincipal(int museumId, int visitorId);
+
 }

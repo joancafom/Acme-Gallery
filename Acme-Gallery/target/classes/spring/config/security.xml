@@ -51,7 +51,10 @@
 		
 		<security:intercept-url pattern="/announcement/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/announcement/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
-		
+		<security:intercept-url pattern="/announcement/visitor/create.do" access="hasRole('VISITOR')" />
+		<security:intercept-url pattern="/announcement/visitor/edit.do" access="hasRole('VISITOR')" />	
+		<security:intercept-url pattern="/announcement/visitor/stream.do" access="hasRole('VISITOR')" />	
+			
 		<security:intercept-url pattern="/category/display.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/category/administrator/display.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/category/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
@@ -132,9 +135,13 @@
 		
 		<security:intercept-url pattern="/group/visitor/join.do" access="hasRole('VISITOR')"/>
 		<security:intercept-url pattern="/group/visitor/list.do" access="hasRole('VISITOR')"/>
+		<security:intercept-url pattern="/group/visitor/listJoined.do" access="hasRole('VISITOR')"/>
+		<security:intercept-url pattern="/group/visitor/listCreated.do" access="hasRole('VISITOR')"/>
 		<security:intercept-url pattern="/group/visitor/delete.do" access="hasRole('VISITOR')"/>
 		<security:intercept-url pattern="/group/visitor/display.do" access="hasRole('VISITOR')"/>
 		<security:intercept-url pattern="/group/visitor/quit.do" access="hasRole('VISITOR')"/>
+		<security:intercept-url pattern="/group/visitor/create.do" access="hasRole('VISITOR')"/>
+		<security:intercept-url pattern="/group/visitor/edit.do" access="hasRole('VISITOR')"/>
 		
 		<security:intercept-url pattern="/group/director/list.do" access="hasRole('DIRECTOR')"/>
 		<security:intercept-url pattern="/group/director/display.do" access="hasRole('DIRECTOR')"/>
@@ -198,6 +205,8 @@
 
 		<security:intercept-url pattern="/review/administrator/listTaboo.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/review/administrator/delete.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/review/visitor/create.do" access="hasRole('VISITOR')" />
+		<security:intercept-url pattern="/review/visitor/edit.do" access="hasRole('VISITOR')" />
 
 		<security:intercept-url pattern="/room/director/create.do" access="hasRole('DIRECTOR')" />
 		<security:intercept-url pattern="/room/director/delete.do" access="hasRole('DIRECTOR')" />

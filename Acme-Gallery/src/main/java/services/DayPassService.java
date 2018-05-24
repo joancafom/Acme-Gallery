@@ -221,4 +221,11 @@ public class DayPassService {
 		return res;
 	}
 
+	/* v1.0 - josembell */
+	public Collection<DayPass> findAllByMuseumAndPrincipal(final Museum museum) {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		return this.dayPassRepository.findAllByMuseumAndPrincipal(museum.getId(), visitor.getId());
+	}
+
 }

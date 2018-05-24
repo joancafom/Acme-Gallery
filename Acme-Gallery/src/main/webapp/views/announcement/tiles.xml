@@ -21,4 +21,14 @@
 		<put-attribute name="body" value="/views/announcement/list.jsp" />
 	</definition>
 	
+	<definition name="announcement/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit an announcement" />
+		<put-attribute name="body" value="/views/announcement/edit.jsp" />
+	</definition>
+	
+	<definition name="announcement/stream" extends="master.page">	
+		<put-attribute name="title" value="Announcements" />
+		<put-attribute name="body" value="/views/announcement/stream.jsp" />
+	</definition>
+	
 </tiles-definitions>

@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -10,28 +11,77 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ReviewRepository;
 import security.LoginService;
 import domain.Administrator;
+import domain.DayPass;
 import domain.Museum;
 import domain.Review;
+import domain.Visitor;
 
 @Service
 @Transactional
-public class ReviewService extends ActorService {
+public class ReviewService {
 
 	//Managed Repository
 	@Autowired
-	private ReviewRepository		reviewRepository;
+	private ReviewRepository			reviewRepository;
 
 	//Supporting Services
 	@Autowired
-	private AdministratorService	adminService;
+	private AdministratorService		adminService;
+
+	@Autowired
+	private VisitorService				visitorService;
+
+	@Autowired
+	private DayPassService				dayPassService;
+
+	@Autowired
+	private SystemConfigurationService	sysConfigService;
+
+	@Autowired
+	private Validator					validator;
 
 
 	//CRUD Methods
 
+	/* v1.0 - josembell */
+	public Review create(final Museum museum) {
+		Assert.notNull(museum);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		final Review review = new Review();
+		review.setMuseum(museum);
+		review.setVisitor(visitor);
+		review.setContainsTaboo(false);
+
+		return review;
+	}
+
+	/* v1.0 - josembell */
+	public Review saveCreate(final Review review) {
+		Assert.notNull(review);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		final Collection<DayPass> dayPassesByVisitor = this.dayPassService.findAllByMuseumAndPrincipal(review.getMuseum());
+		Assert.isTrue(dayPassesByVisitor.isEmpty() == false);
+
+		review.setCreationDate(new Date(System.currentTimeMillis() - 1000));
+		final Boolean containsTaboo = this.sysConfigService.containsTaboo(review.getBody());
+		review.setContainsTaboo(containsTaboo);
+
+		final Review saved = this.reviewRepository.save(review);
+		visitor.getReviews().add(saved);
+		this.visitorService.save(visitor);
+
+		return saved;
+	}
 	// v1.0 - JA
 	public Review save(final Review review) {
 		Assert.notNull(review);
@@ -97,4 +147,23 @@ public class ReviewService extends ActorService {
 		return this.reviewRepository.findNotTabooed(new PageRequest(page - 1, size));
 	}
 
+	/* v1.0 - josembell */
+	public Review reconstruct(final Review prunedReview, final BindingResult binding) {
+		Assert.notNull(prunedReview);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		Review review = new Review();
+
+		if (prunedReview.getId() == 0) {
+			review = prunedReview;
+			review.setCreationDate(new Date(System.currentTimeMillis() - 1000));
+			review.setVisitor(visitor);
+			review.setContainsTaboo(false);
+		}
+
+		this.validator.validate(review, binding);
+
+		return review;
+	}
 }

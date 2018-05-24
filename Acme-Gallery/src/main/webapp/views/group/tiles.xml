@@ -36,4 +36,6 @@
 		<put-attribute name="body" value="/views/group/edit.jsp" />
 	</definition>
 	
+	
+	
 </tiles-definitions>

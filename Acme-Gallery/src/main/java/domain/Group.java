@@ -60,6 +60,7 @@ public class Group extends DomainEntity {
 	}
 
 	@Min(1)
+	@NotNull
 	public Integer getMaxParticipants() {
 		return this.maxParticipants;
 	}

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AnnouncementRepository;
 import security.LoginService;
@@ -27,26 +29,57 @@ public class AnnouncementService {
 	// Managed Repository -----------------------------------------------------------------------------
 
 	@Autowired
-	private AnnouncementRepository	announcementRepository;
+	private AnnouncementRepository		announcementRepository;
 
 	// Supporting Services ----------------------------------------------------------------------------
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private AdministratorService		administratorService;
 
 	@Autowired
-	private GroupService			groupService;
+	private GroupService				groupService;
 
 	@Autowired
-	private VisitorService			visitorService;
+	private VisitorService				visitorService;
 
 	@Autowired
-	private DirectorService			directorService;
+	private DirectorService				directorService;
+
+	@Autowired
+	private Validator					validator;
+
+	@Autowired
+	private SystemConfigurationService	sysConfigService;
 
 
 	// Validator --------------------------------------------------------------------------------------
 
 	// CRUD Methods -----------------------------------------------------------------------------------
+
+	/* v1.0 - josembell */
+	public Announcement create(final Group group) {
+		Assert.notNull(group);
+
+		final Announcement announcement = new Announcement();
+		announcement.setGroup(group);
+
+		return announcement;
+	}
+
+	/* v1.0 - josembell */
+	public Announcement saveCreate(final Announcement announcement) {
+		Assert.notNull(announcement);
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		Assert.isTrue(announcement.getGroup().getCreator().equals(visitor));
+
+		announcement.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
+
+		final Boolean result = this.sysConfigService.containsTaboo(announcement.getTitle() + announcement.getDescription());
+		announcement.setContainsTaboo(result);
+
+		return this.announcementRepository.save(announcement);
+	}
 
 	// v1.0 - JA
 	public Announcement findOne(final int announcementId) {
@@ -192,4 +225,30 @@ public class AnnouncementService {
 
 		return res;
 	}
+
+	/* v1.0 - josembell */
+	public Announcement reconstruct(final Announcement prunedAnnouncement, final BindingResult binding) {
+
+		Assert.notNull(prunedAnnouncement);
+
+		Announcement announcement = new Announcement();
+
+		if (prunedAnnouncement.getId() == 0) {
+			announcement = prunedAnnouncement;
+			announcement.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
+			announcement.setContainsTaboo(false);
+		}
+
+		this.validator.validate(announcement, binding);
+
+		return announcement;
+	}
+
+	/* v1.0 - josembell */
+	public Page<Announcement> getStreamByPrincipal(final Integer page, final int size) {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		return this.announcementRepository.getStreamByPrincipal(visitor.getId(), new PageRequest(page - 1, size));
+	}
+
 }

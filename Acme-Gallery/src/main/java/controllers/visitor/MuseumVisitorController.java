@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.DayPassService;
 import services.ExhibitionService;
 import services.MuseumService;
 import services.ReviewService;
 import controllers.AbstractController;
+import domain.DayPass;
 import domain.Exhibition;
 import domain.Museum;
 import domain.Review;
@@ -46,10 +48,14 @@ public class MuseumVisitorController extends AbstractController {
 	@Autowired
 	private ExhibitionService	exhibitionService;
 
+	@Autowired
+	private DayPassService		dayPassService;
+
 
 	// Methods ----------------------------------------------------------------------------------------
 
 	//v1.0 - Implemented by JA
+	/* v2.0 - josembell -> DayPass Control */
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int museumId, @RequestParam(value = "d-447218-p", defaultValue = "1") final Integer pageR, @RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer pageE) {
 
@@ -75,6 +81,10 @@ public class MuseumVisitorController extends AbstractController {
 		res.addObject("exhibitions", exhibitions);
 		res.addObject("resultSizeE", resultSizeE);
 		res.addObject("actorWS", this.ACTOR_WS);
+
+		final Collection<DayPass> dayPasses = this.dayPassService.findAllByMuseumAndPrincipal(museum);
+		if (dayPasses.isEmpty() == false)
+			res.addObject("alreadyVisited", true);
 
 		return res;
 	}

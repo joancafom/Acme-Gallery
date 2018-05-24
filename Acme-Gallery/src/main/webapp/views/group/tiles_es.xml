@@ -35,5 +35,6 @@
 		<put-attribute name="title" value="Editar un grupo" />
 		<put-attribute name="body" value="/views/group/edit.jsp" />
 	</definition>
+
 	
 </tiles-definitions>

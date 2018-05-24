@@ -54,6 +54,9 @@
 		<display:column>
 			<a href="museum/director/edit.do?museumId=${museum.id}"><spring:message code="museum.edit"/></a>
 		</display:column>
+		<display:column>
+			<a href="museum/director/addGuide.do?museumId=${museum.id}"><spring:message code="museum.addGuide"/></a>
+		</display:column>
 	</jstl:if>
 </security:authorize>
 

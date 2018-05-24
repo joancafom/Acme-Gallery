@@ -27,4 +27,8 @@ public interface GuideRepository extends JpaRepository<Guide, Integer> {
 	@Query("select g from Guide g, Museum m where m.id = ?1 and g member of m.guides and ?2 not member of g.exhibitions")
 	Collection<Guide> findByMuseumIdNotInExhibition(int museumId, Exhibition exhibition);
 
+	// v1.0 - JA
+	@Query("select g from Guide g, Museum m where m.id = ?1 and g not member of m.guides")
+	Collection<Guide> findNotWorkingByMuseumId(int museumId);
+
 }

@@ -84,6 +84,48 @@ public class ArtworkGuideController extends AbstractController {
 	}
 
 	/* v1.0 - josembell */
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int artworkId) {
+		final ModelAndView result;
+		final Artwork artwork = this.artworkService.findOne(artworkId);
+		Assert.notNull(artwork);
+
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+
+		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(artwork.getIsFinal() == false);
+
+		result = this.createEditModelAndView(artwork);
+
+		return result;
+	}
+
+	/* v1.0 - josembell */
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int artworkId) {
+		final ModelAndView result;
+		final Artwork artwork = this.artworkService.findOne(artworkId);
+		Assert.notNull(artwork);
+
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+
+		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(artwork.getIsFinal() == false);
+
+		result = new ModelAndView("redirect:/exhibition/guide/display.do?exhibitionId=" + artwork.getExhibition().getId());
+
+		try {
+			this.artworkService.delete(artwork);
+		} catch (final Throwable oops) {
+			result.addObject("message", "artwork.commit.error");
+
+		}
+
+		return result;
+	}
+	/* v1.0 - josembell */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Artwork prunedArtwork, final int exhibitionId, final BindingResult binding) {
 		ModelAndView res = null;
@@ -99,7 +141,7 @@ public class ArtworkGuideController extends AbstractController {
 		else
 			try {
 				final Artwork saved = this.artworkService.save(artwork);
-				res = new ModelAndView("redirect:/museum/guide/display.do?museumId=" + saved.getExhibition().getRoom().getMuseum().getId());
+				res = new ModelAndView("redirect:/exhibition/guide/display.do?exhibitionId=" + saved.getExhibition().getId());
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(artwork, "artwork.commit.error");
 			}

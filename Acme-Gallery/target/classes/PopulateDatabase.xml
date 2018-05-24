@@ -2466,8 +2466,8 @@
 				</value>
 			</list>
 		</property>
-		<property name="isPrivate" value="false" />
-		<property name="price" value="0.00" />
+		<property name="isPrivate" value="true" />
+		<property name="price" value="10.00" />
 
 		<property name="room" ref="room3" />
 		<property name="dayPasses">
@@ -2837,8 +2837,8 @@
 				<value>https://www.madametussauds.com/</value>
 			</list>
 		</property>
-		<property name="isPrivate" value="false" />
-		<property name="price" value="0.00" />
+		<property name="isPrivate" value="true" />
+		<property name="price" value="29.00" />
 
 		<property name="room" ref="room18" />
 		<property name="dayPasses">

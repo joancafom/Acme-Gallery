@@ -31,6 +31,7 @@
 		<acme:textbox code="announcement.description" path="description"/><br>
 		<acme:textbox code="announcement.picture" path="picture"/><br>
 	
-		<acme:cancel url="group/visitor/display.do?groupId=${group.id}" code="announcement.cancel"/>	
 		<acme:submit name="save" code="announcement.save"/>
+		<acme:cancel url="group/visitor/display.do?groupId=${group.id}" code="announcement.cancel"/>	
+		
 	</form:form>

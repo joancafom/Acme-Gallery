@@ -113,6 +113,14 @@
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>
+		<security:authorize access="hasRole('GUIDE')">
+			<display:column>
+				<jstl:if test="${artwork.isFinal==false}">
+				<a href="artwork/guide/edit.do?artworkId=${artwork.id}"><spring:message code="artwork.edit"/></a>
+				<a href="artwork/guide/delete.do?artworkId=${artwork.id}" style="color:red;"><spring:message code="artwork.delete"/></a>
+				</jstl:if>
+			</display:column>
+		</security:authorize>
 	</display:table>
 	<jstl:if test="${worksIn==true}">
 		<a href="artwork/guide/create.do?exhibitionId=${exhibition.id}"><spring:message code="artwork.create"/></a>

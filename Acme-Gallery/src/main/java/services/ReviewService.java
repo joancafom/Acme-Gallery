@@ -76,6 +76,8 @@ public class ReviewService {
 		final Boolean containsTaboo = this.sysConfigService.containsTaboo(review.getBody());
 		review.setContainsTaboo(containsTaboo);
 
+		Assert.isTrue(review.getScore() % 1 == 0);
+
 		final Review saved = this.reviewRepository.save(review);
 		visitor.getReviews().add(saved);
 		this.visitorService.save(visitor);

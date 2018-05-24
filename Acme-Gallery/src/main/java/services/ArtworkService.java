@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -65,8 +66,12 @@ public class ArtworkService {
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
 		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(artwork.getYear() % 1 == 0);
 		if (artwork.getId() != 0)
 			Assert.isTrue(artwork.getIsFinal() == false);
+
+		final Integer yearOfNow = LocalDate.now().getYear();
+		Assert.isTrue(artwork.getYear() <= yearOfNow);
 
 		final Artwork saved = this.artworkRepository.save(artwork);
 		artwork.getExhibition().getArtworks().add(saved);
@@ -74,6 +79,19 @@ public class ArtworkService {
 
 		return saved;
 	}
+
+	/* v1.0 - josembell */
+	public void delete(final Artwork artwork) {
+		Assert.notNull(artwork);
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(artwork.getIsFinal() == false);
+
+		this.artworkRepository.delete(artwork);
+
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	// v1.0 - JA

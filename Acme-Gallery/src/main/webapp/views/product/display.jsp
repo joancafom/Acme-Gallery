@@ -41,7 +41,7 @@
   		<div id="myCarousel" class="carousel slide" data-ride="carousel">
     	<div class="carousel-inner">
       		<div class="item active">
-       			 <img src="${product.pictures[0]}" alt="Los Angeles" style="width:100%;">
+       			 <img src="${product.pictures[0]}" style="width:100%;">
       		</div>
       
       		<jstl:forEach items="${product.pictures}" var="picture" begin="1">
@@ -81,8 +81,9 @@
 	
 				<p style="color:red; font-size:20px"><spring:message code="product.delete.confirmation"/></p>
 				<br>
-				<acme:cancel url="product/director/display.do?productId=${product.id}" code="product.cancel"/>
 				<acme:cancel url="product/director/delete.do?productId=${product.id}" code="product.delete"/>
+				<acme:cancel url="product/director/display.do?productId=${product.id}" code="product.cancel"/>
+				
 			</form:form>
    		</jstl:if>
    		</jstl:if>

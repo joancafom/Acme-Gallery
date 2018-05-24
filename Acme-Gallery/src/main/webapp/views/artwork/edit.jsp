@@ -43,7 +43,8 @@
 		<form:errors cssClass="errors" path="isHighlight"/><br><br>
 		
 		<br>
-		<acme:cancel url="exhibition/guide/display.do?exhibitionId=${exhibition.id}" code="artwork.cancel"/>
 		<acme:submit name="save" code="artwork.save"/>
+		<acme:cancel url="exhibition/guide/display.do?exhibitionId=${exhibition.id}" code="artwork.cancel"/>
+		
 	</form:form>
 

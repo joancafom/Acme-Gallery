@@ -29,16 +29,17 @@
 		
 		<acme:textbox code="store.name" path="name"/><br>
 		<acme:textbox code="store.logo" path="logo"/><br>
-		<acme:textbox code="store.phoneNumber" path="phoneNumber"/><br>
+		<acme:textbox code="store.phoneNumber" path="phoneNumber" placeholder="(+)333333333"/><br>
 		<acme:textbox code="store.email" path="email"/>
 		<br>
+		
+		<acme:submit name="save" code="store.save"/>
 		<jstl:if test="${store.id==0}">
 			<acme:cancel url="museum/director/display.do?museumId=${museum.id}" code="store.cancel"/>
 		</jstl:if>
 		<jstl:if test="${store.id!=0}">
 			<acme:cancel url="store/director/display.do?storeId=${store.id}" code="store.cancel"/>
 		</jstl:if>
-		<acme:submit name="save" code="store.save"/>
 	</form:form>
 </jstl:if>
 <jstl:if test="${toDelete==true }">
@@ -49,9 +50,11 @@
 	
 		<p style="color:red; font-size:20px"><spring:message code="store.delete.confirmation"/></p>
 		<br>
+		
+		<acme:submit name="delete" code="store.delete"/>
 		<jstl:if test="${store.id!=0}">
 			<acme:cancel url="store/director/display.do?storeId=${store.id}" code="store.cancel"/>
 		</jstl:if>
-		<acme:submit name="delete" code="store.delete"/>
+		
 	</form:form>
 </jstl:if>

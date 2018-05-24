@@ -43,7 +43,8 @@
 		</form:select>
 		<form:errors cssClass="error" path="museum"/>
 		<br><br>
-		<acme:cancel url="group/visitor/list.do" code="group.cancel"/>
 		<acme:submit name="save" code="group.save"/>
+		<acme:cancel url="group/visitor/list.do" code="group.cancel"/>
+		
 	</form:form>
 

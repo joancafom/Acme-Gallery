@@ -30,9 +30,10 @@
 		<acme:textbox code="product.description" path="description"/><br>
 		<acme:textarea code="product.pictures" path="pictures"/><br>
 		<acme:textbox code="product.price" path="price"/><br>
-		<acme:textbox code="product.barcode" path="barcode"/>
+		<acme:textbox code="product.barcode" path="barcode" placeholder="3333333333333"/>
 		<br>
-		<acme:cancel url="store/director/display.do?storeId=${store.id}" code="product.cancel"/>
 		<acme:submit name="save" code="product.save"/>
+		<acme:cancel url="store/director/display.do?storeId=${store.id}" code="product.cancel"/>
+		
 	</form:form>
 

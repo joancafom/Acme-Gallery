@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
 import services.ArtworkService;
 import services.CritiqueService;
 import services.ExhibitionService;
@@ -60,6 +61,7 @@ public class ExhibitionGuideController extends AbstractController {
 	// Methods ----------------------------------------------------------------------------------------
 
 	//v1.0 - Implemented by JA
+	/* v2.0 - josembell -> Guide artworks */
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-1332818-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-3999872-p", defaultValue = "1") final Integer pageC, @RequestParam(
 		value = "d-148442-p", defaultValue = "1") final Integer pageG) {
@@ -97,6 +99,11 @@ public class ExhibitionGuideController extends AbstractController {
 		res.addObject("resultSizeG", resultSizeG);
 		res.addObject("ad", currentSponsorship);
 		res.addObject("actorWS", this.ACTOR_WS);
+
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+		if (exhibition.getRoom().getMuseum().getGuides().contains(guide))
+			res.addObject("worksIn", true);
 
 		return res;
 	}

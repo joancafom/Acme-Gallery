@@ -10,10 +10,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ArtworkRepository;
+import security.LoginService;
 import domain.Artwork;
 import domain.Exhibition;
+import domain.Guide;
 
 @Service
 @Transactional
@@ -24,8 +28,17 @@ public class ArtworkService {
 	@Autowired
 	private ArtworkRepository	artworkRepository;
 
-
 	// Supporting Services ----------------------------------------------------------------------------
+
+	@Autowired
+	private Validator			validator;
+
+	@Autowired
+	private GuideService		guideService;
+
+	@Autowired
+	private ExhibitionService	exhibitionService;
+
 
 	// Validator --------------------------------------------------------------------------------------
 
@@ -36,6 +49,31 @@ public class ArtworkService {
 		return this.artworkRepository.findOne(artworkId);
 	}
 
+	/* v1.0 - josembell */
+	public Artwork create(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+		final Artwork artwork = new Artwork();
+
+		artwork.setExhibition(exhibition);
+
+		return artwork;
+	}
+
+	/* v1.0 - josembell */
+	public Artwork save(final Artwork artwork) {
+		Assert.notNull(artwork);
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(guide);
+		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		if (artwork.getId() != 0)
+			Assert.isTrue(artwork.getIsFinal() == false);
+
+		final Artwork saved = this.artworkRepository.save(artwork);
+		artwork.getExhibition().getArtworks().add(saved);
+		this.exhibitionService.save(saved.getExhibition());
+
+		return saved;
+	}
 	//Other Business Methods --------------------------------------------------------------------------
 
 	// v1.0 - JA
@@ -76,6 +114,19 @@ public class ArtworkService {
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	/* v1.0 - josembell */
+	public Artwork reconstruct(final Artwork prunedArtwork, final BindingResult binding) {
+		Assert.notNull(prunedArtwork);
+
+		final Artwork artwork;
+
+		artwork = prunedArtwork;
+
+		this.validator.validate(artwork, binding);
+
+		return artwork;
 	}
 
 }

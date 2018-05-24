@@ -114,6 +114,10 @@
 			</jstl:choose>
 		</display:column>
 	</display:table>
+	<jstl:if test="${worksIn==true}">
+		<a href="artwork/guide/create.do?exhibitionId=${exhibition.id}"><spring:message code="artwork.create"/></a>
+	</jstl:if>
+	
 </div>
 
 <div id="eCritiques" class="info">

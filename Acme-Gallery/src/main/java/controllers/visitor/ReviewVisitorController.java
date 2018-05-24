@@ -77,12 +77,8 @@ public class ReviewVisitorController extends AbstractController {
 
 	/* v1.0 - josembell */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final Review prunedReview, final int museumId, final BindingResult binding) {
+	public ModelAndView edit(final Review prunedReview, final BindingResult binding) {
 		ModelAndView res = null;
-		final Museum museum = this.museumService.findOne(museumId);
-		Assert.notNull(museum);
-
-		prunedReview.setMuseum(museum);
 
 		final Review review = this.reviewService.reconstruct(prunedReview, binding);
 

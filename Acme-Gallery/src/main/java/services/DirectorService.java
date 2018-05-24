@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.HashSet;
 
 import javax.transaction.Transactional;
@@ -45,6 +46,12 @@ public class DirectorService extends ActorService {
 		res.setMuseums(new HashSet<Museum>());
 
 		return res;
+	}
+
+	// v1.0 - JA
+	public Collection<Director> findAll() {
+
+		return this.directorRepository.findAll();
 	}
 
 	// v1.0 - Alicia

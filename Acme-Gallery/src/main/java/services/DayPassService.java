@@ -77,6 +77,12 @@ public class DayPassService {
 		return dayPass;
 	}
 
+	//v1.0 - JA
+	public Collection<DayPass> findAll() {
+
+		return this.dayPassRepository.findAll();
+	}
+
 	// v1.0 - Alicia
 	public DayPass create(final Museum museum) {
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());

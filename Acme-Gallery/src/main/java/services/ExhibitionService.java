@@ -93,6 +93,12 @@ public class ExhibitionService {
 		return exhibition;
 	}
 
+	// v1.0 - JA
+	public Collection<Exhibition> findAll() {
+
+		return this.exhibitionRepository.findAll();
+	}
+
 	// v1.0 - Alicia
 	public void delete(final Exhibition exhibition) {
 		Assert.notNull(exhibition);
@@ -152,6 +158,7 @@ public class ExhibitionService {
 
 		this.exhibitionRepository.delete(exhibition);
 	}
+
 	// v1.0 - JA
 	public Exhibition findOne(final int exhibitionId) {
 

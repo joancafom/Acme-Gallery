@@ -27,6 +27,12 @@
 	<!-- Inputs -->
 	<br/>
 	
+	<jstl:if test="${empty museums}">
+		<p style="color:red; font-weight: bold;"><spring:message code="museums.size"/></p><br/>
+	</jstl:if>
+	
+	<br/>
+	
 	<acme:textbox code="room.name" path="name"/><br/>
 	<acme:textbox code="room.area" path="area"/><br/>
 	
@@ -41,7 +47,7 @@
 	</form:select>
 	<form:errors cssClass="error" path="museum"/>
 	
-	<br/>
+	<br/><br/>
 	
 	<acme:submit name="save" code="room.save"/>
 	<acme:cancel url="room/${actorWS}listMine.do" code="room.cancel"/>

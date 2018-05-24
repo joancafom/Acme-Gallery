@@ -21,6 +21,10 @@
 
 <display:table name="sponsorships" id="sponsorship" requestURI="sponsorship/${actorWS}listMine.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
+	<display:column titleKey="sponsorship.exhibition">
+		<a href="exhibition/sponsor/display.do?exhibitionId=${sponsorship.exhibition.id}"><jstl:out value="${sponsorship.exhibition.title}"/></a>
+	</display:column>
+
 	<display:column titleKey="sponsorship.banner">
 		<a href="<jstl:out value="${sponsorship.banner}" />" target="_blank"><img src="<jstl:out value="${sponsorship.banner}" />" style="max-width: 200px;"></a>
 	</display:column>

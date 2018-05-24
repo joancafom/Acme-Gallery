@@ -40,7 +40,7 @@
 
 </script>
 
-<jstl:if test="${exhibition.id eq 0 or empty exhibition.dayPasses}">
+<jstl:if test="${(exhibition.id eq 0 or empty exhibition.dayPasses) and not empty rooms}">
 
 	<div style="float: right;">
 	<br/>
@@ -64,7 +64,15 @@
 	<br/>
 	
 	<jstl:if test="${exhibition.id eq 0}">
-	<acme:textbox code="exhibition.ticker" path="ticker"/><br/>
+	
+	<jstl:if test="${empty rooms}">
+		<p style="color:red; font-weight: bold;"><spring:message code="rooms.size"/></p><br/>
+	</jstl:if>
+	
+	<br/>
+	
+	<spring:message code="exhibition.ticker.placeholder" var="tickerPlaceholder"/>
+	<acme:textbox code="exhibition.ticker" path="ticker" placeholder="${tickerPlaceholder}"/><br/>
 	</jstl:if>
 	<acme:textbox code="exhibition.title" path="title"/><br/>
 	<acme:textarea code="exhibition.description" path="description"/><br/>
@@ -155,7 +163,7 @@
 	</form:select>
 	<form:errors cssClass="error" path="category"/>
 	
-	<br/>
+	<br/><br/>
 	
 	<acme:submit name="save" code="exhibition.save"/>
 	<acme:cancel url="exhibition/${actorWS}listMine.do" code="exhibition.cancel"/>

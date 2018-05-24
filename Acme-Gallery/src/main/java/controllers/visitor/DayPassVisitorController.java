@@ -137,12 +137,7 @@ public class DayPassVisitorController extends AbstractController {
 			res = this.createEditModelAndView(prunedDayPass);
 		else
 			try {
-				final DayPass dayPassS = this.dayPassService.saveCreateAndEdit(dayPass);
-
-				if (exhibitionId != null)
-					res = new ModelAndView("redirect:/exhibition/visitor/display.do?exhibitionId=" + dayPassS.getExhibition().getId());
-				else if (museumId != null)
-					res = new ModelAndView("redirect:/museum/visitor/display.do?museumId=" + dayPassS.getMuseum().getId());
+				res = new ModelAndView("redirect:/dayPass/visitor/listMine.do");
 
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(dayPass, "dayPass.commit.error");

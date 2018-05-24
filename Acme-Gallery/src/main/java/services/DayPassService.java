@@ -161,7 +161,7 @@ public class DayPassService {
 
 		Boolean res = false;
 
-		if (exhibition.getIsPrivate() && exhibition.getEndingDate().after(new Date()))
+		if (exhibition.getIsPrivate() && exhibition.getEndingDate().after(new Date()) && !exhibition.getArtworks().isEmpty())
 			res = true;
 
 		return res;

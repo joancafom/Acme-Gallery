@@ -61,6 +61,11 @@ public class SponsorService extends ActorService {
 		return this.sponsorRepository.findOne(sponsorId);
 	}
 
+	// v1.0 - Alicia
+	public void flush() {
+		this.sponsorRepository.flush();
+	}
+
 	//Other Business Methods
 
 	// v1.0 - Alicia

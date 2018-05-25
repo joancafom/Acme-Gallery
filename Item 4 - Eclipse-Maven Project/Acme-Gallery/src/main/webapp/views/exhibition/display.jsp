@@ -56,6 +56,7 @@
 		<h4><spring:message code="exhibition.info"/></h4>
 		
 		<p><spring:message code="exhibition.from"/> <acme:dateFormat code="date.format" value="${exhibition.startingDate}"/> <spring:message code="exhibition.to"/> <acme:dateFormat code="date.format" value="${exhibition.endingDate}"/></p>
+		<p><spring:message code="exhibition.museum"/>: <a href="museum/${actorWS}display.do?museumId=<jstl:out value="${exhibition.room.museum.id}"/>"><jstl:out value="${exhibition.room.museum.name}"/></a></p>
 		<p><spring:message code="exhibition.type"/>: 
 			<jstl:if test="${exhibition.isPrivate}">
 				<spring:message code="exhibition.private"/>
@@ -86,7 +87,7 @@
 
 	<h4><spring:message code="exhibition.artworks"/></h4>
 	
-	<display:table name="artworks" id="artwork" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeA}">
+	<display:table name="artworks" id="artwork" requestURI="exhibition/${actorWS}display.do#eArtworks" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeA}">
 		<display:column titleKey="artwork.title">
 			<a href="artwork/${actorWS}display.do?artworkId=<jstl:out value="${artwork.id}" />"><jstl:out value="${artwork.title}" /></a>
 		</display:column>
@@ -131,7 +132,7 @@
 <div id="eCritiques" class="info">
 	<h4><spring:message code="exhibition.critiques"/></h4>
 	
-	<display:table name="critiques" id="critique" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeC}">
+	<display:table name="critiques" id="critique" requestURI="exhibition/${actorWS}display.do#eCritiques" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeC}">
 		<display:column titleKey="critique.critic">
 			<jstl:out value="${critique.critic.name}" /> <jstl:out value="${critique.critic.surnames}" />
 		</display:column>
@@ -161,7 +162,7 @@
 <div id="eGuides" class="info">
 	<h4><spring:message code="exhibition.guides"/></h4>
 	
-	<display:table name="guides" id="guide" requestURI="exhibition/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeG}">
+	<display:table name="guides" id="guide" requestURI="exhibition/${actorWS}display.do#eGuides" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeG}">
 		<display:column titleKey="guide.name" property="name" />
 		<display:column titleKey="guide.surnames" property="surnames" />
 		<display:column titleKey="guide.email">

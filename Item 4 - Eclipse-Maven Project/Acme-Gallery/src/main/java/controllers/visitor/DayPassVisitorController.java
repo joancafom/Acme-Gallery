@@ -137,6 +137,7 @@ public class DayPassVisitorController extends AbstractController {
 			res = this.createEditModelAndView(prunedDayPass);
 		else
 			try {
+				this.dayPassService.saveCreateAndEdit(dayPass);
 				res = new ModelAndView("redirect:/dayPass/visitor/listMine.do");
 
 			} catch (final Throwable oops) {

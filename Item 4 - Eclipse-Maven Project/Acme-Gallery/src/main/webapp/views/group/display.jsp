@@ -61,13 +61,13 @@
 	</jstl:choose>
 </security:authorize>
 <br>
-<div>
+<div id="gAnnouncements">
 <h3><spring:message code="group.announcements"/></h3>
-<display:table name="announcements" id="announcement" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeAnnouncements}">
+<display:table name="announcements" id="announcement" requestURI="group/${actorWS}display.do#gAnnouncements" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeAnnouncements}">
 	<display:column style="text-align:center;">
 		<h4><acme:dateFormat code="date.format" value="${announcement.creationMoment}"/> - <jstl:out value="${announcement.title}"/></h4>
 		
-		<jstl:if test="${announcement.picture!=null or announcement.picture!=''}">
+		<jstl:if test="${announcement.picture!=null and announcement.picture!=''}">
 			<img src="${announcement.picture}" style="width:10%;"/>
 		</jstl:if>
 		<br><br>
@@ -81,9 +81,9 @@
 <br><br>
 
 <div style="width: 100%;">
-	<div style="float:left; width: 60%; min-height: 300px;">
+	<div style="float:left; width: 60%; min-height: 300px;" id="gParticipants">
    		<h3><spring:message code="group.participants"/></h3>
-		<display:table name="participants" id="participant" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%;" partialList="true" size="${resultSizeParticipants}">
+		<display:table name="participants" id="participant" requestURI="group/${actorWS}display.do#gParticipants" pagesize="5" class="displaytag" style="width:79%;" partialList="true" size="${resultSizeParticipants}">
 			<display:column titleKey="group.participants.name">
 				<a href="visitor/${actorWS}display.do?visitorId=${participant.id}"><jstl:out value="${participant.name}"/> <jstl:out value="${participant.surnames}"/></a>
 			</display:column>
@@ -118,7 +118,7 @@
 <div id="comments">
 	<jstl:if test="${hasReplies==null}">
 		<h3><spring:message code="group.comments"/></h3>
-		<display:table name="comments" id="comment" requestURI="group/${actorWS}display.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeComments}">
+		<display:table name="comments" id="comment" requestURI="group/${actorWS}display.do#comments" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSizeComments}">
 			<display:column>
 				<div style="margin: 20px;">
 				<p><strong><jstl:out value="${comment.visitor.name}"/> <jstl:out value="${comment.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${comment.title}"/></p>

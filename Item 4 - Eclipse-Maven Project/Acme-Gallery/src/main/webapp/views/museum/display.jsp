@@ -52,7 +52,7 @@
 		<h4><spring:message code="museum.info"/></h4>
 		
 		<p><spring:message code="museum.identifier"/>: <em><jstl:out value="${museum.identifier}"/></em></p>
-		<p><spring:message code="museum.identifier"/>: <acme:priceFormat code="price.format" value="${museum.price}"/></p>
+		<p><spring:message code="museum.price"/>: <acme:priceFormat code="price.format" value="${museum.price}"/></p>
 		<p><spring:message code="museum.address"/>:
 		<jstl:choose>
 			<jstl:when test="${museum.coordinates.latitude ne null and museum.coordinates.longitude ne null}">
@@ -91,7 +91,7 @@
 	</security:authorize>
 	
 	<spring:message code="price.format" var="priceFormat"></spring:message>
-	<display:table name="exhibitions" id="exhibition" requestURI="museum/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeE}">
+	<display:table name="exhibitions" id="exhibition" requestURI="museum/${actorWS}display.do#mExhibitions" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeE}">
 		<display:column titleKey="exhibition.title">
 			<a href="exhibition/${actorWS}display.do?exhibitionId=<jstl:out value="${exhibition.id}"/>"><jstl:out value="${exhibition.title}"/></a>
 		</display:column>
@@ -108,7 +108,7 @@
 <div id="mReviews" class="info">
 	<h4><spring:message code="museum.reviews"/></h4>
 	
-	<display:table name="reviews" id="review" requestURI="museum/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeR}">
+	<display:table name="reviews" id="review" requestURI="museum/${actorWS}display.do#mReviews" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeR}">
 		<display:column titleKey="review.visitor.name" style="width:20%">
 			<jstl:out value="${review.visitor.name}"></jstl:out> <jstl:out value="${review.visitor.surnames}"></jstl:out>
 		</display:column>

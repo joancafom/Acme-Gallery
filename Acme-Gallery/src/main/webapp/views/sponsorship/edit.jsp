@@ -68,6 +68,10 @@
    <br><br>
    
    <div id="dates">
+ 
+   		<strong><spring:message code="sponsorship.exhibition.dates" />:</strong> <acme:dateFormat code="date.format" value="${exhibition.startingDate}"/> - <acme:dateFormat code="date.format" value="${exhibition.endingDate}"/>
+   		<br><br>
+   		<br>
    		<acme:date id="startingDateInput" code="sponsorship.startingDate" path="startingDate" />
    		<acme:date id="endingDateInput" code="sponsorship.endingDate" path="endingDate"/>
    		
@@ -85,8 +89,9 @@
    		
    </div>
    
-	<acme:cancel url="sponsorship/${actorWS}list.do?exhibitionId=${exhibitionId}" code="sponsorship.cancel"/>
-	<acme:submit name="save" code="sponsorship.save"/>
+    <acme:submit name="save" code="sponsorship.save"/>
+	<acme:cancel url="sponsorship/${actorWS}list.do?exhibitionId=${exhibition.id}" code="sponsorship.cancel"/>
+	
 	
 </form:form>
 </security:authorize>

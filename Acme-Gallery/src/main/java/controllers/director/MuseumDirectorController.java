@@ -26,13 +26,16 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.DirectorService;
 import services.ExhibitionService;
+import services.GuideService;
 import services.MuseumService;
 import services.ReviewService;
 import controllers.AbstractController;
 import domain.Director;
 import domain.Exhibition;
+import domain.Guide;
 import domain.Museum;
 import domain.Review;
+import forms.MuseumForm;
 
 @Controller
 @RequestMapping("/museum/director")
@@ -54,9 +57,53 @@ public class MuseumDirectorController extends AbstractController {
 	@Autowired
 	private DirectorService		directorService;
 
+	@Autowired
+	private GuideService		guideService;
+
 
 	// Methods ----------------------------------------------------------------------------------------
 
+	// v1.0 - JA
+	@RequestMapping(value = "/addGuide", method = RequestMethod.GET)
+	public ModelAndView addGuide(@RequestParam final int museumId) {
+		final ModelAndView res;
+
+		final MuseumForm museumForm = new MuseumForm();
+
+		final Museum museum = this.museumService.findOne(museumId);
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(museum);
+		Assert.notNull(director);
+
+		Assert.isTrue(director.getMuseums().contains(museum));
+
+		museumForm.setMuseum(museum);
+
+		res = this.addGuideModelAndView(museumForm);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	@RequestMapping(value = "/addGuide", method = RequestMethod.POST, params = "save")
+	public ModelAndView addGuide(final MuseumForm museumForm, final BindingResult binding) {
+		ModelAndView res = null;
+
+		final Museum museum = this.museumService.reconstructAddGuide(museumForm, binding);
+
+		if (binding.hasErrors())
+			res = this.addGuideModelAndView(museumForm);
+		else
+			try {
+				this.museumService.saveAddGuide(museum);
+				res = new ModelAndView("redirect:listMine.do");
+			} catch (final Throwable oops) {
+				res = this.addGuideModelAndView(museumForm, "museum.commit.error");
+			}
+
+		return res;
+
+	}
 	// v1.0 - JA
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
@@ -208,6 +255,32 @@ public class MuseumDirectorController extends AbstractController {
 		res = new ModelAndView("museum/edit");
 		res.addObject("museum", museum);
 		res.addObject("message", message);
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	protected ModelAndView addGuideModelAndView(final MuseumForm museumForm) {
+
+		ModelAndView res;
+		res = this.addGuideModelAndView(museumForm, null);
+
+		return res;
+	}
+
+	// v1.0 - JA
+	private ModelAndView addGuideModelAndView(final MuseumForm museumForm, final String message) {
+		final ModelAndView res;
+
+		res = new ModelAndView("museum/addGuide");
+
+		final Collection<Guide> guides = this.guideService.getNotWorkingInMuseum(museumForm.getMuseum());
+
+		res.addObject("museum", museumForm);
+		res.addObject("guides", guides);
+		res.addObject("message", message);
+
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

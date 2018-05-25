@@ -99,7 +99,12 @@ public class SponsorshipDirectorController extends AbstractController {
 		Assert.isTrue(currentDirector.equals(sponsorship.getExhibition().getRoom().getMuseum().getDirector()));
 		Assert.isTrue(sponsorship.getStatus().equals("PENDING"));
 
+		//Skip checking for exhibition being null, as it was retrieved from the DB
+		final Collection<Sponsorship> currentSponsorships = this.sponsorshipService.findAcceptedAndNegotiationByExhibition(sponsorship.getExhibition());
+
 		res = this.createEditModelAndView(sponsorship);
+		res.addObject("exhibition", sponsorship.getExhibition());
+		res.addObject("sponsorships", currentSponsorships);
 
 		return res;
 	}
@@ -113,11 +118,11 @@ public class SponsorshipDirectorController extends AbstractController {
 
 		//Skip checking for exhibition being null, as it was retrieved from the DB
 
-		final Collection<Sponsorship> currentSponsorships = this.sponsorshipService.findAcceptedByExhibition(sponsorship.getExhibition());
+		final Collection<Sponsorship> currentSponsorships = this.sponsorshipService.findAcceptedAndNegotiationByExhibition(sponsorship.getExhibition());
 
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(prunedSponsorship);
-			res.addObject("exhibitionId", sponsorship.getExhibition().getId());
+			res.addObject("exhibition", sponsorship.getExhibition());
 			res.addObject("sponsorships", currentSponsorships);
 		} else
 			try {
@@ -125,11 +130,11 @@ public class SponsorshipDirectorController extends AbstractController {
 				res = new ModelAndView("redirect:list.do?exhibitionId=" + sponsorship.getExhibition().getId());
 			} catch (final IllegalStateException oops) {
 				res = this.createEditModelAndView(prunedSponsorship, "sponsorship.dates.unavailable");
-				res.addObject("exhibitionId", sponsorship.getExhibition().getId());
+				res.addObject("exhibition", sponsorship.getExhibition());
 				res.addObject("sponsorships", currentSponsorships);
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(prunedSponsorship, "sponsorship.commit.error");
-				res.addObject("exhibitionId", sponsorship.getExhibition().getId());
+				res.addObject("exhibition", sponsorship.getExhibition());
 				res.addObject("sponsorships", currentSponsorships);
 			}
 

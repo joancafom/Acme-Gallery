@@ -20,10 +20,11 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-	<form:form action="review/visitor/edit.do?museumId=${museum.id}" modelAttribute="review">
+	<form:form action="review/visitor/edit.do" modelAttribute="review">
 		<br>
 		<form:hidden path="id"/>
 		<form:hidden path="version"/>
+		<form:hidden path="museum"/>
 	
 		<!-- Inputs -->
 		

@@ -47,7 +47,8 @@
 	   	<br>
 	   	<br>
 	   
+	   	<acme:submit name="save" code="invitation.save"/>
 		<acme:cancel url="group/visitor/display.do?groupId=${invitation.group.id}" code="invitation.cancel"/>
-		<acme:submit name="save" code="invitation.save"/>
+		
 	</form:form>
 </jstl:if>

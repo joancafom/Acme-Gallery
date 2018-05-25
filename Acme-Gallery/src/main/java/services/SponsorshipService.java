@@ -175,10 +175,10 @@ public class SponsorshipService {
 	}
 
 	//v1.0 - Implemented by JA
-	public Collection<Sponsorship> findAcceptedByExhibition(final Exhibition exhibition) {
+	public Collection<Sponsorship> findAcceptedAndNegotiationByExhibition(final Exhibition exhibition) {
 		Assert.notNull(exhibition);
 
-		return this.sponsorshipRepository.findAcceptedByExhibitionId(exhibition.getId());
+		return this.sponsorshipRepository.findAcceptedAndNegotiationByExhibitionId(exhibition.getId());
 	}
 
 	//v1.0 - Implemented by JA
@@ -261,6 +261,10 @@ public class SponsorshipService {
 		if (sponsorshipToUpdate.getStatus().equals("TIME_NEGOTIATION"))
 			if (!this.checkDatesAvailability(oldSponsorship.getExhibition(), sponsorshipToUpdate.getStartingDate(), sponsorshipToUpdate.getEndingDate()))
 				throw new IllegalStateException("The requested dates are unavailable");
+
+		//The dates must be in the boundaries of the exhibition also
+		Assert.isTrue(sponsorshipToUpdate.getStartingDate().compareTo(oldSponsorship.getExhibition().getStartingDate()) >= 0);
+		Assert.isTrue(sponsorshipToUpdate.getEndingDate().compareTo(oldSponsorship.getExhibition().getEndingDate()) <= 0);
 
 		return this.save(sponsorshipToUpdate);
 	}

@@ -21,6 +21,7 @@ import domain.Administrator;
 import domain.Exhibition;
 import domain.Guide;
 import domain.Incident;
+import domain.Museum;
 import forms.ActorRegistrationForm;
 
 @Service
@@ -130,4 +131,13 @@ public class GuideService extends ActorService {
 		return res;
 	}
 
+	// v1.0 - JA
+	public Collection<Guide> getNotWorkingInMuseum(final Museum museum) {
+
+		Assert.notNull(museum);
+
+		final Collection<Guide> res = this.guideRepository.findNotWorkingByMuseumId(museum.getId());
+
+		return res;
+	}
 }

@@ -66,12 +66,15 @@ public class ArtworkService {
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
 		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
-		Assert.isTrue(artwork.getYear() % 1 == 0);
+
 		if (artwork.getId() != 0)
 			Assert.isTrue(artwork.getIsFinal() == false);
 
 		final Integer yearOfNow = LocalDate.now().getYear();
-		Assert.isTrue(artwork.getYear() <= yearOfNow);
+		if (artwork.getYear() != null) {
+			Assert.isTrue(artwork.getYear() % 1 == 0);
+			Assert.isTrue(artwork.getYear() <= yearOfNow);
+		}
 
 		final Artwork saved = this.artworkRepository.save(artwork);
 		artwork.getExhibition().getArtworks().add(saved);

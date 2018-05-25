@@ -24,6 +24,7 @@ import domain.Guide;
 import domain.Museum;
 import domain.Review;
 import domain.Room;
+import forms.MuseumForm;
 
 @Service
 @Transactional
@@ -36,6 +37,9 @@ public class MuseumService extends ActorService {
 	//Supporting Services
 	@Autowired
 	private DirectorService		directorService;
+
+	@Autowired
+	private GuideService		guideService;
 
 	//Validator
 	@Autowired
@@ -125,6 +129,55 @@ public class MuseumService extends ActorService {
 		Assert.notNull(guide);
 
 		return this.museumRepository.findWorkplacesByGuide(guide, new PageRequest(page - 1, size));
+	}
+
+	// v1.0 - JA
+	public Museum reconstructAddGuide(final MuseumForm museumForm, final BindingResult binding) {
+
+		Assert.notNull(museumForm);
+		Assert.notNull(museumForm.getMuseum());
+
+		final Museum res = this.create();
+
+		final Museum oldMuseum = this.findOne(museumForm.getMuseum().getId());
+
+		final Director currentDirector = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentDirector);
+		Assert.isTrue(oldMuseum.getDirector().equals(currentDirector));
+
+		res.setId(oldMuseum.getId());
+		res.setVersion(oldMuseum.getVersion());
+
+		res.setName(oldMuseum.getName());
+		res.setAddress(oldMuseum.getAddress());
+		res.setCoordinates(oldMuseum.getCoordinates());
+		res.setEmail(oldMuseum.getEmail());
+		res.setPhoneNumber(oldMuseum.getPhoneNumber());
+		res.setSlogan(oldMuseum.getSlogan());
+		res.setIdentifier(oldMuseum.getIdentifier());
+		res.setBanner(oldMuseum.getBanner());
+		res.setPrice(oldMuseum.getPrice());
+		res.setRooms(oldMuseum.getRooms());
+		res.setDayPasses(oldMuseum.getDayPasses());
+		res.setReviews(oldMuseum.getReviews());
+		res.setDirector(oldMuseum.getDirector());
+		res.setStore(oldMuseum.getStore());
+
+		final Collection<Guide> newGuides = new HashSet<Guide>();
+		newGuides.addAll(oldMuseum.getGuides());
+
+		if (museumForm.getGuides() != null)
+			for (final String s : museumForm.getGuides()) {
+				final Guide g = this.guideService.findOne(new Integer(s));
+				Assert.notNull(g);
+				newGuides.add(g);
+			}
+
+		res.setGuides(newGuides);
+
+		this.validator.validate(res, binding);
+
+		return res;
 	}
 
 	//v1.0 - Implemented by JA
@@ -231,6 +284,23 @@ public class MuseumService extends ActorService {
 		final Museum savedMuseum = this.save(museum);
 
 		return savedMuseum;
+	}
+
+	// v2.0 - JA
+	public Museum saveAddGuide(final Museum museum) {
+
+		Assert.notNull(museum);
+		Assert.isTrue(museum.getId() != 0);
+
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Museum oldMuseum = this.findOne(museum.getId());
+
+		Assert.isTrue(oldMuseum.getDirector().equals(museum.getDirector()));
+		Assert.isTrue(museum.getDirector().equals(director));
+
+		return this.save(museum);
 	}
 
 	// v1.0 - Alicia

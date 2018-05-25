@@ -31,7 +31,7 @@
    	<br>
    	<br>
    
+   <acme:submit name="save" code="critique.save"/>
 	<acme:cancel url="exhibition/critic/display.do?exhibitionId=${critique.exhibition.id}" code="critique.cancel"/>
-	<acme:submit name="save" code="critique.save"/>
 	
 </form:form>

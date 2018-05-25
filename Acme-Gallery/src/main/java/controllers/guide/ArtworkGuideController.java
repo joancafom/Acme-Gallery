@@ -127,13 +127,8 @@ public class ArtworkGuideController extends AbstractController {
 	}
 	/* v1.0 - josembell */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final Artwork prunedArtwork, final int exhibitionId, final BindingResult binding) {
+	public ModelAndView edit(final Artwork prunedArtwork, final BindingResult binding) {
 		ModelAndView res = null;
-		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
-		Assert.notNull(exhibition);
-
-		prunedArtwork.setExhibition(exhibition);
-
 		final Artwork artwork = this.artworkService.reconstruct(prunedArtwork, binding);
 
 		if (binding.hasErrors())
@@ -141,7 +136,7 @@ public class ArtworkGuideController extends AbstractController {
 		else
 			try {
 				final Artwork saved = this.artworkService.save(artwork);
-				res = new ModelAndView("redirect:/exhibition/guide/display.do?exhibitionId=" + saved.getExhibition().getId());
+				res = new ModelAndView("redirect:display.do?artworkId=" + saved.getId());
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(artwork, "artwork.commit.error");
 			}

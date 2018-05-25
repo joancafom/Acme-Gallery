@@ -28,7 +28,8 @@
    
    <jstl:choose>
    		<jstl:when test="${museum.id == 0}">
-   			<acme:textbox code="museum.identifier" path="identifier" placeholder="MdP"/>
+   			<spring:message  var="idPlaceHolder" code="museum.idPlaceHolder" />
+   			<acme:textbox code="museum.identifier" path="identifier" placeholder="${idPlaceHolder}"/>
    		</jstl:when>
    </jstl:choose>
    
@@ -43,7 +44,7 @@
    
    <br>
    
+    <acme:submit name="save" code="museum.save"/>
 	<acme:cancel url="museum/director/listMine.do" code="museum.cancel"/>
-	<acme:submit name="save" code="museum.save"/>
 	
 </form:form>

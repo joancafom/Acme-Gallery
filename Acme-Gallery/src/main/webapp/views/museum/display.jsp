@@ -52,6 +52,7 @@
 		<h4><spring:message code="museum.info"/></h4>
 		
 		<p><spring:message code="museum.identifier"/>: <em><jstl:out value="${museum.identifier}"/></em></p>
+		<p><spring:message code="museum.identifier"/>: <acme:priceFormat code="price.format" value="${museum.price}"/></p>
 		<p><spring:message code="museum.address"/>:
 		<jstl:choose>
 			<jstl:when test="${museum.coordinates.latitude ne null and museum.coordinates.longitude ne null}">

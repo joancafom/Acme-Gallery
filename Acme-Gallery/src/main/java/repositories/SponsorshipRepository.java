@@ -24,7 +24,7 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 	Page<Sponsorship> findAllByExhibitionId(final int exhibitionId, Pageable pageable);
 
 	//v1.0 - Implemented by JA
-	@Query("select s from Sponsorship s where s.exhibition.id = ?1 and s.status = 'ACCEPTED' and s.startingDate != null and ( (?2 >= s.startingDate and ?2 <= s.endingDate) or (?3 >= s.startingDate and ?3 <= s.endingDate) or (s.startingDate >= ?2 and s.endingDate <= ?2) or (s.startingDate >= ?3 and s.endingDate <= ?3))")
+	@Query("select s from Sponsorship s where s.exhibition.id = ?1 and s.startingDate != null and (s.status = 'ACCEPTED' or (s.status = 'TIME_NEGOTIATION' and s.startingDate >= CURRENT_TIMESTAMP)) and ( (?2 >= s.startingDate and ?2 <= s.endingDate) or (?3 >= s.startingDate and ?3 <= s.endingDate) or (s.startingDate >= ?2 and s.endingDate <= ?2) or (s.startingDate >= ?3 and s.endingDate <= ?3))")
 	Collection<Sponsorship> findByExhibitionIdAndDates(final int exhibitionId, Date startingDate, Date endingDate);
 
 	//v1.0 - Implemented by JA
@@ -32,8 +32,8 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 	Sponsorship findCurrentByExhibitionId(final int exhibitionId);
 
 	//v1.0 - Implemented by JA
-	@Query("select s from Sponsorship s where s.exhibition.id = ?1 and s.status = 'ACCEPTED'")
-	Collection<Sponsorship> findAcceptedByExhibitionId(final int exhibitionId);
+	@Query("select s from Sponsorship s where s.exhibition.id = ?1 and (s.status = 'ACCEPTED' or (s.status = 'TIME_NEGOTIATION' and s.startingDate >= CURRENT_TIMESTAMP))")
+	Collection<Sponsorship> findAcceptedAndNegotiationByExhibitionId(final int exhibitionId);
 
 	// v1.0 - Alicia
 	@Query("select s from Sponsorship s where s.sponsor.id = ?1 order by s.status asc")

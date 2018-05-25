@@ -45,7 +45,7 @@
 	<div style="float: right;">
 	<br/>
 	<h3>Your current exhibitions dates and rooms:</h3><br/>
-	<jstl:forEach var="i" begin="0" end="${exhSize - 1}">
+	<jstl:forEach var="i" begin="0" end="${exhSize}">
 		<strong><jstl:out value="${tickers[i]} | ${roomNames[i]}"/>:</strong> <acme:dateFormat code="date.format" value="${startingDates[i]}"/> - <acme:dateFormat code="date.format" value="${endingDates[i]}"/><br/>
 	</jstl:forEach>
 	</div>

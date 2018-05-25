@@ -59,14 +59,18 @@
 </head>
 
 <body style="margin: 0px; font-family: Arial;">
-
-	<div>
+	
+	<div >
 		<tiles:insertAttribute name="header" />
 	</div>
+	<div id=backgroundBlur>
+		
+	
 	<div id="content-wrapper">
 	<div>
 		<a href="?language=en">en</a> | <a href="?language=es">es</a>
 	</div>
+
 	<div>
 		<h1>
 			<tiles:insertAttribute name="title" />
@@ -78,6 +82,9 @@
 		</jstl:if>	
 	</div>
 	</div>
+	</div>
+	
+
 	<div>
 		<tiles:insertAttribute name="footer" />
 	</div>

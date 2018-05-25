@@ -28,13 +28,10 @@ window.onload = function(){
 
 </script>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+<nav id="menuSkinny" class="navbar navbar-inverse">
+  <div class="container-fluid" >
     <div class="navbar-header">
-    
-      <!-- TODO: Place here the name and logo of the company -->
-      <img src="images/logo.png" alt="Acme, Inc." style="max-height: 50px;"/>
-      <a class="navbar-brand" href="#">Acme</a>
+      <a href="#"> <img src="images/logo2.svg" alt="Acme, Inc." style="max-height: 50px;"/></a>
     </div>
   
   	<!--------------------------- ADMINISTRATOR --------------------------->  

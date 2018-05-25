@@ -15,7 +15,35 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<style>
+	#backgroundBlur{
+		background-image: url('images/wallpapers/${wallpaperName}');
+		background-size: 100%;
+		
+	}
 
-<p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
+	#content-wrapper{
+		margin:0 auto;
+		min-height:570px;
+  		
+  		width:100%;
+  		
 
-<p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
+
+	}
+	#menuSkinny{
+		margin-bottom:0px;
+	}
+	
+	.content {
+		
+
+	}
+	
+</style>
+<div class="content" style="text-align:center;color:white;">
+<h1><strong><spring:message code="welcome.welcome"/></strong></h1>
+<h2><spring:message code="welcome.greeting.current.time" /> ${moment}</h2> 
+<br>
+<a href="?language=en"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Great_Britain_%281707%E2%80%931800%29.svg" style="width:3%"></a> <a href="?language=es"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/1280px-Flag_of_Spain.svg.png" style="width:3%"></a>
+</div>

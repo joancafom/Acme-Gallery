@@ -84,6 +84,11 @@ public class VisitorService extends ActorService {
 		return this.visitorRepositories.findOne(visitorId);
 	}
 
+	// v1.0 - JA
+	public Collection<Visitor> findAll() {
+		return this.visitorRepositories.findAll();
+	}
+
 	//Other Business Methods
 
 	//v1.0 - JA

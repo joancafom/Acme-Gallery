@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.HashSet;
 
 import javax.transaction.Transactional;
@@ -54,6 +55,11 @@ public class SponsorService extends ActorService {
 		Assert.notNull(sponsorToSave);
 
 		return this.sponsorRepository.save(sponsorToSave);
+	}
+
+	// v1.0 - JA
+	public Collection<Sponsor> findAll() {
+		return this.sponsorRepository.findAll();
 	}
 
 	/* v1.0 - josembell */

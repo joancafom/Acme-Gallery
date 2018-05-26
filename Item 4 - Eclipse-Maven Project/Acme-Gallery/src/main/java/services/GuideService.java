@@ -58,6 +58,12 @@ public class GuideService extends ActorService {
 		return this.guideRepository.findOne(guideId);
 	}
 
+	// v1.0 - JA
+	public Collection<Guide> findAll() {
+
+		return this.guideRepository.findAll();
+	}
+
 	// v1.0 - Alicia
 	public Guide save(final Guide guide) {
 		Assert.notNull(guide);

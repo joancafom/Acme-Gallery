@@ -19,10 +19,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-	<form:form action="product/director/edit.do?storeId=${store.id}" modelAttribute="product">
+	<form:form action="product/director/edit.do" modelAttribute="product">
 		<br>
-		<form:hidden path="id"/>
-		<form:hidden path="version"/>
+		<form:hidden path="store"/>
 	
 		<!-- Inputs -->
 		

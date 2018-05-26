@@ -76,6 +76,9 @@ public class ArtworkService {
 			Assert.isTrue(artwork.getYear() <= yearOfNow);
 		}
 
+		if (artwork.getCreatorName() == "")
+			artwork.setCreatorName(null);
+
 		final Artwork saved = this.artworkRepository.save(artwork);
 		artwork.getExhibition().getArtworks().add(saved);
 		this.exhibitionService.save(saved.getExhibition());

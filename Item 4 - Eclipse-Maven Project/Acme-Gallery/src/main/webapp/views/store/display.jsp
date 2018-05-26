@@ -61,9 +61,9 @@
 		<p style="font-size:25px"><acme:priceFormat code="price.format" value="${product.price}"/></p>
 	</display:column>
 </display:table>
-
-<a href="product/director/create.do?storeId=${store.id}"><spring:message code="store.product.create"/></a>
-	
+<jstl:if test="${own}">
+	<a href="product/director/create.do?storeId=${store.id}"><spring:message code="store.product.create"/></a>
+</jstl:if>
 </div>
 
 

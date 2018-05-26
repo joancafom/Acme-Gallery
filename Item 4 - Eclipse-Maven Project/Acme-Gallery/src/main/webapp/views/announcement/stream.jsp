@@ -22,11 +22,13 @@
 <display:table name="announcements" id="announcement" requestURI="announcement/visitor/stream.do" pagesize="5" class="displaytag" style="width:79%" partialList="true" size="${resultSize}">
 	<display:column style="text-align:center;">
 		<h4><acme:dateFormat code="date.format" value="${announcement.creationMoment}"/> - <jstl:out value="${announcement.title}"/></h4>
+		<p><spring:message code="announcement.atGroup"/> <a href="group/visitor/display.do?groupId=${announcement.group.id}"><jstl:out value="${announcement.group.name}"/></a></p>
 		
-		<jstl:if test="${announcement.picture!=null or announcement.picture!=''}">
+		<jstl:if test="${announcement.picture!=null and announcement.picture!=''}">
 			<img src="${announcement.picture}" style="width:10%;"/>
+			<br>
 		</jstl:if>
-		<br><br>
+		<br>
 		<p><jstl:out value="${announcement.description}"/></p>
 	</display:column>
 </display:table>

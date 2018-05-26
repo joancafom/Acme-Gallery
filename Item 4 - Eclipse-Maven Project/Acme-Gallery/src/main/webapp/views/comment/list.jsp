@@ -30,7 +30,7 @@
 	</display:column>
 	<display:column>
 		<div style="margin: 20px;">
-			<a href="comment/administrator/delete.do?commentId=${comment.id}"><spring:message code="comment.remove"/></a>
+			<a href="comment/administrator/delete.do?commentId=${comment.id}&redirect=listTaboo.do"><spring:message code="comment.remove"/></a>
 		</div>
 	</display:column>
 </display:table>

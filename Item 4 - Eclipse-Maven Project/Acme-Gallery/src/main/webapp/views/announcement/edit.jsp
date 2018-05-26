@@ -21,10 +21,7 @@
 
 
 	<form:form action="announcement/visitor/edit.do?groupId=${group.id}" modelAttribute="announcement">
-		<br>
-		<form:hidden path="id"/>
-		<form:hidden path="version"/>
-	
+		<br>	
 		<!-- Inputs -->
 		
 		<acme:textbox code="announcement.title" path="title"/><br>

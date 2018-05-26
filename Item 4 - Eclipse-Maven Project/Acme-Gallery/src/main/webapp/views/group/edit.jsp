@@ -20,9 +20,6 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 	<form:form action="group/visitor/edit.do" modelAttribute="group">
-		<br>
-		<form:hidden path="id"/>
-		<form:hidden path="version"/>
 	
 		<!-- Inputs -->
 		

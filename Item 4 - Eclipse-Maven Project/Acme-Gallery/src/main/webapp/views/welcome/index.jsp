@@ -15,6 +15,10 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<script>
+	document.title="Acme Gallery";
+</script>
+
 <style>
 	#backgroundBlur{
 		background-image: url('images/wallpapers/${wallpaperName}');

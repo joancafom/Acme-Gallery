@@ -133,7 +133,7 @@
 			</display:column>
 			<security:authorize access="hasRole('ADMINISTRATOR')">
 				<display:column>
-					<a href="comment/administrator/delete.do?commentId=${comment.id}"><spring:message code="comment.remove"/></a>
+					<a href="comment/administrator/delete.do?commentId=${comment.id}&redirect=/group/administrator/display.do?groupId=${group.id}#comments"><spring:message code="comment.remove"/></a>
 				</display:column>
 			</security:authorize>
 			<security:authorize access="hasRole('VISITOR')">
@@ -168,7 +168,7 @@
 			</display:column>
 			<security:authorize access="hasRole('ADMINISTRATOR')">
 				<display:column>
-					<a href="comment/administrator/delete.do?commentId=${reply.id}"><spring:message code="comment.remove"/></a>
+					<a href="comment/administrator/delete.do?commentId=${reply.id}&redirect=/group/administrator/display.do?groupId=${group.id}#comments"><spring:message code="comment.remove"/></a>
 				</display:column>
 			</security:authorize>
 			<security:authorize access="hasRole('VISITOR')">

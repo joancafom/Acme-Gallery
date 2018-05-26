@@ -60,6 +60,7 @@ public class CategoryService {
 	}
 
 	// v1.0 - JA
+	// v2.0 - Alicia
 	public void delete(final Category category) {
 
 		Assert.notNull(category);
@@ -90,7 +91,14 @@ public class CategoryService {
 		category.getParentCategory().getChildrenCategories().remove(category);
 		this.save(category.getParentCategory());
 
+		this.flush();
+
 		this.categoryRepository.delete(category);
+	}
+
+	// v1.0 - Alicia
+	public Collection<Category> findAll() {
+		return this.categoryRepository.findAll();
 	}
 
 	// v1.0 - Alicia
@@ -104,6 +112,11 @@ public class CategoryService {
 		Assert.notNull(category);
 
 		return this.categoryRepository.save(category);
+	}
+
+	// v1.0 - Alicia
+	public void flush() {
+		this.categoryRepository.flush();
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------
@@ -161,6 +174,7 @@ public class CategoryService {
 	}
 
 	// v1.0 - JA
+	// v2.0 - Alicia
 	public Category saveCreate(final Category category) {
 
 		Assert.notNull(category);
@@ -174,6 +188,8 @@ public class CategoryService {
 
 		//The only category allowed to have a null parent is CATEGORY
 		Assert.notNull(category.getParentCategory());
+
+		Assert.isTrue(!category.getName().equals("CATEGORY"));
 
 		//As it is new, its children categories must be empty
 		Assert.notNull(category.getChildrenCategories());
@@ -194,7 +210,6 @@ public class CategoryService {
 
 		return savedCategory;
 	}
-
 	// v1.0 - Alicia
 	public Collection<Category> getAllExceptRoot() {
 		final Collection<Category> res = this.categoryRepository.findAllExceptRoot();

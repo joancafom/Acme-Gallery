@@ -61,7 +61,6 @@
 		<security:intercept-url pattern="/category/administrator/create.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/category/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/category/director/display.do" access="hasRole('DIRECTOR')" />
-		<security:intercept-url pattern="/category/guide/display.do" access="hasRole('GUIDE')" />
 		<security:intercept-url pattern="/category/critic/display.do" access="hasRole('CRITIC')" />
 		<security:intercept-url pattern="/category/sponsor/display.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/category/visitor/display.do" access="hasRole('VISITOR')" />

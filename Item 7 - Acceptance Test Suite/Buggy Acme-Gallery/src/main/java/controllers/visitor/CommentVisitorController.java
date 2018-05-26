@@ -75,29 +75,11 @@ public class CommentVisitorController extends AbstractController {
 
 	// v1.0 - Alicia
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(@RequestParam(required = false) final Integer groupId, @RequestParam(required = false) final Integer commentId, final Comment prunedComment, final BindingResult binding) {
+	public ModelAndView edit(final Comment comment, final BindingResult binding) {
 		ModelAndView res = null;
 
-		Assert.isTrue(groupId != null || commentId != null);
-		Assert.isTrue(!(groupId != null && commentId != null));
-
-		if (groupId != null) {
-			final Group group = this.groupService.findOne(groupId);
-			Assert.notNull(group);
-
-			prunedComment.setGroup(group);
-
-		} else if (commentId != null) {
-			final Comment parentComment = this.commentService.findOne(commentId);
-			Assert.notNull(parentComment);
-
-			prunedComment.setParentComment(parentComment);
-		}
-
-		final Comment comment = this.commentService.reconstruct(prunedComment, binding);
-
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(prunedComment);
+			res = this.createEditModelAndView(comment);
 		else
 			try {
 				final Comment commentS = this.commentService.saveCreate(comment);

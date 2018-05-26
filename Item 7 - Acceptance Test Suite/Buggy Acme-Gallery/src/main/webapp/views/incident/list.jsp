@@ -52,10 +52,6 @@
 		</display:column>
 	</security:authorize>
 	
-	<display:column titleKey="incident.guide">
-		<jstl:out value="${incident.guide.name} ${incident.guide.surnames}"/>
-	</display:column>
-	
 	<display:column titleKey="incident.room">
 		<jstl:out value="${incident.room.name}"/>
 	</display:column>

@@ -42,10 +42,6 @@
 		</jstl:if>
 	</display:column>
 	
-	<display:column titleKey="museum.price">
-		<acme:priceFormat code="price.format" value="${museum.price}"/>
-	</display:column>
-	
 	<display:column titleKey="museum.address" property="address"/>
 	<display:column titleKey="museum.email" property="email"/>
 	

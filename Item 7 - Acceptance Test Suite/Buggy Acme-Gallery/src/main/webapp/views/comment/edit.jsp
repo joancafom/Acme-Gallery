@@ -20,11 +20,18 @@
 
 <jstl:if test="${comment.parentComment eq null}">
 
-<form:form action="comment/${actorWS}edit.do?groupId=${comment.group.id}" modelAttribute="comment">
+<form:form action="comment/${actorWS}edit.do" modelAttribute="comment">
 
 	<!-- Hidden Inputs -->
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+	
+	<form:hidden path="containsTaboo"/>
+	<form:hidden path="childrenComments"/>
+	<form:hidden path="parentComment"/>
+	<form:hidden path="visitor"/>
+	<form:hidden path="group"/>
+	
 	
 	<!-- Inputs -->
 	<br/>
@@ -44,11 +51,17 @@
 
 <jstl:if test="${comment.parentComment ne null}">
 
-<form:form action="comment/${actorWS}edit.do?commentId=${comment.parentComment.id}" modelAttribute="comment">
+<form:form action="comment/${actorWS}edit.do" modelAttribute="comment">
 
 	<!-- Hidden Inputs -->
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+	
+	<form:hidden path="containsTaboo"/>
+	<form:hidden path="childrenComments"/>
+	<form:hidden path="parentComment"/>
+	<form:hidden path="visitor"/>
+	<form:hidden path="group"/>
 	
 	<!-- Inputs -->
 	<br/>

@@ -48,10 +48,6 @@
 		</jstl:if>
 	</display:column>
 	
-	<display:column titleKey="incident.guide">
-		<jstl:out value="${incident.guide.name} ${incident.guide.surnames}"/>
-	</display:column>
-	
 	<display:column titleKey="incident.museum">
 		<a href="museum/director/display.do?museumId=${incident.room.museum.id}"><jstl:out value="${incident.room.museum.name}"/></a>
 	</display:column>

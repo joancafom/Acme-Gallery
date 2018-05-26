@@ -68,7 +68,7 @@
 			</jstl:if>
 		</p>
 		<jstl:if test="${exhibition.isPrivate}">
-			<p><spring:message code="exhibition.price"/>: <acme:priceFormat code="price.format" value="${exhibition.price}" /></p>
+			<p><spring:message code="exhibition.price"/>: <fmt:formatNumber type="currency" currencySymbol="&#8364;" pattern="${priceFormat}" value="${exhibition.price}" /></p>
 		</jstl:if>
 		<p><spring:message code="exhibition.ticker"/>: <em><jstl:out value="${exhibition.ticker}"/></em></p>
 		<p><spring:message code="exhibition.websites"/>:</p>
@@ -89,7 +89,7 @@
 
 	<h4><spring:message code="exhibition.artworks"/></h4>
 	
-	<display:table name="artworks" id="artwork" requestURI="exhibition/${actorWS}display.do#eArtworks" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeA}">
+	<display:table name="artworks" id="artwork" requestURI="exhibit1on/${actorWS}display.do#eArtworks" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeA}">
 		<display:column titleKey="artwork.title">
 			<a href="artwork/${actorWS}display.do?artworkId=<jstl:out value="${artwork.id}" />"><jstl:out value="${artwork.title}" /></a>
 		</display:column>

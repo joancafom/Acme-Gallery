@@ -83,10 +83,10 @@
 
 <div id="mExhibitions" class="info">
 
-	<security:authorize access="hasAnyRole('VISITOR','SPONSOR', 'CRITIC') or isAnonymous()">
+	<security:authorize access="hasRole('VISITOR') or isAnonymous()">
 		<h4><spring:message code="museum.exhibitions.currentAndFuture"/></h4>
 	</security:authorize>
-	<security:authorize access="hasAnyRole('ADMINISTRATOR','DIRECTOR', 'GUIDE')">
+	<security:authorize access="hasAnyRole('ADMINISTRATOR','DIRECTOR', 'GUIDE', 'CRITIC', 'SPONSOR')">
 		<h4><spring:message code="museum.exhibitions"/></h4>
 	</security:authorize>
 	

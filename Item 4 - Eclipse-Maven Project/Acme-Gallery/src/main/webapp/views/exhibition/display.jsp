@@ -66,7 +66,7 @@
 			</jstl:if>
 		</p>
 		<jstl:if test="${exhibition.isPrivate}">
-			<p><spring:message code="exhibition.price"/>: <fmt:formatNumber type="currency" currencySymbol="&#8364;" pattern="${priceFormat}" value="${exhibition.price}" /></p>
+			<p><spring:message code="exhibition.price"/>: <acme:priceFormat code="price.format" value="${exhibition.price}" /></p>
 		</jstl:if>
 		<p><spring:message code="exhibition.ticker"/>: <em><jstl:out value="${exhibition.ticker}"/></em></p>
 		<p><spring:message code="exhibition.websites"/>:</p>
@@ -114,6 +114,16 @@
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>
+		<security:authorize access="hasAnyRole('ADMINISTRATOR', 'CRITIC', 'DIRECTOR', 'GUIDE', 'SPONSOR')">
+			<display:column titleKey="artwork.mode">
+				<jstl:if test="${artwork.isFinal==false}">
+					<p><spring:message code="artwork.mode.draft" /></p>
+				</jstl:if>
+				<jstl:if test="${artwork.isFinal==true}">
+					<p><spring:message code="artwork.mode.final" /></p>
+				</jstl:if>
+			</display:column>
+		</security:authorize>
 		<security:authorize access="hasRole('GUIDE')">
 			<display:column>
 				<jstl:if test="${artwork.isFinal==false}">

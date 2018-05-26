@@ -64,7 +64,7 @@ public class MuseumSponsorController extends AbstractController {
 		final Integer resultSizeR = new Long(pageResultR.getTotalElements()).intValue();
 
 		//Exhibition are also listed in a Museum's Profile (in this case, current and future ones)
-		final Page<Exhibition> pageResultE = this.exhibitionService.getCurrentAndFutureByMuseum(museum, pageE, 5);
+		final Page<Exhibition> pageResultE = this.exhibitionService.getAllByMuseum(museum, pageE, 5);
 		final Collection<Exhibition> exhibitions = pageResultE.getContent();
 		final Integer resultSizeE = new Long(pageResultE.getTotalElements()).intValue();
 

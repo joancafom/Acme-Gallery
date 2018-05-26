@@ -74,7 +74,7 @@ public class DirectorAdministratorController extends AbstractController {
 
 				this.directorService.register(directorToRegister);
 
-				res = new ModelAndView("welcome/index");
+				res = new ModelAndView("redirect:/");
 
 			} catch (final DataIntegrityViolationException oops) {
 				res = this.createEditModelAndView(actorRegistrationForm, "actor.userAccount.username.duplicated");

@@ -65,7 +65,7 @@ public class CriticAdministratorController extends AbstractController {
 
 				this.criticService.register(criticToRegister);
 
-				res = new ModelAndView("welcome/index");
+				res = new ModelAndView("redirect:/");
 
 			} catch (final DataIntegrityViolationException oops) {
 				res = this.createEditModelAndView(actorRegistrationForm, "actor.userAccount.username.duplicated");

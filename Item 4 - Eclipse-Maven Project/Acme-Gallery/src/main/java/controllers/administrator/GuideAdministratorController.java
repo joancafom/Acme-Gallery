@@ -65,7 +65,7 @@ public class GuideAdministratorController extends AbstractController {
 
 				this.guideService.register(guideToRegister);
 
-				res = new ModelAndView("welcome/index");
+				res = new ModelAndView("redirect:/");
 
 			} catch (final DataIntegrityViolationException oops) {
 				res = this.createEditModelAndView(actorRegistrationForm, "actor.userAccount.username.duplicated");

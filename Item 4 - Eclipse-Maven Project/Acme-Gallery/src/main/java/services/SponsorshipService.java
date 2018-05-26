@@ -258,13 +258,14 @@ public class SponsorshipService {
 		Assert.isTrue(sponsorshipToUpdate.getStatus().equals("TIME_NEGOTIATION") || sponsorshipToUpdate.getStatus().equals("REJECTED"));
 
 		//If the sponsorship were to be updated to TIME_NEGOTIATION, the dates must be available
-		if (sponsorshipToUpdate.getStatus().equals("TIME_NEGOTIATION"))
+		if (sponsorshipToUpdate.getStatus().equals("TIME_NEGOTIATION")) {
 			if (!this.checkDatesAvailability(oldSponsorship.getExhibition(), sponsorshipToUpdate.getStartingDate(), sponsorshipToUpdate.getEndingDate()))
 				throw new IllegalStateException("The requested dates are unavailable");
 
-		//The dates must be in the boundaries of the exhibition also
-		Assert.isTrue(sponsorshipToUpdate.getStartingDate().compareTo(oldSponsorship.getExhibition().getStartingDate()) >= 0);
-		Assert.isTrue(sponsorshipToUpdate.getEndingDate().compareTo(oldSponsorship.getExhibition().getEndingDate()) <= 0);
+			//The dates must be in the boundaries of the exhibition also (in case we were accepting it
+			Assert.isTrue(sponsorshipToUpdate.getStartingDate().compareTo(oldSponsorship.getExhibition().getStartingDate()) >= 0);
+			Assert.isTrue(sponsorshipToUpdate.getEndingDate().compareTo(oldSponsorship.getExhibition().getEndingDate()) <= 0);
+		}
 
 		return this.save(sponsorshipToUpdate);
 	}

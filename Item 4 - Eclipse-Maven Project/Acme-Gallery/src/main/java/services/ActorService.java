@@ -125,7 +125,10 @@ public class ActorService {
 		actorToReconstruct.setName(actorRegistrationForm.getName());
 		actorToReconstruct.setSurnames(actorRegistrationForm.getSurnames());
 		actorToReconstruct.setEmail(actorRegistrationForm.getEmail());
-		actorToReconstruct.setPhoneNumber(actorRegistrationForm.getPhoneNumber());
+		if (actorRegistrationForm.getPhoneNumber() != null)
+			actorToReconstruct.setPhoneNumber(actorRegistrationForm.getPhoneNumber().replaceAll(" ", ""));
+		else
+			actorToReconstruct.setPhoneNumber(actorRegistrationForm.getPhoneNumber());
 
 		if (actorRegistrationForm.getAddress() == null || actorRegistrationForm.getAddress().equals(""))
 			actorToReconstruct.setAddress(null);

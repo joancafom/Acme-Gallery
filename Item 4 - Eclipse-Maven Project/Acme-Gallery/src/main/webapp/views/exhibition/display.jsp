@@ -47,7 +47,9 @@
 </security:authorize>
 
 <security:authorize access="hasRole('SPONSOR')">
-	<h3 style="text-align:center;"><a href="sponsorship/sponsor/create.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.sponsor"/></a></h3>
+	<jstl:if test="${canBeSponsored}">
+		<h3 style="text-align:center;"><a href="sponsorship/sponsor/create.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.sponsor"/></a></h3>
+	</jstl:if>
 </security:authorize>
 
 <div id="eInfo" class="info container">

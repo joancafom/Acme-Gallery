@@ -48,6 +48,6 @@
 	</display:column>
 	
 	<display:column>
-		<a href="group/administrator/delete.do?groupId=${group.id}&listTabooed=true"><spring:message code="group.delete" /></a>
+		<a href="group/administrator/delete.do?groupId=${group.id}&listTaboo=true"><spring:message code="group.delete" /></a>
 	</display:column>
 </display:table>

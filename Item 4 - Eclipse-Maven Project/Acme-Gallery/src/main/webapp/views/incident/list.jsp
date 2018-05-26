@@ -47,7 +47,7 @@
 	<security:authorize access="hasRole('DIRECTOR')">
 		<display:column>
 			<jstl:if test="${incident.isChecked eq false}">
-				<a href="incident/director/check.do?incidentId=${incident.id}"><spring:message code="incident.check" /></a>
+				<a href="incident/director/check.do?incidentId=${incident.id}&listMine=false"><spring:message code="incident.check" /></a>
 			</jstl:if>
 		</display:column>
 	</security:authorize>
@@ -63,7 +63,7 @@
 	<security:authorize access="hasRole('DIRECTOR')">
 		<display:column>
 			<jstl:if test="${incident.isChecked eq false}">
-				<a href="incident/director/delete.do?incidentId=${incident.id}"><spring:message code="incident.delete" /></a>
+				<a href="incident/director/delete.do?incidentId=${incident.id}&listMine=false"><spring:message code="incident.delete" /></a>
 			</jstl:if>
 		</display:column>
 	</security:authorize>

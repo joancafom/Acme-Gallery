@@ -96,15 +96,18 @@ public class IncidentDirectorController extends AbstractController {
 		return res;
 	}
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
-	public ModelAndView check(@RequestParam final int incidentId, final RedirectAttributes redirectAttributes) {
-		final ModelAndView res;
+	public ModelAndView check(@RequestParam final int incidentId, @RequestParam(required = false, defaultValue = "false") final Boolean listMine, final RedirectAttributes redirectAttributes) {
+		ModelAndView res = null;
 
 		final Incident incident = this.incidentService.findOne(incidentId);
 		Assert.notNull(incident);
 
-		res = new ModelAndView("redirect:list.do?museumId=" + incident.getRoom().getMuseum().getId());
+		if (listMine.equals(true))
+			res = new ModelAndView("redirect:listMine.do");
+		else if (listMine.equals(false))
+			res = new ModelAndView("redirect:list.do?museumId=" + incident.getRoom().getMuseum().getId());
 
 		try {
 			this.incidentService.check(incident);
@@ -115,15 +118,18 @@ public class IncidentDirectorController extends AbstractController {
 		return res;
 	}
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final int incidentId, final RedirectAttributes redirectAttributes) {
-		final ModelAndView res;
+	public ModelAndView delete(@RequestParam final int incidentId, @RequestParam(required = false, defaultValue = "false") final Boolean listMine, final RedirectAttributes redirectAttributes) {
+		ModelAndView res = null;
 
 		final Incident incident = this.incidentService.findOne(incidentId);
 		Assert.notNull(incident);
 
-		res = new ModelAndView("redirect:list.do?museumId=" + incident.getRoom().getMuseum().getId());
+		if (listMine.equals(true))
+			res = new ModelAndView("redirect:listMine.do");
+		else if (listMine.equals(false))
+			res = new ModelAndView("redirect:list.do?museumId=" + incident.getRoom().getMuseum().getId());
 
 		try {
 			this.incidentService.delete(incident);

@@ -33,6 +33,7 @@ import domain.Exhibition;
 import domain.Guide;
 import domain.Museum;
 import domain.Room;
+import domain.Sponsor;
 import domain.Sponsorship;
 import forms.ExhibitionForm;
 
@@ -64,6 +65,9 @@ public class ExhibitionService {
 
 	@Autowired
 	private RoomService				roomService;
+
+	@Autowired
+	private SponsorService			sponsorService;
 
 	@Autowired
 	private SponsorshipService		sponsorshipService;
@@ -412,7 +416,7 @@ public class ExhibitionService {
 		return res;
 	}
 
-	// v2.0 - Alicia
+	// v3.0 - Alicia
 	public Exhibition reconstructSave(final ExhibitionForm exhibitionForm, final BindingResult binding) {
 		Assert.notNull(exhibitionForm);
 
@@ -445,6 +449,8 @@ public class ExhibitionService {
 			for (final String s : exhibitionForm.getGuides()) {
 				final Guide g = this.guideService.findOne(new Integer(s));
 				Assert.notNull(g);
+				Assert.isTrue(oldExhibition.getRoom().getMuseum().getGuides().contains(g));
+				Assert.isTrue(!oldExhibition.getGuides().contains(g));
 				newGuides.add(g);
 				g.getExhibitions().add(res);
 				this.guideService.save(g);
@@ -550,6 +556,19 @@ public class ExhibitionService {
 
 		final Collection<Exhibition> res = this.exhibitionRepository.findFutureExhibitionsWithSponsorshipsByRoomId(room.getId());
 		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Boolean canBeSponsored(final Exhibition exhibition) {
+		Boolean res = false;
+
+		final Sponsor sponsor = this.sponsorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(sponsor);
+
+		if (exhibition.getStartingDate().after(new Date()))
+			res = true;
 
 		return res;
 	}

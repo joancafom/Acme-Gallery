@@ -33,24 +33,32 @@
 	
 	<br/>
 	
-	<acme:textbox code="room.name" path="name"/><br/>
-	<acme:textbox code="room.area" path="area"/><br/>
+	<jstl:if test="${not empty museums}">
 	
-	<br/>
+		<acme:textbox code="room.name" path="name"/><br/>
+		<acme:textbox code="room.area" path="area"/><br/>
 	
-	<strong><form:label path="museum"><spring:message code="room.museum"/>: </form:label></strong>
-	<form:select path="museum">
-		<form:option value="0" label="---"/>
-		<jstl:forEach items="${museums}" var="m">
-			<form:option value="${m.id}" label="${m.name}"/>
-		</jstl:forEach>
-	</form:select>
-	<form:errors cssClass="error" path="museum"/>
+		<br/>
 	
-	<br/><br/>
+		<strong><form:label path="museum"><spring:message code="room.museum"/>: </form:label></strong>
+		<form:select path="museum">
+			<form:option value="0" label="---"/>
+			<jstl:forEach items="${museums}" var="m">
+				<form:option value="${m.id}" label="${m.name}"/>
+			</jstl:forEach>
+		</form:select>
+		<form:errors cssClass="error" path="museum"/>
 	
-	<acme:submit name="save" code="room.save"/>
-	<acme:cancel url="room/${actorWS}listMine.do" code="room.cancel"/>
+		<br/><br/>
+	
+		<acme:submit name="save" code="room.save"/>
+		<acme:cancel url="room/${actorWS}listMine.do" code="room.cancel"/>
+	
+	</jstl:if>
+
+	<jstl:if test="${empty museums}">
+		<acme:cancel url="room/${actorWS}listMine.do" code="room.back"/>
+	</jstl:if>
 	
 </form:form>
 

@@ -20,7 +20,7 @@
 
 <spring:message code="price.format" var="priceFormat"></spring:message>
 
-<h3 style="text-align:center;"><spring:message code="room.museum.link"/><a href="museum/director/display.do?museumId=${museum.id}"><jstl:out value="${room.museum.name}"/></a></h3>
+<h3 style="text-align:center;"><spring:message code="room.museum.link"/><a href="museum/director/display.do?museumId=${room.museum.id}"> <jstl:out value="${room.museum.name}"/></a></h3>
 
 <p><strong><spring:message code="room.name"/>:</strong> <jstl:out value="${room.name}"/></p>
 <p><strong><spring:message code="room.area"/>:</strong> <jstl:out value="${room.area}"/> m<sup>2</sup></p>

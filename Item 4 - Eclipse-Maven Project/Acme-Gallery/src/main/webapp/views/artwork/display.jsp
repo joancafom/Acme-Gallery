@@ -24,6 +24,15 @@
 	<h3 style="color:gold; text-align:center;"><spring:message code="artwork.highlight"/></h3>
 </jstl:if>
 
+<security:authorize access="hasAnyRole('ADMINISTRATOR','DIRECTOR', 'GUIDE', 'CRITIC', 'SPONSOR')">
+	<jstl:if test="${artwork.isFinal eq true}">
+		<h3 style="text-align: center; font-style: italic;"><spring:message code="artwork.isFinal.true"/></h3>
+	</jstl:if>
+	<jstl:if test="${artwork.isFinal eq false}">
+		<h3 style="text-align: center; font-style: italic;"><spring:message code="artwork.isFinal.false"/></h3>
+	</jstl:if>
+</security:authorize>
+
 <div style="display:block; margin-left: auto; margin-right:auto; text-align:center; font-weight: bold;">
 	<jstl:if test="${artwork.creatorName ne null}">
 		<jstl:out value="${artwork.creatorName}"/> - 

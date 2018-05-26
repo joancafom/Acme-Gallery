@@ -29,6 +29,10 @@
 		<a href="exhibition/${actorWS}display.do?exhibitionId=${exhibition.id}"><jstl:out value="${exhibition.title}"/></a>
 	</display:column>
 	
+	<display:column titleKey="exhibition.museum">
+		<a href="museum/${actorWS}display.do?museumId=${exhibition.room.museum.id}"><jstl:out value="${exhibition.room.museum.name}"/></a>
+	</display:column>
+	
 	<display:column titleKey="exhibition.startingDate">
 		<acme:dateFormat code="date.format" value="${exhibition.startingDate}"/>
 	</display:column>

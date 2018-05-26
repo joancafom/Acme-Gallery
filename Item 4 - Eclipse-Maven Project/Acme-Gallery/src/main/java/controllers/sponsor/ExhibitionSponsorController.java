@@ -60,6 +60,7 @@ public class ExhibitionSponsorController extends AbstractController {
 	// Methods ----------------------------------------------------------------------------------------
 
 	//v1.0 - Implemented by JA
+	// v2.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int exhibitionId, @RequestParam(value = "d-1332818-p", defaultValue = "1") final Integer pageA, @RequestParam(value = "d-3999872-p", defaultValue = "1") final Integer pageC, @RequestParam(
 		value = "d-148442-p", defaultValue = "1") final Integer pageG) {
@@ -87,6 +88,8 @@ public class ExhibitionSponsorController extends AbstractController {
 		//We must display the current sponsorship, if any
 		final Sponsorship currentSponsorship = this.sponsorshipService.findCurrentByExhibition(exhibition);
 
+		final Boolean canBeSponsored = this.exhibitionService.canBeSponsored(exhibition);
+
 		res = new ModelAndView("exhibition/display");
 		res.addObject("exhibition", exhibition);
 		res.addObject("artworks", artworks);
@@ -96,6 +99,7 @@ public class ExhibitionSponsorController extends AbstractController {
 		res.addObject("guides", guides);
 		res.addObject("resultSizeG", resultSizeG);
 		res.addObject("ad", currentSponsorship);
+		res.addObject("canBeSponsored", canBeSponsored);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

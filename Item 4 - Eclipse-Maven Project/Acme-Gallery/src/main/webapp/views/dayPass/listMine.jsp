@@ -30,12 +30,12 @@
 	</display:column>
 	
 	<display:column titleKey="dayPass.museum">
-		<jstl:out value="${dayPass.museum.name}"/>
+		<a href="museum/${actorWS}display.do?museumId=${dayPass.museum.id}"><jstl:out value="${dayPass.museum.name}"/></a>
 	</display:column>
 	
 	<display:column titleKey="dayPass.exhibition.name">
 		<jstl:if test="${dayPass.exhibition.title ne null}">
-			<jstl:out value="${dayPass.exhibition.title}"/>
+			<a href="exhibition/${actorWS}display.do?exhibitionId=${dayPass.exhibition.id}"><jstl:out value="${dayPass.exhibition.title}"/></a>
 		</jstl:if>
 		<jstl:if test="${dayPass.exhibition.title eq null}">
 			<jstl:out value="-"/>

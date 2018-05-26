@@ -257,7 +257,7 @@ public class ExhibitionDirectorController extends AbstractController {
 		return res;
 	}
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Exhibition prunedExhibition, final BindingResult binding) {
 		ModelAndView res = null;
@@ -271,13 +271,13 @@ public class ExhibitionDirectorController extends AbstractController {
 				final Exhibition exhibitionS = this.exhibitionService.saveCreateAndEdit(exhibition);
 				res = new ModelAndView("redirect:/exhibition/director/display.do?exhibitionId=" + exhibitionS.getId());
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(prunedExhibition, "exhibition.commit.error");
+				res = this.createEditModelAndView(exhibition, "exhibition.commit.error");
 			}
 
 		return res;
 
 	}
-
+	
 	// v1.0 - Alicia
 	@RequestMapping(value = "/addGuide", method = RequestMethod.POST, params = "save")
 	public ModelAndView addGuide(final ExhibitionForm exhibitionForm, final BindingResult binding) {
@@ -317,16 +317,19 @@ public class ExhibitionDirectorController extends AbstractController {
 		return res;
 	}
 
-	// v2.0 - Alicia
+	// v3.0 - Alicia
 	private ModelAndView createEditModelAndView(final Exhibition exhibition, final String message) {
 		final ModelAndView res;
+
+		if (exhibition.getId() != 0)
+			Assert.isTrue(exhibition.getStartingDate().after(new Date()));
 
 		res = new ModelAndView("exhibition/edit");
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
 		final Collection<Room> rooms = this.roomService.getByPrincipal();
 
-		if (exhibition.getId() == 0 || exhibition.getDayPasses().isEmpty()) {
+		if (exhibition.getId() == 0 || this.exhibitionService.findOne(exhibition.getId()).getDayPasses().isEmpty()) {
 			final Collection<String> tickers = this.exhibitionService.getTickersByPrincipal();
 			final Collection<Date> startingDates = this.exhibitionService.getStartingDatesByPrincipal();
 			final Collection<Date> endingDates = this.exhibitionService.getEndingDatesByPrincipal();

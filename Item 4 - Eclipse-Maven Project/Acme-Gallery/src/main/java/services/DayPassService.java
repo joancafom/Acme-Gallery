@@ -47,6 +47,9 @@ public class DayPassService {
 	@Autowired
 	private MuseumService				museumService;
 
+	@Autowired
+	private ArtworkService				artworkService;
+
 	// Validator --------------------------------------------------------------------------------------
 
 	@Autowired
@@ -55,8 +58,11 @@ public class DayPassService {
 
 	// CRUD Methods -----------------------------------------------------------------------------------
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	public DayPass create(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+		Assert.isTrue(exhibition.getIsPrivate());
+
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(visitor);
 
@@ -123,7 +129,7 @@ public class DayPassService {
 		this.dayPassRepository.delete(dayPass);
 	}
 
-	// v2.0 - Alicia
+	// v3.0 - Alicia
 	public DayPass saveCreateAndEdit(final DayPass dayPass) {
 		Assert.notNull(dayPass);
 		Assert.isTrue(dayPass.getId() == 0);
@@ -146,6 +152,9 @@ public class DayPassService {
 		final LocalDate now = new LocalDate();
 		Assert.notNull(dayPass.getCreditCard());
 
+		final int compareVisitDate = DateTimeComparator.getDateOnlyInstance().compare(dayPass.getVisitDate(), now.toDate());
+		Assert.isTrue(compareVisitDate >= 0);
+
 		// Assert (year == current && month == current) || year == future || (year == current && month == future)
 		Assert.isTrue((now.getYear() == dayPass.getCreditCard().getYear() && now.getMonthOfYear() == dayPass.getCreditCard().getMonth()) || (now.getYear() < dayPass.getCreditCard().getYear())
 			|| (now.getYear() == dayPass.getCreditCard().getYear() && now.getMonthOfYear() < dayPass.getCreditCard().getMonth()));
@@ -155,13 +164,13 @@ public class DayPassService {
 	}
 	// Other Business Methods -------------------------------------------------------------------------
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	public Boolean canBuyADayPass(final Exhibition exhibition) {
 		Assert.notNull(exhibition);
 
 		Boolean res = false;
 
-		if (exhibition.getIsPrivate() && exhibition.getEndingDate().after(new Date()) && !exhibition.getArtworks().isEmpty())
+		if (exhibition.getIsPrivate() && exhibition.getEndingDate().after(new Date()) && !this.artworkService.findFinalByExhibition(exhibition).isEmpty())
 			res = true;
 
 		return res;

@@ -110,7 +110,7 @@ public class DayPassVisitorController extends AbstractController {
 		return res;
 	}
 
-	// v2.0 - Alicia
+	// v3.0 - Alicia
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@RequestParam(required = false) final Integer exhibitionId, @RequestParam(required = false) final Integer museumId, final DayPass prunedDayPass, final BindingResult binding) {
 		ModelAndView res = null;
@@ -121,6 +121,7 @@ public class DayPassVisitorController extends AbstractController {
 		if (exhibitionId != null) {
 			final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
 			Assert.notNull(exhibition);
+			Assert.isTrue(this.dayPassService.canBuyADayPass(exhibition));
 
 			prunedDayPass.setExhibition(exhibition);
 
@@ -133,9 +134,10 @@ public class DayPassVisitorController extends AbstractController {
 
 		final DayPass dayPass = this.dayPassService.reconstruct(prunedDayPass, binding);
 
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
+			prunedDayPass.setPrice(dayPass.getPrice());
 			res = this.createEditModelAndView(prunedDayPass);
-		else
+		} else
 			try {
 				this.dayPassService.saveCreateAndEdit(dayPass);
 				res = new ModelAndView("redirect:/dayPass/visitor/listMine.do");

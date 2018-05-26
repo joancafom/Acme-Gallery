@@ -54,13 +54,15 @@ public class SponsorshipSponsorController extends AbstractController {
 
 	// Methods ----------------------------------------------------------------------------------------
 
-	// v1.0 - Alicia
+	// v2.0 - Alicia
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int exhibitionId) {
 		final ModelAndView res;
 
 		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
 		Assert.notNull(exhibition);
+
+		Assert.isTrue(this.exhibitionService.canBeSponsored(exhibition));
 
 		final Sponsorship sponsorship = this.sponsorshipService.create(exhibition);
 
@@ -133,13 +135,15 @@ public class SponsorshipSponsorController extends AbstractController {
 		return res;
 	}
 
-	// v2.0 - Alicia
+	// v3.0 - Alicia
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@RequestParam final int exhibitionId, final Sponsorship prunedSponsorship, final BindingResult binding) {
 		ModelAndView res = null;
 
 		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
 		Assert.notNull(exhibition);
+
+		Assert.isTrue(this.exhibitionService.canBeSponsored(exhibition));
 
 		prunedSponsorship.setExhibition(exhibition);
 

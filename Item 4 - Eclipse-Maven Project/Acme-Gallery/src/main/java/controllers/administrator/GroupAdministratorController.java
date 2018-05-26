@@ -74,16 +74,15 @@ public class GroupAdministratorController extends AbstractController {
 		return res;
 	}
 
-	// v1.0 - JA
+	// v1.0 - Alicia
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final int groupId, @RequestParam(required = false, defaultValue = "false") final Boolean listTabooed, final RedirectAttributes redirectAttributes) {
+	public ModelAndView delete(@RequestParam final int groupId, @RequestParam(required = false, defaultValue = "false") final Boolean listTaboo, final RedirectAttributes redirectAttributes) {
+		ModelAndView res = null;
 
-		final ModelAndView res;
-
-		if (listTabooed == null || !listTabooed)
-			res = new ModelAndView("redirect:list.do");
-		else
+		if (listTaboo.equals(true))
 			res = new ModelAndView("redirect:listTaboo.do");
+		else if (listTaboo.equals(false))
+			res = new ModelAndView("redirect:list.do");
 
 		final Group toDelete = this.groupService.findOne(groupId);
 		Assert.notNull(toDelete);

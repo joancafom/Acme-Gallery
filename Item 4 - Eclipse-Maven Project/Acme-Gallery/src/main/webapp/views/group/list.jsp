@@ -49,7 +49,7 @@
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<display:column>
-			<a href="group/administrator/delete.do?groupId=${group.id}"><spring:message code="group.delete" /></a>
+			<a href="group/administrator/delete.do?groupId=${group.id}&listTabooed=false"><spring:message code="group.delete" /></a>
 		</display:column>
 	</security:authorize>
 </display:table>

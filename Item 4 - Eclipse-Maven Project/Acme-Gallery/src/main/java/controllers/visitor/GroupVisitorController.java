@@ -164,7 +164,7 @@ public class GroupVisitorController extends AbstractController {
 		try {
 
 			this.groupService.deleteOwner(groupToDelete);
-			res = new ModelAndView("redirect:list.do");
+			res = new ModelAndView("redirect:listCreated.do");
 
 		} catch (final Throwable oops) {
 			res = new ModelAndView("redirect:display.do?groupId=" + groupId);

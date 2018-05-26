@@ -36,7 +36,7 @@
    <acme:textbox code="museum.slogan" path="slogan" />
    <acme:textbox code="museum.address" path="address" />
    <acme:textbox code="museum.email" path="email" />
-   <acme:textbox code="museum.phoneNumber" path="phoneNumber" />
+   <acme:textbox code="museum.phoneNumber" path="phoneNumber" placeholder="(+)333333333" />
    <acme:textbox code="museum.price" path="price" />
    <acme:textbox code="museum.coordinates.latitude" path="coordinates.latitude" />
    <acme:textbox code="museum.coordinates.longitude" path="coordinates.longitude" />

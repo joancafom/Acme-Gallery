@@ -1728,7 +1728,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
-		<property name="price" value="68.99" />
+		<property name="price" value="16.94" />
 		<property name="VAT" value="0.21" />
 
 		<property name="visitor" ref="visitor1" />
@@ -1749,7 +1749,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
-		<property name="price" value="85.99" />
+		<property name="price" value="19.52" />
 		<property name="VAT" value="0.22" />
 
 		<property name="visitor" ref="visitor1" />
@@ -1790,7 +1790,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
-		<property name="price" value="88.59" />
+		<property name="price" value="122.19" />
 		<property name="VAT" value="0.21" />
 
 		<property name="visitor" ref="visitor1" />
@@ -1811,7 +1811,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
-		<property name="price" value="35.55" />
+		<property name="price" value="8.45" />
 		<property name="VAT" value="0.21" />
 
 		<property name="visitor" ref="visitor1" />
@@ -1832,7 +1832,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard2" />
-		<property name="price" value="68.99" />
+		<property name="price" value="19.2" />
 		<property name="VAT" value="0.20" />
 
 		<property name="visitor" ref="visitor2" />
@@ -1893,7 +1893,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard2" />
-		<property name="price" value="35.55" />
+		<property name="price" value="8.45" />
 		<property name="VAT" value="0.21" />
 
 		<property name="visitor" ref="visitor2" />
@@ -1914,7 +1914,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard6" />
-		<property name="price" value="68.99" />
+		<property name="price" value="19.36" />
 		<property name="VAT" value="0.21" />
 
 		<property name="visitor" ref="visitor6" />
@@ -1955,7 +1955,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard6" />
-		<property name="price" value="70.50" />
+		<property name="price" value="126.23" />
 		<property name="VAT" value="0.25" />
 
 		<property name="visitor" ref="visitor6" />
@@ -1976,7 +1976,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard4" />
-		<property name="price" value="68.99" />
+		<property name="price" value="20.00" />
 		<property name="VAT" value="0.25" />
 
 		<property name="visitor" ref="visitor4" />
@@ -1997,7 +1997,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard4" />
-		<property name="price" value="80.00" />
+		<property name="price" value="37.5" />
 		<property name="VAT" value="0.25" />
 
 		<property name="visitor" ref="visitor4" />
@@ -2018,7 +2018,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard5" />
-		<property name="price" value="75.00" />
+		<property name="price" value="19.36" />
 		<property name="VAT" value="0.21" />
 
 		<property name="visitor" ref="visitor5" />
@@ -2079,7 +2079,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard5" />
-		<property name="price" value="80.99" />
+		<property name="price" value="39.30" />
 		<property name="VAT" value="0.31" />
 
 		<property name="visitor" ref="visitor5" />
@@ -2100,7 +2100,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard1" />
-		<property name="price" value="58.99" />
+		<property name="price" value="14.3" />
 		<property name="VAT" value="0.30" />
 
 		<property name="visitor" ref="visitor1" />
@@ -2121,7 +2121,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard2" />
-		<property name="price" value="88.99" />
+		<property name="price" value="55.66" />
 		<property name="VAT" value="0.21" />
 
 		<property name="visitor" ref="visitor2" />
@@ -2142,7 +2142,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard4" />
-		<property name="price" value="89.99" />
+		<property name="price" value="12.21" />
 		<property name="VAT" value="0.21" />
 
 		<property name="visitor" ref="visitor4" />
@@ -2163,7 +2163,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard5" />
-		<property name="price" value="83.99" />
+		<property name="price" value="21.93" />
 		<property name="VAT" value="0.24" />
 
 		<property name="visitor" ref="visitor5" />
@@ -2184,7 +2184,7 @@
 			</bean>
 		</property>
 		<property name="creditCard" ref="creditCard6" />
-		<property name="price" value="49.99" />
+		<property name="price" value="24.32" />
 		<property name="VAT" value="0.28" />
 
 		<property name="visitor" ref="visitor6" />

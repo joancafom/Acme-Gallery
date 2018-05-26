@@ -21,7 +21,7 @@
 
 <display:table name="rooms" id="room" requestURI="room/${actorWS}list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
 
-	<display:column titleKey="room.name" property="name"/>
+	<display:column titleKey="room.name" property="name" sortable="true"/>
 	
 	<display:column titleKey="room.area">
 		<jstl:out value="${room.area}"/> m<sup>2</sup>

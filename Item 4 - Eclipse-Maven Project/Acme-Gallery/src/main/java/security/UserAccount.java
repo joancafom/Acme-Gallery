@@ -78,6 +78,7 @@ public class UserAccount extends DomainEntity implements UserDetails {
 
 	@Size(min = 5, max = 32)
 	@Override
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword() {
 		return this.password;
 	}

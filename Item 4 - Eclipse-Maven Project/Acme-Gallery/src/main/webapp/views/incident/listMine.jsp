@@ -21,7 +21,7 @@
 
 	<display:column titleKey="incident.text" property="text"/>
 	
-	<display:column titleKey="incident.level">
+	<display:column titleKey="incident.level" sortable="true">
 		<jstl:if test="${incident.level eq 'LOW'}">
 			<spring:message code="incident.level.low"/>
 		</jstl:if>

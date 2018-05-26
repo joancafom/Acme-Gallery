@@ -129,7 +129,7 @@
 		</display:column>
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<display:column>
-				<a href="review/administrator/delete.do?reviewId=${review.id}"><spring:message code="review.delete"/></a>
+				<a href="review/administrator/delete.do?reviewId=${review.id}&redirect=/museum/administrator/display.do?museumId=${museum.id}#mReviews"><spring:message code="review.delete"/></a>
 			</display:column>
 		</security:authorize>
 	</display:table>

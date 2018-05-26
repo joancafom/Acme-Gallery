@@ -39,6 +39,6 @@
 			<acme:dateFormat code="date.format" value="${review.creationDate}"/>
 		</display:column>
 		<display:column>
-			<a href="review/administrator/delete.do?reviewId=${review.id}"><spring:message code="review.delete"/></a>
+			<a href="review/administrator/delete.do?reviewId=${review.id}&redirect=listTaboo.do"><spring:message code="review.delete"/></a>
 		</display:column>
 	</display:table>

@@ -20,8 +20,9 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-	<form:form action="announcement/visitor/edit.do?groupId=${group.id}" modelAttribute="announcement">
+	<form:form action="announcement/visitor/edit.do" modelAttribute="announcement">
 		<br>	
+		<form:hidden path="group"/>
 		<!-- Inputs -->
 		
 		<acme:textbox code="announcement.title" path="title"/><br>

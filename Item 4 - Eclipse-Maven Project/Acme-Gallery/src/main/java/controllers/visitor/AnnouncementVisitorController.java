@@ -90,13 +90,8 @@ public class AnnouncementVisitorController extends AbstractController {
 
 	/* v1.0 - josembell */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final Announcement prunedAnnouncement, final int groupId, final BindingResult binding) {
+	public ModelAndView edit(final Announcement prunedAnnouncement, final BindingResult binding) {
 		ModelAndView res = null;
-		final Group group = this.groupService.findOne(groupId);
-		Assert.notNull(group);
-
-		prunedAnnouncement.setGroup(group);
-
 		final Announcement announcement = this.announcementService.reconstruct(prunedAnnouncement, binding);
 
 		if (binding.hasErrors())

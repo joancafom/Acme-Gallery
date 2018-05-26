@@ -55,7 +55,7 @@ public class ReviewAdministratorController extends AbstractController {
 
 	/* v1.0 - josembell */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final int reviewId, final RedirectAttributes redirectAttributes) {
+	public ModelAndView delete(@RequestParam final int reviewId, @RequestParam final String redirect, final RedirectAttributes redirectAttributes) {
 		final ModelAndView result;
 		final Administrator admin = this.administratorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(admin);
@@ -63,7 +63,7 @@ public class ReviewAdministratorController extends AbstractController {
 		final Review review = this.reviewService.findOne(reviewId);
 		Assert.notNull(review);
 
-		result = new ModelAndView("redirect:listTaboo.do");
+		result = new ModelAndView("redirect:" + redirect);
 
 		try {
 			this.reviewService.delete(review);

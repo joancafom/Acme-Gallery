@@ -212,6 +212,7 @@ public class MuseumService extends ActorService {
 			reconstructedMuseum.setGuides(retrievedMuseum.getGuides());
 			reconstructedMuseum.setReviews(retrievedMuseum.getReviews());
 			reconstructedMuseum.setRooms(retrievedMuseum.getRooms());
+			reconstructedMuseum.setStore(retrievedMuseum.getStore());
 		}
 
 		if ("".equals(prunedMuseum.getSlogan()))

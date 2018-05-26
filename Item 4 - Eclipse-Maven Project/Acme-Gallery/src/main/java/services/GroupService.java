@@ -87,11 +87,17 @@ public class GroupService {
 	}
 
 	// v1.0 - JA
+	// v2.0 - JA (taboo)
 	public Group save(final Group group) {
 		Assert.notNull(group);
 
 		//Beware to change this method! AnnouncementService.delete uses it!
 		//Beware to change this method! SystemConfigurationService.updateTaboo uses it!
+
+		//Check for taboo
+		final Boolean veredict = this.sysConfigService.containsTaboo(group.getName() + " " + group.getDescription());
+		group.setContainsTaboo(veredict);
+
 		return this.groupRepository.save(group);
 	}
 
@@ -112,7 +118,7 @@ public class GroupService {
 		group.getParticipants().add(visitor);
 
 		/* Check if it contains a taboo word */
-		final Boolean result = this.sysConfigService.containsTaboo(group.getName() + group.getDescription());
+		final Boolean result = this.sysConfigService.containsTaboo(group.getName() + " " + group.getDescription());
 		group.setContainsTaboo(result);
 
 		final Group saved = this.groupRepository.save(group);

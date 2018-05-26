@@ -75,7 +75,7 @@ public class AnnouncementService {
 
 		announcement.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
 
-		final Boolean result = this.sysConfigService.containsTaboo(announcement.getTitle() + announcement.getDescription());
+		final Boolean result = this.sysConfigService.containsTaboo(announcement.getTitle() + " " + announcement.getDescription());
 		announcement.setContainsTaboo(result);
 
 		return this.announcementRepository.save(announcement);
@@ -88,11 +88,16 @@ public class AnnouncementService {
 	}
 
 	//v1.0 - Implemented by JA
+	// v2.0 - JA (taboo)
 	public Announcement save(final Announcement announcement) {
+
+		Assert.notNull(announcement);
 
 		//Beware to modify this method! It is used by SystemConfigurationService.updateTaboo
 
-		Assert.notNull(announcement);
+		//Check for taboo
+		final Boolean veredict = this.sysConfigService.containsTaboo(announcement.getTitle() + " " + announcement.getDescription());
+		announcement.setContainsTaboo(veredict);
 		return this.announcementRepository.save(announcement);
 	}
 

@@ -85,8 +85,13 @@ public class ReviewService {
 		return saved;
 	}
 	// v1.0 - JA
+	// v2.0 - JA (taboo)
 	public Review save(final Review review) {
 		Assert.notNull(review);
+
+		//Check for taboo
+		final Boolean containsTaboo = this.sysConfigService.containsTaboo(review.getBody());
+		review.setContainsTaboo(containsTaboo);
 
 		//Beware to change this method! SystemConfigurationService.updateTaboo uses it!
 		return this.reviewRepository.save(review);

@@ -61,7 +61,7 @@ public class CritiqueService {
 
 		res.setExhibition(exhibition);
 		res.setCritic(currentCritic);
-		res.setCreationDate(now);
+		res.setCreationDate(new Date(System.currentTimeMillis() - 1000L));
 
 		return res;
 	}

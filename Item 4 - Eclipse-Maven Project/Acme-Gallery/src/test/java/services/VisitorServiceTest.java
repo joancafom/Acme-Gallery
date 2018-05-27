@@ -1,8 +1,6 @@
 
 package services;
 
-import java.util.Collection;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Visitor;
@@ -119,101 +116,6 @@ public class VisitorServiceTest extends AbstractTest {
 
 		this.checkExceptions(expected, caught);
 		this.unauthenticate();
-
-	}
-
-	// [UC-018] Administrator ban a Visitor ----------
-	// v1.0 - Alicia
-
-	@Test
-	public void driverBanVisitor() {
-
-		// testingData[i][0] -> username of the logged actor.
-		// testingData[i][1] -> Visitor to ban.
-		// testingData[i][2] -> thrown exception.
-
-		final Object testingData[][] = {
-			{
-				// 1 - (+) An Administrator correctly bans a Visitor.
-				"admin", "visitor6", null
-			}, {
-				// 2 - (-) An Administrator bans an already banned Visitor.
-				"admin", "visitor7", IllegalArgumentException.class
-			}, {
-				// 3 - (-) An Administrator bans a non-existing Visitor.
-				"admin", "abcdefg", IllegalArgumentException.class
-			}, {
-				// 4 - (-) An Administrator bans a null Visitor.
-				"admin", null, IllegalArgumentException.class
-			}, {
-				// 5 - (-) A Sponsor bans a Visitor.
-				"sponsor1", "visitor6", IllegalArgumentException.class
-			}
-		};
-
-		for (int i = 0; i < testingData.length; i++) {
-
-			Visitor visitor = null;
-
-			if (i < 2 || i == 4)
-				visitor = this.visitorService.findOne(super.getEntityId((String) testingData[i][1]));
-
-			if (i == 2)
-				visitor = new Visitor();
-
-			this.startTransaction();
-
-			this.templateBanVisitor((String) testingData[i][0], visitor, (Class<?>) testingData[i][2]);
-
-			this.rollbackTransaction();
-			this.entityManager.clear();
-
-		}
-
-	}
-
-	protected void templateBanVisitor(final String username, final Visitor visitor, final Class<?> expected) {
-		Class<?> caught = null;
-
-		// 1. Log in to the system
-		super.authenticate(username);
-
-		try {
-
-			Boolean isBanned = null;
-
-			if (visitor != null && visitor.getUserAccount() != null)
-				isBanned = visitor.getUserAccount().getIsLocked();
-
-			// 2. List Visitors
-			final Collection<Visitor> oldBannedVisitors = this.visitorService.findAllLocked();
-			final Collection<Visitor> oldNonBannedVisitors = this.visitorService.findAllUnlocked();
-
-			// 3. Ban a Visitor
-			this.visitorService.ban(visitor);
-
-			// Flush
-			this.visitorService.flush();
-
-			// 4. List again and check
-			final Collection<Visitor> newBannedVisitors = this.visitorService.findAllLocked();
-			final Collection<Visitor> newNonBannedVisitors = this.visitorService.findAllUnlocked();
-
-			if (!isBanned) {
-				Assert.isTrue(!oldBannedVisitors.contains(visitor));
-				Assert.isTrue(newBannedVisitors.contains(visitor));
-
-				Assert.isTrue(oldNonBannedVisitors.contains(visitor));
-				Assert.isTrue(!newNonBannedVisitors.contains(visitor));
-
-			}
-
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-
-		super.unauthenticate();
-		super.checkExceptions(expected, caught);
 
 	}
 }

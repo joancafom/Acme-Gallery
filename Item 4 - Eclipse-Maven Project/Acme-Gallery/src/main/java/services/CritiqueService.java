@@ -116,6 +116,11 @@ public class CritiqueService {
 		return this.critiqueRepository.save(critique);
 	}
 
+	// v1.0 - Alicia
+	public void flush() {
+		this.critiqueRepository.flush();
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	// v1.0 - JA
@@ -192,5 +197,4 @@ public class CritiqueService {
 
 		return this.critiqueRepository.save(critique);
 	}
-
 }

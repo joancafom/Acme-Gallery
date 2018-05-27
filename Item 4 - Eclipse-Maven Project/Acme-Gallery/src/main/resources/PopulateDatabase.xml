@@ -2964,6 +2964,7 @@
 		<property name="category" ref="category11" />
 		<property name="artworks">
 			<list>
+				<ref bean="artwork21"/>
 			</list>
 		</property>
 		<property name="guides">
@@ -4140,6 +4141,16 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="isFinal" value="true" />
 		<property name="isHighlight" value="false" />
 		<property name="exhibition" ref="exhibition1" />
+	</bean>
+	
+	<bean id="artwork21" class="domain.Artwork">
+		<property name="title" value="Tutankamon" />
+		<property name="photograph"
+			value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/TUT-Ausstellung_FFM_2012_47_%287117819557%29.jpg/245px-TUT-Ausstellung_FFM_2012_47_%287117819557%29.jpg" />
+		<property name="remark" value="Tutankhamun was an Egyptian pharaoh of the 18th dynasty (ruled c. 1332–1323 BC in the conventional chronology), during the period of Egyptian history known as the New Kingdom or sometimes the New Empire Period" />
+		<property name="isFinal" value="true" />
+		<property name="isHighlight" value="true" />
+		<property name="exhibition" ref="exhibition14" />
 	</bean>
 
 	<!-- Incidents -->

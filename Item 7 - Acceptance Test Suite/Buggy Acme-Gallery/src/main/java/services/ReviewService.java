@@ -97,19 +97,32 @@ public class ReviewService {
 		return this.reviewRepository.save(review);
 	}
 
+	// v1.0 - Alicia
+	public Collection<Review> findAll() {
+		return this.reviewRepository.findAll();
+	}
+
 	/* v1.0 - josembell */
 	public Review findOne(final int reviewId) {
 		return this.reviewRepository.findOne(reviewId);
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - Alicia
 	public void delete(final Review review) {
 		Assert.notNull(review);
+		Assert.isTrue(this.reviewRepository.exists(review.getId()));
+
 		final Administrator administrator = this.adminService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(administrator);
 
 		this.reviewRepository.delete(review);
 
+	}
+
+	// v1.0 - Alicia
+	public void flush() {
+		this.reviewRepository.flush();
 	}
 
 	//Other Business Methods

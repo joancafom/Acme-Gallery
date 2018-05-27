@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.HashSet;
 
 import javax.transaction.Transactional;
@@ -56,6 +57,11 @@ public class SponsorService extends ActorService {
 		return this.sponsorRepository.save(sponsorToSave);
 	}
 
+	// v1.0 - JA
+	public Collection<Sponsor> findAll() {
+		return this.sponsorRepository.findAll();
+	}
+
 	/* v1.0 - josembell */
 	public Sponsor findOne(final int sponsorId) {
 		return this.sponsorRepository.findOne(sponsorId);
@@ -106,9 +112,31 @@ public class SponsorService extends ActorService {
 		return this.save(sponsor);
 	}
 
+	// v1.0 - Alicia
+	public Collection<Sponsor> findAllUnlocked() {
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		final Collection<Sponsor> res = this.sponsorRepository.findAllUnlocked();
+		Assert.notNull(res);
+
+		return res;
+	}
+
 	/* v1.0 - josembell */
 	public Page<Sponsor> findAllUnlocked(final Integer page, final int size) {
 		final Page<Sponsor> res = this.sponsorRepository.findAllUnlocked(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Sponsor> findAllLocked() {
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		final Collection<Sponsor> res = this.sponsorRepository.findAllLocked();
 		Assert.notNull(res);
 
 		return res;
@@ -123,9 +151,12 @@ public class SponsorService extends ActorService {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - Alicia
 	public void ban(final Sponsor sponsor) {
 		Assert.notNull(sponsor);
+		Assert.isTrue(this.sponsorRepository.exists(sponsor.getId()));
 		Assert.isTrue(sponsor.getUserAccount().getIsLocked() == false);
+
 		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(administrator);
 

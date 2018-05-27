@@ -87,6 +87,12 @@ public class GroupService {
 	}
 
 	// v1.0 - JA
+	public Collection<Group> findAll() {
+
+		return this.groupRepository.findAll();
+	}
+
+	// v1.0 - JA
 	// v2.0 - JA (taboo)
 	public Group save(final Group group) {
 		Assert.notNull(group);

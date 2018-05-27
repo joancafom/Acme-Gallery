@@ -97,6 +97,12 @@ public class SponsorshipService {
 	}
 
 	//v1.0 - Implemented by JA
+	public Collection<Sponsorship> findAll() {
+
+		return this.sponsorshipRepository.findAll();
+	}
+
+	//v1.0 - Implemented by JA
 	// v2.0 - Alicia
 	public Sponsorship save(final Sponsorship sponsorship) {
 

@@ -170,6 +170,12 @@ public class CommentService extends ActorService {
 		return this.commentRepository.findOne(commentId);
 	}
 
+	// v1.0 - JA
+	public Collection<Comment> findAll() {
+
+		return this.commentRepository.findAll();
+	}
+
 	//Other Business Methods
 
 	public Collection<Comment> findTabooed() {

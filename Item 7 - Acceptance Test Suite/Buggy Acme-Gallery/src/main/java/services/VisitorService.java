@@ -84,6 +84,11 @@ public class VisitorService extends ActorService {
 		return this.visitorRepositories.findOne(visitorId);
 	}
 
+	// v1.0 - JA
+	public Collection<Visitor> findAll() {
+		return this.visitorRepositories.findAll();
+	}
+
 	//Other Business Methods
 
 	//v1.0 - JA
@@ -197,9 +202,31 @@ public class VisitorService extends ActorService {
 		return res;
 	}
 
+	// v1.0 - Alicia
+	public Collection<Visitor> findAllUnlocked() {
+		final Administrator administator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administator);
+
+		final Collection<Visitor> res = this.visitorRepositories.findAllUnlocked();
+		Assert.notNull(res);
+
+		return res;
+	}
+
 	/* v1.0 - josembell */
 	public Page<Visitor> findAllUnlocked(final Integer page, final int size) {
 		final Page<Visitor> res = this.visitorRepositories.findAllUnlocked(new PageRequest(page - 1, size));
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Visitor> findAllLocked() {
+		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(administrator);
+
+		final Collection<Visitor> res = this.visitorRepositories.findAllLocked();
 		Assert.notNull(res);
 
 		return res;
@@ -222,9 +249,12 @@ public class VisitorService extends ActorService {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - Alicia
 	public void ban(final Visitor visitor) {
 		Assert.notNull(visitor);
+		Assert.isTrue(this.visitorRepositories.exists(visitor.getId()));
 		Assert.isTrue(visitor.getUserAccount().getIsLocked() == false);
+
 		final Administrator administrator = this.administratorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(administrator);
 

@@ -203,6 +203,10 @@ public class AdministratorService extends ActorService {
 
 	// v1.0 - Alicia
 	public Collection<Exhibition> getExhibitions10MoreSponsorhipsThanAvg() {
+
+		final Administrator admin = this.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(admin);
+
 		final Collection<Exhibition> res = this.administratorRepository.exhibitions10MoreSponsorshipsThanAvg();
 		Assert.notNull(res);
 
@@ -318,6 +322,9 @@ public class AdministratorService extends ActorService {
 
 	// v1.0 - Alicia
 	public Page<Group> getGroups75MoreAnnouncementsThanAvg(final int page, final int size) {
+		final Administrator admin = this.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(admin);
+
 		final Page<Group> res = this.administratorRepository.groups75MoreAnnouncementsThanAvg(new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
@@ -326,6 +333,10 @@ public class AdministratorService extends ActorService {
 
 	// v1.0 - Alicia
 	public Collection<Group> getGroups75MoreAnnouncementsThanAvg() {
+
+		final Administrator admin = this.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(admin);
+
 		final Collection<Group> res = this.administratorRepository.groups75MoreAnnouncementsThanAvg();
 		Assert.notNull(res);
 

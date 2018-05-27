@@ -271,7 +271,7 @@ public class ExhibitionDirectorController extends AbstractController {
 				final Exhibition exhibitionS = this.exhibitionService.saveCreateAndEdit(exhibition);
 				res = new ModelAndView("redirect:/exhibition/director/display.do?exhibitionId=" + exhibitionS.getId());
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(exhibition, "exhibition.commit.error");
+				res = this.createEditModelAndView(prunedExhibition, "exhibition.commit.error");
 			}
 
 		return res;

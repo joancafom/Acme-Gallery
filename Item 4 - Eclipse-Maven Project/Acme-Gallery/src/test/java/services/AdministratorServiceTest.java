@@ -75,9 +75,6 @@ public class AdministratorServiceTest extends AbstractTest {
 	@Autowired
 	private SponsorService			sponsorService;
 
-	@Autowired
-	private IncidentService			incidentService;
-
 	@PersistenceContext
 	private EntityManager			entityManager;
 

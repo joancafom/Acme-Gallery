@@ -41,8 +41,7 @@ public class GroupServiceTest extends AbstractTest {
 	 * 3. Delete a group
 	 * 
 	 * v1.0 - josembell
-	 * 
-	 * NO FUNCIONA!!!!!
+	 * v2.0 - Alicia
 	 */
 	@Test
 	public void driverDeleteGroup() {
@@ -50,25 +49,25 @@ public class GroupServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				// 1 - (+) Un admin elimina un grupo
-				"admin", "group4", null
+				"admin", "group10", null
 			}, {
 				/* 2 - (-) Un usuario no identificado elimina un grupo */
-				null, "group4", IllegalArgumentException.class
+				null, "group10", IllegalArgumentException.class
 			}, {
 				/* 3 - (-) Un visitor elimina un grupo */
-				"visitor1", "group4", IllegalArgumentException.class
+				"visitor1", "group10", IllegalArgumentException.class
 			}, {
 				/* 4 - (-) Un sponsor elimina un grupo */
-				"sponsor1", "group4", IllegalArgumentException.class
+				"sponsor1", "group10", IllegalArgumentException.class
 			}, {
 				/* 5 - (-) Un guide elimina un grupo */
-				"guide1", "group4", IllegalArgumentException.class
+				"guide1", "group10", IllegalArgumentException.class
 			}, {
 				/* 6 - (-) Un critic elimina un grupo */
-				"critic1", "group4", IllegalArgumentException.class
+				"critic1", "group10", IllegalArgumentException.class
 			}, {
 				/* 7 - (-) Un director elimina un grupo */
-				"director1", "group4", IllegalArgumentException.class
+				"director1", "group10", IllegalArgumentException.class
 			}, {
 				/* 8 - (-) Un admin elimina un grupo null */
 				"admin", null, IllegalArgumentException.class
@@ -80,9 +79,7 @@ public class GroupServiceTest extends AbstractTest {
 			if (testingData[i][1] != null)
 				group = this.groupService.findOne(this.getEntityId((String) testingData[i][1]));
 			this.startTransaction();
-			System.out.println(i);
 			this.templateDeleteGroup((String) testingData[i][0], group, (Class<?>) testingData[i][2]);
-			System.out.println(i);
 			this.rollbackTransaction();
 			this.entityManager.clear();
 		}
@@ -90,6 +87,7 @@ public class GroupServiceTest extends AbstractTest {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - Alicia
 	protected void templateDeleteGroup(final String username, final Group group, final Class<?> expected) {
 		Class<?> caught = null;
 		/* 1. Authenticate */
@@ -103,11 +101,8 @@ public class GroupServiceTest extends AbstractTest {
 			Assert.isTrue(tabooedGroups.contains(group));
 
 			/* 4. Delete it */
-			try {
-				this.groupService.delete(group);
-			} catch (final Throwable oops) {
-				final Class<?> whoops = oops.getClass();
-			}
+
+			this.groupService.delete(group);
 
 			/* Flush */
 			this.groupService.flush();

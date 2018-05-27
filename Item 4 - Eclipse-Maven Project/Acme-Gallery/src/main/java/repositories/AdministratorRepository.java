@@ -199,7 +199,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	// ---------------------------------------- QUERY #18 ---------------------------------------------
 
 	// v1.0 - Alicia
-	@Query("select (select count(m1)*1.0 from Museum m1 where m1.store != null) / count(m2)*1.0 from Museum m2 where m2.store = null")
+	@Query("select (select count(m1)*1.0 from Museum m1 where m1.store != null) / count(m2)*1.0 from Museum m2")
 	Double ratioMuseumsWithStore();
 
 	// ---------------------------------------- QUERY #19 ---------------------------------------------

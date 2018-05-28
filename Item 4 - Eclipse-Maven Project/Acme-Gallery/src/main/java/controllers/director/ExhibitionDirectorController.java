@@ -392,16 +392,10 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
 		final Collection<Room> rooms = this.roomService.getByPrincipal();
-		final Collection<String> tickers = this.exhibitionService.getTickersByPrincipal();
-		final Collection<Date> startingDates = this.exhibitionService.getStartingDatesByPrincipal();
-		final Collection<Date> endingDates = this.exhibitionService.getEndingDatesByPrincipal();
-		final Collection<String> roomNames = this.exhibitionService.getRoomNamesByPrincipal();
-		final Integer exhSize = startingDates.size();
+		final Collection<Exhibition> exhibitions = this.exhibitionService.getExhibitionsByPrincipal();
+		final Integer exhSize = exhibitions.size();
 
-		res.addObject("tickers", tickers);
-		res.addObject("startingDates", startingDates);
-		res.addObject("endingDates", endingDates);
-		res.addObject("roomNames", roomNames);
+		res.addObject("exhibitions", exhibitions);
 		res.addObject("exhSize", exhSize);
 		res.addObject("exhibition", exhibition);
 		res.addObject("categories", categories);
@@ -421,16 +415,10 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
 		final Collection<Room> rooms = this.roomService.getByPrincipal();
-		final Collection<String> tickers = this.exhibitionService.getTickersByPrincipal();
-		final Collection<Date> startingDates = this.exhibitionService.getStartingDatesByPrincipal();
-		final Collection<Date> endingDates = this.exhibitionService.getEndingDatesByPrincipal();
-		final Collection<String> roomNames = this.exhibitionService.getRoomNamesByPrincipal();
-		final Integer exhSize = startingDates.size();
+		final Collection<Exhibition> exhibitions = this.exhibitionService.getExhibitionsByPrincipal();
+		final Integer exhSize = exhibitions.size();
 
-		res.addObject("tickers", tickers);
-		res.addObject("startingDates", startingDates);
-		res.addObject("endingDates", endingDates);
-		res.addObject("roomNames", roomNames);
+		res.addObject("exhibitions", exhibitions);
 		res.addObject("exhSize", exhSize);
 		res.addObject("exhibition", exhibition);
 		res.addObject("categories", categories);

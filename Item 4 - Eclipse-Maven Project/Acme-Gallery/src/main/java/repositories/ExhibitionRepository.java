@@ -68,7 +68,7 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
 	Page<Exhibition> findByRoomId(int roomId, Pageable pageable);
 
 	// v2.0 - Alicia
-	@Query("select e.startingDate, e.endingDate from Exhibition e where e.room.id = ?1 and ((e.startingDate <= ?2 and e.endingDate >= ?2) or (e.startingDate <= ?3 and e.endingDate >= ?3))")
+	@Query("select e from Exhibition e where e.room.id = ?1 and ((e.startingDate <= ?2 and e.endingDate >= ?2) or (e.startingDate <= ?3 and e.endingDate >= ?3))")
 	Collection<Exhibition> findDateAndRoomConflicts(int roomId, Date startingDate, Date endingDate);
 
 	// v1.0 - Alicia
@@ -94,5 +94,9 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
 	// v1.0 - Alicia
 	@Query("select e from Exhibition e where e.room.id = ?1 and e.startingDate >= CURRENT_TIMESTAMP and e.sponsorships.size > 0")
 	Collection<Exhibition> findFutureExhibitionsWithSponsorshipsByRoomId(int roomId);
+
+	// v1.0 - Alicia
+	@Query("select e from Exhibition e where e.room.museum.director.id = ?1")
+	Collection<Exhibition> findExhibitionsByDirectorId(int directorId);
 
 }

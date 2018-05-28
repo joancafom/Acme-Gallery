@@ -574,4 +574,15 @@ public class ExhibitionService {
 
 		return res;
 	}
+
+	// v1.0 - Alicia
+	public Collection<Exhibition> getExhibitionsByPrincipal() {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.findExhibitionsByDirectorId(director.getId());
+		Assert.notNull(res);
+
+		return res;
+	}
 }

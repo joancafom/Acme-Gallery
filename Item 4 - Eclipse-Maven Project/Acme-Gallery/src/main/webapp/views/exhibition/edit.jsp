@@ -48,7 +48,7 @@
 			<br/>
 			<h3><spring:message code="currentExhibitions"/></h3><br/>
 			<jstl:forEach var="i" begin="0" end="${exhSize - 1}">
-				<strong><jstl:out value="${tickers[i]} | ${roomNames[i]}"/>:</strong> <acme:dateFormat code="date.format" value="${startingDates[i]}"/> - <acme:dateFormat code="date.format" value="${endingDates[i]}"/><br/>
+				<strong><jstl:out value="${exhibitions[i].ticker} | ${exhibitions[i].room.name}"/>:</strong> <acme:dateFormat code="date.format" value="${exhibitions[i].startingDate}"/> - <acme:dateFormat code="date.format" value="${exhibitions[i].endingDate}"/><br/>
 			</jstl:forEach>
 		</div>
 	</jstl:if>

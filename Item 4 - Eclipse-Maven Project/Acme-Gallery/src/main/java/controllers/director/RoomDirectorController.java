@@ -75,7 +75,7 @@ public class RoomDirectorController extends AbstractController {
 
 	// v1.0 - Alicia
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int roomId) {
+	public ModelAndView display(@RequestParam final int roomId, @RequestParam(value = "d-2511045-p", defaultValue = "1") final Integer pageE, @RequestParam(value = "d-4007480-p", defaultValue = "1") final Integer pageI) {
 		final ModelAndView res;
 
 		final Room room = this.roomService.findOne(roomId);
@@ -86,8 +86,14 @@ public class RoomDirectorController extends AbstractController {
 		Assert.isTrue(room.getMuseum().getDirector().equals(director));
 
 		final Collection<Exhibition> currentExhibition = this.exhibitionService.getCurrentByRoom(room);
-		final Collection<Exhibition> allExhibitions = this.exhibitionService.getByRoom(room);
-		final Collection<Incident> incidents = this.incidentService.getByRoom(room);
+
+		final Page<Exhibition> ePageResult = this.exhibitionService.getByRoom(room, pageE, 5);
+		final Collection<Exhibition> allExhibitions = ePageResult.getContent();
+		final Integer eResultSize = new Long(ePageResult.getTotalElements()).intValue();
+
+		final Page<Incident> iPageResult = this.incidentService.getByRoom(room, pageI, 5);
+		final Collection<Incident> incidents = iPageResult.getContent();
+		final Integer iResultSize = new Long(iPageResult.getTotalElements()).intValue();
 
 		final Boolean canBeMarkedAsInRepair = this.roomService.canBeMarkedAsInRepair(room);
 		final Boolean canBeMarkedAsNotInRepair = this.roomService.canBeMarkedAsNotInRepair(room);
@@ -97,7 +103,9 @@ public class RoomDirectorController extends AbstractController {
 		res.addObject("room", room);
 		res.addObject("currentExhibition", currentExhibition);
 		res.addObject("allExhibitions", allExhibitions);
+		res.addObject("eResultSize", eResultSize);
 		res.addObject("incidents", incidents);
+		res.addObject("iResultSize", iResultSize);
 		res.addObject("canBeMarkedAsInRepair", canBeMarkedAsInRepair);
 		res.addObject("canBeMarkedAsNotInRepair", canBeMarkedAsNotInRepair);
 		res.addObject("canBeDeleted", canBeDeleted);

@@ -207,7 +207,7 @@ public class IncidentService {
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.isTrue(director.getMuseums().contains(room.getMuseum()));
 
-		final Page<Incident> res = this.incidentRepository.findByMuseumId(room.getId(), new PageRequest(page - 1, size));
+		final Page<Incident> res = this.incidentRepository.findByRoomId(room.getId(), new PageRequest(page - 1, size));
 		Assert.notNull(res);
 
 		return res;

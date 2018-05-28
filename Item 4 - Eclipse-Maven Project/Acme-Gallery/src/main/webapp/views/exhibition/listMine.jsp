@@ -51,7 +51,12 @@
 	</display:column>
 	
 	<display:column titleKey="exhibition.dayPasses.size">
-		<jstl:out value="${fn:length(exhibition.dayPasses)}"/>
+		<jstl:if test="${exhibition.isPrivate eq true}">
+			<jstl:out value="${fn:length(exhibition.dayPasses)}"/>
+		</jstl:if>
+		<jstl:if test="${exhibition.isPrivate eq false}">
+			<jstl:out value="-"/>
+		</jstl:if>
 	</display:column>
 	
 	<security:authorize access="hasRole('DIRECTOR')">
@@ -61,8 +66,11 @@
 	</security:authorize>
 	
 	<display:column>
-		<jstl:if test="${now < exhibition.startingDate}">
+		<jstl:if test="${now < exhibition.startingDate && fn:length(exhibition.dayPasses) eq 0}">
 			<a href="exhibition/director/edit.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.edit"/></a>
+		</jstl:if>
+		<jstl:if test="${now < exhibition.startingDate && fn:length(exhibition.dayPasses) > 0}">
+			<a href="exhibition/director/editDetails.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.edit"/></a>
 		</jstl:if>
 	</display:column>
 	

@@ -446,7 +446,7 @@ public class ExhibitionDirectorController extends AbstractController {
 	private ModelAndView editDetailsModelAndView(final Exhibition exhibition, final String message) {
 		final ModelAndView res;
 
-		res = new ModelAndView("exhibition/edit");
+		res = new ModelAndView("exhibition/editDetails");
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
 

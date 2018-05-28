@@ -16,6 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <jsp:useBean id="now" class="java.util.Date" />
 
@@ -47,6 +48,10 @@
 	
 	<display:column titleKey="exhibition.price">
 		<acme:priceFormat code="price.format" value="${exhibition.price}"/>
+	</display:column>
+	
+	<display:column titleKey="exhibition.dayPasses.size">
+		<jstl:out value="${fn:length(exhibition.dayPasses)}"/>
 	</display:column>
 	
 	<security:authorize access="hasRole('DIRECTOR')">

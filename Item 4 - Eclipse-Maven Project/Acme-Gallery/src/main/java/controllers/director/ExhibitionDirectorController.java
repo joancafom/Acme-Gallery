@@ -85,7 +85,7 @@ public class ExhibitionDirectorController extends AbstractController {
 		final ModelAndView res;
 		final Exhibition exhibition = this.exhibitionService.create();
 
-		res = this.createEditModelAndView(exhibition);
+		res = this.createModelAndView(exhibition);
 
 		return res;
 	}
@@ -102,8 +102,29 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		Assert.isTrue(director.getMuseums().contains(exhibition.getRoom().getMuseum()));
 		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
+		Assert.isTrue(exhibition.getDayPasses().isEmpty());
 
-		res = this.createEditModelAndView(exhibition);
+		res = this.editModelAndView(exhibition);
+
+		return res;
+
+	}
+
+	// v1.0 - Alicia
+	@RequestMapping(value = "/editDetails", method = RequestMethod.GET)
+	public ModelAndView editDetails(@RequestParam final int exhibitionId) {
+		final ModelAndView res;
+
+		final Exhibition exhibition = this.exhibitionService.findOne(exhibitionId);
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(exhibition);
+		Assert.notNull(director);
+
+		Assert.isTrue(director.getMuseums().contains(exhibition.getRoom().getMuseum()));
+		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
+		Assert.isTrue(!exhibition.getDayPasses().isEmpty());
+
+		res = this.editDetailsModelAndView(exhibition);
 
 		return res;
 
@@ -262,22 +283,52 @@ public class ExhibitionDirectorController extends AbstractController {
 	public ModelAndView edit(final Exhibition prunedExhibition, final BindingResult binding) {
 		ModelAndView res = null;
 
+		if (prunedExhibition.getId() != 0) {
+			final Exhibition oldExhibition = this.exhibitionService.findOne(prunedExhibition.getId());
+			Assert.notNull(oldExhibition);
+			Assert.isTrue(oldExhibition.getDayPasses().isEmpty());
+		}
+
 		final Exhibition exhibition = this.exhibitionService.reconstructSave(prunedExhibition, binding);
 
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(prunedExhibition);
+			res = this.editModelAndView(prunedExhibition);
 		else
 			try {
 				final Exhibition exhibitionS = this.exhibitionService.saveCreateAndEdit(exhibition);
 				res = new ModelAndView("redirect:/exhibition/director/display.do?exhibitionId=" + exhibitionS.getId());
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(prunedExhibition, "exhibition.commit.error");
+				res = this.editModelAndView(prunedExhibition, "exhibition.commit.error");
 			}
 
 		return res;
 
 	}
-	
+
+	// v2.0 - Alicia
+	@RequestMapping(value = "/editDetails", method = RequestMethod.POST, params = "save")
+	public ModelAndView editDetails(final Exhibition prunedExhibition, final BindingResult binding) {
+		ModelAndView res = null;
+
+		final Exhibition oldExhibition = this.exhibitionService.findOne(prunedExhibition.getId());
+		Assert.isTrue(!oldExhibition.getDayPasses().isEmpty());
+
+		final Exhibition exhibition = this.exhibitionService.reconstructSave(prunedExhibition, binding);
+
+		if (binding.hasErrors())
+			res = this.editDetailsModelAndView(prunedExhibition);
+		else
+			try {
+				final Exhibition exhibitionS = this.exhibitionService.saveCreateAndEdit(exhibition);
+				res = new ModelAndView("redirect:/exhibition/director/display.do?exhibitionId=" + exhibitionS.getId());
+			} catch (final Throwable oops) {
+				res = this.editDetailsModelAndView(prunedExhibition, "exhibition.commit.error");
+			}
+
+		return res;
+
+	}
+
 	// v1.0 - Alicia
 	@RequestMapping(value = "/addGuide", method = RequestMethod.POST, params = "save")
 	public ModelAndView addGuide(final ExhibitionForm exhibitionForm, final BindingResult binding) {
@@ -302,9 +353,25 @@ public class ExhibitionDirectorController extends AbstractController {
 	// Ancillary Methods ------------------------------------------------------------------------------
 
 	// v1.0 - Alicia
-	protected ModelAndView createEditModelAndView(final Exhibition exhibition) {
+	protected ModelAndView createModelAndView(final Exhibition exhibition) {
 		ModelAndView res;
-		res = this.createEditModelAndView(exhibition, null);
+		res = this.createModelAndView(exhibition, null);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	protected ModelAndView editModelAndView(final Exhibition exhibition) {
+		ModelAndView res;
+		res = this.editModelAndView(exhibition, null);
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	protected ModelAndView editDetailsModelAndView(final Exhibition exhibition) {
+		ModelAndView res;
+		res = this.editDetailsModelAndView(exhibition, null);
 
 		return res;
 	}
@@ -317,32 +384,25 @@ public class ExhibitionDirectorController extends AbstractController {
 		return res;
 	}
 
-	// v3.0 - Alicia
-	private ModelAndView createEditModelAndView(final Exhibition exhibition, final String message) {
+	// v1.0 - Alicia
+	private ModelAndView createModelAndView(final Exhibition exhibition, final String message) {
 		final ModelAndView res;
-
-		if (exhibition.getId() != 0)
-			Assert.isTrue(exhibition.getStartingDate().after(new Date()));
 
 		res = new ModelAndView("exhibition/edit");
 
 		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
 		final Collection<Room> rooms = this.roomService.getByPrincipal();
+		final Collection<String> tickers = this.exhibitionService.getTickersByPrincipal();
+		final Collection<Date> startingDates = this.exhibitionService.getStartingDatesByPrincipal();
+		final Collection<Date> endingDates = this.exhibitionService.getEndingDatesByPrincipal();
+		final Collection<String> roomNames = this.exhibitionService.getRoomNamesByPrincipal();
+		final Integer exhSize = startingDates.size();
 
-		if (exhibition.getId() == 0 || this.exhibitionService.findOne(exhibition.getId()).getDayPasses().isEmpty()) {
-			final Collection<String> tickers = this.exhibitionService.getTickersByPrincipal();
-			final Collection<Date> startingDates = this.exhibitionService.getStartingDatesByPrincipal();
-			final Collection<Date> endingDates = this.exhibitionService.getEndingDatesByPrincipal();
-			final Collection<String> roomNames = this.exhibitionService.getRoomNamesByPrincipal();
-			final Integer exhSize = startingDates.size();
-
-			res.addObject("tickers", tickers);
-			res.addObject("startingDates", startingDates);
-			res.addObject("endingDates", endingDates);
-			res.addObject("roomNames", roomNames);
-			res.addObject("exhSize", exhSize);
-		}
-
+		res.addObject("tickers", tickers);
+		res.addObject("startingDates", startingDates);
+		res.addObject("endingDates", endingDates);
+		res.addObject("roomNames", roomNames);
+		res.addObject("exhSize", exhSize);
 		res.addObject("exhibition", exhibition);
 		res.addObject("categories", categories);
 		res.addObject("rooms", rooms);
@@ -352,6 +412,53 @@ public class ExhibitionDirectorController extends AbstractController {
 
 		return res;
 	}
+
+	// v3.0 - Alicia
+	private ModelAndView editModelAndView(final Exhibition exhibition, final String message) {
+		final ModelAndView res;
+
+		res = new ModelAndView("exhibition/edit");
+
+		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
+		final Collection<Room> rooms = this.roomService.getByPrincipal();
+		final Collection<String> tickers = this.exhibitionService.getTickersByPrincipal();
+		final Collection<Date> startingDates = this.exhibitionService.getStartingDatesByPrincipal();
+		final Collection<Date> endingDates = this.exhibitionService.getEndingDatesByPrincipal();
+		final Collection<String> roomNames = this.exhibitionService.getRoomNamesByPrincipal();
+		final Integer exhSize = startingDates.size();
+
+		res.addObject("tickers", tickers);
+		res.addObject("startingDates", startingDates);
+		res.addObject("endingDates", endingDates);
+		res.addObject("roomNames", roomNames);
+		res.addObject("exhSize", exhSize);
+		res.addObject("exhibition", exhibition);
+		res.addObject("categories", categories);
+		res.addObject("rooms", rooms);
+		res.addObject("message", message);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
+	// v3.0 - Alicia
+	private ModelAndView editDetailsModelAndView(final Exhibition exhibition, final String message) {
+		final ModelAndView res;
+
+		res = new ModelAndView("exhibition/edit");
+
+		final Collection<Category> categories = this.categoryService.getAllExceptRoot();
+
+		res.addObject("exhibition", exhibition);
+		res.addObject("categories", categories);
+		res.addObject("message", message);
+
+		res.addObject("actorWS", this.ACTOR_WS);
+
+		return res;
+	}
+
 	// v1.0 - Alicia
 	private ModelAndView addGuideModelAndView(final ExhibitionForm exhibition, final String message) {
 		final ModelAndView res;

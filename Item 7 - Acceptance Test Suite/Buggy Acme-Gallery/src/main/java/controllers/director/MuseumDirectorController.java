@@ -137,6 +137,9 @@ public class MuseumDirectorController extends AbstractController {
 		final Director currentDirector = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(currentDirector);
 
+		//Average Rating
+		final Double avgRating = this.museumService.getAvgRating(museum);
+
 		res = new ModelAndView("museum/display");
 		res.addObject("museum", museum);
 		res.addObject("reviews", reviews);
@@ -144,6 +147,7 @@ public class MuseumDirectorController extends AbstractController {
 		res.addObject("exhibitions", exhibitions);
 		res.addObject("resultSizeE", resultSizeE);
 		res.addObject("own", museum.getDirector().equals(currentDirector));
+		res.addObject("avgRating", avgRating);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

@@ -98,13 +98,15 @@ public class IncidentDirectorController extends AbstractController {
 
 	// v2.0 - Alicia
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
-	public ModelAndView check(@RequestParam final int incidentId, @RequestParam(required = false, defaultValue = "false") final Boolean listMine, final RedirectAttributes redirectAttributes) {
+	public ModelAndView check(@RequestParam final int incidentId, @RequestParam(required = false) final Boolean listMine, final RedirectAttributes redirectAttributes) {
 		ModelAndView res = null;
 
 		final Incident incident = this.incidentService.findOne(incidentId);
 		Assert.notNull(incident);
 
-		if (listMine.equals(true))
+		if (listMine == null)
+			res = new ModelAndView("redirect:/room/director/display.do?roomId=" + incident.getRoom().getId());
+		else if (listMine.equals(true))
 			res = new ModelAndView("redirect:listMine.do");
 		else if (listMine.equals(false))
 			res = new ModelAndView("redirect:list.do?museumId=" + incident.getRoom().getMuseum().getId());
@@ -117,16 +119,17 @@ public class IncidentDirectorController extends AbstractController {
 
 		return res;
 	}
-
 	// v2.0 - Alicia
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final int incidentId, @RequestParam(required = false, defaultValue = "false") final Boolean listMine, final RedirectAttributes redirectAttributes) {
+	public ModelAndView delete(@RequestParam final int incidentId, @RequestParam(required = false) final Boolean listMine, final RedirectAttributes redirectAttributes) {
 		ModelAndView res = null;
 
 		final Incident incident = this.incidentService.findOne(incidentId);
 		Assert.notNull(incident);
 
-		if (listMine.equals(true))
+		if (listMine == null)
+			res = new ModelAndView("redirect:/room/director/display.do?roomId=" + incident.getRoom().getId());
+		else if (listMine.equals(true))
 			res = new ModelAndView("redirect:listMine.do");
 		else if (listMine.equals(false))
 			res = new ModelAndView("redirect:list.do?museumId=" + incident.getRoom().getMuseum().getId());

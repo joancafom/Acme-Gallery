@@ -59,7 +59,7 @@
 
 <h3><spring:message code="room.allExhibitions"/></h3>
 
-<display:table name="allExhibitions" id="exhibition" requestURI="room/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%">
+<display:table name="allExhibitions" id="exhibition" requestURI="room/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="eResultSize">
 	<display:column titleKey="exhibition.title">
 		<a href="exhibition/${actorWS}display.do?exhibitionId=<jstl:out value="${exhibition.id}"/>"><jstl:out value="${exhibition.title}"/></a>
 	</display:column>
@@ -76,7 +76,7 @@
 
 <h3><spring:message code="room.incidents"/></h3>
 
-<display:table name="incidents" id="incident" requestURI="incident/${actorWS}list.do" pagesize="5" class="displaytag" style="width:100%">
+<display:table name="incidents" id="incident" requestURI="room/${actorWS}display.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="iResultSize">
 
 	<display:column titleKey="incident.text" property="text"/>
 	

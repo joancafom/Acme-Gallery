@@ -170,13 +170,13 @@ public class SponsorshipSponsorController extends AbstractController {
 		final Sponsorship sponsorship = this.sponsorshipService.reconstructAccept(prunedSponsorship, binding);
 
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(prunedSponsorship);
+			res = this.acceptModelAndView(prunedSponsorship);
 		else
 			try {
 				this.sponsorshipService.save(sponsorship);
 				res = new ModelAndView("redirect:listMine.do");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(prunedSponsorship, "sponsorship.commit.error");
+				res = this.acceptModelAndView(prunedSponsorship, "sponsorship.commit.error");
 			}
 
 		return res;

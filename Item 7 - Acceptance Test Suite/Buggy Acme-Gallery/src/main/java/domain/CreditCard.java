@@ -21,9 +21,9 @@ public class CreditCard {
 	private String	holderName;
 	private String	brandName;
 	private String	number;
-	private int		CVV;
-	private int		month;
-	private int		year;
+	private Integer	CVV;
+	private Integer	month;
+	private Integer	year;
 
 
 	@NotBlank

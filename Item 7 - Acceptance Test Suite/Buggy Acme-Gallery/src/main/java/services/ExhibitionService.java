@@ -330,6 +330,8 @@ public class ExhibitionService {
 
 		final Exhibition oldExhibition = this.findOne(prunedExhibition.getId());
 
+		Assert.isTrue(prunedExhibition.getId() == 0 || oldExhibition != null);
+
 		if (prunedExhibition.getId() == 0 || (oldExhibition != null && oldExhibition.getDayPasses().isEmpty())) {
 
 			if (oldExhibition != null && oldExhibition.getDayPasses().isEmpty()) {
@@ -356,7 +358,7 @@ public class ExhibitionService {
 			res.setCategory(prunedExhibition.getCategory());
 			res.setRoom(prunedExhibition.getRoom());
 
-		} else {
+		} else if (oldExhibition != null && !oldExhibition.getDayPasses().isEmpty()) {
 
 			res.setId(oldExhibition.getId());
 			res.setVersion(oldExhibition.getVersion());
@@ -569,6 +571,17 @@ public class ExhibitionService {
 
 		if (exhibition.getStartingDate().after(new Date()))
 			res = true;
+
+		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Exhibition> getExhibitionsByPrincipal() {
+		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(director);
+
+		final Collection<Exhibition> res = this.exhibitionRepository.findExhibitionsByDirectorId(director.getId());
+		Assert.notNull(res);
 
 		return res;
 	}

@@ -74,7 +74,7 @@ public class ArtworkGuideController extends AbstractController {
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
 
-		Assert.isTrue(exhibition.getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(guide.getExhibitions().contains(exhibition));
 
 		final Artwork artwork = this.artworkService.create(exhibition);
 
@@ -84,6 +84,7 @@ public class ArtworkGuideController extends AbstractController {
 	}
 
 	/* v1.0 - josembell */
+	/* v2.0 - josembell > Guides can only edit artworks for their exhibitions */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int artworkId) {
 		final ModelAndView result;
@@ -93,7 +94,7 @@ public class ArtworkGuideController extends AbstractController {
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
 
-		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(guide.getExhibitions().contains(artwork.getExhibition()));
 		Assert.isTrue(artwork.getIsFinal() == false);
 
 		result = this.createEditModelAndView(artwork);
@@ -111,7 +112,7 @@ public class ArtworkGuideController extends AbstractController {
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
 
-		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(guide.getExhibitions().contains(artwork.getExhibition()));
 		Assert.isTrue(artwork.getIsFinal() == false);
 
 		result = new ModelAndView("redirect:/exhibition/guide/display.do?exhibitionId=" + artwork.getExhibition().getId());

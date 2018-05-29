@@ -138,12 +138,8 @@ public class StoreDirectorController extends AbstractController {
 
 	/* v1.0 - josembell */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final Store prunedStore, final int museumId, final BindingResult binding) {
+	public ModelAndView edit(final Store prunedStore, final BindingResult binding) {
 		ModelAndView res = null;
-		final Museum museum = this.museumService.findOne(museumId);
-		Assert.notNull(museum);
-
-		prunedStore.setMuseum(museum);
 
 		final Store store = this.storeService.reconstruct(prunedStore, binding);
 

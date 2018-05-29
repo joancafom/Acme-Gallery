@@ -111,6 +111,7 @@
 		<security:intercept-url pattern="/exhibition/director/delete.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/display.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/edit.do" access="hasRole('DIRECTOR')" />  
+		<security:intercept-url pattern="/exhibition/director/editDetails.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/listMine.do" access="hasRole('DIRECTOR')" />  
 		<security:intercept-url pattern="/exhibition/director/listResults.do" access="hasRole('DIRECTOR')" /> 
 		<security:intercept-url pattern="/exhibition/director/search.do" access="hasRole('DIRECTOR')" />

@@ -16,6 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <jsp:useBean id="now" class="java.util.Date" />
 
@@ -49,6 +50,15 @@
 		<acme:priceFormat code="price.format" value="${exhibition.price}"/>
 	</display:column>
 	
+	<display:column titleKey="exhibition.dayPasses.size">
+		<jstl:if test="${exhibition.isPrivate eq true}">
+			<jstl:out value="${fn:length(exhibition.dayPasses)}"/>
+		</jstl:if>
+		<jstl:if test="${exhibition.isPrivate eq false}">
+			<jstl:out value="-"/>
+		</jstl:if>
+	</display:column>
+	
 	<security:authorize access="hasRole('DIRECTOR')">
 		<display:column titleKey="exhibition.sponsorships">
 			<a href="sponsorship/director/list.do?exhibitionId=${exhibition.id}"><spring:message code="sponsorship.list"/></a>
@@ -56,8 +66,11 @@
 	</security:authorize>
 	
 	<display:column>
-		<jstl:if test="${now < exhibition.startingDate}">
+		<jstl:if test="${now < exhibition.startingDate && fn:length(exhibition.dayPasses) eq 0}">
 			<a href="exhibition/director/edit.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.edit"/></a>
+		</jstl:if>
+		<jstl:if test="${now < exhibition.startingDate && fn:length(exhibition.dayPasses) > 0}">
+			<a href="exhibition/director/editDetails.do?exhibitionId=${exhibition.id}"><spring:message code="exhibition.edit"/></a>
 		</jstl:if>
 	</display:column>
 	

@@ -132,7 +132,7 @@
 		</security:authorize>
 		<security:authorize access="hasRole('GUIDE')">
 			<display:column>
-				<jstl:if test="${artwork.isFinal==false}">
+				<jstl:if test="${artwork.isFinal==false and worksIn}">
 				<a href="artwork/guide/edit.do?artworkId=${artwork.id}"><spring:message code="artwork.edit"/></a>
 				<a href="artwork/guide/delete.do?artworkId=${artwork.id}" style="color:red;"><spring:message code="artwork.delete"/></a>
 				</jstl:if>

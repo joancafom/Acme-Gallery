@@ -113,12 +113,8 @@ public class ProductDirectorController extends AbstractController {
 
 	/* v1.0 - josembell */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final Product prunedProduct, final int storeId, final BindingResult binding) {
+	public ModelAndView edit(final Product prunedProduct, final BindingResult binding) {
 		ModelAndView res = null;
-		final Store store = this.storeService.findOne(storeId);
-		Assert.notNull(store);
-
-		prunedProduct.setStore(store);
 
 		final Product product = this.productService.reconstruct(prunedProduct, binding);
 

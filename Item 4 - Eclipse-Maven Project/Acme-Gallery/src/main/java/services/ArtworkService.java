@@ -65,7 +65,7 @@ public class ArtworkService {
 		Assert.notNull(artwork);
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
-		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(artwork.getExhibition().getGuides().contains(guide));
 
 		if (artwork.getId() != 0)
 			Assert.isTrue(artwork.getIsFinal() == false);

@@ -32,7 +32,7 @@
 	</jstl:if>
 </p>
 <p>
-	<strong><spring:message code="invitation.sentMoment" /></strong>: <jstl:out value="${invitation.sentMoment}" />
+	<strong><spring:message code="invitation.sentMoment" /></strong>: <acme:dateFormat code="date.format" value="${invitation.sentMoment}"/>
 </p>
 <p>
 	<jstl:choose>

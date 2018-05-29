@@ -89,7 +89,7 @@
 
 	<h4><spring:message code="exhibition.artworks"/></h4>
 	
-	<display:table name="artworks" id="artwork" requestURI="exhibition/${actorWS}display.do#eArtworks" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeA}">
+	<display:table name="artworks" id="artwork" requestURI="exhibit1on/${actorWS}display.do#eArtworks" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeA}">
 		
 		<display:column titleKey="artwork.title">
 			<a href="artwork/${actorWS}display.do?artworkId=<jstl:out value="${artwork.id}" />"><jstl:out value="${artwork.title}" /></a>

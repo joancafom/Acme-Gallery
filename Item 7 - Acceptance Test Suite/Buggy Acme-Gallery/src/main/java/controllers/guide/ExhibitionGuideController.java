@@ -102,7 +102,7 @@ public class ExhibitionGuideController extends AbstractController {
 
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
-		if (exhibition.getRoom().getMuseum().getGuides().contains(guide))
+		if (exhibition.getGuides().contains(guide))
 			res.addObject("worksIn", true);
 
 		return res;

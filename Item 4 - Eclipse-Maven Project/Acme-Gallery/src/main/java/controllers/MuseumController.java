@@ -56,12 +56,16 @@ public class MuseumController extends AbstractController {
 		final Collection<Exhibition> exhibitions = pageResultE.getContent();
 		final Integer resultSizeE = new Long(pageResultE.getTotalElements()).intValue();
 
+		//Average Rating
+		final Double avgRating = this.museumService.getAvgRating(museum);
+
 		res = new ModelAndView("museum/display");
 		res.addObject("museum", museum);
 		res.addObject("reviews", reviews);
 		res.addObject("resultSizeR", resultSizeR);
 		res.addObject("exhibitions", exhibitions);
 		res.addObject("resultSizeE", resultSizeE);
+		res.addObject("avgRating", avgRating);
 
 		return res;
 	}

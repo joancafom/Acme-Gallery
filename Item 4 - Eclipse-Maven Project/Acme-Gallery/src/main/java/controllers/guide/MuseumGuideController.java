@@ -79,6 +79,9 @@ public class MuseumGuideController extends AbstractController {
 
 		final Boolean worksFor = museum.getGuides().contains(guide);
 
+		//Average Rating
+		final Double avgRating = this.museumService.getAvgRating(museum);
+
 		res = new ModelAndView("museum/display");
 		res.addObject("museum", museum);
 		res.addObject("reviews", reviews);
@@ -86,6 +89,7 @@ public class MuseumGuideController extends AbstractController {
 		res.addObject("exhibitions", exhibitions);
 		res.addObject("resultSizeE", resultSizeE);
 		res.addObject("worksFor", worksFor);
+		res.addObject("avgRating", avgRating);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

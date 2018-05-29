@@ -35,4 +35,8 @@ public interface MuseumRepository extends JpaRepository<Museum, Integer> {
 	@Query("select m from Museum m where ?1 member of m.guides")
 	Page<Museum> findWorkplacesByGuide(Guide guide, Pageable pageable);
 
+	//v1.0 - JA
+	@Query("select avg(r.score) from Review r where r.museum.id = ?1")
+	Double getAvgRating(final int museumId);
+
 }

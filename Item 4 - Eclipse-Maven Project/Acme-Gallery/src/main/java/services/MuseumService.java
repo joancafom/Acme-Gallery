@@ -314,4 +314,12 @@ public class MuseumService extends ActorService {
 
 		return res;
 	}
+
+	// v1.0 - JA
+	public Double getAvgRating(final Museum museum) {
+
+		Assert.notNull(museum);
+
+		return this.museumRepository.getAvgRating(museum.getId());
+	}
 }

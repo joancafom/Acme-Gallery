@@ -90,8 +90,12 @@
 	<h4><spring:message code="exhibition.artworks"/></h4>
 	
 	<display:table name="artworks" id="artwork" requestURI="exhibition/${actorWS}display.do#eArtworks" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSizeA}">
+		
 		<display:column titleKey="artwork.title">
 			<a href="artwork/${actorWS}display.do?artworkId=<jstl:out value="${artwork.id}" />"><jstl:out value="${artwork.title}" /></a>
+			<jstl:if test="${artwork.isHighlight}">
+				<p style="color:orange;"><strong><spring:message code="exhibition.highlight"/></strong></p>
+			</jstl:if>
 		</display:column>
 		<display:column titleKey="artwork.photograph">
 			<img src="${artwork.photograph}" alt="${artwork.title}" title="${artwork.title}" style="max-width:200px;"/>

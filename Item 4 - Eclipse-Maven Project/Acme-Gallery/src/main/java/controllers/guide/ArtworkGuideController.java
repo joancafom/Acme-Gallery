@@ -112,7 +112,7 @@ public class ArtworkGuideController extends AbstractController {
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
 
-		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(guide.getExhibitions().contains(artwork.getExhibition()));
 		Assert.isTrue(artwork.getIsFinal() == false);
 
 		result = new ModelAndView("redirect:/exhibition/guide/display.do?exhibitionId=" + artwork.getExhibition().getId());

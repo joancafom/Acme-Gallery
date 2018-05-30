@@ -70,15 +70,20 @@ public class ProductService {
 
 	/* v1.0 - josembell */
 	public Product save(final Product product) {
+
 		Assert.notNull(product);
+
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
+
+		Assert.notNull(product.getStore());
 		Assert.isTrue(product.getStore().getMuseum().getDirector().equals(director));
 
-		Assert.notNull(product.getPictures());
+		Assert.notNull(product.getBarcode());
 		final Boolean isEAN13 = this.isEAN13(product.getBarcode());
 		Assert.isTrue(isEAN13 == true);
 
+		Assert.notNull(product.getPictures());
 		Assert.isTrue(!product.getPictures().isEmpty());
 		for (final String s : product.getPictures())
 			try {
@@ -89,6 +94,11 @@ public class ProductService {
 			}
 
 		return this.productRepository.save(product);
+	}
+
+	// v1.0 - JA
+	public void flush() {
+		this.productRepository.flush();
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------

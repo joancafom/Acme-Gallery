@@ -52,6 +52,12 @@ public class CriticService extends ActorService {
 		return this.criticRepository.save(critic);
 	}
 
+	//v1.0 - JA
+	public void flush() {
+
+		this.criticRepository.flush();
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	//v1.0 - Implemented by JA

@@ -66,6 +66,12 @@ public class DirectorService extends ActorService {
 		return this.directorRepository.findOne(directorId);
 	}
 
+	// v1.0 - JA
+	public void flush() {
+
+		this.directorRepository.flush();
+	}
+
 	//Other Business Methods --------------------------------------------------------------------------
 
 	public Director findByUserAccount(final UserAccount userAccount) {

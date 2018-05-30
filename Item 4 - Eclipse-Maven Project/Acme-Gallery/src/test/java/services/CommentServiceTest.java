@@ -29,19 +29,22 @@ public class CommentServiceTest extends AbstractTest {
 	// System Under Test -----------------------------
 
 	@Autowired
-	private CommentService			commentService;
-
-	@Autowired
-	private AdministratorService	adminService;
+	private CommentService				commentService;
 
 	//Fixtures ---------------------------------------
 
+	@Autowired
+	private AdministratorService		adminService;
+
+	@Autowired
+	private SystemConfigurationService	sysConfigService;
+
 	@PersistenceContext
-	private EntityManager			entityManager;
+	private EntityManager				entityManager;
 
 
 	// -------------------------------------------------------------------------------
-	// [UC-001] Administrator displays the dashboard.
+	// [UC-008] Administrator delete comments.
 	// 
 	// Related requirements:
 	//   · REQ 22.18: An actor who is authenticated as an administrator must be able to
@@ -126,6 +129,11 @@ public class CommentServiceTest extends AbstractTest {
 				if (this.adminService.findByUserAccount(LoginService.getPrincipal()) != null)
 					throw new RuntimeException("An admin could not retrieve taboo comments!");
 			}
+
+			//To be Taboo Comments, they all must contain some taboo words
+			for (final Comment c : tabooCommentsBefore)
+				if (!this.sysConfigService.containsTaboo(c.getTitle() + " " + c.getDescription()))
+					throw new RuntimeException("Taboo comments must contain Taboo words!");
 
 			// 3. Delete a comment
 

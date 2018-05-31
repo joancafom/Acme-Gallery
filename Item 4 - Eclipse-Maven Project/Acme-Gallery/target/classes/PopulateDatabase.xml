@@ -6248,6 +6248,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="museum" ref="museum1" />
 		<property name="exhibitions">
 			<list>
+				<ref bean="exhibition3"/>
 			</list>
 		</property>
 		<property name="incidents">
@@ -6385,6 +6386,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="museum" ref="museum4" />
 		<property name="exhibitions">
 			<list>
+				<ref bean="exhibition8"/>
 			</list>
 		</property>
 		<property name="incidents">
@@ -6588,6 +6590,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="museum" ref="museum9" />
 		<property name="exhibitions">
 			<list>
+				<ref bean="exhibition13"/>
 			</list>
 		</property>
 		<property name="incidents">

@@ -2,6 +2,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Exhibition;
+import domain.Sponsor;
 import domain.Sponsorship;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,6 +42,9 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 	@Autowired
 	private ExhibitionService	exhibitionService;
+
+	@Autowired
+	private SponsorService		sponsorService;
 
 
 	// -------------------------------------------------------------------------------
@@ -155,6 +161,261 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 		this.unauthenticate();
 		this.checkExceptions(expected, caught);
+
+	}
+
+	// [UC-034] Director negotiate time of a Sponsorship -------
+	// v1.0 - Alicia
+
+	@Test
+	public void driverNegotiateTime() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> Sponsorship to edit.
+		// testingData[i][2] -> status of the Sponsorship.
+		// testingData[i][3] -> banner of the Sponsorship.
+		// testingData[i][4] -> link of the Sponsorship.
+		// testingData[i][5] -> sponsor of the Sponsorship.
+		// testingData[i][6] -> exhibition of the Sponsorship.
+		// testingData[i][7] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// 1 - (+) A Director correctly negotiates the time
+				"director1", "sponsorship5", null, null, null, null, null, null
+			}, {
+				// 2 - (-) A Director tries to negotiate the time of a non-pending Sponsorship
+				"director1", "sponsorship1", null, null, null, null, null, IllegalArgumentException.class
+			}, {
+				// 3 - (-) A Director tries to edit more properties of the Sponsorship
+				"director1", "sponsorship5", "ACCEPTED", "http://www.google.es", "http://www.google.es", "sponsor2", "exhibition1", IllegalArgumentException.class
+			}, {
+				// 4 - (-) A Director tries to negotiate dates out of the range of the exhibition
+				"director1", "sponsorship5", null, null, null, null, null, IllegalArgumentException.class
+			}, {
+				// 5 - (-) A Director tries to negotiate dates in the past
+				"director1", "sponsorship5", null, null, null, null, null, IllegalArgumentException.class
+			}, {
+				// 6 - (-) A Visitor tries to negotiate the time.
+				"visitor1", "sponsorship5", null, null, null, null, null, IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			final Sponsorship sponsorship = this.sponsorshipService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			final Sponsor sponsor = null;
+
+			if (testingData[i][6] != null)
+				this.sponsorService.findOne(super.getEntityId((String) testingData[i][5]));
+
+			final Exhibition exhibition = null;
+
+			if (testingData[i][6] != null)
+				this.exhibitionService.findOne(super.getEntityId((String) testingData[i][6]));
+
+			Date startingDate = null;
+			Date endingDate = null;
+
+			if (i < 3 || i == 5) {
+				final LocalDate sDate = new LocalDate(sponsorship.getStartingDate());
+				startingDate = sDate.plusMonths(3).toDate();
+				endingDate = sDate.plusMonths(4).toDate();
+			}
+
+			if (i == 3) {
+				final LocalDate sDate = new LocalDate(sponsorship.getStartingDate());
+				startingDate = sDate.plusMonths(6).toDate();
+				final LocalDate eDate = new LocalDate(sponsorship.getEndingDate());
+				endingDate = eDate.plusMonths(2).toDate();
+			}
+
+			if (i == 4) {
+				final LocalDate sDate = new LocalDate(sponsorship.getStartingDate());
+				startingDate = sDate.minusDays(14).toDate();
+				endingDate = sDate.plusDays(10).toDate();
+			}
+
+			this.startTransaction();
+
+			this.templateNegotiateTime((String) testingData[i][0], sponsorship, (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], sponsor, exhibition, startingDate, endingDate, (Class<?>) testingData[i][7]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+	protected void templateNegotiateTime(final String username, final Sponsorship sponsorship, final String status, final String banner, final String link, final Sponsor sponsor, final Exhibition exhibition, final Date startingDate, final Date endingDate,
+		final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		super.authenticate(username);
+
+		try {
+
+			// 2. Negotiate the time
+
+			if (status != null)
+				sponsorship.setStatus(status);
+			else
+				sponsorship.setStatus("TIME_NEGOTIATION");
+
+			if (banner != null)
+				sponsorship.setBanner(banner);
+
+			if (link != null)
+				sponsorship.setLink(link);
+
+			if (sponsor != null)
+				sponsorship.setSponsor(sponsor);
+
+			if (exhibition != null)
+				sponsorship.setExhibition(exhibition);
+
+			if (startingDate != null)
+				sponsorship.setStartingDate(startingDate);
+
+			if (endingDate != null)
+				sponsorship.setEndingDate(endingDate);
+
+			final Sponsorship savedSponsorship = this.sponsorshipService.updateStatus(sponsorship);
+
+			// Flush
+			this.sponsorshipService.flush();
+
+			// 3. Check that it has been updated
+
+			Assert.notNull(savedSponsorship.getStartingDate());
+			Assert.notNull(savedSponsorship.getEndingDate());
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.unauthenticate();
+		super.checkExceptions(expected, caught);
+
+	}
+
+	// [UC-035] Director reject a Sponsorship ------------------
+	// v1.0 - Alicia
+
+	@Test
+	public void driverRejectSponsorship() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> Sponsorship to edit.
+		// testingData[i][2] -> status of the Sponsorship.
+		// testingData[i][3] -> banner of the Sponsorship.
+		// testingData[i][4] -> link of the Sponsorship.
+		// testingData[i][5] -> sponsor of the Sponsorship.
+		// testingData[i][6] -> exhibition of the Sponsorship.
+		// testingData[i][7] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// 1 - (+) A Director correctly rejects a Sponsorship
+				"director1", "sponsorship5", null, null, null, null, null, null
+			}, {
+				// 2 - (-) A Director tries to reject a non-pending Sponsorship
+				"director1", "sponsorship1", null, null, null, null, null, IllegalArgumentException.class
+			}, {
+				// 3 - (-) A Director tries to edit more properties of the Sponsorship
+				"director1", "sponsorship5", "ACCEPTED", "http://www.google.es", "http://www.google.es", "sponsor2", "exhibition1", IllegalArgumentException.class
+			}, {
+				// 4 - (-) A Director tries to reject a null Sponsorship
+				"director1", null, null, null, null, null, null, IllegalArgumentException.class
+			}, {
+				// 5 - (-) A Visitor tries to reject a Sponsorship
+				"visitor1", "sponsorship5", null, null, null, null, null, IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			Sponsorship sponsorship = null;
+
+			if (testingData[i][1] != null)
+				sponsorship = this.sponsorshipService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			final Sponsor sponsor = null;
+
+			if (testingData[i][6] != null)
+				this.sponsorService.findOne(super.getEntityId((String) testingData[i][5]));
+
+			final Exhibition exhibition = null;
+
+			if (testingData[i][6] != null)
+				this.exhibitionService.findOne(super.getEntityId((String) testingData[i][6]));
+
+			Date startingDate = null;
+			Date endingDate = null;
+
+			if (i == 2) {
+				final LocalDate sDate = new LocalDate(sponsorship.getStartingDate());
+				startingDate = sDate.plusMonths(3).toDate();
+				endingDate = sDate.plusMonths(4).toDate();
+			}
+
+			this.startTransaction();
+
+			this.templateRejectSponsorship((String) testingData[i][0], sponsorship, (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], sponsor, exhibition, startingDate, endingDate, (Class<?>) testingData[i][7]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+
+	protected void templateRejectSponsorship(final String username, final Sponsorship sponsorship, final String status, final String banner, final String link, final Sponsor sponsor, final Exhibition exhibition, final Date startingDate,
+		final Date endingDate, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		super.authenticate(username);
+
+		try {
+
+			// 2. Negotiate the time
+
+			if (status != null && sponsorship != null)
+				sponsorship.setStatus(status);
+			else if (sponsorship != null)
+				sponsorship.setStatus("REJECTED");
+
+			if (banner != null)
+				sponsorship.setBanner(banner);
+
+			if (link != null)
+				sponsorship.setLink(link);
+
+			if (sponsor != null)
+				sponsorship.setSponsor(sponsor);
+
+			if (exhibition != null)
+				sponsorship.setExhibition(exhibition);
+
+			if (startingDate != null)
+				sponsorship.setStartingDate(startingDate);
+
+			if (endingDate != null)
+				sponsorship.setEndingDate(endingDate);
+
+			this.sponsorshipService.updateStatus(sponsorship);
+
+			// Flush
+			this.sponsorshipService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.unauthenticate();
+		super.checkExceptions(expected, caught);
 
 	}
 }

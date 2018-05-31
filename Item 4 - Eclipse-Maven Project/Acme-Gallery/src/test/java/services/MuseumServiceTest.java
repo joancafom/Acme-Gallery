@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Director;
 import domain.GPSCoordinates;
 import domain.Museum;
 
@@ -36,6 +37,9 @@ public class MuseumServiceTest extends AbstractTest {
 
 	@PersistenceContext
 	private EntityManager	entityManager;
+
+	@Autowired
+	private DirectorService	directorService;
 
 
 	// [UC-026] Director create Museum ---------------
@@ -132,6 +136,124 @@ public class MuseumServiceTest extends AbstractTest {
 
 			Assert.isTrue(newMuseums.contains(savedMuseum));
 			Assert.isTrue(newMuseums.size() > oldMuseums.size());
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.unauthenticate();
+		super.checkExceptions(expected, caught);
+
+	}
+
+	// [UC-027] Director edit a Museum -------------------------
+	// v1.0 - Alicia
+
+	@Test
+	public void driverEditMuseum() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> Museum to edit.
+		// testingData[i][2] -> name of the Museum.
+		// testingData[i][3] -> address of the Museum.
+		// testingData[i][4] -> latitude of the Museum.
+		// testingData[i][5] -> longitude of the Museum.
+		// testingData[i][6] -> email of the Museum.
+		// testingData[i][7] -> phoneNumber of the Museum.
+		// testingData[i][8] -> slogan of the Museum.
+		// testingData[i][9] -> identifier of the Museum.
+		// testingData[i][10] -> banner of the Museum.
+		// testingData[i][11] -> price of the Museum.
+		// testingData[i][12] -> director of the Museum.
+		// testingData[i][13] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// 1 - (+) A Director correctly edits a Museum
+				"director1", "museum1", "testName", "C/ Test nº29", 80.123, -45.434, "test@email.com", "+34698245143", "testSlogan", null, "http://www.google.es", 3.0, null, null
+			}, {
+				// 2 - (-) A Director tries to edit the identifier of a Museum
+				"director1", "museum1", "testName", "C/ Test nº29", 80.123, -45.434, "test@email.com", "+34698245143", "testSlogan", "POP", "http://www.google.es", 3.0, null, IllegalArgumentException.class
+			}, {
+				// 3 - (-) A Director tries to edit a Museum that isn't hers
+				"director1", "museum7", "testName", "C/ Test nº29", 80.123, -45.434, "test@email.com", "+34698245143", "testSlogan", null, "http://www.google.es", 3.0, "director1", IllegalArgumentException.class
+			}, {
+				// 4 - (-) A Director tries to edit a non-existing Museum 
+				"director1", "abcdefg", "testName", "C/ Test nº29", 80.123, -45.434, "test@email.com", "+34 698245143", "testSlogan", null, "http://www.google.es", 3.0, null, IllegalArgumentException.class
+			}, {
+				// 5 - (-) A Visitor tries to edit a Museum
+				"visitor1", "museum1", "testName", "C/ Test nº29", 80.123, -45.434, "test@email.com", "+34698245143", "testSlogan", null, "http://www.google.es", 3.0, null, IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			Museum museum = null;
+
+			if (i == 3)
+				museum = new Museum();
+			else
+				museum = this.museumService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			Director director = null;
+
+			if (testingData[i][12] != null)
+				director = this.directorService.findOne(super.getEntityId((String) testingData[i][12]));
+
+			this.startTransaction();
+
+			this.templateEditMuseum((String) testingData[i][0], museum, (String) testingData[i][2], (String) testingData[i][3], (Double) testingData[i][4], (Double) testingData[i][5], (String) testingData[i][6], (String) testingData[i][7],
+				(String) testingData[i][8], (String) testingData[i][9], (String) testingData[i][10], (Double) testingData[i][11], director, (Class<?>) testingData[i][13]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+
+	protected void templateEditMuseum(final String username, final Museum museum, final String name, final String address, final Double latitude, final Double longitude, final String email, final String phoneNumber, final String slogan,
+		final String identifier, final String banner, final Double price, final Director director, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		super.authenticate(username);
+
+		try {
+
+			final String oldAddress = museum.getAddress();
+
+			// 2. Edit a Museum
+
+			final GPSCoordinates gpsCoordinates = new GPSCoordinates();
+			gpsCoordinates.setLatitude(latitude);
+			gpsCoordinates.setLongitude(longitude);
+
+			museum.setAddress(address);
+			museum.setBanner(banner);
+			museum.setCoordinates(gpsCoordinates);
+			museum.setEmail(email);
+			museum.setName(name);
+			museum.setPhoneNumber(phoneNumber);
+			museum.setPrice(price);
+			museum.setSlogan(slogan);
+
+			if (identifier != null)
+				museum.setIdentifier(identifier);
+
+			if (director != null)
+				museum.setDirector(director);
+
+			// 3. Save the Museum
+
+			final Museum savedMuseum = this.museumService.saveEdit(museum);
+
+			// Flush
+			this.museumService.flush();
+
+			// 3. Check the changes
+
+			Assert.isTrue(!oldAddress.equals(savedMuseum.getAddress()));
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

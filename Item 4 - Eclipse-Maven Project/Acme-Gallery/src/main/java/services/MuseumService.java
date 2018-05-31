@@ -267,6 +267,7 @@ public class MuseumService extends ActorService {
 	}
 
 	// v1.0 - JA
+	// v2.0 - Alicia
 	public Museum saveEdit(final Museum museum) {
 
 		Assert.notNull(museum);
@@ -281,6 +282,13 @@ public class MuseumService extends ActorService {
 
 		//The museum must be assigned to the current Director
 		Assert.isTrue(currentDirector.equals(museum.getDirector()));
+
+		// The identifier can't be changed
+		final Museum oldMuseum = this.museumRepository.findOne(museum.getId());
+		Assert.isTrue(oldMuseum.getIdentifier().equals(museum.getIdentifier()));
+
+		// Check that the principal isn't changing the 'director' property so that it's hers.
+		Assert.isTrue(oldMuseum.getDirector().equals(museum.getDirector()));
 
 		final Museum savedMuseum = this.save(museum);
 

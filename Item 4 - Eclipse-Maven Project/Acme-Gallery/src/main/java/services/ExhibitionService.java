@@ -186,6 +186,13 @@ public class ExhibitionService {
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
 
+		Assert.notNull(exhibition.getRoom());
+		Assert.notNull(exhibition.getStartingDate());
+		Assert.notNull(exhibition.getEndingDate());
+		Assert.notNull(exhibition.getIsPrivate());
+		Assert.notNull(exhibition.getPrice());
+		Assert.notNull(exhibition.getTicker());
+
 		Assert.isTrue(director.getMuseums().contains(exhibition.getRoom().getMuseum()));
 		Assert.isTrue(exhibition.getStartingDate().before(exhibition.getEndingDate()));
 		Assert.isTrue((exhibition.getIsPrivate() && exhibition.getPrice() > 0.0) || (!exhibition.getIsPrivate() && exhibition.getPrice() == 0.0));

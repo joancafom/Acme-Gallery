@@ -2510,7 +2510,7 @@
 		</property>
 		<property name="endingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="28/05/2018 17:00" />
+				<constructor-arg value="28/05/2019 17:00" />
 			</bean>
 		</property>
 		<property name="websites">

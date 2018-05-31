@@ -103,6 +103,12 @@ public class SponsorshipService {
 	}
 
 	//v1.0 - Implemented by JA
+	public void flush() {
+
+		this.sponsorshipRepository.flush();
+	}
+
+	//v1.0 - Implemented by JA
 	// v2.0 - Alicia
 	public Sponsorship save(final Sponsorship sponsorship) {
 
@@ -131,8 +137,11 @@ public class SponsorshipService {
 
 		Assert.notNull(sponsorship.getStatus());
 
-		if (sponsorship.getId() == 0)
+		if (sponsorship.getId() == 0) {
 			Assert.isTrue(sponsorship.getStatus().equals("PENDING"));
+			Assert.notNull(sponsorship.getExhibition());
+			Assert.isTrue(this.exhibitionService.canBeSponsored(sponsorship.getExhibition()));
+		}
 
 		if (sponsorship.getStatus().equals("ACCEPTED")) {
 			Assert.notNull(sponsorship.getCreditCard());

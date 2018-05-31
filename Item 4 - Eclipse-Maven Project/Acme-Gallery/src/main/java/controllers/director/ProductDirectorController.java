@@ -94,8 +94,10 @@ public class ProductDirectorController extends AbstractController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int productId) {
 		ModelAndView result;
+
 		final Product product = this.productService.findOne(productId);
 		Assert.notNull(product);
+
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
 

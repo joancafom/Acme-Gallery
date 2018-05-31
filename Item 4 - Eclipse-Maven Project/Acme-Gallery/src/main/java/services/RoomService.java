@@ -98,6 +98,12 @@ public class RoomService extends ActorService {
 		return this.roomRepository.findOne(roomId);
 	}
 
+	// v1.0 - JA
+	public void flush() {
+
+		this.roomRepository.flush();
+	}
+
 	// v1.0 Alicia
 	public Room save(final Room room) {
 		Assert.notNull(room);

@@ -36,6 +36,9 @@ public class ProductService {
 	private DirectorService		directorService;
 
 	@Autowired
+	private StoreService		storeService;
+
+	@Autowired
 	private Validator			validator;
 
 
@@ -48,12 +51,18 @@ public class ProductService {
 
 	/* v1.0 - josembell */
 	public void delete(final Product product) {
+
 		Assert.notNull(product);
+
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
+
+		Assert.notNull(product.getStore());
 		Assert.isTrue(product.getStore().getMuseum().getDirector().equals(director));
 
 		product.getStore().getProducts().remove(product);
+		this.storeService.save(product.getStore());
+
 		this.productRepository.delete(product);
 	}
 

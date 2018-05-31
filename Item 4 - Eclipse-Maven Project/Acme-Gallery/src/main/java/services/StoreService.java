@@ -100,6 +100,14 @@ public class StoreService {
 		this.storeRepository.delete(store);
 	}
 
+	// v1.0 - JA
+	public void flush() {
+
+		this.storeRepository.flush();
+	}
+
+	//Other Business Methods --------------------------------------------------------------------------
+
 	/* v1.0 - josembell */
 	public Store reconstruct(final Store prunedStore, final BindingResult binding) {
 
@@ -129,6 +137,5 @@ public class StoreService {
 
 		return store;
 	}
-	//Other Business Methods --------------------------------------------------------------------------
 
 }

@@ -141,10 +141,105 @@ public class ProductServiceTest extends AbstractTest {
 
 			final Product savedProduct = this.productService.save(product);
 			this.productService.flush();
+			this.storeService.flush();
 
 			//Assert that now the stores contains the product
 			final Store storeAfter = this.storeService.findOne(store.getId());
 			Assert.isTrue(storeAfter.getProducts().contains(savedProduct));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+
+	}
+
+	// -------------------------------------------------------------------------------
+	// [UC-029] Director delete a product.
+	// 
+	// Related requirements:
+	//
+	//   · REQ 23.29: An actor who is authenticated as an director must be able to
+	//                Delete a product for the gift store of a museum that she or he
+	//				  manages.
+	//
+	// -------------------------------------------------------------------------------
+	// v1.0 - Implemented by JA
+	// -------------------------------------------------------------------------------
+
+	@Test
+	public void driverDeleteProduct() {
+
+		// testingData[i][0] -> username of the Actor to log in.
+		// testingData[i][1] -> the product to delete.
+		// testingData[i][2] -> the expected exception.
+
+		final Object testingData[][] = {
+			{
+				// + 1) A director successfully deletes product for her or his store.
+				"director1", "product1", null
+			}, {
+				// - 2) A director tries to delete a product of another director's store.
+				"director1", "product10", IllegalArgumentException.class
+			}, {
+				// - 3) A director tries to delete a null product.
+				"director1", null, IllegalArgumentException.class
+			}, {
+				// - 4) A sponsor tries to delete a null product.
+				"sponsor1", "product1", IllegalArgumentException.class
+			}, {
+				// - 5) A director tries to delete a product with a null store.
+				"director1", "product2", IllegalArgumentException.class
+			}
+		};
+
+		Product product;
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			if (testingData[i][1] != null)
+				product = this.productService.findOne(this.getEntityId((String) testingData[i][1]));
+			else
+				product = null;
+
+			if (i == testingData.length - 1)
+				product.setStore(null);
+
+			this.startTransaction();
+
+			this.templateDeleteProduct((String) testingData[i][0], product, (Class<?>) testingData[i][2]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+		}
+
+	}
+	protected void templateDeleteProduct(final String performer, final Product product, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		this.authenticate(performer);
+
+		try {
+
+			Store productStore = null;
+
+			if (product != null)
+				productStore = product.getStore();
+
+			// 1. Delete the product
+			this.productService.delete(product);
+			this.productService.flush();
+
+			//2. Get the list of products of its store and Assert it does not longer appear
+			final Store storeAfter = this.storeService.findOne(productStore.getId());
+
+			Assert.isTrue(!storeAfter.getProducts().contains(product));
+
+			//3. Furthermore, the product must not be in the system
+			Assert.isNull(this.productService.findOne(product.getId()));
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

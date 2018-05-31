@@ -2510,7 +2510,7 @@
 		</property>
 		<property name="endingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="28/05/2018 17:00" />
+				<constructor-arg value="28/05/2019 17:00" />
 			</bean>
 		</property>
 		<property name="websites">
@@ -2843,6 +2843,8 @@
 		<property name="room" ref="room18" />
 		<property name="dayPasses">
 			<list>
+				<ref bean="dayPass14"/>
+				<ref bean="dayPass18"/>
 			</list>
 		</property>
 		<property name="sponsorships">
@@ -2893,8 +2895,8 @@
 				</value>
 			</list>
 		</property>
-		<property name="isPrivate" value="false" />
-		<property name="price" value="0.00" />
+		<property name="isPrivate" value="true" />
+		<property name="price" value="80.99" />
 
 		<property name="room" ref="room22" />
 		<property name="dayPasses">

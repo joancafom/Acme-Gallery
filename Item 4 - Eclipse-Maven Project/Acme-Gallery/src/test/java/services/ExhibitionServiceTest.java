@@ -19,10 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
+import org.springframework.validation.BeanPropertyBindingResult;
 
 import utilities.AbstractTest;
 import domain.Category;
 import domain.Exhibition;
+import domain.Guide;
 import domain.Room;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,7 +50,7 @@ public class ExhibitionServiceTest extends AbstractTest {
 	private CategoryService		categoryService;
 
 	@Autowired
-	private GuideService 		guideService;
+	private GuideService		guideService;
 
 
 	/*
@@ -204,8 +206,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 		Collection<String> websites;
 
 		for (int i = 0; i < testingData.length; i++) {
-
-			System.err.println(i);
 
 			if (testingData[i][9] != null)
 				category = this.categoryService.findOne(this.getEntityId((String) testingData[i][9]));
@@ -372,8 +372,214 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	}
 
+	// -------------------------------------------------------------------------------
+	// [UC-021] Director edit an exhibition. *EXTENDED*
+	// 
+	// Related requirements:
+	//   � REQ 8: Directors organize exhibitions. For every exhibition, the system must store 
+	//			  a ticker (which must follow the pattern: uuuu-XXXX where "uuuu" is the username
+	//			  of the actor creating the exhibition and "XXXX" is a string chosen by the
+	//			  director. Both have a variable size), a title, the room where is going to take 
+	//			  place, a description, a starting date, an ending date and a collection of links 
+	//			  to external webpages that provide further information about the author.
+	//
+	//   � REQ 9: Exhibitions can be either public or private. A day pass must be purchased in order 
+	//			  to access private exhibitions whereas public ones can be visited by all the visitors
+	//			  of a museum
+	//
+	//   � REQ 10: An exhibition belongs to a category. For each category, the system must store a name,
+	//			   which must be unique within the context of the same parent category; that is, several
+	//			   categories may have the same name as long as they do not have the same parent. Categories
+	//			   are organized into a tree whose root is a fictitious category called "CATEGORY".
+	//
+	//   � REQ 23.5: Edit the details of an exhibition she has created as long as it hasn't started. In case 
+	//				 it is a private exhibition that has already sold day passes, she is only able to 
+	//				 edit: title, description, websites and category. The ticker can never be edited.
+	//
+	// -------------------------------------------------------------------------------
+	// v1.0 - Implemented by JA
+	// -------------------------------------------------------------------------------
 
+	@Test
+	public void driverExhibitionEdit() {
 
+		// testingData[i][0] -> username of the Actor to log in.
+		// testingData[i][1] -> the ticker of the exhibition.
+		// testingData[i][2] -> the title of the exhibition.
+		// testingData[i][3] -> the description of the exhibition.
+		// testingData[i][4] -> the startingDate of the exhibition.
+		// testingData[i][5] -> the endingDate of the exhibition.
+		// testingData[i][6] -> the websites of the exhibition.
+		// testingData[i][7] -> if the Exhibition is private or not
+		// testingData[i][8] -> the price of the exhibition.
+		// testingData[i][9] -> the category of the exhibition.
+		// testingData[i][10] -> the room of the exhibition.
+		// testingData[i][11] -> if we want to change the ticker or not.
+		// testingData[i][12] -> if we only want to update the fields a 
+		//						 private exhibition with sold passes is allowed to.
+		// testingData[i][13] -> if we want to force that exhibition to start in the future (testing purporses)
+		//						 true --> Force to start in the future.
+		//						 false --> Force to start in the past but end in the future.
+		//						 null --> Default values of the field
+		// testingData[i][14] -> the exhibition to update.
+		// testingData[i][15] -> the expected exception.
+
+		final LocalDate tomorrow = new LocalDate().plusDays(1);
+		final LocalDate nextMonth = tomorrow.plusMonths(1);
+
+		final Object testingData[][] = {
+			{
+				// + 1) A director successfully edits a public exhibition that has not started yet to a room with no other exhibition in that period.
+				"director1", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, true,
+				"exhibition4", null
+			},
+			{
+				// + 2) A director successfully edits a private exhibition that has not started yet and has not sold any day passes
+				"director4", "test2", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false, true,
+				"exhibition12", null
+			},
+			{
+				// + 3) A director tries to edits a private exhibition that has not started yet and has sold some day passes
+				"director4", "test3", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false, true,
+				"exhibition12", null
+			}
+		};
+
+		Category category;
+		Room room;
+		Collection<String> websites;
+		String ticker;
+		Exhibition exhibition;
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			//Makes a collection of Websites out of the provided String
+			if (testingData[i][6] != null) {
+				websites = new ArrayList<String>();
+				websites.addAll(Arrays.asList(new String((String) testingData[i][6]).split(",")));
+			} else
+				websites = null;
+
+			//Retrieves the Category out of the provided String
+			if (testingData[i][9] != null)
+				category = this.categoryService.findOne(this.getEntityId((String) testingData[i][9]));
+			else
+				category = null;
+
+			//Retrieves the Room out of the provided String
+			if (testingData[i][10] != null)
+				room = this.roomService.findOne(this.getEntityId((String) testingData[i][10]));
+			else
+				room = null;
+
+			//Retrieves the Exhibition to update out of the provided String
+			if (testingData[i][14] != null)
+				exhibition = this.exhibitionService.findOne(this.getEntityId((String) testingData[i][14]));
+			else
+				exhibition = null;
+
+			//Selects the value applied for the ticker in the testcase (if we want to change it or not)
+			if ((Boolean) testingData[i][11])
+				ticker = (String) testingData[i][1];
+			else if (exhibition != null)
+				ticker = exhibition.getTicker();
+			else
+				ticker = null;
+
+			//If, for testing purporses, we wanted to ensure that the exhibition starts in the future...
+			if ((Boolean) testingData[i][13] && exhibition != null) {
+				exhibition.setStartingDate(tomorrow.toDate());
+				exhibition.setEndingDate(nextMonth.toDate());
+				exhibition = this.exhibitionService.save(exhibition);
+			}
+
+			this.startTransaction();
+
+			this.templateExhibitionEdit((String) testingData[i][0], exhibition, (Boolean) testingData[i][12], ticker, (String) testingData[i][2], (String) testingData[i][3], (Date) testingData[i][4], (Date) testingData[i][5], websites,
+				(Boolean) testingData[i][7], (Double) testingData[i][8], category, room, (Class<?>) testingData[i][15]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+		}
+
+	}
+	protected void templateExhibitionEdit(final String performer, final Exhibition exhibitionToUpdate, final Boolean onlyUpdatePP, final String ticker, final String title, final String description, final Date startingDate, final Date endingDate,
+		final Collection<String> websites, final Boolean isPrivate, final Double price, final Category category, final Room room, final Class<?> expected) {
+
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		this.authenticate(performer);
+
+		try {
+
+			// 1. Edit the exhibiton that is given via parameters
+
+			exhibitionToUpdate.setTitle(title);
+			exhibitionToUpdate.setDescription(description);
+			exhibitionToUpdate.setWebsites(websites);
+			exhibitionToUpdate.setCategory(category);
+			exhibitionToUpdate.setTicker(ticker);
+
+			//If we don't want to update only the fields allowed in 
+			//the case it were a private exhibition with sold passes. (Req 23.5)
+			if (!onlyUpdatePP) {
+				exhibitionToUpdate.setStartingDate(startingDate);
+				exhibitionToUpdate.setEndingDate(endingDate);
+				exhibitionToUpdate.setPrice(price);
+				exhibitionToUpdate.setRoom(room);
+				exhibitionToUpdate.setIsPrivate(isPrivate);
+			}
+
+			//The exhibition to be updated is passed through a reconstruct as in real life
+			final Exhibition reconstructedExhibition = this.exhibitionService.reconstructSave(exhibitionToUpdate, new BeanPropertyBindingResult(exhibitionToUpdate, ""));
+
+			final Exhibition updatedExhibition = this.exhibitionService.saveCreateAndEdit(reconstructedExhibition);
+			this.exhibitionService.flush();
+
+			//Assert that the updated exhibition appears in the listing of exhibitions of its director
+			Exhibition foundExhibition = null;
+
+			for (final Exhibition e : this.exhibitionService.getByDirector(updatedExhibition.getRoom().getMuseum().getDirector()))
+				if (e.equals(updatedExhibition)) {
+					foundExhibition = e;
+					break;
+				}
+
+			Assert.notNull(foundExhibition);
+
+			//Assert that the fields were updated
+			Assert.isTrue(foundExhibition.getTitle().equals(updatedExhibition.getTitle()));
+			Assert.isTrue(foundExhibition.getDescription().equals(updatedExhibition.getDescription()));
+			Assert.isTrue(foundExhibition.getWebsites().equals(updatedExhibition.getWebsites()));
+			Assert.isTrue(foundExhibition.getCategory().equals(updatedExhibition.getCategory()));
+			Assert.isTrue(foundExhibition.getTicker().equals(updatedExhibition.getTicker()));
+
+			//If we were just meant to update the fields allowed in 
+			//the case it were a private exhibition with sold passes, we assert
+			//those fields are not changed (and viceversa). (Req 23.5)
+			if (onlyUpdatePP) {
+				Assert.isTrue(foundExhibition.getStartingDate().equals(exhibitionToUpdate.getStartingDate()));
+				Assert.isTrue(foundExhibition.getEndingDate().equals(exhibitionToUpdate.getEndingDate()));
+				Assert.isTrue(foundExhibition.getPrice().equals(exhibitionToUpdate.getPrice()));
+				Assert.isTrue(foundExhibition.getRoom().equals(exhibitionToUpdate.getRoom()));
+				Assert.isTrue(foundExhibition.getIsPrivate() == exhibitionToUpdate.getIsPrivate());
+			} else {
+				Assert.isTrue(foundExhibition.getStartingDate().equals(updatedExhibition.getStartingDate()));
+				Assert.isTrue(foundExhibition.getEndingDate().equals(updatedExhibition.getEndingDate()));
+				Assert.isTrue(foundExhibition.getPrice().equals(updatedExhibition.getPrice()));
+				Assert.isTrue(foundExhibition.getRoom().equals(updatedExhibition.getRoom()));
+				Assert.isTrue(foundExhibition.getIsPrivate() == updatedExhibition.getIsPrivate());
+			}
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+
+	}
 
 	//Auxiliary Methods
 	private Date formatDate(final String date) {

@@ -130,7 +130,7 @@ public class CategoryServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				// 1 - (+) An Administrator correctly removes a Category.
-				"admin", "category20", null
+				"admin", "category19", null
 			}, {
 				// 2 - (-) An Administrator removes a non-existing Category.
 				"admin", "abcdefgh", IllegalArgumentException.class
@@ -142,7 +142,7 @@ public class CategoryServiceTest extends AbstractTest {
 				"admin", "category1", IllegalArgumentException.class
 			}, {
 				// 5 - (-) A Visitor removes a Category.
-				"visitor1", "category20", IllegalArgumentException.class
+				"visitor1", "category19", IllegalArgumentException.class
 			}
 		};
 

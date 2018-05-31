@@ -138,4 +138,11 @@ public class StoreService {
 		return store;
 	}
 
+	// v1.0 - Alicia
+	public Store getStoreByMuseum(final Museum museum) {
+		Assert.notNull(museum);
+
+		return this.storeRepository.getStoreByMuseumId(museum.getId());
+	}
+
 }

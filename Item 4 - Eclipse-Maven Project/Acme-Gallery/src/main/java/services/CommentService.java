@@ -91,6 +91,9 @@ public class CommentService extends ActorService {
 		//Beware to modify this method! It is used by SystemConfigurationService.updateTaboo
 
 		Assert.notNull(comment);
+
+		final Boolean veredict = this.systemConfigurationService.containsTaboo(comment.getDescription() + " " + comment.getTitle());
+		comment.setContainsTaboo(veredict);
 		return this.commentRepository.save(comment);
 	}
 

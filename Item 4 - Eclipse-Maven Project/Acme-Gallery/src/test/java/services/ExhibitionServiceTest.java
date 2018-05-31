@@ -47,6 +47,9 @@ public class ExhibitionServiceTest extends AbstractTest {
 	@Autowired
 	private CategoryService		categoryService;
 
+	@Autowired
+	private GuideService 		guideService;
+
 
 	/*
 	 * [UC-002] - Search for exhibitions
@@ -55,7 +58,7 @@ public class ExhibitionServiceTest extends AbstractTest {
 	 * 3. List your search results
 	 * 4. Display an exhibition
 	 * 
-	 * v1.0 - josembell
+	 * v1.1 - josembell
 	 */
 	@Test
 	public void driverSearchExhibitions() {
@@ -83,8 +86,8 @@ public class ExhibitionServiceTest extends AbstractTest {
 				// 7 - (+) Un critic busca exhibiciones
 				"critic1", "Van Gogh", "exhibition1", null
 			}, {
-				/* 8 - (-) Un user displayea una exhibicion null */
-				null, "Van Gogh", null, NullPointerException.class
+				/* 8 - (-) Un user busca exhibiciones con keyword null */
+				null, null, "exhibition1", IllegalArgumentException.class
 			}
 		};
 
@@ -101,6 +104,7 @@ public class ExhibitionServiceTest extends AbstractTest {
 		}
 
 	}
+
 	/* v1.0 - josembell */
 	private void templateSearchExhibitions(final String username, final String keyword, final Exhibition exhibition, final Class<?> expected) {
 		Class<?> caught = null;
@@ -280,6 +284,96 @@ public class ExhibitionServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * [UC-022] - Director add Guide
+	 * 1. Log in as a director
+	 * 2. List my exhibitions
+	 * 3. Add guide to a exhibition
+	 * 
+	 * REQ:
+	 * 
+	 * v1.0 - josembell
+	 */
+	@Test
+	public void driverAddGuide() {
+
+		final Object testingData[][] = {
+			{
+				/* + 1. Un director añade un guia perteneciente a un museo a una de sus exhibiciones */
+				"director1", "exhibition2", "guide1", null
+			}, {
+				/* - 2. Un usuario no identificado añade un guia */
+				null, "exhibition2", "guide1", IllegalArgumentException.class
+			}, {
+				/* - 3. Un usuario que no es un director añade un guia */
+				"visitor1", "exhibition2", "guide1", IllegalArgumentException.class
+			}, {
+				/* - 4. Un director añade un guia que no le pertenece al museo */
+				"director5", "exhibition13", "guide1", IllegalArgumentException.class
+			}, {
+				/* - 5. Un director añade un guia a una exhibicion que no le pertenece */
+				"director1", "exhibition13", "guide1", IllegalArgumentException.class
+			}, {
+				/* - 6. Un director añade un guia null a una exhibicion */
+				"director1", "exhibition2", null, IllegalArgumentException.class
+			}, {
+				/* - 7. Un director añade un guia a una exhibicion null */
+				"director1", null, "guide1", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			Exhibition exhibition = null;
+			Guide guide = null;
+			if (testingData[i][1] != null)
+				exhibition = this.exhibitionService.findOne(this.getEntityId((String) testingData[i][1]));
+			if (testingData[i][2] != null)
+				guide = this.guideService.findOne(this.getEntityId((String) testingData[i][2]));
+			this.startTransaction();
+			System.out.println(i);
+			this.templateAddGuide((String) testingData[i][0], exhibition, guide, (Class<?>) testingData[i][3]);
+			System.out.println(i);
+			this.rollbackTransaction();
+			this.entityManager.clear();
+		}
+
+	}
+
+	/* v1.0 - josembell */
+	protected void templateAddGuide(final String username, final Exhibition exhibition, final Guide guide, final Class<?> expected) {
+		Class<?> caught = null;
+		/* 1. authenticate */
+		this.authenticate(username);
+
+		try {
+			/* 2. list my exhibitions */
+			final Collection<Exhibition> myExhibitions = this.exhibitionService.getExhibitionsByPrincipal();
+
+			/* 3. add the guide */
+
+			guide.getExhibitions().add(exhibition);
+			this.guideService.save(guide);
+			exhibition.getGuides().add(guide);
+
+			final Exhibition saved = this.exhibitionService.saveCreateAndEdit(exhibition);
+			this.exhibitionService.flush();
+
+			/* 4. check that the exhibition is in the list */
+			Assert.isTrue(myExhibitions.contains(exhibition));
+			Assert.isTrue(saved.getGuides().contains(guide));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+
+	}
+
+
+
 
 	//Auxiliary Methods
 	private Date formatDate(final String date) {

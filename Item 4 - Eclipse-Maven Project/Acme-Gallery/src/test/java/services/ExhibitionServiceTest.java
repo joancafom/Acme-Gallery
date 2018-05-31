@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.joda.time.LocalDate;
 import org.junit.Test;
@@ -417,31 +418,64 @@ public class ExhibitionServiceTest extends AbstractTest {
 		// testingData[i][11] -> if we want to change the ticker or not.
 		// testingData[i][12] -> if we only want to update the fields a 
 		//						 private exhibition with sold passes is allowed to.
-		// testingData[i][13] -> if we want to force that exhibition to start in the future (testing purporses)
-		//						 true --> Force to start in the future.
-		//						 false --> Force to start in the past but end in the future.
-		//						 null --> Default values of the field
-		// testingData[i][14] -> the exhibition to update.
-		// testingData[i][15] -> the expected exception.
-
-		final LocalDate tomorrow = new LocalDate().plusDays(1);
-		final LocalDate nextMonth = tomorrow.plusMonths(1);
+		// testingData[i][13] -> the exhibition to update.
+		// testingData[i][14] -> the expected exception.
 
 		final Object testingData[][] = {
 			{
 				// + 1) A director successfully edits a public exhibition that has not started yet to a room with no other exhibition in that period.
-				"director1", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, true,
-				"exhibition4", null
+				"director1", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition4",
+				null
 			},
 			{
 				// + 2) A director successfully edits a private exhibition that has not started yet and has not sold any day passes
-				"director4", "test2", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false, true,
-				"exhibition12", null
+				"director5", "test2", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false,
+				"exhibition13", null
 			},
 			{
-				// + 3) A director tries to edits a private exhibition that has not started yet and has sold some day passes
-				"director4", "test3", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false, true,
-				"exhibition12", null
+				// + 3) A director successfully edits a private exhibition that has not started yet and has sold some day passes
+				"director6", "test3", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, true, "exhibition14",
+				null
+			},
+			{
+				// - 4) A director tries to edit forbidden fields of a private exhibition that has not started yet but has sold some day passes
+				"director6", "test3", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false,
+				"exhibition14", null
+			},
+			{
+				// - 5) A director tries to edit a public exhibition that has already started.
+				"director1", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition1",
+				IllegalArgumentException.class
+			},
+			{
+				// - 5) A director tries to edit a private exhibition that has not sold any day passes with XSS in its title.
+				"director5", "test2", "Test <script>alert('hacked!');</script> Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2",
+				"room18", false, false, "exhibition13", ConstraintViolationException.class
+			},
+			{
+				// - 6) A director tries to edit a fellow director's public exhibition that has not started
+				"director2", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition4",
+				IllegalArgumentException.class
+			},
+			{
+				// - 7) A visitor tries to edit a private exhibition that has not started yet and has sold some day passes
+				"visitor1", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition14",
+				IllegalArgumentException.class
+			},
+			{
+				// - 8) A director tries to edit a public exhi8bition that has not started yet with wrong dates (ending before starting)
+				"director1", "test1", "Test Title", "Test Description", this.formatDate("20-08-2018 19:00"), this.formatDate("18-08-2018 21:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition4",
+				IllegalArgumentException.class
+			},
+			{
+				// - 9) A director tries to edit a public exhibition that has not started yet to a room in which other exhibition takes place in those dates
+				"director1", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 20:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition4",
+				IllegalArgumentException.class
+			},
+			{
+				// - 10) A director tries to edit a private exhibition that has not started yet and has not sold any day passes by providing a null starting date
+				"director5", "test2", "Test Title", "Test Description", null, this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false, "exhibition13",
+				IllegalArgumentException.class
 			}
 		};
 
@@ -452,6 +486,8 @@ public class ExhibitionServiceTest extends AbstractTest {
 		Exhibition exhibition;
 
 		for (int i = 0; i < testingData.length; i++) {
+
+			System.err.println(i);
 
 			//Makes a collection of Websites out of the provided String
 			if (testingData[i][6] != null) {
@@ -473,8 +509,8 @@ public class ExhibitionServiceTest extends AbstractTest {
 				room = null;
 
 			//Retrieves the Exhibition to update out of the provided String
-			if (testingData[i][14] != null)
-				exhibition = this.exhibitionService.findOne(this.getEntityId((String) testingData[i][14]));
+			if (testingData[i][13] != null)
+				exhibition = this.exhibitionService.findOne(this.getEntityId((String) testingData[i][13]));
 			else
 				exhibition = null;
 
@@ -486,24 +522,17 @@ public class ExhibitionServiceTest extends AbstractTest {
 			else
 				ticker = null;
 
-			//If, for testing purporses, we wanted to ensure that the exhibition starts in the future...
-			if ((Boolean) testingData[i][13] && exhibition != null) {
-				exhibition.setStartingDate(tomorrow.toDate());
-				exhibition.setEndingDate(nextMonth.toDate());
-				exhibition = this.exhibitionService.save(exhibition);
-			}
-
 			this.startTransaction();
 
 			this.templateExhibitionEdit((String) testingData[i][0], exhibition, (Boolean) testingData[i][12], ticker, (String) testingData[i][2], (String) testingData[i][3], (Date) testingData[i][4], (Date) testingData[i][5], websites,
-				(Boolean) testingData[i][7], (Double) testingData[i][8], category, room, (Class<?>) testingData[i][15]);
+				(Boolean) testingData[i][7], (Double) testingData[i][8], category, room, (Class<?>) testingData[i][14]);
 
 			this.rollbackTransaction();
 			this.entityManager.clear();
 		}
 
 	}
-	protected void templateExhibitionEdit(final String performer, final Exhibition exhibitionToUpdate, final Boolean onlyUpdatePP, final String ticker, final String title, final String description, final Date startingDate, final Date endingDate,
+	protected void templateExhibitionEdit(final String performer, final Exhibition originalExhibition, final Boolean onlyUpdatePP, final String ticker, final String title, final String description, final Date startingDate, final Date endingDate,
 		final Collection<String> websites, final Boolean isPrivate, final Double price, final Category category, final Room room, final Class<?> expected) {
 
 		Class<?> caught = null;
@@ -513,8 +542,9 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 		try {
 
-			// 1. Edit the exhibiton that is given via parameters
+			final Exhibition exhibitionToUpdate = this.getCopy(originalExhibition);
 
+			// 1. Edit the exhibiton that is given via parameters
 			exhibitionToUpdate.setTitle(title);
 			exhibitionToUpdate.setDescription(description);
 			exhibitionToUpdate.setWebsites(websites);
@@ -548,28 +578,29 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 			Assert.notNull(foundExhibition);
 
-			//Assert that the fields were updated
-			Assert.isTrue(foundExhibition.getTitle().equals(updatedExhibition.getTitle()));
-			Assert.isTrue(foundExhibition.getDescription().equals(updatedExhibition.getDescription()));
-			Assert.isTrue(foundExhibition.getWebsites().equals(updatedExhibition.getWebsites()));
-			Assert.isTrue(foundExhibition.getCategory().equals(updatedExhibition.getCategory()));
-			Assert.isTrue(foundExhibition.getTicker().equals(updatedExhibition.getTicker()));
+			//Assert that the fields were updated or remained the same
+			Assert.isTrue(foundExhibition.getTitle().equals(title));
+			Assert.isTrue(foundExhibition.getDescription().equals(description));
+			Assert.isTrue(foundExhibition.getWebsites().containsAll(websites));
+			Assert.isTrue(foundExhibition.getWebsites().size() == websites.size());
+			Assert.isTrue(foundExhibition.getCategory().equals(category));
+			Assert.isTrue(foundExhibition.getTicker().equals(originalExhibition.getTicker()));
 
-			//If we were just meant to update the fields allowed in 
-			//the case it were a private exhibition with sold passes, we assert
-			//those fields are not changed (and viceversa). (Req 23.5)
+			//Check that, in case of a private exhibition with some day passes sold, the fields
+			//you were not allowed to remained the same
 			if (onlyUpdatePP) {
-				Assert.isTrue(foundExhibition.getStartingDate().equals(exhibitionToUpdate.getStartingDate()));
-				Assert.isTrue(foundExhibition.getEndingDate().equals(exhibitionToUpdate.getEndingDate()));
-				Assert.isTrue(foundExhibition.getPrice().equals(exhibitionToUpdate.getPrice()));
-				Assert.isTrue(foundExhibition.getRoom().equals(exhibitionToUpdate.getRoom()));
-				Assert.isTrue(foundExhibition.getIsPrivate() == exhibitionToUpdate.getIsPrivate());
+				Assert.isTrue(foundExhibition.getStartingDate().equals(originalExhibition.getStartingDate()));
+				Assert.isTrue(foundExhibition.getEndingDate().equals(originalExhibition.getEndingDate()));
+				Assert.isTrue(foundExhibition.getPrice().equals(originalExhibition.getPrice()));
+				Assert.isTrue(foundExhibition.getRoom().equals(originalExhibition.getRoom()));
+				Assert.isTrue(foundExhibition.getIsPrivate() == originalExhibition.getIsPrivate());
 			} else {
-				Assert.isTrue(foundExhibition.getStartingDate().equals(updatedExhibition.getStartingDate()));
-				Assert.isTrue(foundExhibition.getEndingDate().equals(updatedExhibition.getEndingDate()));
-				Assert.isTrue(foundExhibition.getPrice().equals(updatedExhibition.getPrice()));
-				Assert.isTrue(foundExhibition.getRoom().equals(updatedExhibition.getRoom()));
-				Assert.isTrue(foundExhibition.getIsPrivate() == updatedExhibition.getIsPrivate());
+				System.out.println(foundExhibition.getStartingDate().compareTo(startingDate));
+				Assert.isTrue(foundExhibition.getStartingDate().compareTo(startingDate) == 0);
+				Assert.isTrue(foundExhibition.getEndingDate().compareTo(endingDate) == 0);
+				Assert.isTrue(foundExhibition.getPrice().equals(price));
+				Assert.isTrue(foundExhibition.getRoom().equals(room));
+				Assert.isTrue(foundExhibition.getIsPrivate() == isPrivate);
 			}
 
 		} catch (final Throwable oops) {
@@ -580,7 +611,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 
 	}
-
 	//Auxiliary Methods
 	private Date formatDate(final String date) {
 		Date res;
@@ -614,5 +644,30 @@ public class ExhibitionServiceTest extends AbstractTest {
 		else
 			return exh.getRoom();
 
+	}
+
+	private Exhibition getCopy(final Exhibition original) {
+
+		final Exhibition res = new Exhibition();
+
+		res.setArtworks(original.getArtworks());
+		res.setCategory(original.getCategory());
+		res.setCritiques(original.getCritiques());
+		res.setDayPasses(original.getDayPasses());
+		res.setDescription(original.getDescription());
+		res.setEndingDate(original.getEndingDate());
+		res.setGuides(original.getGuides());
+		res.setId(original.getId());
+		res.setIsPrivate(original.getIsPrivate());
+		res.setPrice(original.getPrice());
+		res.setRoom(original.getRoom());
+		res.setSponsorships(original.getSponsorships());
+		res.setStartingDate(original.getStartingDate());
+		res.setTicker(original.getTicker());
+		res.setTitle(original.getTitle());
+		res.setVersion(original.getVersion());
+		res.setWebsites(original.getWebsites());
+
+		return res;
 	}
 }

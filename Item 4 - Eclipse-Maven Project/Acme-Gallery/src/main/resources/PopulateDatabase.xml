@@ -13,9 +13,9 @@
 	<bean class="java.text.SimpleDateFormat" id="dateFormat">
 		<constructor-arg value="dd/MM/yyyy HH:mm" />
 	</bean>
-	
+
 	<bean class="java.text.SimpleDateFormat" id="dateFormat2">
-		<constructor-arg value="dd/MM/yyyy"/>
+		<constructor-arg value="dd/MM/yyyy" />
 	</bean>
 
 	<!-- User accounts -->
@@ -448,7 +448,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount33" class="security.UserAccount">
 		<property name="username" value="sponsor5" />
 		<property name="password" value="d6d7f85c15bbb451ef50b704b3693033" />
@@ -461,7 +461,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount34" class="security.UserAccount">
 		<property name="username" value="sponsor6" />
 		<property name="password" value="214a700672abaf88da097fbf5f246252" />
@@ -474,7 +474,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount35" class="security.UserAccount">
 		<property name="username" value="visitor7" />
 		<property name="password" value="3693575994a2a47ddfd67bd19f37381c" />
@@ -487,7 +487,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount36" class="security.UserAccount">
 		<property name="username" value="visitor8" />
 		<property name="password" value="237295a49f2b11e7b9415d1a2cd753d6" />
@@ -500,7 +500,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount37" class="security.UserAccount">
 		<property name="username" value="visitor9" />
 		<property name="password" value="5be811d2f99e53b886b2fcbc95dacec0" />
@@ -513,7 +513,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount38" class="security.UserAccount">
 		<property name="username" value="visitor10" />
 		<property name="password" value="14afa2b6ad807eed0ce6b4d9e9ab49d6" />
@@ -526,7 +526,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount39" class="security.UserAccount">
 		<property name="username" value="visitor11" />
 		<property name="password" value="af25ad4009f90b0afa854443f0206eb7" />
@@ -539,7 +539,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount40" class="security.UserAccount">
 		<property name="username" value="visitor12" />
 		<property name="password" value="785495f4278380480c3f2a63fe06e3d9" />
@@ -552,7 +552,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount41" class="security.UserAccount">
 		<property name="username" value="sponsor7" />
 		<property name="password" value="9798bbc9417e0ad8183332d408703757" />
@@ -565,7 +565,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount42" class="security.UserAccount">
 		<property name="username" value="sponsor8" />
 		<property name="password" value="8ef13e3e3c71f78fdee0a575c59bbdf5" />
@@ -578,7 +578,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount43" class="security.UserAccount">
 		<property name="username" value="sponsor9" />
 		<property name="password" value="504c1ba7b26260e8df9e9cd0c36a5fc3" />
@@ -591,7 +591,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount44" class="security.UserAccount">
 		<property name="username" value="sponsor10" />
 		<property name="password" value="a667d56c80461ae8bd64029e955c60ce" />
@@ -604,7 +604,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount45" class="security.UserAccount">
 		<property name="username" value="sponsor11" />
 		<property name="password" value="49ea8ae74b49364f5b4740edbe21b99c" />
@@ -617,7 +617,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount46" class="security.UserAccount">
 		<property name="username" value="sponsor12" />
 		<property name="password" value="bb18323431ed82889eb5d53a0ac376ba" />
@@ -630,7 +630,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Administrator -->
 
 	<bean id="admin" class="domain.Administrator">
@@ -2510,7 +2510,7 @@
 		</property>
 		<property name="endingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="28/05/2019 17:00" />
+				<constructor-arg value="29/05/2019 17:00" />
 			</bean>
 		</property>
 		<property name="websites">
@@ -2843,8 +2843,8 @@
 		<property name="room" ref="room18" />
 		<property name="dayPasses">
 			<list>
-				<ref bean="dayPass14"/>
-				<ref bean="dayPass18"/>
+				<ref bean="dayPass14" />
+				<ref bean="dayPass18" />
 			</list>
 		</property>
 		<property name="sponsorships">
@@ -2931,7 +2931,7 @@
 			value="BATIMAT EGYPT will offer the complete range of products and solutions suited to the construction market in Egypt and the Middle East." />
 		<property name="startingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="01/01/2017 08:00" />
+				<constructor-arg value="10/08/2018 08:00" />
 			</bean>
 		</property>
 		<property name="endingDate">
@@ -2966,7 +2966,7 @@
 		<property name="category" ref="category11" />
 		<property name="artworks">
 			<list>
-				<ref bean="artwork21"/>
+				<ref bean="artwork21" />
 			</list>
 		</property>
 		<property name="guides">
@@ -3396,7 +3396,7 @@
 				<ref bean="invitation4" />
 				<ref bean="invitation5" />
 				<ref bean="invitation6" />
-				<ref bean="invitation25"/>
+				<ref bean="invitation25" />
 			</list>
 		</property>
 		<property name="announcements">
@@ -3863,7 +3863,7 @@
 		</property>
 		<property name="invitations">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="announcements">
@@ -4144,12 +4144,13 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="isHighlight" value="false" />
 		<property name="exhibition" ref="exhibition1" />
 	</bean>
-	
+
 	<bean id="artwork21" class="domain.Artwork">
 		<property name="title" value="Tutankamon" />
 		<property name="photograph"
 			value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/TUT-Ausstellung_FFM_2012_47_%287117819557%29.jpg/245px-TUT-Ausstellung_FFM_2012_47_%287117819557%29.jpg" />
-		<property name="remark" value="Tutankhamun was an Egyptian pharaoh of the 18th dynasty (ruled c. 1332–1323 BC in the conventional chronology), during the period of Egyptian history known as the New Kingdom or sometimes the New Empire Period" />
+		<property name="remark"
+			value="Tutankhamun was an Egyptian pharaoh of the 18th dynasty (ruled c. 1332–1323 BC in the conventional chronology), during the period of Egyptian history known as the New Kingdom or sometimes the New Empire Period" />
 		<property name="isFinal" value="true" />
 		<property name="isHighlight" value="true" />
 		<property name="exhibition" ref="exhibition14" />
@@ -4521,7 +4522,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="host" ref="visitor5" />
 		<property name="guest" ref="visitor4" />
 	</bean>
-	
+
 	<bean id="invitation25" class="domain.Invitation">
 		<property name="message" value="Let's go to the British Museum!!" />
 		<property name="sentMoment">
@@ -5378,7 +5379,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 				<ref bean="invitation13" />
 				<ref bean="invitation14" />
 				<ref bean="invitation17" />
-				<ref bean="invitation25"/>
+				<ref bean="invitation25" />
 			</list>
 		</property>
 	</bean>
@@ -5395,11 +5396,11 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="createdGroups">
 			<list>
 			</list>
-		</property>	
+		</property>
 		<property name="joinedGroups">
 			<list>
 				<ref bean="group1" />
-				<ref bean="group2"/>
+				<ref bean="group2" />
 			</list>
 		</property>
 		<property name="comments">
@@ -5419,7 +5420,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		</property>
 		<property name="receivedInvitations">
 			<list>
-				<ref bean="invitation25"/>
+				<ref bean="invitation25" />
 			</list>
 		</property>
 		<property name="sentInvitations">
@@ -5608,7 +5609,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="visitor7" class="domain.Visitor">
 		<property name="name" value="Beelén" />
 		<property name="surnames" value="Lucky" />
@@ -5646,14 +5647,14 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="visitor8" class="domain.Visitor">
 		<property name="name" value="Jota" />
 		<property name="surnames" value="Morrell" />
 		<property name="email" value="jota@gmail.com" />
 		<property name="phoneNumber" value="+34652998500" />
 		<property name="gender" value="MALE" />
-		<property name="address" value="4446 Sycamore Fork Road"/>
+		<property name="address" value="4446 Sycamore Fork Road" />
 		<property name="userAccount" ref="userAccount36" />
 
 		<property name="createdGroups">
@@ -5685,14 +5686,14 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="visitor9" class="domain.Visitor">
 		<property name="name" value="Flopi" />
 		<property name="surnames" value="McElroy" />
 		<property name="email" value="flopi@gmail.com" />
 		<property name="phoneNumber" value="+34776900300" />
 		<property name="gender" value="FEMALE" />
-		<property name="address" value="3345 Clearview Drive"/>
+		<property name="address" value="3345 Clearview Drive" />
 		<property name="userAccount" ref="userAccount37" />
 
 		<property name="createdGroups">
@@ -5724,14 +5725,14 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="visitor10" class="domain.Visitor">
 		<property name="name" value="Patidifú" />
 		<property name="surnames" value="Barker" />
 		<property name="email" value="patidifu@gmail.com" />
 		<property name="phoneNumber" value="+34665111789" />
 		<property name="gender" value="FEMALE" />
-		<property name="address" value="2589 Boggess Street"/>
+		<property name="address" value="2589 Boggess Street" />
 		<property name="userAccount" ref="userAccount38" />
 
 		<property name="createdGroups">
@@ -5763,14 +5764,14 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="visitor11" class="domain.Visitor">
 		<property name="name" value="Eto" />
 		<property name="surnames" value="Brown" />
 		<property name="email" value="eto@gmail.com" />
 		<property name="phoneNumber" value="+34661911600" />
 		<property name="gender" value="MALE" />
-		<property name="address" value="1435 Radford Street"/>
+		<property name="address" value="1435 Radford Street" />
 		<property name="userAccount" ref="userAccount39" />
 
 		<property name="createdGroups">
@@ -5802,7 +5803,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="visitor12" class="domain.Visitor">
 		<property name="name" value="Paulino" />
 		<property name="surnames" value="Sims" />
@@ -6701,7 +6702,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="sponsor5" class="domain.Sponsor">
 		<property name="name" value="Cervasio" />
 		<property name="surnames" value="D Long" />
@@ -6715,7 +6716,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="sponsor6" class="domain.Sponsor">
 		<property name="name" value="Croco" />
 		<property name="surnames" value="Brewer" />
@@ -6729,13 +6730,13 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="sponsor7" class="domain.Sponsor">
 		<property name="name" value="Méloni" />
 		<property name="surnames" value="Escamilla" />
 		<property name="email" value="meloni@gmail.com" />
 		<property name="phoneNumber" value="+34665100897" />
-		<property name="address" value="3363 Saints Alley"/>
+		<property name="address" value="3363 Saints Alley" />
 		<property name="gender" value="FEMALE" />
 		<property name="userAccount" ref="userAccount41" />
 
@@ -6744,13 +6745,13 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="sponsor8" class="domain.Sponsor">
 		<property name="name" value="Eloísa" />
 		<property name="surnames" value="Hamilton" />
 		<property name="email" value="hamilton@gmail.com" />
 		<property name="phoneNumber" value="+34655112980" />
-		<property name="address" value="1508 Davis Place"/>
+		<property name="address" value="1508 Davis Place" />
 		<property name="gender" value="FEMALE" />
 		<property name="userAccount" ref="userAccount42" />
 
@@ -6759,7 +6760,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="sponsor9" class="domain.Sponsor">
 		<property name="name" value="Ava" />
 		<property name="surnames" value="Metzger" />
@@ -6773,13 +6774,13 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="sponsor10" class="domain.Sponsor">
 		<property name="name" value="Olivia" />
 		<property name="surnames" value="Radcliff" />
 		<property name="email" value="olivia@gmail.com" />
 		<property name="phoneNumber" value="+34651334942" />
-		<property name="address" value="4193 Jarvis Street"/>
+		<property name="address" value="4193 Jarvis Street" />
 		<property name="gender" value="FEMALE" />
 		<property name="userAccount" ref="userAccount44" />
 
@@ -6788,7 +6789,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="sponsor11" class="domain.Sponsor">
 		<property name="name" value="Arsenio" />
 		<property name="surnames" value="Dunn" />
@@ -6802,7 +6803,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="sponsor12" class="domain.Sponsor">
 		<property name="name" value="Olaf" />
 		<property name="surnames" value="Sommer" />

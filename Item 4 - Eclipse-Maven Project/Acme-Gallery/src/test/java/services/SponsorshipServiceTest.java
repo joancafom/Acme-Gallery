@@ -88,7 +88,7 @@ public class SponsorshipServiceTest extends AbstractTest {
 				"sponsor1", "http://www.tinyurl.com/kittenDP", "http://www.charlie.xcx/buy/VroomEP", "exhibition4", null
 			}, {
 				// - 2) A sponsor tries to create a pending sponsorship for an exhibition that has already started.
-				"sponsor3", "http://www.tinyurl.com/kittenDP", "http://www.charlie.xcx/buy/VroomEP", "exhibition14", IllegalArgumentException.class
+				"sponsor3", "http://www.tinyurl.com/kittenDP", "http://www.charlie.xcx/buy/VroomEP", "exhibition12", IllegalArgumentException.class
 			}, {
 				// - 3) A sponsor tries to create a pending sponsorship with an invalid banner.
 				"sponsor2", "invalidURL", "http://www.charlie.xcx/buy/VroomEP", "exhibition4", ConstraintViolationException.class

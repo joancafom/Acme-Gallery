@@ -665,7 +665,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 		Exhibition exhibitionToRemove;
 
 		for (int i = 0; i < testingData.length; i++) {
-			System.err.println(i);
 
 			exhibitionToRemove = null;
 

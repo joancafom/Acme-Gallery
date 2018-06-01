@@ -50,21 +50,26 @@ public class ProductService {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - JA
 	public void delete(final Product product) {
 
 		Assert.notNull(product);
+		Assert.notNull(product.getStore());
 
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
 
-		Assert.notNull(product.getStore());
-		Assert.isTrue(product.getStore().getMuseum().getDirector().equals(director));
+		final Store productStore = this.storeService.findOne(product.getStore().getId());
+		Assert.notNull(productStore);
+		Assert.isTrue(productStore.getMuseum().getDirector().equals(director));
+		Assert.isTrue(productStore.getProducts().contains(product));
 
-		product.getStore().getProducts().remove(product);
-		this.storeService.saveSimple(product.getStore());
-		this.storeService.flush();
+		productStore.getProducts().remove(product);
+		this.storeService.saveSimple(productStore);
 
 		this.productRepository.delete(product);
+
+		this.storeService.flush();
 	}
 
 	/* v1.0 - josembell */

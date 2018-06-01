@@ -141,11 +141,18 @@ public class IncidentService {
 	}
 
 	// v1.0 - Alicia
+	/* v2.0 - josembell > implementado para Guides */
 	public Collection<Incident> getByMuseum(final Museum museum) {
 		Assert.notNull(museum);
 
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
-		Assert.isTrue(director.getMuseums().contains(museum));
+		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
+
+		Assert.isTrue(director != null || guide != null);
+		if (director != null)
+			Assert.isTrue(director.getMuseums().contains(museum));
+		else
+			Assert.isTrue(museum.getGuides().contains(guide));
 
 		final Collection<Incident> res = this.incidentRepository.findByMuseumId(museum.getId());
 		Assert.notNull(res);

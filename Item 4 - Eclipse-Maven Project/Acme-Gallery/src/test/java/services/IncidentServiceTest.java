@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,7 @@ import security.LoginService;
 import utilities.AbstractTest;
 import domain.Director;
 import domain.Incident;
+import domain.Room;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -37,6 +39,9 @@ public class IncidentServiceTest extends AbstractTest {
 
 	@Autowired
 	private DirectorService	directorService;
+
+	@Autowired
+	private RoomService		roomService;
 
 
 	/*
@@ -179,6 +184,89 @@ public class IncidentServiceTest extends AbstractTest {
 			final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 			final Collection<Incident> myIncidents = this.incidentService.getByDirector(director);
 			Assert.isTrue(!myIncidents.contains(incident));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+
+	}
+
+	/*
+	 * [UC-038] - Guide create Incident
+	 * 1. Log in as guide
+	 * 2. List my museums
+	 * 3. Display a museum
+	 * 4. List its incidents
+	 * 5. Create an incident
+	 * 
+	 * REQ: 19, 31.1, 32.2, 32.3
+	 * 
+	 * v1.0 - josembell
+	 */
+	@Test
+	public void driverCreateIncident() {
+
+		final Object testingData[][] = {
+			{
+				/* + 1. Un guide crea un incident para una room de un museo que le pertenece */
+				"guide1", "room1", "Test", "LOW", null
+			}, {
+				/* - 2. Un usuario no identificado crea un incident */
+				null, "room1", "Test", "LOW", IllegalArgumentException.class
+			}, {
+				/* - 3. Un usuario que no es director crea un incident */
+				"visitor1", "room1", "Test", "LOW", IllegalArgumentException.class
+			}, {
+				/* - 4. Un guide crea un incident sin texto */
+				"guide1", "room1", null, "LOW", ConstraintViolationException.class
+			}, {
+				/* - 5. Un guide crea un incident sin level */
+				"guide1", "room1", "TEST", null, ConstraintViolationException.class
+			}, {
+				/* - 6. Un guide crea un incident con level erróneo */
+				"guide1", "room1", "TEST", "TEST", ConstraintViolationException.class
+			}, {
+				/* - 7. Un guide crea un incident para un room que no es suyo */
+				"guide1", "room22", "TEST", "LOW", IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			Room room = null;
+			if (testingData[i][1] != null)
+				room = this.roomService.findOne(this.getEntityId((String) testingData[i][1]));
+			this.startTransaction();
+			//System.out.println(i);
+			this.templateCreateIncident((String) testingData[i][0], room, (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
+			//System.out.println(i);
+			this.rollbackTransaction();
+			this.entityManager.clear();
+		}
+
+	}
+
+	/* v1.0 - josembell */
+	protected void templateCreateIncident(final String username, final Room room, final String text, final String level, final Class<?> expected) {
+		Class<?> caught = null;
+		/* 1. authenticate */
+		this.authenticate(username);
+
+		try {
+			/* 5. create the incident */
+			final Incident incident = this.incidentService.create();
+			incident.setLevel(level);
+			incident.setText(text);
+			incident.setRoom(room);
+
+			final Incident saved = this.incidentService.saveCreate(incident);
+
+			/* 4. list my incidents */
+			final Collection<Incident> incidents = this.incidentService.getByMuseum(room.getMuseum());
+			Assert.isTrue(incidents.contains(saved));
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

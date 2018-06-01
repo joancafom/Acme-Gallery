@@ -142,7 +142,7 @@ public class RoomServiceTest extends AbstractTest {
 	 * 2. List my rooms
 	 * 3. Create a room
 	 * 
-	 * REQ: 4
+	 * REQ: 4, 29.13
 	 * 
 	 * v1.0 - josembell
 	 */
@@ -218,4 +218,157 @@ public class RoomServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * [UC-032] - Director mark room in repair
+	 * 1. Log in as director
+	 * 2. List my rooms
+	 * 3. Display a room
+	 * 4. Mark the room in repair
+	 * 
+	 * REQ: 4, 29.17
+	 * 
+	 * v1.0 - josembell
+	 */
+	@Test
+	public void driverMarkRoomInRepair() {
+
+		final Object testingData[][] = {
+			{
+				/* + 1. Un director marca un room suyo en reparación */
+				"director1", "room1", null
+			}, {
+				/* - 2. Un usuario no identificado marca una room en reparacion */
+				null, "room1", IllegalArgumentException.class
+			}, {
+				/* - 3. Un usuario que no es director marca una room en reparacion */
+				"visitor1", "room1", IllegalArgumentException.class
+			}, {
+				/* - 4. Un director marca una room que no es suya en reparación */
+				"director1", "room22", IllegalArgumentException.class
+			}, {
+				/* - 5. Un director marca una room null en reparación */
+				"director1", null, IllegalArgumentException.class
+			}, {
+				/* - 6. Un director marca una room en reparación que ya lo estaba */
+				"director1", "room5", IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			Room room = null;
+			if (testingData[i][1] != null)
+				room = this.roomService.findOne(this.getEntityId((String) testingData[i][1]));
+			this.startTransaction();
+			this.templateMarkRoomInRepair((String) testingData[i][0], room, (Class<?>) testingData[i][2]);
+			this.rollbackTransaction();
+			this.entityManager.clear();
+		}
+
+	}
+
+	/* v1.0 - josembell */
+	protected void templateMarkRoomInRepair(final String username, final Room room, final Class<?> expected) {
+		Class<?> caught = null;
+		/* 1. authenticate */
+		this.authenticate(username);
+
+		try {
+			/* 4. mark the room in repair */
+			this.roomService.inRepair(room);
+			this.roomService.flush();
+
+			final Room marked = this.roomService.findOne(room.getId());
+			Assert.isTrue(marked.getInRepair() == true);
+
+			/* 2. list my rooms */
+			final Collection<Room> myRooms = this.roomService.getByPrincipal();
+			Assert.isTrue(myRooms.contains(room));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+
+	}
+
+	/*
+	 * [UC-033] - Director mark room in repair
+	 * 1. Log in as director
+	 * 2. List my rooms
+	 * 3. Display a room
+	 * 4. Mark the room in repair
+	 * 
+	 * REQ: 4, 29.17
+	 * 
+	 * v1.0 - josembell
+	 */
+	@Test
+	public void driverMarkRoomNotInRepair() {
+
+		final Object testingData[][] = {
+			{
+				/* + 1. Un director marca un room suyo en no reparación */
+				"director1", "room5", null
+			}, {
+				/* - 2. Un usuario no identificado marca una room en no reparacion */
+				null, "room5", IllegalArgumentException.class
+			}, {
+				/* - 3. Un usuario que no es director marca una room en no reparacion */
+				"visitor1", "room5", IllegalArgumentException.class
+			}, {
+				/* - 4. Un director marca una room que no es suya en no reparación */
+				"director1", "room23", IllegalArgumentException.class
+			}, {
+				/* - 5. Un director marca una room null en no reparación */
+				"director1", null, IllegalArgumentException.class
+			}, {
+				/* - 6. Un director marca una room en no reparación que ya lo estaba */
+				"director1", "room1", IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			Room room = null;
+			if (testingData[i][1] != null)
+				room = this.roomService.findOne(this.getEntityId((String) testingData[i][1]));
+			this.startTransaction();
+			this.templateMarkRoomNotInRepair((String) testingData[i][0], room, (Class<?>) testingData[i][2]);
+			this.rollbackTransaction();
+			this.entityManager.clear();
+		}
+
+	}
+
+	/* v1.0 - josembell */
+	protected void templateMarkRoomNotInRepair(final String username, final Room room, final Class<?> expected) {
+		Class<?> caught = null;
+		/* 1. authenticate */
+		this.authenticate(username);
+
+		try {
+			/* 4. mark the room in repair */
+			this.roomService.notInRepair(room);
+			this.roomService.flush();
+
+			final Room marked = this.roomService.findOne(room.getId());
+			Assert.isTrue(marked.getInRepair() == false);
+
+			/* 2. list my rooms */
+			final Collection<Room> myRooms = this.roomService.getByPrincipal();
+			Assert.isTrue(myRooms.contains(room));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+
+	}
+
 }

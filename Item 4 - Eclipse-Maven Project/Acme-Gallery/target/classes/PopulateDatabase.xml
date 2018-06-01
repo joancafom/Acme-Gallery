@@ -2329,6 +2329,7 @@
 		<property name="category" ref="category16" />
 		<property name="artworks">
 			<list>
+				<ref bean="artwork22"/>
 			</list>
 		</property>
 		<property name="guides">
@@ -2488,6 +2489,7 @@
 		<property name="category" ref="category8" />
 		<property name="artworks">
 			<list>
+				<ref bean="artwork23"/>
 			</list>
 		</property>
 		<property name="guides">
@@ -2703,7 +2705,8 @@
 		</property>
 		<property name="category" ref="category5" />
 		<property name="artworks">
-			<list>
+			<list>	
+				<ref bean="artwork24"/>
 			</list>
 		</property>
 		<property name="guides">
@@ -4155,6 +4158,43 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 		<property name="isFinal" value="true" />
 		<property name="isHighlight" value="true" />
 		<property name="exhibition" ref="exhibition14" />
+	</bean>
+	
+	<bean id="artwork22" class="domain.Artwork">
+		<property name="title" value="Sasha Velour" />
+		<property name="photograph"
+			value="https://www.out.com/sites/out.com/files/2017/06/24/sasha_velour.jpg" />
+		<property name="remark"
+			value="Drag Queen, Illustrator, Graphic Design. Sasha Velour is a Queer Artist living in Brooklyn, NY." />
+		<property name="isFinal" value="true" />
+		<property name="isHighlight" value="true" />
+		<property name="exhibition" ref="exhibition2" />
+	</bean>
+	
+	<bean id="artwork23" class="domain.Artwork">
+		<property name="title" value="The Allegory of the Redemption" />
+		<property name="photograph"
+			value="https://i.pinimg.com/originals/0b/b7/c8/0bb7c893443e465c7100908a592393d4.jpg" />
+		<property name="remark"
+			value="Jacopo Ligozzi (1547–1627) was an Italian painter, illustrator, designer, and miniaturist. His art can be categorized as late-Renaissance and Mannerist styles." />
+		<property name="isFinal" value="true" />
+		<property name="creatorName" value="Jacopo Ligozzi"/>
+		<property name="year" value="1587"/>
+		<property name="isHighlight" value="true" />
+		<property name="exhibition" ref="exhibition5" />
+	</bean>
+	
+	<bean id="artwork24" class="domain.Artwork">
+		<property name="title" value="Première journée" />
+		<property name="photograph"
+			value="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Isra%C3%ABl_Silvestre%2C_Premi%C3%A8re_journ%C3%A9e%2C_1664.jpg/800px-Isra%C3%ABl_Silvestre%2C_Premi%C3%A8re_journ%C3%A9e%2C_1664.jpg" />
+		<property name="remark"
+			value="Israel Silvestre (13 August 1621 in Nancy – 11 October 1691 in Paris), called the Younger to distinguish him from his father, was a prolific French draftsman, etcher and print dealer who specialized in topographical views and perspectives of famous buildings." />
+		<property name="isFinal" value="true" />
+		<property name="creatorName" value="Israël Silvestre"/>
+		<property name="year" value="1664"/>
+		<property name="isHighlight" value="false" />
+		<property name="exhibition" ref="exhibition5" />
 	</bean>
 
 	<!-- Incidents -->

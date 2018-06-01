@@ -29,4 +29,8 @@ public interface ArtworkRepository extends JpaRepository<Artwork, Integer> {
 	// v1.0 - Alicia
 	@Query("select a from Artwork a where a.exhibition.id = ?1 and a.isFinal = true order by a.isHighlight DESC")
 	Page<Artwork> findFinalByExhibitionId(int exhibitionId, Pageable pageable);
+
+	// v1.0 - Alicia
+	@Query("select a from Artwork a where a.exhibition.id = ?1")
+	Collection<Artwork> findByExhibitionId(int exhibitionId);
 }

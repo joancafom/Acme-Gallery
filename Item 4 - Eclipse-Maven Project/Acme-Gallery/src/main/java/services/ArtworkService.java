@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -87,15 +88,21 @@ public class ArtworkService {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - Alicia
 	public void delete(final Artwork artwork) {
 		Assert.notNull(artwork);
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
-		Assert.isTrue(artwork.getExhibition().getRoom().getMuseum().getGuides().contains(guide));
+		Assert.isTrue(artwork.getExhibition().getGuides().contains(guide));
 		Assert.isTrue(artwork.getIsFinal() == false);
 
 		this.artworkRepository.delete(artwork);
 
+	}
+
+	// v1.0 - Alicia
+	public void flush() {
+		this.artworkRepository.flush();
 	}
 
 	//Other Business Methods --------------------------------------------------------------------------
@@ -153,4 +160,23 @@ public class ArtworkService {
 		return artwork;
 	}
 
+	// v1.0 - Alicia
+	public Collection<Artwork> getByExhibition(final Exhibition exhibition) {
+		Assert.notNull(exhibition);
+
+		return this.artworkRepository.findByExhibitionId(exhibition.getId());
+	}
+
+	// v1.0 - Alicia
+	public Collection<Artwork> getByGuide(final Guide guide) {
+		Assert.notNull(guide);
+
+		final Collection<Artwork> artworks = new HashSet<Artwork>();
+		final Collection<Exhibition> exhibitions = this.exhibitionService.getByGuide(guide);
+
+		for (final Exhibition e : exhibitions)
+			artworks.addAll(this.getByExhibition(e));
+
+		return artworks;
+	}
 }

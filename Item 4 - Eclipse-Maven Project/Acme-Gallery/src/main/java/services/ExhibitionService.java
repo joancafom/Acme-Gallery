@@ -231,6 +231,7 @@ public class ExhibitionService {
 
 		return this.exhibitionRepository.save(exhibition);
 	}
+
 	// v1.0 - JA
 	public void flush() {
 
@@ -609,5 +610,12 @@ public class ExhibitionService {
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	// v1.0 - Alicia
+	public Collection<Exhibition> getByGuide(final Guide guide) {
+		Assert.notNull(guide);
+
+		return this.exhibitionRepository.findByGuideId(guide.getId());
 	}
 }

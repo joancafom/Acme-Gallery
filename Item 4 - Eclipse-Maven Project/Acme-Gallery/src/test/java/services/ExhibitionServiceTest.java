@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,8 +23,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 import org.springframework.validation.BeanPropertyBindingResult;
 
+import security.LoginService;
 import utilities.AbstractTest;
 import domain.Category;
+import domain.Director;
 import domain.Exhibition;
 import domain.Guide;
 import domain.Room;
@@ -52,6 +55,9 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	@Autowired
 	private GuideService		guideService;
+
+	@Autowired
+	private DirectorService		directorService;
 
 
 	/*
@@ -429,12 +435,12 @@ public class ExhibitionServiceTest extends AbstractTest {
 			},
 			{
 				// + 2) A director successfully edits a private exhibition that has not started yet and has not sold any day passes
-				"director5", "test2", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false,
+				"director5", "test2", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room23", false, false,
 				"exhibition13", null
 			},
 			{
 				// + 3) A director successfully edits a private exhibition that has not started yet and has sold some day passes
-				"director6", "test3", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, true, "exhibition14",
+				"director6", "test3", "Test Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room24", false, true, "exhibition14",
 				null
 			},
 			{
@@ -611,6 +617,130 @@ public class ExhibitionServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 
 	}
+
+	// -------------------------------------------------------------------------------
+	// [UC-023] Director delete exhibition.
+	// 
+	// Related requirements:
+	//   · REQ ?: An actor who is authenticated as a director must be able to
+	//            List the exhibitions that she or he manages.
+
+	//   · REQ 23.6: An actor who is authenticated as a director must be able to
+	//               Delete any exhibition she or he has created, as long as it 
+	//				 hasn't started, and nobody has bought a day pass yet (in
+	//				 case it is a private exhibition) or requested a sponsorship.
+	//
+	// -------------------------------------------------------------------------------
+	// v1.0 - Implemented by JA
+	// -------------------------------------------------------------------------------
+
+	@Test
+	public void driverExhibitionDelete() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> the exhibition to remove from the System.
+		// testingData[i][2] -> if we want to create a new Exhibition that will not be persisted, for testing purporses
+		// testingData[i][3] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// + 1) A Director correctly retrieves the lists of her/his Exhibitions, selects an existing one without artworks that has not started and
+				//		nobody has bought a day pass yet nor requested an sponsorship.
+				"director1", "exhibition13", false, null
+			}, {
+				// + 2) A Director correctly retrieves the lists of her/his Exhibitions, selects an existing with artworks that has not started and
+				//		nobody has bought a day pass yet nor requested an sponsorship.
+				"admin", "comment6", false, null
+			}, {
+				// - 3) A Director correctly retrieves the lists of her/his Exhibition an tries to delete an exhibition that has already started
+				"admin", null, false, IllegalArgumentException.class
+			}, {
+				// - 4) A Director correctly retrieves the lists of her/his Exhibition an tries to delete an exhibition for which someone has bought a daypass,
+				//		but it still hasn't started yet
+				"admin", "exhibition13", false, IllegalArgumentException.class
+			}, {
+				// - 4) A Director tries to delete a non-existing exhibition
+				"admin", "comment5", true, IllegalArgumentException.class
+			}, {
+				// - 4) A Director tries to delete a fellow director's exhibition
+				"admin", "comment5", true, IllegalArgumentException.class
+			}
+		};
+
+		Exhibition exhibitionToRemove;
+
+		for (int i = 0; i < testingData.length; i++) {
+			exhibitionToRemove = null;
+
+			if ((String) testingData[i][1] != null)
+				exhibitionToRemove = this.exhibitionService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			if ((Boolean) testingData[i][2] && exhibitionToRemove != null) {
+				this.authenticate((String) testingData[i][0]);
+				exhibitionToRemove = this.exhibitionService.create();
+				this.unauthenticate();
+
+			}
+
+			this.startTransaction();
+
+			this.templateExhibitionDelete((String) testingData[i][0], exhibitionToRemove, (Class<?>) testingData[i][3]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+	protected void templateExhibitionDelete(final String username, final Exhibition exhibitionToRemove, final Class<?> expected) {
+
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		this.authenticate(username);
+
+		try {
+
+			Director director = null;
+
+			// 2. List My Exhibitions
+			final List<Exhibition> myExhibitionsBefore = new ArrayList<Exhibition>();
+
+			//Surround with try/catch to keep checking the testCase even if a non-director tries to retrieve the exhibitions
+			try {
+				director = this.directorService.findByUserAccount(LoginService.getPrincipal());
+				myExhibitionsBefore.addAll(this.exhibitionService.getByDirector(director));
+
+				//To be my Exhibitons, they all must belong to me
+				for (final Exhibition e : myExhibitionsBefore)
+					if (!director.equals(e.getRoom().getMuseum().getDirector()))
+						throw new RuntimeException("The Exhibitions must belong to the current director");
+
+			} catch (final Throwable oops) {
+				if (director != null)
+					throw new RuntimeException("A director could not retrieve its exhibitions!!");
+			}
+
+			// 3. Delete an Exhibition
+
+			this.exhibitionService.delete(exhibitionToRemove);
+
+			// Flush
+			this.exhibitionService.flush();
+
+			final List<Exhibition> myExhibitionsAfter = new ArrayList<Exhibition>(this.exhibitionService.getByDirector(director));
+			Assert.isTrue(myExhibitionsBefore.size() == myExhibitionsAfter.size() + 1);
+			Assert.isTrue(!myExhibitionsAfter.contains(exhibitionToRemove));
+			Assert.isNull(this.exhibitionService.findOne(exhibitionToRemove.getId()));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+	}
+
 	//Auxiliary Methods
 	private Date formatDate(final String date) {
 		Date res;

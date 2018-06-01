@@ -11,6 +11,7 @@
 package controllers.sponsor;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -83,6 +84,7 @@ public class SponsorshipSponsorController extends AbstractController {
 
 		Assert.isTrue(sponsorship.getSponsor().equals(sponsor));
 		Assert.isTrue(sponsorship.getStatus().equals("TIME_NEGOTIATION"));
+		Assert.isTrue(!this.sponsorshipService.isExpired(sponsorship));
 		Assert.isTrue(sponsorship.getStartingDate().after(new Date()));
 
 		res = this.acceptModelAndView(sponsorship);
@@ -107,10 +109,16 @@ public class SponsorshipSponsorController extends AbstractController {
 
 		final Timestamp currentDate = new Timestamp(System.currentTimeMillis());
 
+		//Next Month
+		final Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MONTH, 1);
+
+		final Timestamp nextMonth = new Timestamp(calendar.getTimeInMillis());
+
 		res.addObject("sponsorships", sponsorships);
 		res.addObject("resultSize", resultSize);
 		res.addObject("currentDate", currentDate);
-
+		res.addObject("nextMonth", nextMonth);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;

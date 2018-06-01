@@ -252,6 +252,7 @@ public class SponsorshipService {
 		Assert.isNull(oldSponsorship.getStartingDate());
 		Assert.isNull(oldSponsorship.getEndingDate());
 		Assert.isTrue(oldSponsorship.getStatus().equals("PENDING"));
+		Assert.isTrue(!this.isExpired(oldSponsorship));
 
 		//Check now that no fields other than the allowed were changed
 		Assert.isTrue(oldSponsorship.getSponsor().equals(sponsorshipToUpdate.getSponsor()));
@@ -294,6 +295,7 @@ public class SponsorshipService {
 		//Make sure it is not a made-up sponsorship
 		final Sponsorship oldSponsorship = this.findOne(prunedSponsorship.getId());
 		Assert.notNull(oldSponsorship);
+		Assert.isTrue(this.isExpired(oldSponsorship));
 
 		//Create a brand-new reconstructed Sponsorship using the pruned and the old one as basis
 		final Sponsorship res = this.create(oldSponsorship.getSponsor());
@@ -366,6 +368,7 @@ public class SponsorshipService {
 
 		Assert.isTrue(sponsorship.getSponsor().equals(sponsor));
 		Assert.isTrue(sponsorship.getStatus().equals("TIME_NEGOTIATION"));
+		Assert.isTrue(!this.isExpired(sponsorship));
 
 		sponsorship.setStatus("REJECTED");
 
@@ -390,6 +393,7 @@ public class SponsorshipService {
 		final Sponsorship oldSponsorship = this.sponsorshipRepository.findOne(prunedSponsorship.getId());
 		Assert.notNull(oldSponsorship);
 		Assert.isTrue(oldSponsorship.getStatus().equals("TIME_NEGOTIATION"));
+		Assert.isTrue(!this.isExpired(oldSponsorship));
 
 		final Sponsor sponsor = this.sponsorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(sponsor);
@@ -409,6 +413,23 @@ public class SponsorshipService {
 		res.setEndingDate(oldSponsorship.getEndingDate());
 
 		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	// v1.0 - JA & Alicia
+	public Boolean isExpired(final Sponsorship sponsorship) {
+
+		Assert.notNull(sponsorship);
+		Assert.notNull(sponsorship.getExhibition());
+		Boolean res = false;
+
+		final Date now = new Date();
+
+		if (sponsorship.getStatus().equals("TIME_NEGOTIATION") && sponsorship.getStartingDate().before(now))
+			res = true;
+		else if (sponsorship.getStatus().equals("PENDING") && sponsorship.getExhibition().getEndingDate().before(now))
+			res = true;
 
 		return res;
 	}

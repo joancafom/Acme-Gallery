@@ -11,6 +11,7 @@
 package controllers.director;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,11 +75,18 @@ public class SponsorshipDirectorController extends AbstractController {
 		//Current Date to determine EXPIREd cases
 		final Timestamp currentDate = new Timestamp(System.currentTimeMillis());
 
+		//Next Month
+		final Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MONTH, 1);
+
+		final Timestamp nextMonth = new Timestamp(calendar.getTimeInMillis());
+
 		res = new ModelAndView("sponsorship/list");
 		res.addObject("sponsorships", sponsorships);
 		res.addObject("resultSize", resultSize);
 		res.addObject("exhibition", exhibition);
 		res.addObject("currentDate", currentDate);
+		res.addObject("nextMonth", nextMonth);
 		res.addObject("actorWS", this.ACTOR_WS);
 
 		return res;
@@ -86,7 +94,7 @@ public class SponsorshipDirectorController extends AbstractController {
 
 	// v1.0 - JA
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int sponsorshipId) {
+	public ModelAndView edit(@RequestParam final int sponsorshipId) {
 		final ModelAndView res;
 
 		final Sponsorship sponsorship = this.sponsorshipService.findOne(sponsorshipId);
@@ -98,6 +106,7 @@ public class SponsorshipDirectorController extends AbstractController {
 		//Skipping notNull checking as the entity was retrieved from the DB
 		Assert.isTrue(currentDirector.equals(sponsorship.getExhibition().getRoom().getMuseum().getDirector()));
 		Assert.isTrue(sponsorship.getStatus().equals("PENDING"));
+		Assert.isTrue(!this.sponsorshipService.isExpired(sponsorship));
 
 		//Skip checking for exhibition being null, as it was retrieved from the DB
 		final Collection<Sponsorship> currentSponsorships = this.sponsorshipService.findAcceptedAndNegotiationByExhibition(sponsorship.getExhibition());

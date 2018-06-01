@@ -18,6 +18,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<fmt:formatDate var="nextDate" value="${nextMonth}" pattern="dd/MM/yyyy HH:mm"/>
+<fmt:parseDate value="${nextDate}" type="both" var="parsedNextDate" pattern="dd/MM/yyyy HH:mm" />
+
 <h3><spring:message code="sponsorship.exhibition"/>: <a href="exhibition/${actorWS}display.do?exhibitionId=<jstl:out value="${exhibition.id}" />"><jstl:out value="${exhibition.title}" /></a></h3>
 <br>
 <display:table name="sponsorships" id="sponsorship" requestURI="sponsorship/${actorWS}list.do" pagesize="5" class="displaytag" style="width:100%" partialList="true" size="${resultSize}">
@@ -34,69 +37,53 @@
 	</display:column>
 	<display:column titleKey="sponsorship.creditcard.number" property="creditCard.number"/>
 	
-	<%-- Block to compute the color --%>
-
-	<jsp:useBean id="now" class="java.util.Date" />
-	<fmt:formatDate var="day" value="${now}" pattern="dd"/>
-	<fmt:formatDate var="month" value="${now}" pattern="MM"/>
-	<fmt:formatDate var="year" value="${now}" pattern="yyyy"/>
-	<fmt:formatDate var="time" value="${now}" pattern="HH:mm"/>
-
-	<jstl:if test="${month == 12}">
-		<jstl:set var="nextMonth" value="01"></jstl:set>
-		<jstl:set var="nextYear" value="${year+1}"></jstl:set>	
-	</jstl:if>
-
-	<jstl:if test="${month < 12}">
-		<jstl:set var="nextMonth" value="${month+1}"></jstl:set>
-		<jstl:set var="nextYear" value="${year}"></jstl:set>	
-	</jstl:if>
-
-	<jstl:set var="nextDate" value="${day}/${nextMonth}/${nextYear} ${time}"></jstl:set>
-	<fmt:parseDate value = "${nextDate}" type="both" var = "parsedNextDate" pattern = "dd/MM/yyyy HH:mm" />
-
-	<fmt:formatDate var="startDate" value="${sponsorship.startingDate}" pattern="dd/MM/yyyy HH:mm"/>
-	<fmt:parseDate value = "${startDate}" type="both" var = "startDate" pattern = "dd/MM/yyyy HH:mm" />
+	<%-- Block to both compute the color and the message --%>
 	
-	<jstl:if test="${sponsorship.status eq 'ACCEPTED'}">
-		<jstl:set var="backColor" value="#42f46b"/>
-	</jstl:if>
-	<jstl:if test="${sponsorship.status eq 'PENDING'}">
-		<jstl:set var="backColor" value="#41a6f4"/>
-	</jstl:if>
-	<jstl:if test="${sponsorship.status eq 'REJECTED'}">
-		<jstl:set var="backColor" value="#f45642"/>
-	</jstl:if>
-	<jstl:if test="${sponsorship.status eq 'TIME_NEGOTIATION'}">
-		<jstl:set var="backColor" value="#e9f241"/>
-		<jstl:if test="${startDate < parsedNextDate}">
-			<jstl:set var="backColor" value="#f4aa42"></jstl:set>
-		</jstl:if>
-	</jstl:if>
-	<jstl:if test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate < currentDate)}">
-		<jstl:set var="backColor" value="#d9baff"/>
-	</jstl:if>	
+	<fmt:formatDate var="startDate" value="${sponsorship.startingDate}" pattern="dd/MM/yyyy HH:mm"/>
+	<fmt:parseDate value="${startDate}" type="both" var="startDate" pattern="dd/MM/yyyy HH:mm" />
+	
+	<jstl:choose>
+		<jstl:when test="${sponsorship.status eq 'ACCEPTED'}">
+			<spring:message var="sponsorshipStatus" code="sponsorship.status.accepted"/>
+			<jstl:set var="backColor" value="#42f46b"/>
+		</jstl:when>
+		<jstl:when test="${sponsorship.status eq 'PENDING'}">
+			<jstl:choose>
+				<jstl:when test="${currentDate > sponsorship.exhibition.endingDate}">
+					<spring:message var="sponsorshipStatus" code="sponsorship.status.expired"/>
+					<jstl:set var="backColor" value="#d9baff"/>
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message var="sponsorshipStatus" code="sponsorship.status.pending"/>
+					<jstl:set var="backColor" value="#41a6f4"/>
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:when>
+		<jstl:when test="${sponsorship.status eq 'REJECTED'}">
+			<spring:message var="sponsorshipStatus" code="sponsorship.status.rejected"/>
+			<jstl:set var="backColor" value="#f45642"/>
+		</jstl:when>
+		<jstl:when test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate < currentDate)}">
+			<spring:message code="sponsorship.status.expired"/>
+			<jstl:set var="backColor" value="#d9baff"/>
+		</jstl:when>
+		<jstl:otherwise>
+			<spring:message var="sponsorshipStatus" code="sponsorship.status.timeNegotiation"/>
+			<jstl:choose>
+				<jstl:when test="${startDate < parsedNextDate}">
+					<jstl:set var="backColor" value="#f4aa42"></jstl:set>
+				</jstl:when>
+				<jstl:otherwise>
+					<jstl:set var="backColor" value="#e9f241"/>
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:otherwise>
+	</jstl:choose>
 	
 	<%-- End of the block --%>
-
+	
 	<display:column titleKey="sponsorship.status" style="background-color:${backColor};">
-		<jstl:choose>
-			<jstl:when test="${sponsorship.status eq 'ACCEPTED'}">
-				<spring:message code="sponsorship.status.accepted"/>
-			</jstl:when>
-			<jstl:when test="${sponsorship.status eq 'PENDING'}">
-				<spring:message code="sponsorship.status.pending"/>
-			</jstl:when>
-			<jstl:when test="${sponsorship.status eq 'REJECTED'}">
-				<spring:message code="sponsorship.status.rejected"/>
-			</jstl:when>
-			<jstl:when test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate < currentDate)}">
-				<spring:message code="sponsorship.status.expired"/>
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="sponsorship.status.timeNegotiation"/>
-			</jstl:otherwise>
-		</jstl:choose>
+		<jstl:out value="${sponsorshipStatus}" />
 	</display:column>
 	<display:column titleKey="sponsorship.startingDate">
 		<jstl:if test="${sponsorship.startingDate ne null}">
@@ -110,7 +97,7 @@
 	</display:column>
 	<security:authorize access="hasRole('DIRECTOR')">
 		<display:column>
-			<jstl:if test="${sponsorship.status eq 'PENDING'}">
+			<jstl:if test="${sponsorship.status eq 'PENDING' and currentDate <= sponsorship.exhibition.endingDate}">
 				<a href="sponsorship/${actorWS}edit.do?sponsorshipId=<jstl:out value="${sponsorship.id}" />"><spring:message code="sponsorship.edit"/></a>
 			</jstl:if>
 		</display:column>

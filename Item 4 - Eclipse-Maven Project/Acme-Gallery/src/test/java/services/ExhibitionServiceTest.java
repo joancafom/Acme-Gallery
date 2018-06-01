@@ -338,9 +338,7 @@ public class ExhibitionServiceTest extends AbstractTest {
 			if (testingData[i][2] != null)
 				guide = this.guideService.findOne(this.getEntityId((String) testingData[i][2]));
 			this.startTransaction();
-			System.out.println(i);
 			this.templateAddGuide((String) testingData[i][0], exhibition, guide, (Class<?>) testingData[i][3]);
-			System.out.println(i);
 			this.rollbackTransaction();
 			this.entityManager.clear();
 		}
@@ -454,32 +452,32 @@ public class ExhibitionServiceTest extends AbstractTest {
 				IllegalArgumentException.class
 			},
 			{
-				// - 5) A director tries to edit a private exhibition that has not sold any day passes with XSS in its title.
+				// - 6) A director tries to edit a private exhibition that has not sold any day passes with XSS in its title.
 				"director5", "test2", "Test <script>alert('hacked!');</script> Title", "Test Description", this.formatDate("18-08-2028 21:00"), this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2",
-				"room18", false, false, "exhibition13", ConstraintViolationException.class
+				"room23", false, false, "exhibition13", ConstraintViolationException.class
 			},
 			{
-				// - 6) A director tries to edit a fellow director's public exhibition that has not started
-				"director2", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition4",
+				// - 7) A director tries to edit a fellow director's public exhibition that has not started
+				"director2", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room17", false, false, "exhibition4",
 				IllegalArgumentException.class
 			},
 			{
-				// - 7) A visitor tries to edit a private exhibition that has not started yet and has sold some day passes
+				// - 8) A visitor tries to edit a private exhibition that has not started yet and has sold some day passes
 				"visitor1", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 19:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition14",
 				IllegalArgumentException.class
 			},
 			{
-				// - 8) A director tries to edit a public exhi8bition that has not started yet with wrong dates (ending before starting)
+				// - 9) A director tries to edit a public exhi8bition that has not started yet with wrong dates (ending before starting)
 				"director1", "test1", "Test Title", "Test Description", this.formatDate("20-08-2018 19:00"), this.formatDate("18-08-2018 21:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition4",
 				IllegalArgumentException.class
 			},
 			{
-				// - 9) A director tries to edit a public exhibition that has not started yet to a room in which other exhibition takes place in those dates
+				// - 10) A director tries to edit a public exhibition that has not started yet to a room in which other exhibition takes place in those dates
 				"director1", "test1", "Test Title", "Test Description", this.formatDate("18-08-2018 21:00"), this.formatDate("20-08-2018 20:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition4",
 				IllegalArgumentException.class
 			},
 			{
-				// - 10) A director tries to edit a private exhibition that has not started yet and has not sold any day passes by providing a null starting date
+				// - 11) A director tries to edit a private exhibition that has not started yet and has not sold any day passes by providing a null starting date
 				"director5", "test2", "Test Title", "Test Description", null, this.formatDate("20-08-2028 19:00"), "http://www.apple.com, http://www.google.es", false, 0.0, "category2", "room18", false, false, "exhibition13",
 				IllegalArgumentException.class
 			}
@@ -492,8 +490,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 		Exhibition exhibition;
 
 		for (int i = 0; i < testingData.length; i++) {
-
-			System.err.println(i);
 
 			//Makes a collection of Websites out of the provided String
 			if (testingData[i][6] != null) {
@@ -594,14 +590,13 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 			//Check that, in case of a private exhibition with some day passes sold, the fields
 			//you were not allowed to remained the same
-			if (onlyUpdatePP) {
+			if (onlyUpdatePP || (originalExhibition.getIsPrivate() && originalExhibition.getDayPasses().size() > 0)) {
 				Assert.isTrue(foundExhibition.getStartingDate().equals(originalExhibition.getStartingDate()));
 				Assert.isTrue(foundExhibition.getEndingDate().equals(originalExhibition.getEndingDate()));
 				Assert.isTrue(foundExhibition.getPrice().equals(originalExhibition.getPrice()));
 				Assert.isTrue(foundExhibition.getRoom().equals(originalExhibition.getRoom()));
 				Assert.isTrue(foundExhibition.getIsPrivate() == originalExhibition.getIsPrivate());
 			} else {
-				System.out.println(foundExhibition.getStartingDate().compareTo(startingDate));
 				Assert.isTrue(foundExhibition.getStartingDate().compareTo(startingDate) == 0);
 				Assert.isTrue(foundExhibition.getEndingDate().compareTo(endingDate) == 0);
 				Assert.isTrue(foundExhibition.getPrice().equals(price));
@@ -646,30 +641,32 @@ public class ExhibitionServiceTest extends AbstractTest {
 			{
 				// + 1) A Director correctly retrieves the lists of her/his Exhibitions, selects an existing one without artworks that has not started and
 				//		nobody has bought a day pass yet nor requested an sponsorship.
-				"director1", "exhibition13", false, null
+				"director5", "exhibition13", false, null
 			}, {
 				// + 2) A Director correctly retrieves the lists of her/his Exhibitions, selects an existing with artworks that has not started and
 				//		nobody has bought a day pass yet nor requested an sponsorship.
-				"admin", "comment6", false, null
+				"director1", "exhibition2", false, null
 			}, {
 				// - 3) A Director correctly retrieves the lists of her/his Exhibition an tries to delete an exhibition that has already started
-				"admin", null, false, IllegalArgumentException.class
+				"director4", "exhibition12", false, IllegalArgumentException.class
 			}, {
 				// - 4) A Director correctly retrieves the lists of her/his Exhibition an tries to delete an exhibition for which someone has bought a daypass,
 				//		but it still hasn't started yet
-				"admin", "exhibition13", false, IllegalArgumentException.class
+				"director1", "exhibition5", false, IllegalArgumentException.class
 			}, {
-				// - 4) A Director tries to delete a non-existing exhibition
-				"admin", "comment5", true, IllegalArgumentException.class
+				// - 5) A Director tries to delete a non-existing exhibition
+				"director2", null, true, IllegalArgumentException.class
 			}, {
-				// - 4) A Director tries to delete a fellow director's exhibition
-				"admin", "comment5", true, IllegalArgumentException.class
+				// - 6) A Director tries to delete a fellow director's exhibition
+				"director2", "exhibition13", false, IllegalArgumentException.class
 			}
 		};
 
 		Exhibition exhibitionToRemove;
 
 		for (int i = 0; i < testingData.length; i++) {
+			System.err.println(i);
+
 			exhibitionToRemove = null;
 
 			if ((String) testingData[i][1] != null)

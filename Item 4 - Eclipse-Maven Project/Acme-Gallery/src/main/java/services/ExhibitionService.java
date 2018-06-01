@@ -115,7 +115,8 @@ public class ExhibitionService {
 		Assert.isTrue(exhibition.getDayPasses().isEmpty());
 		Assert.isTrue(exhibition.getSponsorships().isEmpty());
 
-		for (final Critique c : exhibition.getCritiques())
+		final Collection<Critique> critiques = new HashSet<Critique>(exhibition.getCritiques());
+		for (final Critique c : critiques)
 			this.critiqueService.delete(c);
 
 		exhibition.getCategory().getExhibitions().remove(exhibition);
@@ -198,9 +199,24 @@ public class ExhibitionService {
 		Assert.isTrue((exhibition.getIsPrivate() && exhibition.getPrice() > 0.0) || (!exhibition.getIsPrivate() && exhibition.getPrice() == 0.0));
 		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
 
+		System.out.println(this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate()));
+
+		final Collection<Exhibition> concurrentExhibitions = this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate());
+
 		if (exhibition.getId() == 0) {
-			Assert.isTrue(this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate()).isEmpty());
+			Assert.isTrue(concurrentExhibitions.isEmpty());
 			exhibition.setTicker(director.getUserAccount().getUsername() + "-" + exhibition.getTicker());
+		} else {
+			//There are two valid possibilities here
+
+			//The dates we have selected do not conflict with any other exhibition
+			//Or the do conflict with the exhibitions we are trying to modify (for example,
+			//if we try to shorten the dates), but not with other exhibition different than
+			//itself
+			Assert.isTrue(concurrentExhibitions.size() <= 1);
+
+			if (concurrentExhibitions.size() == 1)
+				Assert.isTrue(concurrentExhibitions.contains(exhibition));
 		}
 
 		Assert.notNull(exhibition.getWebsites());
@@ -215,7 +231,6 @@ public class ExhibitionService {
 
 		return this.exhibitionRepository.save(exhibition);
 	}
-
 	// v1.0 - JA
 	public void flush() {
 
@@ -336,6 +351,9 @@ public class ExhibitionService {
 		final String tickerPrefix = director.getUserAccount().getUsername() + "-";
 
 		final Exhibition oldExhibition = this.findOne(prunedExhibition.getId());
+
+		if (oldExhibition != null)
+			Assert.isTrue(oldExhibition.getRoom().getMuseum().getDirector().equals(director));
 
 		Assert.isTrue(prunedExhibition.getId() == 0 || oldExhibition != null);
 

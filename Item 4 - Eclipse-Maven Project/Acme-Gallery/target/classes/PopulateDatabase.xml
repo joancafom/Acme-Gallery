@@ -2318,7 +2318,6 @@
 		</property>
 		<property name="sponsorships">
 			<list>
-				<ref bean="sponsorship4" />
 			</list>
 		</property>
 		<property name="critiques">
@@ -2532,6 +2531,7 @@
 		</property>
 		<property name="sponsorships">
 			<list>
+				<ref bean="sponsorship4" />
 				<ref bean="sponsorship5" />
 			</list>
 		</property>
@@ -7004,7 +7004,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 			</bean>
 		</property>
 		<property name="sponsor" ref="sponsor1" />
-		<property name="exhibition" ref="exhibition2" />
+		<property name="exhibition" ref="exhibition6" />
 	</bean>
 
 	<bean id="sponsorship5" class="domain.Sponsorship">

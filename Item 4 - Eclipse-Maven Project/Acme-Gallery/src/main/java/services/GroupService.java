@@ -398,4 +398,11 @@ public class GroupService {
 
 		return this.groupRepository.findCreatedByVisitorId(visitor.getId());
 	}
+
+	// v1.0 - Alicia
+	public Collection<Group> getJoinedByVisitor(final Visitor visitor) {
+		Assert.notNull(visitor);
+
+		return this.groupRepository.findJoinedByVisitorId(visitor.getId());
+	}
 }

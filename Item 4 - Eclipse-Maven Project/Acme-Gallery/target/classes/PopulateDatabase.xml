@@ -2705,7 +2705,7 @@
 		</property>
 		<property name="category" ref="category5" />
 		<property name="artworks">
-			<list>	
+			<list>
 				<ref bean="artwork24"/>
 			</list>
 		</property>
@@ -3882,6 +3882,46 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="group14" class="domain.Group">
+		<property name="name" value="Modern Art" />
+		<property name="description" value="Little things are also art." />
+		<property name="creationMoment">
+			<bean factory-method="parse" factory-bean="dateFormat">
+				<constructor-arg value="24/03/2018 20:05" />
+			</bean>
+		</property>
+		<property name="maxParticipants" value="2" />
+		<property name="meetingDate">
+			<bean factory-method="parse" factory-bean="dateFormat">
+				<constructor-arg value="05/09/2018 17:30" />
+			</bean>
+		</property>
+		<property name="isClosed" value="false" />
+		<property name="containsTaboo" value="false" />
+
+		<property name="museum" ref="museum1" />
+		<property name="creator" ref="visitor4" />
+
+		<property name="participants">
+			<list>
+				<ref bean="visitor4" />
+				<ref bean="visitor5" />
+			</list>
+		</property>
+		<property name="invitations">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Artworks -->
 
@@ -4600,6 +4640,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 				<ref bean="group5" />
 				<ref bean="group7" />
 				<ref bean="group12" />
+				<ref bean="group14" />
 			</list>
 		</property>
 		<property name="reviews">
@@ -5485,6 +5526,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 				<ref bean="group8" />
 				<ref bean="group10" />
 				<ref bean="group12" />
+				<ref bean="group14" />
 			</list>
 		</property>
 		<property name="joinedGroups">
@@ -5496,6 +5538,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 				<ref bean="group6" />
 				<ref bean="group7" />
 				<ref bean="group12" />
+				<ref bean="group14" />
 			</list>
 		</property>
 		<property name="comments">
@@ -5556,6 +5599,7 @@ Van Gogh painted Café Terrace at Night in Arles, France, in mid-September 1888.
 				<ref bean="group4" />
 				<ref bean="group12" />
 				<ref bean="group13" />
+				<ref bean="group14" />
 			</list>
 		</property>
 		<property name="comments">

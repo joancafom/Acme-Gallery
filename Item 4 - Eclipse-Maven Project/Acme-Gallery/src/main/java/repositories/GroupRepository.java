@@ -49,4 +49,8 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
 	// v1.0 - Alicia
 	@Query("select g from Group g where g.creator.id = ?1")
 	Collection<Group> findCreatedByVisitorId(int visitorId);
+
+	// v1.0 - Alicia
+	@Query("select g from Group g, Visitor v where v.id = ?1 and v member of g.participants")
+	Collection<Group> findJoinedByVisitorId(int visitorId);
 }

@@ -61,7 +61,8 @@ public class ProductService {
 		Assert.isTrue(product.getStore().getMuseum().getDirector().equals(director));
 
 		product.getStore().getProducts().remove(product);
-		this.storeService.save(product.getStore());
+		this.storeService.saveSimple(product.getStore());
+		this.storeService.flush();
 
 		this.productRepository.delete(product);
 	}

@@ -85,7 +85,7 @@ public class Store extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "store")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "store", orphanRemoval = true)
 	public Collection<Product> getProducts() {
 		return this.products;
 	}

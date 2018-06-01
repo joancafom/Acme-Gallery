@@ -3639,7 +3639,7 @@
 		<property name="maxParticipants" value="10" />
 		<property name="meetingDate">
 			<bean factory-method="parse" factory-bean="dateFormat">
-				<constructor-arg value="02/02/2018 12:00" />
+				<constructor-arg value="02/02/2019 12:00" />
 			</bean>
 		</property>
 		<property name="isClosed" value="false" />

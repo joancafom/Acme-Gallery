@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Group;
+import domain.Visitor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -32,6 +33,9 @@ public class GroupServiceTest extends AbstractTest {
 
 	@PersistenceContext
 	private EntityManager	entityManager;
+
+	@Autowired
+	private VisitorService	visitorService;
 
 
 	/*
@@ -115,6 +119,87 @@ public class GroupServiceTest extends AbstractTest {
 
 		this.unauthenticate();
 		this.checkExceptions(expected, caught);
+
+	}
+
+	// [UC-045] Visitor delete a Group -------------------------
+	// v1.0 - Alicia
+
+	@Test
+	public void driverVisitorDeleteGroup() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> Group to delete.
+		// testingData[i][2] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// 1 - (+) A Visitor correctly deletes a Group
+				"visitor4", "group8", null
+			}, {
+				// 2 - (-) A Visitor tries to delete a Group that has more participants 
+				"visitor1", "group5", IllegalArgumentException.class
+			}, {
+				// 3 - (-) A Visitor deletes a Group with meeting date in the past
+				"visitor4", "group10", IllegalArgumentException.class
+			}, {
+				// 4 - (-) A Visitor deletes a null Group
+				"visitor1", null, IllegalArgumentException.class
+			}, {
+				// 5 - (-) A Director deletes a Group.
+				"director1", "group1", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			Group group = null;
+
+			if (testingData[i][1] != null)
+				group = this.groupService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			this.startTransaction();
+
+			this.templateVisitorDeleteGroup((String) testingData[i][0], group, (Class<?>) testingData[i][2]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+	}
+
+	protected void templateVisitorDeleteGroup(final String username, final Group group, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		super.authenticate(username);
+
+		try {
+
+			// 2. List my created groups
+
+			final Visitor visitor = this.visitorService.findOne(super.getEntityId(username));
+			final Collection<Group> oldGroups = this.groupService.getCreatedByVisitor(visitor);
+
+			// 3. Delete a Group
+
+			this.groupService.deleteOwner(group);
+
+			// Flush
+			this.groupService.flush();
+
+			// 4. Check it has been deleted
+
+			final Collection<Group> newGroups = this.groupService.getCreatedByVisitor(visitor);
+			Assert.isTrue(oldGroups.contains(group));
+			Assert.isTrue(!newGroups.contains(group));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.unauthenticate();
+		super.checkExceptions(expected, caught);
 
 	}
 }

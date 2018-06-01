@@ -392,4 +392,10 @@ public class GroupService {
 		return this.groupRepository.findAllCreatedByPrinciapl(visitor.getId(), new PageRequest(page - 1, size));
 	}
 
+	// v1.0 - Alicia
+	public Collection<Group> getCreatedByVisitor(final Visitor visitor) {
+		Assert.notNull(visitor);
+
+		return this.groupRepository.findCreatedByVisitorId(visitor.getId());
+	}
 }

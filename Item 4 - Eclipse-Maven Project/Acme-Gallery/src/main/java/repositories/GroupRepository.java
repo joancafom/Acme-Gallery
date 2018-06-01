@@ -45,4 +45,8 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
 
 	@Query("select g from Group g where g.creator.id=?1")
 	Page<Group> findAllCreatedByPrinciapl(int id, Pageable pageRequest);
+
+	// v1.0 - Alicia
+	@Query("select g from Group g where g.creator.id = ?1")
+	Collection<Group> findCreatedByVisitorId(int visitorId);
 }

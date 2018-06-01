@@ -64,6 +64,13 @@ public class StoreService {
 		return store;
 	}
 
+	// v1.0 - Alicia
+	public Store saveSimple(final Store store) {
+		Assert.notNull(store);
+
+		return this.storeRepository.save(store);
+	}
+
 	/* v1.0 - josembell */
 	public Store save(final Store store) {
 		Assert.notNull(store);
@@ -91,11 +98,14 @@ public class StoreService {
 		Assert.isTrue(store.getMuseum().getDirector().equals(director));
 
 		final Collection<Product> products = new HashSet<Product>(store.getProducts());
-		for (final Product p : products)
+		for (final Product p : products) {
 			this.productService.delete(p);
+			this.productService.flush();
+		}
 
 		store.getMuseum().setStore(null);
 		this.museumService.save(store.getMuseum());
+		this.museumService.flush();
 
 		this.storeRepository.delete(store);
 	}

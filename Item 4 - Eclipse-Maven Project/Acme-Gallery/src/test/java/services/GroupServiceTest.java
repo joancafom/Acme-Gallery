@@ -286,4 +286,88 @@ public class GroupServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	// [UC-047] Visitor quit a Group ---------------------------
+	// v1.0 - Alicia
+
+	@Test
+	public void driverQuitGroup() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> Group to quit.
+		// testingData[i][2] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// 1 - (+) A Visitor correctly quits a Group
+				"visitor2", "group1", null
+			}, {
+				// 2 - (-) A Visitor tries to quit a Group she created 
+				"visitor1", "group1", IllegalArgumentException.class
+			}, {
+				// 3 - (-) A Visitor tries to quit a Group with meeting Date in the past.
+				"visitor2", "group3", IllegalArgumentException.class
+			}, {
+				// 4 - (-) A Visitor tries to quit a null Group
+				"visitor1", null, IllegalArgumentException.class
+			}, {
+				// 5 - (-) A Visitor tries to quit a Group she is not a participant of. 
+				"visitor4", "group1", IllegalArgumentException.class
+			}, {
+				// 6 - (-) A Director tries to quit a Group.
+				"director1", "group1", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			Group group = null;
+
+			if (testingData[i][1] != null)
+				group = this.groupService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			this.startTransaction();
+
+			this.templateQuitGroup((String) testingData[i][0], group, (Class<?>) testingData[i][2]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+	}
+
+	protected void templateQuitGroup(final String username, final Group group, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		super.authenticate(username);
+
+		try {
+
+			// 2. List joined groups
+
+			final Visitor visitor = this.visitorService.findOne(super.getEntityId(username));
+			final Collection<Group> oldGroups = this.groupService.getJoinedByVisitor(visitor);
+
+			// 3. Quit a Group
+
+			this.groupService.quitGroup(group);
+
+			// Flush
+			this.groupService.flush();
+
+			// 4. Check it has been quitted
+
+			final Collection<Group> newGroups = this.groupService.getJoinedByVisitor(visitor);
+			Assert.isTrue(oldGroups.contains(group));
+			Assert.isTrue(!newGroups.contains(group));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.unauthenticate();
+		super.checkExceptions(expected, caught);
+
+	}
 }

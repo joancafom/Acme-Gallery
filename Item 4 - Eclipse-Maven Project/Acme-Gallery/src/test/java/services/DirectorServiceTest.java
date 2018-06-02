@@ -38,14 +38,6 @@ public class DirectorServiceTest extends AbstractTest {
 	// -------------------------------------------------------------------------------
 	// [UC-010] Administrator register a Director.
 	// 
-	// Related requirements:
-	//   · REQ 1: The actors of the system are administrators, directors, visitors, sponsors, guides 
-	//			  and critics. For every actor, the system must store a name, the surnames, an email,
-	//            a phone number (which must follow the pattern: optional plus sign and a sequence of 
-	//			  numbers), an optional address and optional gender (which can be male, female, or other).
-	//
-	//   · REQ 22.8: An actor who is authenticated as an administrator must be able to
-	//                Create an account for a new director.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -127,6 +119,71 @@ public class DirectorServiceTest extends AbstractTest {
 
 			// 2. Log in as that Sponsor
 			this.authenticate(userAndPass);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+
+	}
+
+	// -------------------------------------------------------------------------------
+	// [UC-052] Display Director.
+	// 
+	//
+	// -------------------------------------------------------------------------------
+	// v1.0 - Implemented by JA
+	// -------------------------------------------------------------------------------
+
+	@Test
+	public void driverDisplayDirector() {
+
+		// testingData[i][0] -> username of the Actor to log in.
+		// testingData[i][1] -> the director to display.
+		// testingData[i][2] -> the expected exception.
+
+		final Object testingData[][] = {
+			{
+				// + 1) An unauthenticated user displays a director
+				null, "director1", null
+			}, {
+				// + 2) An authenticated user displays a director
+				"visitor1", "director3", null
+			}, {
+				// - 3) An authenticated user tries to display a null director
+				"visitor1", null, NullPointerException.class
+			}, {
+				// - 4) An authenticated user tries to display a non-existing director
+				"visitor1", "directorPrueba", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			this.startTransaction();
+
+			this.templateDirectorDisplay((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+		}
+
+	}
+	protected void templateDirectorDisplay(final String performer, final String directorToDisplay, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		this.authenticate(performer);
+
+		try {
+
+			// 1. Display a Director
+			final Integer idToRetrieve = this.getEntityId(directorToDisplay);
+			final Director director = this.directorService.findOne(idToRetrieve);
+
+			Assert.notNull(director);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

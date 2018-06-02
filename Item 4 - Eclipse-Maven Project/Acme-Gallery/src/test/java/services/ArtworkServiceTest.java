@@ -272,8 +272,6 @@ public class ArtworkServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++) {
 
-			System.err.println(i + 1);
-
 			if (testingData[i][8] != null)
 				artwork = this.artworkService.findOne(this.getEntityId((String) testingData[i][8]));
 			else

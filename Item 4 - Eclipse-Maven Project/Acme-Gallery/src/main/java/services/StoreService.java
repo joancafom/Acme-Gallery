@@ -68,11 +68,17 @@ public class StoreService {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - Alicia
 	public Store save(final Store store) {
 		Assert.notNull(store);
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
 		Assert.isTrue(store.getMuseum().getDirector().equals(director));
+
+		if (store.getId() != 0) {
+			final Store oldStore = this.findOne(store.getId());
+			Assert.isTrue(oldStore.getMuseum().getDirector().equals(director));
+		}
 
 		final Museum museum = store.getMuseum();
 		store.setMuseum(null);

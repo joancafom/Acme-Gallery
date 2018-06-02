@@ -4,6 +4,7 @@ package services;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -154,7 +155,6 @@ public class StoreServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++) {
 
-			System.err.println(i + 1);
 			Store store = null;
 
 			if (testingData[i][1] != null && i != 3)
@@ -192,6 +192,95 @@ public class StoreServiceTest extends AbstractTest {
 			// 3. Check it has been deleted
 
 			Assert.isNull(this.storeService.findOne(store.getId()));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.unauthenticate();
+		super.checkExceptions(expected, caught);
+
+	}
+
+	// [UC-061] Director edit Store ----------------------------
+	// v1.0 - Alicia
+
+	@Test
+	public void driverEditStore() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> Store to edit.
+		// testingData[i][2] -> name of the Store.
+		// testingData[i][3] -> logo of the Store.
+		// testingData[i][4] -> phoneNumber of the Store.
+		// testingData[i][5] -> email of the Store.
+		// testingData[i][6] -> museum of the Store.
+		// testingData[i][7] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// 1 - (+) A Director correctly edits a Store
+				"director1", "store1", "testName", "http://www.logo.es", "+34685839512", "test@email.com", null, null
+			}, {
+				// 2 - (-) A Director edits a Store for a Museum she doesn't own
+				"director1", "store7", "testName", "http://www.logo.es", "+34685839512", "test@email.com", null, IllegalArgumentException.class
+			}, {
+				// 3 - (-) A Director edits a Store changing its museum so that she's the owner.
+				"director1", "store7", "testName", "http://www.logo.es", "+34685839512", "test@email.com", "museum6", IllegalArgumentException.class
+			}, {
+				// 4 - (-) A Director edits a Store changing its name so that it's null.
+				"director1", "store1", null, "http://www.logo.es", "+34685839512", "test@email.com", null, ConstraintViolationException.class
+			}, {
+				// 5 - (-) A Visitor edits a Store.
+				"visitor1", "store1", "testName", "http://www.logo.es", "+34685839512", "test@email.com", null, IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			final Store store = this.storeService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			Museum museum = null;
+
+			if (testingData[i][6] != null)
+				museum = this.museumService.findOne(super.getEntityId((String) testingData[i][6]));
+
+			this.startTransaction();
+
+			this.templateEditStore((String) testingData[i][0], store, (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], museum, (Class<?>) testingData[i][7]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+	protected void templateEditStore(final String username, final Store store, final String name, final String logo, final String phoneNumber, final String email, final Museum museum, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		super.authenticate(username);
+
+		try {
+
+			// 2. Edit a Store
+
+			store.setName(name);
+			store.setLogo(logo);
+			store.setPhoneNumber(phoneNumber);
+			store.setEmail(email);
+
+			if (museum != null)
+				store.setMuseum(museum);
+
+			final Store savedStore = this.storeService.save(store);
+
+			// Flush
+			this.storeService.flush();
+
+			// 3. Check it has been edited
+
+			Assert.isTrue(savedStore.getLogo().equals(logo));
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

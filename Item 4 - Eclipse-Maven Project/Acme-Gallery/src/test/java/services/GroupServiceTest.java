@@ -381,7 +381,7 @@ public class GroupServiceTest extends AbstractTest {
 	// v1.0 - Alicia
 
 	@Test
-	public void driverCreateAnnouncement() {
+	public void driverCreateGroup() {
 
 		// testingData[i][0] -> username of the logged actor.
 		// testingData[i][1] -> name of the Group.

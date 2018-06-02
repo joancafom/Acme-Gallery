@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import security.LoginService;
 import utilities.AbstractTest;
 import domain.Visitor;
 
@@ -214,6 +215,78 @@ public class VisitorServiceTest extends AbstractTest {
 
 		super.unauthenticate();
 		super.checkExceptions(expected, caught);
+
+	}
+
+	/*
+	 * [UC-051] - Visitor edit my profile
+	 * v1.0 - josembell
+	 */
+	@Test
+	public void driverEditProfile() {
+		final Object testingData[][] = {
+			{
+				/* + 1. Un visitor edita su perfil correctamente */
+				"visitor1", "Test", "Tests", "test@gmail.com", "+34651980700", "Av. Test 127", null
+			}, {
+				/* - 2. Un usuario no identificado edita su perfil */
+				null, "Test", "Tests", "test@gmail.com", "+34651980700", "Av. Test 127", IllegalArgumentException.class
+			}, {
+				/* - 3. Un usuario que no es visitor edita su perfil */
+				"director1", "Test", "Tests", "test@gmail.com", "+34651980700", "Av. Test 127", IllegalArgumentException.class
+			}, {
+				/* - 4. Un visitor edita su perfil sin introducir datos */
+				"visitor1", null, null, null, null, null, ConstraintViolationException.class
+			}, {
+				/* - 5. Un visitor edita su perfil con datos erróneos */
+				"visitor1", "Test", "Testes", "test", "test", "Test", ConstraintViolationException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			this.startTransaction();
+
+			this.templateEditProfile((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (Class<?>) testingData[i][6]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+
+	/* v1.0 - josembell */
+	protected void templateEditProfile(final String username, final String name, final String surnames, final String email, final String phone, final String address, final Class<?> expected) {
+		Class<?> caught = null;
+		/* authenticate */
+		this.authenticate(username);
+
+		try {
+
+			/* display profile */
+			final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+
+			/* edit data */
+			try {
+				visitor.setName(name);
+				visitor.setSurnames(surnames);
+				visitor.setEmail(email);
+				visitor.setPhoneNumber(phone);
+				visitor.setAddress(address);
+			} catch (final Throwable oops) {
+
+			}
+
+			/* save & flush */
+			this.visitorService.save(visitor);
+			this.visitorService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
 
 	}
 }

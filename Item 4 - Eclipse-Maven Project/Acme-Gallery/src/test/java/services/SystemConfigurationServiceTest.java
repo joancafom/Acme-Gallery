@@ -52,12 +52,6 @@ public class SystemConfigurationServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-015] - Add a taboo word
-	 * 1. Log in as administrator
-	 * 2. Display the system configuration
-	 * 3. Add a taboo word
-	 * 
-	 * REQ: 22.24, 22.25
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test
@@ -71,25 +65,13 @@ public class SystemConfigurationServiceTest extends AbstractTest {
 				/* - 2. Un usuario no identificado añade una taboo word */
 				null, "test", IllegalArgumentException.class
 			}, {
-				/* - 3. Un visitor añade una taboo word */
+				/* - 3. Un usuario que no es admin añade una taboo word */
 				"visitor1", "test", IllegalArgumentException.class
 			}, {
-				/* - 4. Un guide añade una taboo word */
-				"guide1", "test", IllegalArgumentException.class
-			}, {
-				/* - 5. Un sponsor añade una taboo word */
-				"sponsor1", "test", IllegalArgumentException.class
-			}, {
-				/* - 6. Un director añade una taboo word */
-				"director1", "test", IllegalArgumentException.class
-			}, {
-				/* - 7. Un critic añade una taboo word */
-				"critic1", "test", IllegalArgumentException.class
-			}, {
-				/* - 8. Un admin añade una taboo word null */
+				/* - 4. Un admin añade una taboo word null */
 				"admin", null, IllegalArgumentException.class
 			}, {
-				/* - 9. Un admin añade una taboo word que ya estaba puesta */
+				/* - 5. Un admin añade una taboo word que ya estaba puesta */
 				"admin", "sex", IllegalArgumentException.class
 			}
 		};
@@ -174,12 +156,6 @@ public class SystemConfigurationServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-016] - Delete a taboo word
-	 * 1. Log in as administrator
-	 * 2. Display the system configuration
-	 * 3. Delete a taboo word
-	 * 
-	 * REQ: 22.24, 22.26
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test
@@ -193,25 +169,13 @@ public class SystemConfigurationServiceTest extends AbstractTest {
 				/* - 2. Un usuario no identificado elimina una taboo word */
 				null, "test", IllegalArgumentException.class
 			}, {
-				/* - 3. Un visitor elimina una taboo word */
+				/* - 3. Un usuario que no es admin elimina una taboo word */
 				"visitor1", "test", IllegalArgumentException.class
 			}, {
-				/* - 4. Un guide elimina una taboo word */
-				"guide1", "test", IllegalArgumentException.class
-			}, {
-				/* - 5. Un sponsor elimina una taboo word */
-				"sponsor1", "test", IllegalArgumentException.class
-			}, {
-				/* - 6. Un director elimina una taboo word */
-				"director1", "test", IllegalArgumentException.class
-			}, {
-				/* - 7. Un critic elimina una taboo word */
-				"critic1", "test", IllegalArgumentException.class
-			}, {
-				/* - 8. Un admin elimina una taboo word null */
+				/* - 4. Un admin elimina una taboo word null */
 				"admin", null, IllegalArgumentException.class
 			}, {
-				/* - 9. Un admin elimina una taboo word que no existe */
+				/* - 5. Un admin elimina una taboo word que no existe */
 				"admin", "overwatch", IllegalArgumentException.class
 			}
 		};
@@ -319,12 +283,6 @@ public class SystemConfigurationServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-017] - Edit VAT value
-	 * 1. Log in as administrator
-	 * 2. Display the system configuration
-	 * 3. Edit the VAT value
-	 * 
-	 * REQ: 22.24, 22.27
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test

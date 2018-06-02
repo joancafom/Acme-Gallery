@@ -46,14 +46,6 @@ public class IncidentServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-038] - Guide create Incident
-	 * 1. Log in as guide
-	 * 2. List my museums
-	 * 3. Display a museum
-	 * 4. List its incidents
-	 * 5. Create an incident
-	 * 
-	 * REQ: 19, 31.1, 32.2, 32.3
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test
@@ -90,9 +82,9 @@ public class IncidentServiceTest extends AbstractTest {
 			if (testingData[i][1] != null)
 				room = this.roomService.findOne(this.getEntityId((String) testingData[i][1]));
 			this.startTransaction();
-			System.out.println(i);
+			//System.out.println(i);
 			this.templateCreateIncident((String) testingData[i][0], room, (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
-			System.out.println(i);
+			//System.out.println(i);
 			this.rollbackTransaction();
 			this.entityManager.clear();
 		}
@@ -129,12 +121,6 @@ public class IncidentServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-024] - Director check an Incident
-	 * 1. Log in as director
-	 * 2. List my incidents
-	 * 3. Mark an incident as checked
-	 * 
-	 * REQ: 19, 29.11
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test
@@ -207,12 +193,6 @@ public class IncidentServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-025] - Director delete an Incident
-	 * 1. Log in as director
-	 * 2. List my incidents
-	 * 3. Delete an incident
-	 * 
-	 * REQ: 19, 29.11
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test

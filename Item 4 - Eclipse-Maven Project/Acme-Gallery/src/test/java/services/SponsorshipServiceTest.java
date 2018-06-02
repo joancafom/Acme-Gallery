@@ -404,11 +404,7 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-040] - Sponsor accept sponsorship
-	 * 1. Log in as a sponsor
-	 * 2. List my sponsorships
-	 * 3. Accept a sponsorship
-	 * 
-	 * REQ: 14, 31.3, 31.2
+	 * v1.0 - josembell
 	 */
 	@Test
 	public void driverAcceptSponsorship() {
@@ -429,34 +425,10 @@ public class SponsorshipServiceTest extends AbstractTest {
 				/* - 5. Un sponsor acepta una sponsorship que no es suya */
 				"sponsor2", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 10, 2020, IllegalArgumentException.class
 			}, {
-				/* - 6. Un sponsor acepta una sponsorship sin holder name */
-				"sponsor1", "sponsorship6", null, "BBVT", "1111222233334444", 123, 10, 2020, ConstraintViolationException.class
-			}, {
-				/* - 7. Un sponsor acepta una sponsorship sin brand name */
-				"sponsor1", "sponsorship6", "Test", null, "1111222233334444", 123, 10, 2020, ConstraintViolationException.class
-			}, {
-				/* - 8. Un sponsor acepta una sponsorship sin credit card number */
+				/* - 6. Un sponsor acepta una sponsorship sin credit card number */
 				"sponsor1", "sponsorship6", "Test", "BBVT", null, 123, 10, 2020, IllegalArgumentException.class
 			}, {
-				/* - 9. Un sponsor acepta una sponsorship con credit card number invalida */
-				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334445", 123, 10, 2020, ConstraintViolationException.class
-			}, {
-				/* - 10. Un sponsor acepta una sponsorship con credit card number invalida */
-				"sponsor1", "sponsorship6", "Test", "BBVT", "111122223333444", 123, 10, 2020, ConstraintViolationException.class
-			}, {
-				/* - 11. Un sponsor acepta una sponsorship con CVV invalido */
-				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 99, 10, 2020, ConstraintViolationException.class
-			}, {
-				/* - 12. Un sponsor acepta una sponsorship con CVV invalido */
-				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 1000, 10, 2020, ConstraintViolationException.class
-			}, {
-				/* - 13. Un sponsor acepta una sponsorship con mes invalido */
-				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 0, 2020, ConstraintViolationException.class
-			}, {
-				/* - 14. Un sponsor ace`ta una sponsorship con mes invalido */
-				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 13, 2020, ConstraintViolationException.class
-			}, {
-				/* - 15. Un sponsor acepta una sponsorship con fecha caducada */
+				/* - 7. Un sponsor acepta una sponsorship con fecha caducada */
 				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 5, 2018, IllegalArgumentException.class
 			}
 
@@ -524,11 +496,7 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-040] - Sponsor reject sponsorship
-	 * 1. Log in as a sponsor
-	 * 2. List my sponsorships
-	 * 3. Reject a sponsorship
-	 * 
-	 * REQ: 14, 31.4, 31.2
+	 * v1.0 - josembell
 	 */
 	@Test
 	public void driverSponsorRejectSponsorship() {

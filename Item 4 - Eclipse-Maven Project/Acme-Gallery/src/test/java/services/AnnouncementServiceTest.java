@@ -47,10 +47,6 @@ public class AnnouncementServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-005] - Administrator delete announcement
-	 * 1. Log in as administrator
-	 * 2. List the taboo announcements
-	 * 3. Delete an announcement
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test

@@ -170,6 +170,7 @@ public class MuseumService extends ActorService {
 			for (final String s : museumForm.getGuides()) {
 				final Guide g = this.guideService.findOne(new Integer(s));
 				Assert.notNull(g);
+				Assert.isTrue(!oldMuseum.getGuides().contains(g));
 				newGuides.add(g);
 			}
 

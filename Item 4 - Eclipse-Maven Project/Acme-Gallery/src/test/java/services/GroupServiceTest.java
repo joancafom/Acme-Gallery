@@ -46,10 +46,6 @@ public class GroupServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-011] - Administrator delete group
-	 * 1. Log in as administrator
-	 * 2. List the taboo groups
-	 * 3. Delete a group
-	 * 
 	 * v1.0 - josembell
 	 * v2.0 - Alicia
 	 */
@@ -70,16 +66,7 @@ public class GroupServiceTest extends AbstractTest {
 				/* 4 - (-) Un sponsor elimina un grupo */
 				"sponsor1", "group10", IllegalArgumentException.class
 			}, {
-				/* 5 - (-) Un guide elimina un grupo */
-				"guide1", "group10", IllegalArgumentException.class
-			}, {
-				/* 6 - (-) Un critic elimina un grupo */
-				"critic1", "group10", IllegalArgumentException.class
-			}, {
-				/* 7 - (-) Un director elimina un grupo */
-				"director1", "group10", IllegalArgumentException.class
-			}, {
-				/* 8 - (-) Un admin elimina un grupo null */
+				/* 5 - (-) Un admin elimina un grupo null */
 				"admin", null, IllegalArgumentException.class
 			}
 		};

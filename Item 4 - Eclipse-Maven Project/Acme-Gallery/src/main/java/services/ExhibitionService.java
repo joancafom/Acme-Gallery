@@ -616,4 +616,5 @@ public class ExhibitionService {
 
 		return this.exhibitionRepository.findByGuideId(guide.getId());
 	}
+
 }

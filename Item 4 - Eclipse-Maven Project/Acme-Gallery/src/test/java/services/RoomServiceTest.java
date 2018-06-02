@@ -47,7 +47,7 @@ public class RoomServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-031] Director delete a room.
-	//
+	// 
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
 	// -------------------------------------------------------------------------------
@@ -133,12 +133,6 @@ public class RoomServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-030] - Director create a room
-	 * 1. Log in as director
-	 * 2. List my rooms
-	 * 3. Create a room
-	 * 
-	 * REQ: 4, 29.13
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test
@@ -158,16 +152,13 @@ public class RoomServiceTest extends AbstractTest {
 				/* - 4. Un director crea un room para un museum que no es suyo */
 				"director1", "museum7", "TEST", 10.50, IllegalArgumentException.class
 			}, {
-				/* - 5. Un director crea un room para un museum null */
-				"director1", null, "TEST", 10.50, IllegalArgumentException.class
-			}, {
-				/* - 6. Un director crea un room sin nombre */
+				/* - 5. Un director crea un room sin nombre */
 				"director1", "museum1", null, 10.50, ConstraintViolationException.class
 			}, {
-				/* - 7. Un director crea una room con area invalida */
+				/* - 6. Un director crea una room con area invalida */
 				"director1", "museum1", "TEST", 0.00, ConstraintViolationException.class
 			}, {
-				/* - 8. Un director crea una room sin area */
+				/* - 7. Un director crea una room sin area */
 				"director1", "museum1", "TEST", null, ConstraintViolationException.class
 			}
 
@@ -216,13 +207,6 @@ public class RoomServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-032] - Director mark room in repair
-	 * 1. Log in as director
-	 * 2. List my rooms
-	 * 3. Display a room
-	 * 4. Mark the room in repair
-	 * 
-	 * REQ: 4, 29.17
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test
@@ -292,13 +276,6 @@ public class RoomServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-033] - Director mark room in repair
-	 * 1. Log in as director
-	 * 2. List my rooms
-	 * 3. Display a room
-	 * 4. Mark the room in repair
-	 * 
-	 * REQ: 4, 29.17
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test

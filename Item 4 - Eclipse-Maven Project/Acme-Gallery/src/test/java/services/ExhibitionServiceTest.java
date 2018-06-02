@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,6 +31,7 @@ import domain.Director;
 import domain.Exhibition;
 import domain.Guide;
 import domain.Room;
+import forms.ExhibitionForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -62,11 +64,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-002] - Search for exhibitions
-	 * 1. Log in to the system
-	 * 2. Get to the exhibition browser
-	 * 3. List your search results
-	 * 4. Display an exhibition
-	 * 
 	 * v1.1 - josembell
 	 */
 	@Test
@@ -91,9 +88,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 			}, {
 				// 6 - (+) Un guia busca exhibiciones
 				"guide1", "Van Gogh", "exhibition1", null
-			}, {
-				// 7 - (+) Un critic busca exhibiciones
-				"critic1", "Van Gogh", "exhibition1", null
 			}, {
 				/* 8 - (-) Un user busca exhibiciones con keyword null */
 				null, null, "exhibition1", IllegalArgumentException.class
@@ -143,7 +137,7 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-020] Director creates an Exhibition.
-	//
+	// 
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
 	// -------------------------------------------------------------------------------
@@ -274,12 +268,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	/*
 	 * [UC-022] - Director add Guide
-	 * 1. Log in as a director
-	 * 2. List my exhibitions
-	 * 3. Add guide to a exhibition
-	 * 
-	 * REQ:
-	 * 
 	 * v1.0 - josembell
 	 */
 	@Test
@@ -301,12 +289,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 			}, {
 				/* - 5. Un director añade un guia a una exhibicion que no le pertenece */
 				"director1", "exhibition13", "guide1", IllegalArgumentException.class
-			}, {
-				/* - 6. Un director añade un guia null a una exhibicion */
-				"director1", "exhibition2", null, IllegalArgumentException.class
-			}, {
-				/* - 7. Un director añade un guia a una exhibicion null */
-				"director1", null, "guide1", IllegalArgumentException.class
 			}
 		};
 
@@ -318,7 +300,9 @@ public class ExhibitionServiceTest extends AbstractTest {
 			if (testingData[i][2] != null)
 				guide = this.guideService.findOne(this.getEntityId((String) testingData[i][2]));
 			this.startTransaction();
+			//System.out.println(i);
 			this.templateAddGuide((String) testingData[i][0], exhibition, guide, (Class<?>) testingData[i][3]);
+			//System.out.println(i);
 			this.rollbackTransaction();
 			this.entityManager.clear();
 		}
@@ -336,12 +320,15 @@ public class ExhibitionServiceTest extends AbstractTest {
 			final Collection<Exhibition> myExhibitions = this.exhibitionService.getExhibitionsByPrincipal();
 
 			/* 3. add the guide */
+			final ExhibitionForm exhibitionForm = new ExhibitionForm();
+			final List<String> guides = new LinkedList<String>();
+			guides.add(String.valueOf(guide.getId()));
 
-			guide.getExhibitions().add(exhibition);
-			this.guideService.save(guide);
-			exhibition.getGuides().add(guide);
+			exhibitionForm.setExhibition(exhibition);
+			exhibitionForm.setGuides(guides);
 
-			final Exhibition saved = this.exhibitionService.saveCreateAndEdit(exhibition);
+			final Exhibition reconstructed = this.exhibitionService.reconstructSave(exhibitionForm, new BeanPropertyBindingResult(exhibitionForm, ""));
+			final Exhibition saved = this.exhibitionService.saveCreateAndEdit(reconstructed);
 			this.exhibitionService.flush();
 
 			/* 4. check that the exhibition is in the list */
@@ -356,10 +343,9 @@ public class ExhibitionServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 
 	}
-
 	// -------------------------------------------------------------------------------
 	// [UC-021] Director edit an exhibition. *EXTENDED*
-	//
+	// 
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
 	// -------------------------------------------------------------------------------
@@ -574,7 +560,7 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-023] Director delete exhibition.
-	//
+	// 
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
 	// -------------------------------------------------------------------------------

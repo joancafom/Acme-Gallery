@@ -18,6 +18,7 @@ import org.springframework.util.Assert;
 import security.LoginService;
 import utilities.AbstractTest;
 import domain.Comment;
+import domain.Group;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -42,10 +43,12 @@ public class CommentServiceTest extends AbstractTest {
 	@PersistenceContext
 	private EntityManager				entityManager;
 
+	@Autowired
+	private GroupService				groupService;
+
 
 	// -------------------------------------------------------------------------------
 	// [UC-008] Administrator delete comments.
-	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
 	// -------------------------------------------------------------------------------
@@ -147,6 +150,73 @@ public class CommentServiceTest extends AbstractTest {
 
 		super.unauthenticate();
 		super.checkExceptions(expected, caught);
+
+	}
+
+	/*
+	 * [UC-042] - Create a Comment
+	 * v1.0 - josembell
+	 */
+	@Test
+	public void driverCreateComment() {
+		final Object testingData[][] = {
+			{
+				/* + 1. Un visitor crea un comentario en un grupo al que pertenece */
+				"visitor1", "group1", "Test", "This is a test", "http://www.google.es", null
+			}, {
+				/* - 2. Un usuario no identificado crea un comentario en un grupo */
+				null, "group1", "Test", "This is a test", "http://www.google.es", IllegalArgumentException.class
+			}, {
+				/* - 3. Un visitor crea un comentario en un grupo al que no pertenece */
+				"visitor1", "group7", "Test", "This is a test", "http://www.google.es", IllegalArgumentException.class
+			}, {
+				/* - 4. Un usuario que no es un visitor crea un comentario */
+				"director1", "group1", "Test", "This is a test", "http://www.google.es", IllegalArgumentException.class
+			}, {
+				/* - 5. Un visitor crea un comentario vacio */
+				"director1", "group1", null, null, null, IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			final Group group = this.groupService.findOne(this.getEntityId((String) testingData[i][1]));
+
+			this.startTransaction();
+			//System.out.println(i);
+			this.templateCreateComment((String) testingData[i][0], group, (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (Class<?>) testingData[i][5]);
+			//System.out.println(i);
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+	}
+
+	/* v1.0 - josembell */
+	protected void templateCreateComment(final String username, final Group group, final String title, final String description, final String picture, final Class<?> expected) {
+		Class<?> caught = null;
+		/* 1. authenticate */
+		this.authenticate(username);
+
+		try {
+			/* 2. create the comment */
+			final Comment comment = this.commentService.create(group);
+			comment.setTitle(title);
+			comment.setDescription(description);
+			comment.setPicture(picture);
+
+			final Comment saved = this.commentService.saveCreate(comment);
+			/* > flush */
+			this.commentService.flush();
+
+			final Group savedGroup = this.groupService.findOne(group.getId());
+			Assert.isTrue(savedGroup.getComments().contains(saved));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
 
 	}
 }

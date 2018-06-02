@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,11 +17,14 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
+import org.springframework.validation.BeanPropertyBindingResult;
 
 import utilities.AbstractTest;
 import domain.Director;
 import domain.GPSCoordinates;
+import domain.Guide;
 import domain.Museum;
+import forms.MuseumForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -40,6 +45,9 @@ public class MuseumServiceTest extends AbstractTest {
 
 	@Autowired
 	private DirectorService	directorService;
+
+	@Autowired
+	private GuideService	guideService;
 
 
 	// [UC-026] Director create Museum ---------------
@@ -261,6 +269,81 @@ public class MuseumServiceTest extends AbstractTest {
 
 		super.unauthenticate();
 		super.checkExceptions(expected, caught);
+
+	}
+
+	/*
+	 * [UC-060] - Add guide to a museum
+	 * v1.0 - josembell
+	 */
+	@Test
+	public void driverAddGuide() {
+		final Object testingData[][] = {
+			{
+				/* + 1. Un director añade un guia a un museo suyo */
+				"director1", "museum1", "guide7", null
+			}, {
+				/* - 2. Un usuario no identificado añade un guia a un museo */
+				null, "museum1", "guide7", IllegalArgumentException.class
+			}, {
+				/* - 3. Un usuario que no es un director añade un guia a un museo */
+				"visitor1", "museum1", "guide7", IllegalArgumentException.class
+			}, {
+				/* - 4. Un director añade un guia a un museo que no es suyo */
+				"director1", "museum8", "guide7", IllegalArgumentException.class
+			}, {
+				/* - 5. Un director añade un guia que ya está en un museo suyo */
+				"director1", "museum1", "guide1", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			final Museum museum = this.museumService.findOne(this.getEntityId((String) testingData[i][1]));
+			final Guide guide = this.guideService.findOne(this.getEntityId((String) testingData[i][2]));
+			this.startTransaction();
+			//System.out.println(i);
+			this.templateAddGuide((String) testingData[i][0], museum, guide, (Class<?>) testingData[i][3]);
+			//System.out.println(i);
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+
+	/* v1.0 - josembell */
+	protected void templateAddGuide(final String username, final Museum museum, final Guide guide, final Class<?> expected) {
+		Class<?> caught = null;
+		/* 1. authenticate */
+		this.authenticate(username);
+
+		try {
+			/* 2. list my museums */
+			final Collection<Museum> myMuseums = this.museumService.getByPrincipal();
+
+			/* 3. add the guide */
+			final MuseumForm museumForm = new MuseumForm();
+			final List<String> guides = new LinkedList<String>();
+			guides.add(String.valueOf(guide.getId()));
+
+			museumForm.setMuseum(museum);
+			museumForm.setGuides(guides);
+
+			final Museum reconstructed = this.museumService.reconstructAddGuide(museumForm, new BeanPropertyBindingResult(museumForm, ""));
+			final Museum saved = this.museumService.saveAddGuide(reconstructed);
+			this.museumService.flush();
+
+			/* 4. check that the museum is in the list */
+			Assert.isTrue(myMuseums.contains(museum));
+			Assert.isTrue(saved.getGuides().contains(guide));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
 
 	}
 }

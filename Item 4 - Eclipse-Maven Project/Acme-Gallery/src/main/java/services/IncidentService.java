@@ -253,4 +253,10 @@ public class IncidentService {
 
 		return this.save(incident);
 	}
+
+	/* v1.0 - josembell */
+	public void flush() {
+		this.incidentRepository.flush();
+
+	}
 }

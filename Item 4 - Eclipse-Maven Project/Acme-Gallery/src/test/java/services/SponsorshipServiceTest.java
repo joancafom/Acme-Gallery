@@ -2,6 +2,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.CreditCard;
 import domain.Exhibition;
 import domain.Sponsor;
 import domain.Sponsorship;
@@ -416,6 +418,204 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 		super.unauthenticate();
 		super.checkExceptions(expected, caught);
+
+	}
+
+	/*
+	 * [UC-040] - Sponsor accept sponsorship
+	 * 1. Log in as a sponsor
+	 * 2. List my sponsorships
+	 * 3. Accept a sponsorship
+	 * 
+	 * REQ: 14, 31.3, 31.2
+	 */
+	@Test
+	public void driverAcceptSponsorship() {
+		final Object testingData[][] = {
+			{
+				/* + 1. Un sponsor acepta una sponsorship */
+				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 10, 2020, null
+			}, {
+				/* - 2. Un usuario no identificado acepta un sponsorship */
+				null, "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 10, 2020, IllegalArgumentException.class
+			}, {
+				/* - 3. Un usuario que no es un sponsor acepta un sponsorship */
+				"visitor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 10, 2020, IllegalArgumentException.class
+			}, {
+				/* - 4. Un sponsor acepta una sponsorship null */
+				"sponsor1", null, "Test", "BBVT", "1111222233334444", 123, 10, 2020, IllegalArgumentException.class
+			}, {
+				/* - 5. Un sponsor acepta una sponsorship que no es suya */
+				"sponsor2", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 10, 2020, IllegalArgumentException.class
+			}, {
+				/* - 6. Un sponsor acepta una sponsorship sin holder name */
+				"sponsor1", "sponsorship6", null, "BBVT", "1111222233334444", 123, 10, 2020, ConstraintViolationException.class
+			}, {
+				/* - 7. Un sponsor acepta una sponsorship sin brand name */
+				"sponsor1", "sponsorship6", "Test", null, "1111222233334444", 123, 10, 2020, ConstraintViolationException.class
+			}, {
+				/* - 8. Un sponsor acepta una sponsorship sin credit card number */
+				"sponsor1", "sponsorship6", "Test", "BBVT", null, 123, 10, 2020, IllegalArgumentException.class
+			}, {
+				/* - 9. Un sponsor acepta una sponsorship con credit card number invalida */
+				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334445", 123, 10, 2020, ConstraintViolationException.class
+			}, {
+				/* - 10. Un sponsor acepta una sponsorship con credit card number invalida */
+				"sponsor1", "sponsorship6", "Test", "BBVT", "111122223333444", 123, 10, 2020, ConstraintViolationException.class
+			}, {
+				/* - 11. Un sponsor acepta una sponsorship con CVV invalido */
+				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 99, 10, 2020, ConstraintViolationException.class
+			}, {
+				/* - 12. Un sponsor acepta una sponsorship con CVV invalido */
+				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 1000, 10, 2020, ConstraintViolationException.class
+			}, {
+				/* - 13. Un sponsor acepta una sponsorship con mes invalido */
+				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 0, 2020, ConstraintViolationException.class
+			}, {
+				/* - 14. Un sponsor ace`ta una sponsorship con mes invalido */
+				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 13, 2020, ConstraintViolationException.class
+			}, {
+				/* - 15. Un sponsor acepta una sponsorship con fecha caducada */
+				"sponsor1", "sponsorship6", "Test", "BBVT", "1111222233334444", 123, 5, 2018, IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			Sponsorship sponsorship = null;
+			if (testingData[i][1] != null)
+				sponsorship = this.sponsorshipService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			this.startTransaction();
+			//System.out.println(i);
+			this.templateAcceptSponsorship((String) testingData[i][0], sponsorship, (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (Integer) testingData[i][5], (Integer) testingData[i][6], (Integer) testingData[i][7],
+				(Class<?>) testingData[i][8]);
+			//System.out.println(i);
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+
+	/* v1.0 - josembell */
+	protected void templateAcceptSponsorship(final String username, final Sponsorship sponsorship, final String holderName, final String brandName, final String number, final Integer CVV, final Integer month, final Integer year, final Class<?> expected) {
+		Class<?> caught = null;
+		/* 1. authenticate */
+		this.authenticate(username);
+
+		try {
+			/* 3. -> create a credit card */
+			final CreditCard creditCard = new CreditCard();
+			creditCard.setHolderName(holderName);
+			creditCard.setBrandName(brandName);
+			creditCard.setNumber(number);
+			creditCard.setCVV(CVV);
+			creditCard.setMonth(month);
+			creditCard.setYear(year);
+
+			try {
+				sponsorship.setCreditCard(creditCard);
+				sponsorship.setStatus("ACCEPTED");
+			} catch (final Throwable oops) {
+
+			}
+
+			/* 3. -> save */
+			final Sponsorship saved = this.sponsorshipService.save(sponsorship);
+			this.sponsorshipService.flush();
+
+			final Sponsorship saved2 = this.sponsorshipService.findOne(saved.getId());
+			Assert.isTrue(saved2.getStatus().equals("ACCEPTED"));
+
+			/* 2. list my sponsorships */
+			final Collection<Sponsorship> mySponsorships = this.sponsorshipService.getBySponsorPrincipal();
+			Assert.isTrue(mySponsorships.contains(saved));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
+
+	}
+
+	/*
+	 * [UC-040] - Sponsor reject sponsorship
+	 * 1. Log in as a sponsor
+	 * 2. List my sponsorships
+	 * 3. Reject a sponsorship
+	 * 
+	 * REQ: 14, 31.4, 31.2
+	 */
+	@Test
+	public void driverSponsorRejectSponsorship() {
+		final Object testingData[][] = {
+			{
+				/* + 1. Un sponsor rechaza una sponsorship */
+				"sponsor1", "sponsorship6", null
+			}, {
+				/* - 2. Un usuario no identificado rechaza una sponsorship */
+				null, "sponsorship6", IllegalArgumentException.class
+			}, {
+				/* - 3. Un usuario que no es un sponsor rechaza una sponsorship */
+				"visitor1", "sponsorship6", IllegalArgumentException.class
+			}, {
+				/* - 4. Un sponsor rechaza una sponsorship null */
+				"sponsor1", null, IllegalArgumentException.class
+			}, {
+				/* - 5. Un sponsor rechaza una sponsorship que no es suya */
+				"sponsor2", "sponsorship6", IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			Sponsorship sponsorship = null;
+			if (testingData[i][1] != null)
+				sponsorship = this.sponsorshipService.findOne(super.getEntityId((String) testingData[i][1]));
+
+			this.startTransaction();
+			//System.out.println(i);
+			this.templateSponsorRejectSponsorship((String) testingData[i][0], sponsorship, (Class<?>) testingData[i][2]);
+			//System.out.println(i);
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+
+	/* v1.0 - josembell */
+	protected void templateSponsorRejectSponsorship(final String username, final Sponsorship sponsorship, final Class<?> expected) {
+		Class<?> caught = null;
+		/* 1. authenticate */
+		this.authenticate(username);
+
+		try {
+			/* 3. reject the sponsorship */
+
+			try {
+				sponsorship.setStatus("REJECTED");
+			} catch (final Throwable oops) {
+
+			}
+
+			final Sponsorship saved = this.sponsorshipService.save(sponsorship);
+			final Sponsorship saved2 = this.sponsorshipService.findOne(sponsorship.getId());
+			Assert.isTrue(saved2.getStatus().equals("REJECTED"));
+
+			/* 2. list my sponsorships */
+			final Collection<Sponsorship> mySponsorships = this.sponsorshipService.getBySponsorPrincipal();
+			Assert.isTrue(mySponsorships.contains(saved));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.unauthenticate();
+		this.checkExceptions(expected, caught);
 
 	}
 }

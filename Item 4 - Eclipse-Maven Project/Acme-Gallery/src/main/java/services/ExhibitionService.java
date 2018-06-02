@@ -199,8 +199,6 @@ public class ExhibitionService {
 		Assert.isTrue((exhibition.getIsPrivate() && exhibition.getPrice() > 0.0) || (!exhibition.getIsPrivate() && exhibition.getPrice() == 0.0));
 		Assert.isTrue(exhibition.getStartingDate().after(new Date()));
 
-		System.out.println(this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate()));
-
 		final Collection<Exhibition> concurrentExhibitions = this.exhibitionRepository.findDateAndRoomConflicts(exhibition.getRoom().getId(), exhibition.getStartingDate(), exhibition.getEndingDate());
 
 		if (exhibition.getId() == 0) {

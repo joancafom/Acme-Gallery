@@ -62,27 +62,39 @@ public class ArtworkService {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - JA
 	public Artwork save(final Artwork artwork) {
 		Assert.notNull(artwork);
+
 		final Guide guide = this.guideService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(guide);
+
+		Assert.notNull(artwork.getExhibition());
 		Assert.isTrue(artwork.getExhibition().getGuides().contains(guide));
 
-		if (artwork.getId() != 0)
-			Assert.isTrue(artwork.getIsFinal() == false);
+		if (artwork.getId() != 0) {
+
+			final Artwork oldArtwork = this.findOne(artwork.getId());
+			Assert.notNull(oldArtwork);
+
+			Assert.isTrue(!oldArtwork.getIsFinal());
+			Assert.isTrue(oldArtwork.getExhibition().equals(artwork.getExhibition()));
+		}
 
 		final Integer yearOfNow = LocalDate.now().getYear();
+
 		if (artwork.getYear() != null) {
 			Assert.isTrue(artwork.getYear() % 1 == 0);
 			Assert.isTrue(artwork.getYear() <= yearOfNow);
 		}
 
-		if (artwork.getCreatorName() == "")
-			artwork.setCreatorName(null);
-
 		final Artwork saved = this.artworkRepository.save(artwork);
-		artwork.getExhibition().getArtworks().add(saved);
-		this.exhibitionService.save(saved.getExhibition());
+
+		if (artwork.getId() == 0) {
+
+			artwork.getExhibition().getArtworks().add(saved);
+			this.exhibitionService.save(saved.getExhibition());
+		}
 
 		return saved;
 	}
@@ -152,6 +164,9 @@ public class ArtworkService {
 		Assert.notNull(prunedArtwork);
 
 		final Artwork artwork;
+
+		if ("".equals(prunedArtwork.getCreatorName()))
+			prunedArtwork.setCreatorName(null);
 
 		artwork = prunedArtwork;
 

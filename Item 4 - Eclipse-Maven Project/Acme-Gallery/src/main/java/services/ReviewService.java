@@ -65,6 +65,7 @@ public class ReviewService {
 
 	/* v1.0 - josembell */
 	public Review saveCreate(final Review review) {
+
 		Assert.notNull(review);
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(visitor);

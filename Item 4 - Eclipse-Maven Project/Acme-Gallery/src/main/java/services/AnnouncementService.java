@@ -249,6 +249,14 @@ public class AnnouncementService {
 		return announcement;
 	}
 
+	// v1.0 - JA
+	public Collection<Announcement> getStreamByPrincipal() {
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		return this.announcementRepository.getStreamByPrincipal(visitor.getId());
+	}
+
 	/* v1.0 - josembell */
 	public Page<Announcement> getStreamByPrincipal(final Integer page, final int size) {
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());

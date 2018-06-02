@@ -37,4 +37,8 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Inte
 	@Query("select a from Announcement a, Visitor v where v.id=?1 and v member of a.group.participants order by a.creationMoment desc")
 	Page<Announcement> getStreamByPrincipal(int id, Pageable pageRequest);
 
+	//v1.0 - JA
+	@Query("select a from Announcement a, Visitor v where v.id=?1 and v member of a.group.participants order by a.creationMoment desc")
+	Collection<Announcement> getStreamByPrincipal(int principalId);
+
 }

@@ -156,7 +156,7 @@ public class DirectorServiceTest extends AbstractTest {
 				"visitor1", null, NullPointerException.class
 			}, {
 				// - 4) An authenticated user tries to display a non-existing director
-				"visitor1", "directorPrueba", IllegalArgumentException.class
+				"visitor1", "directorPrueba", NullPointerException.class
 			}
 		};
 
@@ -180,7 +180,14 @@ public class DirectorServiceTest extends AbstractTest {
 		try {
 
 			// 1. Display a Director
-			final Integer idToRetrieve = this.getEntityId(directorToDisplay);
+			Integer idToRetrieve = null;
+
+			try {
+				idToRetrieve = this.getEntityId(directorToDisplay);
+			} catch (final Throwable e) {
+				idToRetrieve = null;
+			}
+
 			final Director director = this.directorService.findOne(idToRetrieve);
 
 			Assert.notNull(director);

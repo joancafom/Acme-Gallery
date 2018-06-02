@@ -140,13 +140,6 @@ public class ReviewServiceTest extends AbstractTest {
 	// -------------------------------------------------------------------------------
 	// [UC-059] Visitor create review.
 	// 
-	// Related requirements:
-	//   · REQ 7: Visitors that had visited the museum can write reviews about it. For every 
-	//			  review, the system must keep track of a body, a scoring (going from 1 to 5)
-	//			  and the moment of creation.
-	//
-	//   · REQ 24.23: An actor who is authenticated as a visitor must be able to:
-	//				  Write a review about a museum she or he has visited.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA

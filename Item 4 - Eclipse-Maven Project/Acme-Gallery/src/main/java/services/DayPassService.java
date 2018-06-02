@@ -89,6 +89,12 @@ public class DayPassService {
 		return this.dayPassRepository.findAll();
 	}
 
+	//v1.0 - JA
+	public void flush() {
+
+		this.dayPassRepository.flush();
+	}
+
 	// v1.0 - Alicia
 	public DayPass create(final Museum museum) {
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
@@ -139,6 +145,8 @@ public class DayPassService {
 
 		Assert.isTrue(visitor.equals(dayPass.getVisitor()));
 
+		Assert.notNull(dayPass.getVisitDate());
+
 		if (dayPass.getExhibition() != null) {
 			Assert.isTrue(this.canBuyADayPass(dayPass.getExhibition()));
 
@@ -146,14 +154,14 @@ public class DayPassService {
 			Assert.isTrue(compareStartingDate >= 0);
 			final int compareEndingDate = DateTimeComparator.getDateOnlyInstance().compare(dayPass.getVisitDate(), dayPass.getExhibition().getEndingDate());
 			Assert.isTrue(compareEndingDate <= 0);
-		} else
-			Assert.isTrue(dayPass.getVisitDate().after(new Date()));
+		}
 
 		final LocalDate now = new LocalDate();
-		Assert.notNull(dayPass.getCreditCard());
 
 		final int compareVisitDate = DateTimeComparator.getDateOnlyInstance().compare(dayPass.getVisitDate(), now.toDate());
 		Assert.isTrue(compareVisitDate >= 0);
+
+		Assert.notNull(dayPass.getCreditCard());
 
 		// Assert (year == current && month == current) || year == future || (year == current && month == future)
 		Assert.isTrue((now.getYear() == dayPass.getCreditCard().getYear() && now.getMonthOfYear() == dayPass.getCreditCard().getMonth()) || (now.getYear() < dayPass.getCreditCard().getYear())
@@ -204,6 +212,7 @@ public class DayPassService {
 
 		res.setTicker(tickerMuseum + "-" + visitor.getUserAccount().getUsername() + "-" + formatedNumber);
 		res.setPurchaseMoment(new Date(System.currentTimeMillis() - 1000));
+
 		res.setVisitDate(prunedDayPass.getVisitDate());
 		res.setCreditCard(prunedDayPass.getCreditCard());
 

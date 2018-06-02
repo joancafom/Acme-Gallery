@@ -47,11 +47,6 @@ public class RoomServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-031] Director delete a room.
-	// 
-	// Related requirements:
-	//
-	//   · REQ 23.29: Delete a room, as long as it has no current exhibition and its future
-	//				  exhibitions haven't sold day passes or sponsorships.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA

@@ -44,19 +44,6 @@ public class ProductServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-028] Director create a product.
-	// 
-	// Related requirements:
-	//   · REQ 6: A store is composed of products, which are managed by the director of 
-	//			  the museum. For each product, the system must keep track of a name, a
-	//			  description, a set of pictures, a price and a barcode which must follow
-	//			  the standard EAN13.
-	//
-	//   · REQ 23.23: An actor who is authenticated as an director must be able to
-	//                List the museums that she or he manages
-	//
-	//   · REQ 23.23: An actor who is authenticated as an director must be able to
-	//                Create a product for the gift store of a museum that she or he manages. 
-	//				  Products cannot be edited.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -158,12 +145,6 @@ public class ProductServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-029] Director delete a product.
-	// 
-	// Related requirements:
-	//
-	//   · REQ 23.29: An actor who is authenticated as an director must be able to
-	//                Delete a product for the gift store of a museum that she or he
-	//				  manages.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA

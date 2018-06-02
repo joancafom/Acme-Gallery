@@ -37,15 +37,6 @@ public class CriticServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-009] Administrator register a Critic.
-	// 
-	// Related requirements:
-	//   · REQ 1: The actors of the system are administrators, directors, visitors, sponsors, guides 
-	//			  and critics. For every actor, the system must store a name, the surnames, an email,
-	//            a phone number (which must follow the pattern: optional plus sign and a sequence of 
-	//			  numbers), an optional address and optional gender (which can be male, female, or other).
-	//
-	//   · REQ 22.9: An actor who is authenticated as an administrator must be able to
-	//                Create an account for a new critic
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA

@@ -129,18 +129,6 @@ public class ArtworkServiceTest extends AbstractTest {
 	// -------------------------------------------------------------------------------
 	// [UC-053] Guide create artwork.
 	// 
-	// Related requirements:
-	//   · REQ 11: An exhibition is led by guides. In order to help visitors, each guide
-	//			   can create some artworks. For every artwork the system must store: the
-	//			   title, a photograph, an optional name of the creator, a short remark,
-	//			   an optional year and if it is a highlight of its exhibition or not.
-	//			   Artworks can be saved in draft mode, which allows it and its fellow
-	//			   guides to modify it later. Draft artworks should never be shown to 
-	// 			   visitors and must only be modified by guides of the corresponding museum.
-	//			   Final mode freezes them forever.
-	//
-	//   · REQ 26.4:  Create an artwork for an exhibition she or he works for. Artworks can be saved in
-	//				  draft mode or final mode, which freezes them forever.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -240,18 +228,7 @@ public class ArtworkServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-054] Guide edit artwork.
-	// 
-	// Related requirements:
-	//   · REQ 11: An exhibition is led by guides. In order to help visitors, each guide
-	//			   can create some artworks. For every artwork the system must store: the
-	//			   title, a photograph, an optional name of the creator, a short remark,
-	//			   an optional year and if it is a highlight of its exhibition or not.
-	//			   Artworks can be saved in draft mode, which allows it and its fellow
-	//			   guides to modify it later. Draft artworks should never be shown to 
-	// 			   visitors and must only be modified by guides of the corresponding museum.
-	//			   Final mode freezes them forever.
 	//
-	//   · REQ 26.5: Edit an artwork of an exhibition she or he works for, if it's in draft mode.
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
 	// -------------------------------------------------------------------------------

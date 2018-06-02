@@ -131,11 +131,6 @@ public class AnnouncementServiceTest extends AbstractTest {
 	// -------------------------------------------------------------------------------
 	// [UC-057] Visitor Stream Announcements.
 	// 
-	// Related requirements:
-	//   · REQ 24.13: An actor who is authenticated as a visitor must be able to:
-	//				  List a stream with the announcements of the groups which she or he is a member of
-	//				  (including the ones she or he has created) ordered by date of creation of the
-	//		  		  announcement.
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
 	// -------------------------------------------------------------------------------

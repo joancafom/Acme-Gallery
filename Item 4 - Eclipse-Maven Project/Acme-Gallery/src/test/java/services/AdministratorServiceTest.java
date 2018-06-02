@@ -81,11 +81,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//              * The average, the minimum, the maximum and the standard deviation for the number of museums managed per director.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -169,11 +164,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//              * The average ratio of private vs public exhibitions per museum, having at least one public exhibition.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -259,11 +249,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//              * The top 5 more visited private exhibitions.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -349,12 +334,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The average, the minimum, the maximum and the standard deviation of the
-	//				  price of the private day passes.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -439,12 +418,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The average, the minimum, the maximum and the standard deviation for the
-	//				  number of day passes sold per museum.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -528,12 +501,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The ratio of sponsorships with status 'REJECTED'.
-	//				* The ratio of sponsorships with status 'ACCEPTED'.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -614,12 +581,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The listing of exhibitions that have at least 10% more sponsorships than the
-	//				  average.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -699,11 +660,6 @@ public class AdministratorServiceTest extends AbstractTest {
 	}
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The top 3 guides with less exhibitions.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -785,11 +741,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The average and the standard deviation of the number of critiques per exhibition.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -865,11 +816,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The average and the standard deviation of the number of artworks per exhibition.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -945,12 +891,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The ratio of banned visitors.
-	//				* The ratio of banned sponsors.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -1034,12 +974,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The average and the standard deviation of the number of participants per
-	//				  open group.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -1116,11 +1050,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The ratio of visitors who have ever created a group.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -1194,11 +1123,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The groups whose number of announcements is above 75% the average number of announcements per group.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -1279,11 +1203,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The average and the standard deviation of replies per comment.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -1359,11 +1278,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-	//				* The ratio of museums with a gift store.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -1437,12 +1351,6 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-001] Administrator displays the dashboard.
-	// 
-	// Related requirements:
-	//   · REQ 22.29: An actor who is authenticated as an administrator must be able to
-	//              display a dashboard with the following information:
-
-	//				* The 3 museums with more high-severity incidents.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA

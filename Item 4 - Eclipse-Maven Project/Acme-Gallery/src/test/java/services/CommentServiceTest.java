@@ -45,14 +45,6 @@ public class CommentServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-008] Administrator delete comments.
-	// 
-	// Related requirements:
-	//   · REQ 22.18: An actor who is authenticated as an administrator must be able to
-	//                List the taboo comments. A comment is taboo if it contains taboo words in its title
-	//				  or description.:
-
-	//   · REQ 22.19: An actor who is authenticated as an administrator must be able to
-	//                Remove any comment that she or he considers inappropriate
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA

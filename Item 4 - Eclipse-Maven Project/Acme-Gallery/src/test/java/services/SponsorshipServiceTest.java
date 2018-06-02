@@ -51,25 +51,6 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-039] Sponsorship create a sponsorship.
-	// 
-	// Related requirements:
-	//   · REQ 13: Sponsors can request to sponsor an exhibition. These requests can be 
-	//			   either ACCEPTED, PENDING, TIME_NEGOCIATION, REJECTED or EXPIRED. When 
-	//			   a request is made by a sponsor, its initial status is 'PENDING'; later, 
-	//			   the corresponding director can change it to 'TIME_NEGOCIATION', sending
-	//			   the period in which the sponsorship will be active for that exhibition, 
-	//			   or 'REJECTED'. The sponsor must now change the status to 'ACCEPTED' by 
-	//			   entering a CreditCard or change it to 'REJECTED'. In case the sponsor does
-	//			   not change the status before the sponsorship starting date, the request 
-	//			   is flagged as EXPIRED.
-	//
-	//   · REQ 14: A sponsorship consists of an image that will appear whenever an exhibition 
-	//			   is displayed, starting and ending dates of the campaign. The image must be 
-	//			   linked to an external web page.
-	//
-	//   · REQ 25.1: Request to sponsor an exhibition that has not started yet
-	//
-	//   · REQ 25.2: List all her or his sponsorships ordered by status
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA

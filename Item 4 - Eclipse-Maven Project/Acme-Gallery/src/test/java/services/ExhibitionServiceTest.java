@@ -143,26 +143,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-020] Director creates an Exhibition.
-	// 
-	// Related requirements:
-	//   · REQ 8: Directors organize exhibitions. For every exhibition, the system must store 
-	//			  a ticker (which must follow the pattern: uuuu-XXXX where "uuuu" is the username
-	//			  of the actor creating the exhibition and "XXXX" is a string chosen by the
-	//			  director. Both have a variable size), a title, the room where is going to take 
-	//			  place, a description, a starting date, an ending date and a collection of links 
-	//			  to external webpages that provide further information about the author.
-	//
-	//   · REQ 9: Exhibitions can be either public or private. A day pass must be purchased in order 
-	//			  to access private exhibitions whereas public ones can be visited by all the visitors
-	//			  of a museum
-	//
-	//   · REQ 10: An exhibition belongs to a category. For each category, the system must store a name,
-	//			   which must be unique within the context of the same parent category; that is, several
-	//			   categories may have the same name as long as they do not have the same parent. Categories
-	//			   are organized into a tree whose root is a fictitious category called "CATEGORY".
-	//
-	//   · REQ 23.4: Create an exhibition for her museums. An exhibition can take place in a room as long 
-	//				 as there is no exhibition taking place there in the selected dates
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -379,27 +359,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-021] Director edit an exhibition. *EXTENDED*
-	// 
-	// Related requirements:
-	//   · REQ 8: Directors organize exhibitions. For every exhibition, the system must store 
-	//			  a ticker (which must follow the pattern: uuuu-XXXX where "uuuu" is the username
-	//			  of the actor creating the exhibition and "XXXX" is a string chosen by the
-	//			  director. Both have a variable size), a title, the room where is going to take 
-	//			  place, a description, a starting date, an ending date and a collection of links 
-	//			  to external webpages that provide further information about the author.
-	//
-	//   · REQ 9: Exhibitions can be either public or private. A day pass must be purchased in order 
-	//			  to access private exhibitions whereas public ones can be visited by all the visitors
-	//			  of a museum
-	//
-	//   · REQ 10: An exhibition belongs to a category. For each category, the system must store a name,
-	//			   which must be unique within the context of the same parent category; that is, several
-	//			   categories may have the same name as long as they do not have the same parent. Categories
-	//			   are organized into a tree whose root is a fictitious category called "CATEGORY".
-	//
-	//   · REQ 23.5: Edit the details of an exhibition she has created as long as it hasn't started. In case 
-	//				 it is a private exhibition that has already sold day passes, she is only able to 
-	//				 edit: title, description, websites and category. The ticker can never be edited.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA
@@ -615,15 +574,6 @@ public class ExhibitionServiceTest extends AbstractTest {
 
 	// -------------------------------------------------------------------------------
 	// [UC-023] Director delete exhibition.
-	// 
-	// Related requirements:
-	//   · REQ ?: An actor who is authenticated as a director must be able to
-	//            List the exhibitions that she or he manages.
-
-	//   · REQ 23.6: An actor who is authenticated as a director must be able to
-	//               Delete any exhibition she or he has created, as long as it 
-	//				 hasn't started, and nobody has bought a day pass yet (in
-	//				 case it is a private exhibition) or requested a sponsorship.
 	//
 	// -------------------------------------------------------------------------------
 	// v1.0 - Implemented by JA

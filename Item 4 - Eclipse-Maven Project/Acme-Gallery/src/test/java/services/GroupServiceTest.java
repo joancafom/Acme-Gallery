@@ -2,11 +2,13 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Group;
+import domain.Museum;
 import domain.Visitor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,6 +36,9 @@ public class GroupServiceTest extends AbstractTest {
 
 	@PersistenceContext
 	private EntityManager	entityManager;
+
+	@Autowired
+	private MuseumService	museumService;
 
 	@Autowired
 	private VisitorService	visitorService;
@@ -361,6 +367,124 @@ public class GroupServiceTest extends AbstractTest {
 			final Collection<Group> newGroups = this.groupService.getJoinedByVisitor(visitor);
 			Assert.isTrue(oldGroups.contains(group));
 			Assert.isTrue(!newGroups.contains(group));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.unauthenticate();
+		super.checkExceptions(expected, caught);
+
+	}
+
+	// [UC-058] Visitor create a Group --------------------
+	// v1.0 - Alicia
+
+	@Test
+	public void driverCreateAnnouncement() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> name of the Group.
+		// testingData[i][2] -> description of the Group.
+		// testingData[i][3] -> creationMoment of the Group.
+		// testingData[i][4] -> maxParticipants of the Group.
+		// testingData[i][5] -> meetingDate of the Group.
+		// testingData[i][6] -> isClosed of the Group.
+		// testingData[i][7] -> containsTaboo of the Group.
+		// testingData[i][8] -> creator of the Group.
+		// testingData[i][9] -> museum of the Group.
+		// testingData[i][10] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// 1 - (+) A Visitor correctly creates a new Group.
+				"visitor1", "testName", "testDescription", null, 10, new LocalDate().plusMonths(4).toDate(), true, null, null, "museum1", null
+			}, {
+				// 2 - (+) A Visitor creates a Group trying to edit containsTaboo and creationMoment
+				"visitor1", "testName", "sexDescription", new LocalDate().plusMonths(2).toDate(), 10, new LocalDate().plusMonths(4).toDate(), false, false, null, "museum1", null
+			}, {
+				// 3 - (-) A Visitor creates a Group saying she is not the creator.
+				"visitor1", "testName", "testDescription", null, 10, new LocalDate().plusMonths(4).toDate(), true, null, "visitor2", "museum1", IllegalArgumentException.class
+			}, {
+				// 4 - (-) A Visitor creates Group for a null museum.
+				"visitor1", "testName", "testDescription", null, 10, new LocalDate().plusMonths(4).toDate(), true, null, null, null, IllegalArgumentException.class
+			}, {
+				// 5 - (-) A Director creates an Group.
+				"director1", "testName", "testDescription", null, 10, new LocalDate().plusMonths(4).toDate(), true, null, null, "museum1", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			Visitor creator = null;
+
+			if (testingData[i][8] != null)
+				creator = this.visitorService.findOne(super.getEntityId((String) testingData[i][8]));
+
+			Museum museum = null;
+
+			if (testingData[i][9] != null)
+				museum = this.museumService.findOne(super.getEntityId((String) testingData[i][9]));
+
+			this.startTransaction();
+
+			this.templateCreateGroup((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Date) testingData[i][3], (Integer) testingData[i][4], (Date) testingData[i][5], (Boolean) testingData[i][6],
+				(Boolean) testingData[i][7], creator, museum, (Class<?>) testingData[i][10]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+	protected void templateCreateGroup(final String username, final String name, final String description, final Date creationMoment, final Integer maxParticipants, final Date meetingDate, final Boolean isClosed, final Boolean containsTaboo,
+		final Visitor creator, final Museum museum, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		super.authenticate(username);
+
+		try {
+
+			// 2. Create a Group
+
+			final Visitor visitor = this.visitorService.findOne(super.getEntityId(username));
+			final Collection<Group> oldGroups = this.groupService.getCreatedByVisitor(visitor);
+
+			final Group createdGroup = this.groupService.create();
+
+			if (creationMoment != null)
+				createdGroup.setCreationMoment(creationMoment);
+
+			if (containsTaboo != null)
+				createdGroup.setContainsTaboo(containsTaboo);
+
+			if (creator != null)
+				createdGroup.setCreator(creator);
+
+			createdGroup.setName(name);
+			createdGroup.setDescription(description);
+			createdGroup.setMaxParticipants(maxParticipants);
+			createdGroup.setMeetingDate(meetingDate);
+			createdGroup.setIsClosed(isClosed);
+			createdGroup.setMuseum(museum);
+
+			final Group savedGroup = this.groupService.saveCreate(createdGroup);
+
+			// Flush
+			this.groupService.flush();
+
+			// 3. Check it has been correctly created
+
+			if (containsTaboo != null)
+				Assert.isTrue(savedGroup.isContainsTaboo() != containsTaboo);
+
+			if (creationMoment != null)
+				Assert.isTrue(!savedGroup.getCreationMoment().equals(creationMoment));
+
+			final Collection<Group> newGroups = this.groupService.getCreatedByVisitor(visitor);
+			Assert.isTrue(!oldGroups.contains(savedGroup));
+			Assert.isTrue(newGroups.contains(savedGroup));
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

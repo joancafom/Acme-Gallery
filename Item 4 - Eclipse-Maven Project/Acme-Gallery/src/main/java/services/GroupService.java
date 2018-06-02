@@ -108,22 +108,31 @@ public class GroupService {
 	}
 
 	/* v1.0 - josembell */
+	// v2.0 - Alicia
 	public Group saveCreate(final Group group) {
 		Assert.notNull(group);
+
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+
+		Assert.notNull(group.getCreator());
 		Assert.isTrue(group.getCreator().equals(visitor));
 
 		/* Make sure that the meeting date is in the future */
 		final Date now = new Date();
+		Assert.notNull(group.getMeetingDate());
 		Assert.isTrue(group.getMeetingDate().after(now));
 
 		/* Set the creation date */
 		group.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
 
 		/* Add the creator to the collection of participants */
+		Assert.notNull(group.getParticipants());
 		group.getParticipants().add(visitor);
 
 		/* Check if it contains a taboo word */
+		Assert.notNull(group.getName());
+		Assert.notNull(group.getDescription());
 		final Boolean result = this.sysConfigService.containsTaboo(group.getName() + " " + group.getDescription());
 		group.setContainsTaboo(result);
 
@@ -131,6 +140,8 @@ public class GroupService {
 
 		visitor.getCreatedGroups().add(saved);
 		visitor.getJoinedGroups().add(saved);
+
+		Assert.notNull(saved.getMuseum());
 		saved.getMuseum().getGroups().add(saved);
 
 		this.visitorService.save(visitor);

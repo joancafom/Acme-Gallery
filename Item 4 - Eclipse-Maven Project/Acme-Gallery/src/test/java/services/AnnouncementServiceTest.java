@@ -2,11 +2,13 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -225,6 +227,112 @@ public class AnnouncementServiceTest extends AbstractTest {
 
 		this.unauthenticate();
 		this.checkExceptions(expected, caught);
+
+	}
+
+	// [UC-056] Visitor create Announcement --------------------
+	// v1.0 - Alicia
+
+	@Test
+	public void driverCreateAnnouncement() {
+
+		// testingData[i][0] -> username of the logged actor.
+		// testingData[i][1] -> title of the Announcement.
+		// testingData[i][2] -> description of the Announcement.
+		// testingData[i][3] -> picture of the Announcement.
+		// testingData[i][4] -> containsTaboo of the Announcement.
+		// testingData[i][5] -> creationMoment of the Announcement.
+		// testingData[i][6] -> group of the Announcement.
+		// testingData[i][7] -> thrown exception.
+
+		final Object testingData[][] = {
+			{
+				// 1 - (+) A Visitor correctly creates a new Announcement.
+				"visitor1", "testTitle", "testDescription", "http://www.google.es", null, null, "group1", null
+			}, {
+				// 2 - (-) A Visitor creates an Announcement for another's visitor group.
+				"visitor2", "testTitle", "testDescription", null, null, null, "group1", IllegalArgumentException.class
+			}, {
+				// 3 - (+) A Visitor creates an Announcement trying to edit containsTaboo and creationMoment
+				"visitor1", "testTitle", "sexDescription", null, false, "future", "group1", null
+			}, {
+				// 4 - (-) A Visitor creates an Announcement for a null group.
+				"visitor1", "testTitle", "testDescription", "http://www.google.es", null, null, null, IllegalArgumentException.class
+			}, {
+				// 5 - (-) A Director creates an Announcement.
+				"director1", "testTitle", "testDescription", "http://www.google.es", null, null, "group1", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			Group group = null;
+
+			if (testingData[i][6] != null)
+				group = this.groupService.findOne(super.getEntityId((String) testingData[i][6]));
+
+			Date creationMoment = null;
+
+			if (testingData[i][5] != null)
+				creationMoment = new LocalDate().plusDays(5).toDate();
+
+			this.startTransaction();
+
+			this.templateCreateAnnouncement((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Boolean) testingData[i][4], creationMoment, group, (Class<?>) testingData[i][7]);
+
+			this.rollbackTransaction();
+			this.entityManager.clear();
+
+		}
+
+	}
+	protected void templateCreateAnnouncement(final String username, final String title, final String description, final String picture, final Boolean containsTaboo, final Date creationMoment, final Group group, final Class<?> expected) {
+		Class<?> caught = null;
+
+		// 1. Log in to the system
+		super.authenticate(username);
+
+		try {
+
+			// 2. Create an Announcement
+
+			final Collection<Announcement> oldAnnouncements = this.announcementService.getByGroup(group);
+
+			final Announcement createdAnnouncement = this.announcementService.create(group);
+
+			if (containsTaboo != null)
+				createdAnnouncement.setContainsTaboo(containsTaboo);
+
+			if (creationMoment != null)
+				createdAnnouncement.setCreationMoment(creationMoment);
+
+			createdAnnouncement.setTitle(title);
+			createdAnnouncement.setDescription(description);
+			createdAnnouncement.setPicture(picture);
+
+			final Announcement savedAnnouncement = this.announcementService.saveCreate(createdAnnouncement);
+
+			// Flush
+			this.announcementService.flush();
+
+			// 3. Check it has been correctly created
+
+			if (containsTaboo != null)
+				Assert.isTrue(savedAnnouncement.isContainsTaboo() != containsTaboo);
+
+			if (creationMoment != null)
+				Assert.isTrue(!savedAnnouncement.getCreationMoment().equals(creationMoment));
+
+			final Collection<Announcement> newAnnouncements = this.announcementService.getByGroup(group);
+			Assert.isTrue(!oldAnnouncements.contains(savedAnnouncement));
+			Assert.isTrue(newAnnouncements.contains(savedAnnouncement));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.unauthenticate();
+		super.checkExceptions(expected, caught);
 
 	}
 }

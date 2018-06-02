@@ -57,8 +57,13 @@ public class AnnouncementService {
 	// CRUD Methods -----------------------------------------------------------------------------------
 
 	/* v1.0 - josembell */
+	// v2.0 - Alicia
 	public Announcement create(final Group group) {
 		Assert.notNull(group);
+
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		Assert.isTrue(group.getCreator().equals(visitor));
 
 		final Announcement announcement = new Announcement();
 		announcement.setGroup(group);
@@ -262,6 +267,13 @@ public class AnnouncementService {
 		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(visitor);
 		return this.announcementRepository.getStreamByPrincipal(visitor.getId(), new PageRequest(page - 1, size));
+	}
+
+	// v1.0 - Alicia
+	public Collection<Announcement> getByGroup(final Group group) {
+		Assert.notNull(group);
+
+		return this.announcementRepository.findByGroupId(group.getId());
 	}
 
 }

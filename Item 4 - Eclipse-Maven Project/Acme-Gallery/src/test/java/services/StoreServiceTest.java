@@ -136,7 +136,7 @@ public class StoreServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				// 1 - (+) A Director correctly deletes a Store
-				"director1", "store3", null
+				"director1", "store5", null
 			}, {
 				// 2 - (-) A Director deletes a Store she doesn't own
 				"director1", "store7", IllegalArgumentException.class
@@ -154,6 +154,7 @@ public class StoreServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++) {
 
+			System.err.println(i + 1);
 			Store store = null;
 
 			if (testingData[i][1] != null && i != 3)

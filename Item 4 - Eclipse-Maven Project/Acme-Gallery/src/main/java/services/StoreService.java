@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.Collection;
 import java.util.HashSet;
 
 import javax.transaction.Transactional;
@@ -38,9 +37,6 @@ public class StoreService {
 
 	@Autowired
 	private MuseumService	museumService;
-
-	@Autowired
-	private ProductService	productService;
 
 
 	// CRUD Methods -----------------------------------------------------------------------------------
@@ -93,18 +89,19 @@ public class StoreService {
 	/* v1.0 - josembell */
 	public void delete(final Store store) {
 		Assert.notNull(store);
+		Assert.isTrue(this.storeRepository.exists(store.getId()));
+
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
 		Assert.isTrue(store.getMuseum().getDirector().equals(director));
 
-		final Collection<Product> products = new HashSet<Product>(store.getProducts());
-		for (final Product p : products) {
-			this.productService.delete(p);
-			this.productService.flush();
-		}
+		//Orphan removal takes care of removing the products
 
-		store.getMuseum().setStore(null);
-		this.museumService.save(store.getMuseum());
+		final Museum museum = this.museumService.findOne(store.getMuseum().getId());
+		Assert.notNull(museum);
+
+		museum.setStore(null);
+		this.museumService.save(museum);
 		this.museumService.flush();
 
 		this.storeRepository.delete(store);

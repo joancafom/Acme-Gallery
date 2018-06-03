@@ -240,6 +240,11 @@ public class AnnouncementService {
 	public Announcement reconstruct(final Announcement prunedAnnouncement, final BindingResult binding) {
 
 		Assert.notNull(prunedAnnouncement);
+		Assert.notNull(prunedAnnouncement.getGroup());
+
+		final Visitor visitor = this.visitorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(visitor);
+		Assert.isTrue((visitor.equals(prunedAnnouncement.getGroup().getCreator())));
 
 		Announcement announcement = new Announcement();
 

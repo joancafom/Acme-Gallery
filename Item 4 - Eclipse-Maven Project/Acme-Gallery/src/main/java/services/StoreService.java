@@ -73,6 +73,7 @@ public class StoreService {
 		Assert.notNull(store);
 		final Director director = this.directorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.notNull(director);
+		Assert.notNull(store.getMuseum());
 		Assert.isTrue(store.getMuseum().getDirector().equals(director));
 
 		if (store.getId() != 0) {
@@ -144,6 +145,7 @@ public class StoreService {
 			store = prunedStore;
 
 			store.setProducts(retrievedStore.getProducts());
+			store.setMuseum(retrievedStore.getMuseum());
 		}
 
 		this.validator.validate(store, binding);

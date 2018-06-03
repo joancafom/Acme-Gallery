@@ -162,6 +162,7 @@ public class ArtworkService {
 	/* v1.0 - josembell */
 	public Artwork reconstruct(final Artwork prunedArtwork, final BindingResult binding) {
 		Assert.notNull(prunedArtwork);
+		Assert.notNull(prunedArtwork.getExhibition());
 
 		final Artwork artwork;
 

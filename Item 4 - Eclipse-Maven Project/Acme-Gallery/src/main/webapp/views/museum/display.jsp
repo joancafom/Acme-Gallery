@@ -21,6 +21,11 @@
 
 <link rel="stylesheet" href="styles/museum.css" type="text/css">
 
+<script>
+	document.title="${museum.name}";
+</script>
+
+
 <div id="mHeader" class="title">
 	<jstl:if test="${museum.banner ne null}">
 		<img src="${museum.banner}" alt="${museum.name}"/>

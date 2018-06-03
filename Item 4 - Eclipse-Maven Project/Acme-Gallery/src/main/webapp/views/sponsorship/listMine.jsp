@@ -88,7 +88,7 @@
 			<jstl:set var="backColor" value="#f45642"/>
 		</jstl:when>
 		<jstl:when test="${(sponsorship.status eq 'TIME_NEGOTIATION') and (sponsorship.creditCard.number eq null) and (sponsorship.startingDate ne null) and (sponsorship.startingDate < currentDate)}">
-			<spring:message code="sponsorship.status.expired"/>
+			<spring:message var="sponsorshipStatus" code="sponsorship.status.expired"/>
 			<jstl:set var="backColor" value="#d9baff"/>
 		</jstl:when>
 		<jstl:otherwise>

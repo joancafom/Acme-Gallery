@@ -295,7 +295,7 @@ public class SponsorshipService {
 		//Make sure it is not a made-up sponsorship
 		final Sponsorship oldSponsorship = this.findOne(prunedSponsorship.getId());
 		Assert.notNull(oldSponsorship);
-		Assert.isTrue(this.isExpired(oldSponsorship));
+		Assert.isTrue(!this.isExpired(oldSponsorship));
 
 		//Create a brand-new reconstructed Sponsorship using the pruned and the old one as basis
 		final Sponsorship res = this.create(oldSponsorship.getSponsor());

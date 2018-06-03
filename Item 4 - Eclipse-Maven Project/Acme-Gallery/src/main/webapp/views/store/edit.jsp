@@ -20,7 +20,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <jstl:if test="${toCreateEdit==true}">
-	<form:form action="store/director/edit.do?museumId=${museum.id}" modelAttribute="store">
+	<form:form action="store/director/edit.do" modelAttribute="store">
 		<br>
 		<form:hidden path="id"/>
 		<form:hidden path="version"/>
@@ -35,6 +35,7 @@
 		
 		<acme:submit name="save" code="store.save"/>
 		<jstl:if test="${store.id==0}">
+			<form:hidden path="museum"/>
 			<acme:cancel url="museum/director/display.do?museumId=${museum.id}" code="store.cancel"/>
 		</jstl:if>
 		<jstl:if test="${store.id!=0}">

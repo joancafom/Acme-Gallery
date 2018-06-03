@@ -297,6 +297,11 @@ public class SponsorshipService {
 		Assert.notNull(oldSponsorship);
 		Assert.isTrue(!this.isExpired(oldSponsorship));
 
+		//Ensure the performer is the director of the exhibition the sponsorship references to.
+		final Director currentDirector = this.directorService.findByUserAccount(LoginService.getPrincipal());
+		Assert.notNull(currentDirector);
+		Assert.isTrue(currentDirector.equals(oldSponsorship.getExhibition().getRoom().getMuseum().getDirector()));
+
 		//Create a brand-new reconstructed Sponsorship using the pruned and the old one as basis
 		final Sponsorship res = this.create(oldSponsorship.getSponsor());
 

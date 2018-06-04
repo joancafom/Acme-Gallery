@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * converters.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd		
+	">
+
+	<util:list id="converters">
+		<!-- 
+			Add your own converters using entries of the following form: 
+			<bean class="converters.Class1ToClass2" /> 
+		-->
+		
+		<bean class="converters.ActorToStringConverter"/>
+		<bean class="converters.StringToActorConverter"/>
+		
+		<bean class="converters.AdministratorToStringConverter"/>
+		<bean class="converters.StringToAdministratorConverter"/>
+		
+		<bean class="converters.AnnouncementToStringConverter"/>
+		<bean class="converters.StringToAnnouncementConverter"/>
+		
+		<bean class="converters.CategoryToStringConverter"/>
+		<bean class="converters.StringToCategoryConverter"/>
+		
+		<bean class="converters.CommentToStringConverter"/>
+		<bean class="converters.StringToCommentConverter"/>
+		
+		<bean class="converters.CreditCardToStringConverter"/>
+		<bean class="converters.StringToCreditCardConverter"/>
+		
+		<bean class="converters.CritiqueToStringConverter"/>
+		<bean class="converters.StringToCritiqueConverter"/>
+		
+		<bean class="converters.DayPassToStringConverter"/>
+		<bean class="converters.StringToDayPassConverter"/>
+		
+		<bean class="converters.DirectorToStringConverter"/>
+		<bean class="converters.StringToDirectorConverter"/>
+		
+		<bean class="converters.ExhibitionToStringConverter"/>
+		<bean class="converters.StringToExhibitionConverter"/>
+		
+		<bean class="converters.GPSCoordinatesToStringConverter"/>
+		<bean class="converters.StringToGPSCoordinatesConverter"/>
+		
+		<bean class="converters.GroupToStringConverter"/>
+		<bean class="converters.StringToGroupConverter"/>
+		
+		<bean class="converters.GuideToStringConverter"/>
+		<bean class="converters.StringToGuideConverter"/>
+		
+		<bean class="converters.ArtworkToStringConverter"/>
+		<bean class="converters.StringToArtworkConverter"/>
+		
+		<bean class="converters.IncidentToStringConverter"/>
+		<bean class="converters.StringToIncidentConverter"/>
+		
+		<bean class="converters.InvitationToStringConverter"/>
+		<bean class="converters.StringToInvitationConverter"/>
+		
+		<bean class="converters.MuseumToStringConverter"/>
+		<bean class="converters.StringToMuseumConverter"/>
+		
+		<bean class="converters.ProductToStringConverter"/>
+		<bean class="converters.StringToProductConverter"/>
+		
+		<bean class="converters.ReviewToStringConverter"/>
+		<bean class="converters.StringToReviewConverter"/>
+		
+		<bean class="converters.CriticToStringConverter"/>
+		<bean class="converters.StringToCriticConverter"/>
+		
+		<bean class="converters.RoomToStringConverter"/>
+		<bean class="converters.StringToRoomConverter"/>
+		
+		<bean class="converters.SponsorToStringConverter"/>
+		<bean class="converters.StringToSponsorConverter"/>
+		
+		<bean class="converters.SponsorshipToStringConverter"/>
+		<bean class="converters.StringToSponsorshipConverter"/>
+		
+		<bean class="converters.StoreToStringConverter"/>
+		<bean class="converters.StringToStoreConverter"/>
+		
+		<bean class="converters.SystemConfigurationToStringConverter"/>
+		<bean class="converters.StringToSystemConfigurationConverter"/>
+		
+		<bean class="converters.VisitorToStringConverter"/>
+		<bean class="converters.StringToVisitorConverter"/>
+		
+	</util:list>
+	
+</beans>

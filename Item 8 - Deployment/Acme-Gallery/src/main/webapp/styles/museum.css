@@ -1,0 +1,64 @@
+/* museum.css
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ * 
+ * Implemented by JA
+ *
+ */
+
+.advert{
+	text-align: center;
+}
+
+.advert img{
+	max-height:150px;
+}
+
+.title {
+	color: black;
+	font-weight: bolder;
+	text-align: center;
+}
+
+.title img{
+	max-width: 250px;
+	width: 50%;
+}
+
+.info{
+	padding: 70px;
+}
+
+th {
+	text-align: center;
+}
+
+td{
+	text-align: center;
+}
+
+.moreInfo{
+	text-align: justify;
+}
+
+.messageOk{
+	color: #1ebf59;
+}
+
+.container{
+	clear: both;
+}
+
+#left{
+	float:left;
+	max-width: 50%;
+}
+
+#right{
+	float:right;
+	max-width: 50%;
+}

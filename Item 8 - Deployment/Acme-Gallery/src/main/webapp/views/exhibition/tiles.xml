@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="exhibition/addGuide" extends="master.page">	
+		<put-attribute name="title" value="Add a Guide" />
+		<put-attribute name="body" value="/views/exhibition/addGuide.jsp" />
+	</definition>
+
+	<definition name="exhibition/display" extends="master.page">	
+		<put-attribute name="title" value="Exhibition" />
+		<put-attribute name="body" value="/views/exhibition/display.jsp" />
+	</definition>
+
+	<definition name="exhibition/search" extends="master.page">	
+		<put-attribute name="title" value="Search for Exhibitions" />
+		<put-attribute name="body" value="/views/exhibition/search.jsp" />
+	</definition>
+	
+	<definition name="exhibition/listMine" extends="master.page">	
+		<put-attribute name="title" value="My exhibitions" />
+		<put-attribute name="body" value="/views/exhibition/listMine.jsp" />
+	</definition>
+	
+	<definition name="exhibition/listResults" extends="master.page">	
+		<put-attribute name="title" value="Search results" />
+		<put-attribute name="body" value="/views/exhibition/listResults.jsp" />
+	</definition>
+	
+	<definition name="exhibition/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit an exhibition" />
+		<put-attribute name="body" value="/views/exhibition/edit.jsp" />
+	</definition>
+	
+	<definition name="exhibition/editDetails" extends="master.page">	
+		<put-attribute name="title" value="Edit an exhibition" />
+		<put-attribute name="body" value="/views/exhibition/editDetails.jsp" />
+	</definition>
+		
+</tiles-definitions>

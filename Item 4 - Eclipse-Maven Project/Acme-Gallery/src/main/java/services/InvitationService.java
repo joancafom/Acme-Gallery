@@ -154,10 +154,14 @@ public class InvitationService {
 		Assert.isTrue(groupToJoin.getCreator().equals(invitation.getHost()));
 		Assert.isTrue(!currentVisitor.getJoinedGroups().contains(groupToJoin));
 
+		if (isAccepted && groupToJoin.getParticipants().size() >= groupToJoin.getMaxParticipants())
+			throw new RuntimeException("You cannot overpass the max number of participants!");
+
 		invitation.setIsAccepted(isAccepted);
 		this.save(invitation);
 
 		if (isAccepted) {
+
 			groupToJoin.getParticipants().add(currentVisitor);
 			this.groupService.save(groupToJoin);
 

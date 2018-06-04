@@ -412,7 +412,7 @@ public class ExhibitionServiceTest extends AbstractTest {
 				IllegalArgumentException.class
 			},
 			{
-				// - 9) A director tries to edit a public exhi8bition that has not started yet with wrong dates (ending before starting)
+				// - 9) A director tries to edit a public exhibition that has not started yet with wrong dates (ending before starting)
 				"director1", "test1", "Test Title", "Test Description", this.formatDate("20-08-2018 19:00"), this.formatDate("18-08-2018 21:00"), "http://www.apple.com, http://www.google.es", true, 12.0, "category1", "room3", false, false, "exhibition4",
 				IllegalArgumentException.class
 			},

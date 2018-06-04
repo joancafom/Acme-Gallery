@@ -124,7 +124,7 @@
 				<p><strong><jstl:out value="${comment.visitor.name}"/> <jstl:out value="${comment.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${comment.title}"/></p>
 				<p><jstl:out value="${comment.description}"/></p><br>
 				<jstl:if test="${comment.picture!=null or comment.picture!=''}">
-					<img src="${comment.picture}" style="text-align:center;"/>
+					<img src="${comment.picture}" style="text-align:center; max-width:200px;"/>
 				</jstl:if>
 				<jstl:if test="${fn:length(comment.childrenComments)!=0}">
 					<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${comment.id}#comments"><spring:message code="group.comment.replies"/></a>
@@ -159,7 +159,7 @@
 				<p><strong><jstl:out value="${reply.visitor.name}"/> <jstl:out value="${reply.visitor.surnames}"/></strong> <spring:message code="comment.said"/>: <jstl:out value="${reply.title}"/></p>
 				<p><jstl:out value="${reply.description}"/></p><br>
 				<jstl:if test="${reply.picture!=null or reply.picture!=''}">
-					<img src="${reply.picture}" style="text-align:center;"/>
+					<img src="${reply.picture}" style="text-align:center; max-width:200px;"/>
 				</jstl:if>
 				<jstl:if test="${fn:length(reply.childrenComments)!=0}">
 					<a href="group/${actorWS}display.do?groupId=${group.id}&commentId=${reply.id}#comments"><spring:message code="group.comment.replies"/></a>
@@ -174,7 +174,7 @@
 			<security:authorize access="hasRole('VISITOR')">
 				<display:column>
 					<jstl:if test="${isMember or own}">
-						<a href="comment/visitor/create.do?commentId=${comment.id}"><spring:message code="comment.reply"/></a>
+						<a href="comment/visitor/create.do?commentId=${reply.id}"><spring:message code="comment.reply"/></a>
 					</jstl:if>
 				</display:column>
 			</security:authorize>

@@ -36,8 +36,11 @@
 	<jstl:if test="${not empty museums}">
 	
 		<acme:textbox code="room.name" path="name"/><br/>
-		<acme:textbox code="room.area" path="area"/><br/>
-	
+		<form:label path="area">
+			<strong><spring:message code="room.area" />:</strong>
+		</form:label>	
+		<form:input path="area"/>  m<sup>2</sup>	
+		<form:errors path="area" cssClass="error" />
 		<br/>
 	
 		<strong><form:label path="museum"><spring:message code="room.museum"/>: </form:label></strong>

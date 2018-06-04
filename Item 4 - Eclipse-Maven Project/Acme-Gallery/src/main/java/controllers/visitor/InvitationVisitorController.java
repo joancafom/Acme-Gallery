@@ -64,6 +64,9 @@ public class InvitationVisitorController extends AbstractController {
 		try {
 			this.invitationService.process(invitation, true);
 			res = new ModelAndView("redirect:/group/visitor/display.do?groupId=" + invitation.getGroup().getId());
+		} catch (final RuntimeException oops) {
+			res = new ModelAndView("redirect:display.do?invitationId=" + invitationId);
+			redirectAttributes.addFlashAttribute("message", "invitation.max.error");
 		} catch (final Throwable oops) {
 			res = new ModelAndView("redirect:display.do?invitationId=" + invitationId);
 			redirectAttributes.addFlashAttribute("message", "invitation.commit.error");

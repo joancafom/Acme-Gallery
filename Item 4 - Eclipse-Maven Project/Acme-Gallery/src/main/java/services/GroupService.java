@@ -100,6 +100,10 @@ public class GroupService {
 		//Beware to change this method! AnnouncementService.delete uses it!
 		//Beware to change this method! SystemConfigurationService.updateTaboo uses it!
 
+		Assert.notNull(group.getParticipants());
+		Assert.notNull(group.getMaxParticipants());
+		Assert.isTrue(group.getParticipants().size() <= group.getMaxParticipants());
+
 		//Check for taboo
 		final Boolean veredict = this.sysConfigService.containsTaboo(group.getName() + " " + group.getDescription());
 		group.setContainsTaboo(veredict);

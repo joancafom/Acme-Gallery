@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-	@Index(columnList = "isChecked")
+	@Index(columnList = "isChecked, level")
 })
 public class Incident extends DomainEntity {
 

@@ -32,7 +32,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-	@Index(columnList = "ticker, title, description, endingDate, startingDate")
+	@Index(columnList = "ticker, title, description, endingDate, startingDate, isPrivate")
 })
 public class Exhibition extends DomainEntity {
 

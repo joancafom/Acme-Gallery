@@ -10,9 +10,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -29,6 +31,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+	@Index(columnList = "ticker, title, description, endingDate, startingDate, isPrivate")
+})
 public class Exhibition extends DomainEntity {
 
 	private String				ticker;
@@ -56,7 +61,7 @@ public class Exhibition extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	@Column(columnDefinition = "TEXT")
+	@Column(columnDefinition = "VARCHAR(1000)")
 	public String getDescription() {
 		return this.description;
 	}

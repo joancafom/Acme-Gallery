@@ -87,6 +87,7 @@ CREATE TABLE `aggroup` (
   `creator_id` int(11) NOT NULL,
   `museum_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_pjan25oj0652kxui9r9hibggu` (`isClosed`,`containsTaboo`),
   KEY `FK_rvpl7qf0g2vbl7l69ge3ci6va` (`creator_id`),
   KEY `FK_qqjicja707am14qkb22qa0jwr` (`museum_id`),
   CONSTRAINT `FK_qqjicja707am14qkb22qa0jwr` FOREIGN KEY (`museum_id`) REFERENCES `museum` (`id`),
@@ -121,6 +122,7 @@ CREATE TABLE `announcement` (
   `title` varchar(255) DEFAULT NULL,
   `group_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_6tc3hm82q4jhkf9luyvm5bfbv` (`containsTaboo`,`creationMoment`),
   KEY `FK_p9u35snbda1unqd9dqojt9ojy` (`group_id`),
   CONSTRAINT `FK_p9u35snbda1unqd9dqojt9ojy` FOREIGN KEY (`group_id`) REFERENCES `aggroup` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -155,6 +157,7 @@ CREATE TABLE `artwork` (
   `year` int(11) DEFAULT NULL,
   `exhibition_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_f41tfmt2dxpvk5n8gx2tntmn9` (`isHighlight`,`isFinal`),
   KEY `FK_ilkg9n1afaald54n8fefs1xeq` (`exhibition_id`),
   CONSTRAINT `FK_ilkg9n1afaald54n8fefs1xeq` FOREIGN KEY (`exhibition_id`) REFERENCES `exhibition` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -183,6 +186,7 @@ CREATE TABLE `category` (
   `name` varchar(255) DEFAULT NULL,
   `parentCategory_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_foei036ov74bv692o5lh5oi66` (`name`),
   KEY `FK_3v34vcvwua46xp9jd0bj7rk78` (`parentCategory_id`),
   CONSTRAINT `FK_3v34vcvwua46xp9jd0bj7rk78` FOREIGN KEY (`parentCategory_id`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -216,6 +220,7 @@ CREATE TABLE `comment` (
   `parentComment_id` int(11) DEFAULT NULL,
   `visitor_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_l7clk1eoeeqatmxpchh3jjt1t` (`containsTaboo`),
   KEY `FK_q8dtm49uxgwbbmkhfkuwko4de` (`group_id`),
   KEY `FK_t4l8ri4kvik847hh7ei7y1l4u` (`parentComment_id`),
   KEY `FK_ofqf2f5j7kgoegs0h5mobkja2` (`visitor_id`),
@@ -327,6 +332,7 @@ CREATE TABLE `daypass` (
   `museum_id` int(11) NOT NULL,
   `visitor_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_b199skiv0y6u89be6y460nvcs` (`price`),
   KEY `FK_9xxn4eysa7pxw8pkyqc20dxcm` (`exhibition_id`),
   KEY `FK_ky5jb9g5p0lcoer9dgn2vpqs0` (`museum_id`),
   KEY `FK_8adrwf6gt8b1k5hep50cr57sf` (`visitor_id`),
@@ -389,7 +395,7 @@ DROP TABLE IF EXISTS `exhibition`;
 CREATE TABLE `exhibition` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `description` text,
+  `description` varchar(1000) DEFAULT NULL,
   `endingDate` datetime DEFAULT NULL,
   `isPrivate` bit(1) NOT NULL,
   `price` double DEFAULT NULL,
@@ -400,6 +406,7 @@ CREATE TABLE `exhibition` (
   `room_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_8iibj36b9i2vnlg3f8dlswvy8` (`ticker`),
+  KEY `UK_t9dagydjkxbf64jehge13cadm` (`ticker`,`title`,`description`(767),`endingDate`,`startingDate`,`isPrivate`),
   KEY `FK_qbey1br2ew2c8mn3oijob26me` (`category_id`),
   KEY `FK_j8tp9kwexl25qg3oejuukotj` (`room_id`),
   CONSTRAINT `FK_j8tp9kwexl25qg3oejuukotj` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`),
@@ -541,6 +548,7 @@ CREATE TABLE `incident` (
   `guide_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_i49k4urikwqolhaln27xkk63s` (`isChecked`,`level`),
   KEY `FK_1j64uo893d1j4vbuw0i3rd0o8` (`guide_id`),
   KEY `FK_hh3b0qxp9gh8lj1yiomcu5nyn` (`room_id`),
   CONSTRAINT `FK_hh3b0qxp9gh8lj1yiomcu5nyn` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`),
@@ -575,6 +583,7 @@ CREATE TABLE `invitation` (
   `guest_id` int(11) NOT NULL,
   `host_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_cbp4o2bk8ony9dn5dshi7sox0` (`sentMoment`,`isAccepted`),
   KEY `FK_cen7765xfec0yqv28st3p50e7` (`group_id`),
   KEY `FK_epmv4ikdppx6m2h76wlwkca88` (`guest_id`),
   KEY `FK_k9wyr1cu15kwgf4yeeo4n5wl2` (`host_id`),
@@ -735,6 +744,7 @@ CREATE TABLE `review` (
   `museum_id` int(11) NOT NULL,
   `visitor_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_q5lebl12rg0dyanw6oyl74c6k` (`creationDate`,`containsTaboo`),
   KEY `FK_effef8l1gye5hl4fwnqd0lhcy` (`museum_id`),
   KEY `FK_qev81awblncgi904knsb39gbl` (`visitor_id`),
   CONSTRAINT `FK_qev81awblncgi904knsb39gbl` FOREIGN KEY (`visitor_id`) REFERENCES `visitor` (`id`),
@@ -839,6 +849,7 @@ CREATE TABLE `sponsorship` (
   `exhibition_id` int(11) NOT NULL,
   `sponsor_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_5akbjhbo66na692br8fufcbx5` (`status`,`startingDate`,`endingDate`),
   KEY `FK_7url5id2hc7muicjogootxy6p` (`exhibition_id`),
   KEY `FK_e3idyfyffpufog3sjl3c2ulun` (`sponsor_id`),
   CONSTRAINT `FK_e3idyfyffpufog3sjl3c2ulun` FOREIGN KEY (`sponsor_id`) REFERENCES `sponsor` (`id`),
@@ -924,7 +935,8 @@ CREATE TABLE `useraccount` (
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_csivo9yqa08nrbkog71ycilh5` (`username`)
+  UNIQUE KEY `UK_csivo9yqa08nrbkog71ycilh5` (`username`),
+  KEY `UK_mf45pwghc90f25v1rfqjyubdp` (`isLocked`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1032,4 +1044,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-04 12:30:25
+-- Dump completed on 2018-06-06 15:08:09

@@ -26,12 +26,12 @@
 	
    	<acme:textbox code="critique.title" path="title" />
    	<acme:textarea code="critique.description" path="description" />
-   	<acme:textbox code="critique.score" path="score" />
+   	<acme:textbox code="critique.score" path="score" placeholder="1 - 5" />
  
    	<br>
    	<br>
    
    <acme:submit name="save" code="critique.save"/>
-	<acme:cancel url="exhibition/critic/display.do?exhibitionId=${critique.exhibition.id}" code="critique.cancel"/>
+   <acme:cancel url="exhibition/critic/display.do?exhibitionId=${critique.exhibition.id}" code="critique.cancel"/>
 	
 </form:form>

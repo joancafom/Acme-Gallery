@@ -29,7 +29,7 @@
 		<!-- Inputs -->
 		
 		<acme:textarea code="review.body" path="body"/><br>
-		<acme:textbox code="review.score" path="score"/><br>
+		<acme:textbox code="review.score" path="score"  placeholder="1 - 5" /><br>
 
 		<acme:submit name="save" code="review.save"/>
 		<acme:cancel url="museum/visitor/display.do?museumId=${museum.id}#mReviews" code="review.cancel"/>

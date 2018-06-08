@@ -25,6 +25,7 @@
 	document.title="${museum.name}";
 </script>
 
+<jsp:useBean id="now" class="java.util.Date" />
 
 <div id="mHeader" class="title">
 	<jstl:if test="${museum.banner ne null}">
@@ -109,6 +110,11 @@
 		</display:column>
 		<display:column titleKey="exhibition.dates" style="width:20%">
 			<spring:message code="exhibition.from"/> <acme:dateFormat code="date.format" value="${exhibition.startingDate}"/> <spring:message code="exhibition.to"/> <acme:dateFormat code="date.format" value="${exhibition.endingDate}"/> 
+		</display:column>
+		<display:column>
+			<jstl:if test="${now > exhibition.endingDate}">
+				<p style="color:red;"><spring:message code="exhibition.passed"/></p>
+			</jstl:if>
 		</display:column>
 	</display:table>
 </div>

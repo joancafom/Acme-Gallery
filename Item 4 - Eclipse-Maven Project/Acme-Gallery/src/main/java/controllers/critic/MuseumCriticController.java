@@ -63,8 +63,8 @@ public class MuseumCriticController extends AbstractController {
 		final Collection<Review> reviews = pageResultR.getContent();
 		final Integer resultSizeR = new Long(pageResultR.getTotalElements()).intValue();
 
-		//Exhibition are also listed in a Museum's Profile (in this case, current and future ones)
-		final Page<Exhibition> pageResultE = this.exhibitionService.getCurrentAndFutureByMuseum(museum, pageE, 5);
+		//Exhibition are also listed in a Museum's Profile (in this case, all of them)
+		final Page<Exhibition> pageResultE = this.exhibitionService.getAllByMuseum(museum, pageE, 5);
 		final Collection<Exhibition> exhibitions = pageResultE.getContent();
 		final Integer resultSizeE = new Long(pageResultE.getTotalElements()).intValue();
 
